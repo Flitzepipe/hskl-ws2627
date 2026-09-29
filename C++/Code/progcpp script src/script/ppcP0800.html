@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="description" content="Eine Einführung in C++">
+<meta name="keywords" content="Programmieren, Programming, C++">
+<meta name="author" content="Wilhelm Meier, Adrian MÜller">
+<meta name="copyright" content="Prof. Dr.-Ing. Wilhelm Meier">
+<title>pCpp - Programmierkonzepte mit C&#43;&#43; - LE 08 - [WS26/27]</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f8f8f8; }
+pre.pygments .tok-c { color: #3D7B7B; font-style: italic } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #666666 } /* Operator */
+pre.pygments .tok-ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #9C6500 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #E40000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { color: #008400 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #717171 } /* Generic.Output */
+pre.pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+pre.pygments .tok-m { color: #666666 } /* Literal.Number */
+pre.pygments .tok-s { color: #BA2121 } /* Literal.String */
+pre.pygments .tok-na { color: #687822 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #008000 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #880000 } /* Name.Constant */
+pre.pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #717171; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #0000FF } /* Name.Function */
+pre.pygments .tok-nl { color: #767600 } /* Name.Label */
+pre.pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #19177C } /* Name.Variable */
+pre.pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #A45A77 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+   jQuery('a[target^="newwindow"]').click(function(e) {
+       var width = 600;
+       var height = 400;
+       window.open(this.href, 'newwindow', 'width=' + width + ', height=' + height + ', top=50, left=500');
+       return false;
+   });
+});
+</script>
+<style>
+.listingblock a.view-result {
+  float: right;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-top: 0.15em;
+}
+</style>
+<script>
+function toggle_result_block(e) {
+  var resultNode = e.target.parentNode.parentNode.nextElementSibling;
+  resultNode.style.display = getComputedStyle(resultNode).display == 'none' ? '' : 'none';
+  return false;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  [].forEach.call(document.querySelectorAll('.result'), function(resultNode) {
+    resultNode.style.display = 'none';
+    var viewLink = document.createElement('a');
+    viewLink.className = 'view-result';
+    viewLink.appendChild(document.createTextNode('[ view result ]'));
+    resultNode.previousElementSibling.querySelector('.title').appendChild(viewLink);
+    viewLink.addEventListener('click', toggle_result_block);
+  });
+});
+</script>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>pCpp - Programmierkonzepte mit C&#43;&#43;</h1>
+<div class="details">
+<span id="author" class="author">Wilhelm Meier, Adrian MÜller</span><br>
+<span id="email" class="email"><a href="mailto:adrian.mueller@hs-kl.de">adrian.mueller@hs-kl.de</a></span><br>
+<span id="revnumber">version 1.12,</span>
+<span id="revdate">01.10.2026</span>
+<br><span id="revremark">WS26/27</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Inhalt</div>
+<ul class="sectlevel1">
+<li><a href="#part08">1. Lerneinheit 08 - Vertauschen, Verschieben, Kopieren</a></li>
+<li><a href="#_eine_verkettete_liste">2. Eine verkettete Liste</a></li>
+<li><a href="#_rohe_zeiger">3. Rohe Zeiger</a>
+<ul class="sectlevel2">
+<li><a href="#_rule_of_three">3.1. Rule of Three</a></li>
+</ul>
+</li>
+<li><a href="#_intelligente_zeiger">4. Intelligente Zeiger</a></li>
+<li><a href="#_erweiterung_der_schnittstelle">5. Erweiterung der Schnittstelle</a></li>
+<li><a href="#_code_strukturierung">6. Code-Strukturierung</a></li>
+<li><a href="#concepts">7. Anforderungen an Datentypen</a></li>
+<li><a href="#swap">8. Vertauschen</a></li>
+<li><a href="#move">9. Verschieben</a>
+<ul class="sectlevel2">
+<li><a href="#_rule_of_five">9.1. Rule of Five</a></li>
+</ul>
+</li>
+<li><a href="#copy">10. Kopieren</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lizenz</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" alt="Lizenz">
+</div>
+</div>
+<div class="paragraph">
+<p>Dieses Werk ist lizenziert unter einer <a href="http://creativecommons.org/licenses/by-nc-nd/4.0">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="part08"><a class="anchor" href="#part08"></a><a class="link" href="#part08">1. Lerneinheit 08 - Vertauschen, Verschieben, Kopieren</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lernziele</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Umsetzung einer Listendatenstruktur unter Anwendung der Regeln zur Eigentümerschaft.</p>
+</li>
+<li>
+<p>Bedeutung der Operationen-Hierarchie: Vertauschen, Verschieben, Kopieren.</p>
+</li>
+<li>
+<p>Wie realisiert man die Operationen?</p>
+</li>
+<li>
+<p>Wie und wann <em>muss</em> man sie realisieren oder verbieten?</p>
+</li>
+<li>
+<p>Was ist die <em>rule-of-three</em> bzw. die <em>rule-of-five</em>?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_eine_verkettete_liste"><a class="anchor" href="#_eine_verkettete_liste"></a><a class="link" href="#_eine_verkettete_liste">2. Eine verkettete Liste</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Ein Mittel zum Zweck</div>
+<div class="paragraph">
+<p>Zunächst behandeln wir die <em>Datenstruktur</em> verkettete Liste. Hierbei geht es weniger um die Datenstruktur selbst,
+d.h. ihre Operationen, sondern einerseits um die Verwendung von intelligenten Zeigern versus rohen Zeigern,
+und andererseits um die Operationen Vertauschen, Verschieben sowohl bei Konstruktion als auch in der Zuweisung,
+Kopieren sowohl bei Konstruktion als auch in der Zuweisung und das Löschen.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Datenstruktur <a href="http://de.wikipedia.org/wiki/Liste_%28Datenstruktur%29">verkettete Liste</a>
+besteht aus der Hüllklasse <code>List</code> und der Knotenklasse <code>ListNode</code>. Das folgende Bild verdeutlicht dies:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnIHN0YW5kYWxvbmU9J25vJz8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyBoZWlnaHQ9JzEzMHB0JyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBtZWV0JyB2aWV3Qm94PScwLjAwIDAuMDAgNzU2Ljg0IDEzMC4zOCcgd2lkdGg9Jzc1N3B0JyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KPGcgY2xhc3M9J2dyYXBoJyBpZD0nZ3JhcGgwJyB0cmFuc2Zvcm09J3NjYWxlKDEgMSkgcm90YXRlKDApIHRyYW5zbGF0ZSg0IDEyNi4zOCknPgo8dGl0bGU+RzwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J3doaXRlJyBwb2ludHM9Jy00LDQgLTQsLTEyNi4zOCA3NTIuODQsLTEyNi4zOCA3NTIuODQsNCAtNCw0JyBzdHJva2U9J25vbmUnLz4KCjxnIGNsYXNzPSdub2RlJyBpZD0nbm9kZTEnPgo8dGl0bGU+TDwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J3JlZCcgcG9pbnRzPScwLC0wLjUgMCwtMTAxLjUgMTMwLjc1LC0xMDEuNSAxMzAuNzUsLTAuNSAwLC0wLjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSc2NS4zOCcgeT0nLTg0LjInPmxpc3Q6IExpc3Q8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzAsLTc2LjI1IDEzMC43NSwtNzYuMjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSc2NS4zOCcgeT0nLTU4Ljk1Jz5oZWFkOiBMaXN0Tm9kZSo8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzAsLTUxIDEzMC43NSwtNTEnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSc2NS4zOCcgeT0nLTMzLjcnPnRhaWw6IExpc3ROb2RlKjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nMCwtMjUuNzUgMTMwLjc1LC0yNS43NScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzY1LjM4JyB5PSctOC40NSc+c2l6ZTogaW50PC90ZXh0Pgo8L2c+Cgo8ZyBjbGFzcz0nbm9kZScgaWQ9J25vZGUyJz4KPHRpdGxlPk4xPC90aXRsZT4KPHBvbHlnb24gZmlsbD0nbGlnaHRncmV5JyBwb2ludHM9JzE2Ni43NSwtNDYuMTIgMTY2Ljc1LC0xMjEuODggMjk0LjUsLTEyMS44OCAyOTQuNSwtNDYuMTIgMTY2Ljc1LC00Ni4xMicgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzIzMC42MicgeT0nLTEwNC41OCc+Okxpc3ROb2RlPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScxNjYuNzUsLTk2LjYyIDI5NC41LC05Ni42Micgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzIzMC42MicgeT0nLTc5LjMzJz5uZXh0OiBMaXN0Tm9kZSo8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzE2Ni43NSwtNzEuMzggMjk0LjUsLTcxLjM4JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nMjMwLjYyJyB5PSctNTQuMDgnPnZhbHVlOiBpbnQ8L3RleHQ+CjwvZz4KCjxnIGNsYXNzPSdlZGdlJyBpZD0nZWRnZTEnPgo8dGl0bGU+TDpoJiM0NTsmZ3Q7TjE8L3RpdGxlPgo8cGF0aCBkPSdNMTMwLjc1LC02NEMxMzguNzYsLTY0IDE0Ny4wNiwtNjQuNjQgMTU1LjI5LC02NS42OScgZmlsbD0nbm9uZScgc3Ryb2tlPSdibGFjaycvPgo8cG9seWdvbiBmaWxsPSdibGFjaycgcG9pbnRzPScxNTQuNTQsLTY5LjExIDE2NC45NSwtNjcuMTIgMTU1LjU3LC02Mi4xOSAxNTQuNTQsLTY5LjExJyBzdHJva2U9J2JsYWNrJy8+CjwvZz4KCjxnIGNsYXNzPSdub2RlJyBpZD0nbm9kZTQnPgo8dGl0bGU+TjM8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSdsaWdodGdyZXknIHBvaW50cz0nNDk0LjI1LC0xMy4xMiA0OTQuMjUsLTg4Ljg4IDYyMiwtODguODggNjIyLC0xMy4xMiA0OTQuMjUsLTEzLjEyJyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nNTU4LjEyJyB5PSctNzEuNTgnPjpMaXN0Tm9kZTwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nNDk0LjI1LC02My42MiA2MjIsLTYzLjYyJyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nNTU4LjEyJyB5PSctNDYuMzMnPm5leHQ6IExpc3ROb2RlKjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nNDk0LjI1LC0zOC4zOCA2MjIsLTM4LjM4JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nNTU4LjEyJyB5PSctMjEuMDcnPnZhbHVlOiBpbnQ8L3RleHQ+CjwvZz4KCjxnIGNsYXNzPSdlZGdlJyBpZD0nZWRnZTUnPgo8dGl0bGU+TDp0JiM0NTsmZ3Q7TjM8L3RpdGxlPgo8cGF0aCBkPSdNMTMwLjc1LC0zOEMxNDYuNzYsLTM4IDE1MC43NSwtMzcuMjIgMTY2Ljc1LC0zNyAyOTYuMjksLTM1LjIgMzI5LjAxLC0yNy45IDQ1OC4yNSwtMzcgNDY2LjIyLC0zNy41NiA0NzQuNTIsLTM4LjM3IDQ4Mi43NywtMzkuMzMnIGZpbGw9J25vbmUnIHN0cm9rZT0nYmxhY2snLz4KPHBvbHlnb24gZmlsbD0nYmxhY2snIHBvaW50cz0nNDgyLjExLC00Mi43NyA0OTIuNDcsLTQwLjUyIDQ4Mi45NywtMzUuODMgNDgyLjExLC00Mi43Nycgc3Ryb2tlPSdibGFjaycvPgo8L2c+Cgo8ZyBjbGFzcz0nbm9kZScgaWQ9J25vZGUzJz4KPHRpdGxlPk4yPC90aXRsZT4KPHBvbHlnb24gZmlsbD0nbGlnaHRncmV5JyBwb2ludHM9JzMzMC41LC00Ni4xMiAzMzAuNSwtMTIxLjg4IDQ1OC4yNSwtMTIxLjg4IDQ1OC4yNSwtNDYuMTIgMzMwLjUsLTQ2LjEyJyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nMzk0LjM4JyB5PSctMTA0LjU4Jz46TGlzdE5vZGU8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzMzMC41LC05Ni42MiA0NTguMjUsLTk2LjYyJyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nMzk0LjM4JyB5PSctNzkuMzMnPm5leHQ6IExpc3ROb2RlKjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nMzMwLjUsLTcxLjM4IDQ1OC4yNSwtNzEuMzgnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSczOTQuMzgnIHk9Jy01NC4wOCc+dmFsdWU6IGludDwvdGV4dD4KPC9nPgoKPGcgY2xhc3M9J2VkZ2UnIGlkPSdlZGdlMic+Cjx0aXRsZT5OMTpuJiM0NTsmZ3Q7TjI8L3RpdGxlPgo8cGF0aCBkPSdNMjk0LjUsLTg0QzMwMi4zMiwtODQgMzEwLjQ4LC04NCAzMTguNjIsLTg0JyBmaWxsPSdub25lJyBzdHJva2U9J2JsYWNrJy8+Cjxwb2x5Z29uIGZpbGw9J2JsYWNrJyBwb2ludHM9JzMxOC41NywtODcuNSAzMjguNTcsLTg0IDMxOC41NywtODAuNSAzMTguNTcsLTg3LjUnIHN0cm9rZT0nYmxhY2snLz4KPC9nPgoKPGcgY2xhc3M9J2VkZ2UnIGlkPSdlZGdlMyc+Cjx0aXRsZT5OMjpuJiM0NTsmZ3Q7TjM8L3RpdGxlPgo8cGF0aCBkPSdNNDU4LjI1LC04NEM0NjYuMzQsLTg0IDQ3NC42MSwtODIuOTkgNDgyLjc3LC04MS4zMycgZmlsbD0nbm9uZScgc3Ryb2tlPSdibGFjaycvPgo8cG9seWdvbiBmaWxsPSdibGFjaycgcG9pbnRzPSc0ODMuNCwtODQuNzggNDkyLjMxLC03OS4wNSA0ODEuNzcsLTc3Ljk3IDQ4My40LC04NC43OCcgc3Ryb2tlPSdibGFjaycvPgo8L2c+Cgo8ZyBjbGFzcz0nbm9kZScgaWQ9J25vZGU1Jz4KPHRpdGxlPm51bGxwdHI8L3RpdGxlPgo8ZWxsaXBzZSBjeD0nNzAzLjQyJyBjeT0nLTUxJyBmaWxsPSd3aGl0ZScgcng9JzQ1LjQyJyByeT0nMTgnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSc3MDMuNDInIHk9Jy00Ni4zMyc+bnVsbHB0cjwvdGV4dD4KPC9nPgoKPGcgY2xhc3M9J2VkZ2UnIGlkPSdlZGdlNCc+Cjx0aXRsZT5OMzpuJiM0NTsmZ3Q7bnVsbHB0cjwvdGl0bGU+CjxwYXRoIGQ9J002MjIsLTUxQzYyOS44OCwtNTEgNjM4LjE5LC01MSA2NDYuMzYsLTUxJyBmaWxsPSdub25lJyBzdHJva2U9J2JsYWNrJy8+Cjxwb2x5Z29uIGZpbGw9J2JsYWNrJyBwb2ludHM9JzY0Ni4yNCwtNTQuNSA2NTYuMjQsLTUxIDY0Ni4yNCwtNDcuNSA2NDYuMjQsLTU0LjUnIHN0cm9rZT0nYmxhY2snLz4KPC9nPgo8L2c+Cjwvc3ZnPgo=" alt="Diagram" width="1006" height="172">
+</div>
+<div class="title">Bild 1. Datenstruktur: Verkettete Liste (Nicht generisch, d.h. nur zur Speicherung von <code>int</code>-Objekten in den Listenknoten)</div>
+</div>
+<div class="paragraph">
+<p>Im folgenden ist ein mögliches Klassendiagramm gezeigt:</p>
+</div>
+<div id="umlclass" class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVMtQVNDSUknIHN0YW5kYWxvbmU9J25vJz8+PHN2ZyBjb250ZW50U3R5bGVUeXBlPSd0ZXh0L2NzcycgaGVpZ2h0PScyNDZweCcgcHJlc2VydmVBc3BlY3RSYXRpbz0nbm9uZScgc3R5bGU9J3dpZHRoOjU4N3B4O2hlaWdodDoyNDZweDtiYWNrZ3JvdW5kOiNGRkZGRkY7JyB2ZXJzaW9uPScxLjEnIHZpZXdCb3g9JzAgMCA1ODcgMjQ2JyB3aWR0aD0nNTg3cHgnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHpvb21BbmRQYW49J21hZ25pZnknPjxkZWZzLz48Zz48ZyBpZD0nZWxlbV9MaXN0Jz48cmVjdCBjb2RlTGluZT0nMScgZmlsbD0nI0YxRjFGMScgaGVpZ2h0PScxNDMuMzM5NicgaWQ9J0xpc3QnIHJ4PScyLjUnIHJ5PScyLjUnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41Oycgd2lkdGg9JzE4MicgeD0nMTIyLjUnIHk9JzcnLz48ZWxsaXBzZSBjeD0nMTk3Ljc1JyBjeT0nMjMnIGZpbGw9JyNBREQxQjInIHJ4PScxMScgcnk9JzExJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cGF0aCBkPSdNMTk3LjIxODgsMjkuOTIxOSBRMTk1LjQ2ODgsMjkuOTIxOSAxOTQuMzI4MSwyOS4xODc1IFExOTMuMjAzMSwyOC40Mzc1IDE5Mi42NDA2LDI3LjA5MzggUTE5Mi4wOTM4LDI1LjczNDQgMTkyLjA5MzgsMjMuOTM3NSBRMTkyLjA5MzgsMjEuOTA2MyAxOTIuNzUsMjAuNDUzMSBRMTkzLjQwNjMsMTkgMTk0LjY4NzUsMTguMjE4OCBRMTk1Ljk2ODgsMTcuNDM3NSAxOTcuODQzOCwxNy40Mzc1IFExOTguNzM0NCwxNy40Mzc1IDE5OS40MDYzLDE3LjYyNSBRMjAwLjA3ODEsMTcuNzk2OSAyMDAuNzY1NiwxOC4xNDA2IEwxOTkuOTUzMSwyMC4xNTYzIFExOTkuMzI4MSwxOS44NDM4IDE5OC43ODEzLDE5LjcxODggUTE5OC4yNSwxOS41OTM4IDE5Ny43NjU2LDE5LjU5MzggUTE5Ni41OTM4LDE5LjU5MzggMTk1Ljg5MDYsMjAuMTI1IFExOTUuMTg3NSwyMC42NTYzIDE5NC44OTA2LDIxLjYwOTQgUTE5NC41OTM4LDIyLjU2MjUgMTk0LjU5MzgsMjMuODI4MSBRMTk0LjU5MzgsMjUuODQzOCAxOTUuMzEyNSwyNi44MTI1IFExOTYuMDMxMywyNy43NjU2IDE5Ny42MjUsMjcuNzY1NiBRMTk4LjIxODgsMjcuNzY1NiAxOTguODQzOCwyNy42MDk0IFExOTkuNDY4OCwyNy40NTMxIDIwMC4yOTY5LDI3LjA3ODEgTDIwMC4yOTY5LDI5LjI5NjkgUTE5OS41NjI1LDI5LjYwOTQgMTk4Ljc2NTYsMjkuNzY1NiBRMTk3Ljk4NDQsMjkuOTIxOSAxOTcuMjE4OCwyOS45MjE5IFogJyBmaWxsPScjMDAwMDAwJy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMjMnIHg9JzIxOC4yNScgeT0nMjguNDMyJz5MaXN0PC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OycgeDE9JzEyMy41JyB4Mj0nMzAzLjUnIHkxPSczOScgeTI9JzM5Jy8+PGVsbGlwc2UgY3g9JzEzMy41JyBjeT0nNTQuMDM0JyBmaWxsPScjODRCRTg0JyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzM1JyB4PScxNDIuNScgeT0nNTcuOTY1OSc+TGlzdCgpOzwvdGV4dD48ZWxsaXBzZSBjeD0nMTMzLjUnIGN5PSc5Ni4xNjk4JyBmaWxsPScjODRCRTg0JyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzE1NicgeD0nMTQyLjUnIHk9JzEwMC4xMDE4Jz5hcHBlbmQoZGF0YTogaW50KTogdm9pZDs8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMTIzLjUnIHgyPScxOTIuNScgeTE9Jzc1LjYwMTknIHkyPSc3NS42MDE5Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nNDInIHg9JzE5Mi41JyB5PSc4MC41MzM5Jz5wdWJsaWM8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMjM0LjUnIHgyPSczMDMuNScgeTE9Jzc1LjYwMTknIHkyPSc3NS42MDE5Jy8+PHJlY3QgZmlsbD0nbm9uZScgaGVpZ2h0PSc2JyBzdHlsZT0nc3Ryb2tlOiNDODI5MzA7c3Ryb2tlLXdpZHRoOjEuMDsnIHdpZHRoPSc2JyB4PScxMzAuNScgeT0nMTM1LjMwNTYnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMjcnIHg9JzE0Mi41JyB5PScxNDIuMjM3Nic+bUhlYWQ6IExpc3ROb2RlKjs8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMTIzLjUnIHgyPScxNzMnIHkxPScxMTcuNzM3NycgeTI9JzExNy43Mzc3Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nODEnIHg9JzE3MycgeT0nMTIyLjY2OTcnPnByaXZhdGUgZGF0YTwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScyNTQnIHgyPSczMDMuNScgeTE9JzExNy43Mzc3JyB5Mj0nMTE3LjczNzcnLz48L2c+PGcgaWQ9J2VsZW1fR01OMyc+PHBhdGggZD0nTTYsNjQuODIgTDYsOTIuNTI2IEEwLDAgMCAwIDAgNiw5Mi41MjYgTDg3LDkyLjUyNiBBMCwwIDAgMCAwIDg3LDkyLjUyNiBMODcsODIuODIgTDEyMi4yOCw3OC42NyBMODcsNzQuODIgTDg3LDc0LjgyIEw3Nyw2NC44MiBMNiw2NC44MiBBMCwwIDAgMCAwIDYsNjQuODIgJyBmaWxsPScjRkVGRkREJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsnLz48cGF0aCBkPSdNNzcsNjQuODIgTDc3LDc0LjgyIEw4Nyw3NC44MiBMNzcsNjQuODIgJyBmaWxsPScjRkVGRkREJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxMycgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc2MCcgeD0nMTInIHk9JzgzLjcxNyc+SCYjMjUyO2xsa2xhc3NlPC90ZXh0PjwvZz48ZyBpZD0nZWxlbV9MaXN0Tm9kZSc+PHJlY3QgY29kZUxpbmU9JzEwJyBmaWxsPScjRjFGMUYxJyBoZWlnaHQ9JzEwMS4yMDM4JyBpZD0nTGlzdE5vZGUnIHJ4PScyLjUnIHJ5PScyLjUnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41Oycgd2lkdGg9JzE0OScgeD0nMzM5JyB5PScyOC4wNycvPjxlbGxpcHNlIGN4PSczODAuMScgY3k9JzQ0LjA3JyBmaWxsPScjQUREMUIyJyByeD0nMTEnIHJ5PScxMScgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHBhdGggZD0nTTM3OS41Njg4LDUwLjk5MTkgUTM3Ny44MTg4LDUwLjk5MTkgMzc2LjY3ODEsNTAuMjU3NSBRMzc1LjU1MzEsNDkuNTA3NSAzNzQuOTkwNiw0OC4xNjM4IFEzNzQuNDQzOCw0Ni44MDQ0IDM3NC40NDM4LDQ1LjAwNzUgUTM3NC40NDM4LDQyLjk3NjMgMzc1LjEsNDEuNTIzMSBRMzc1Ljc1NjMsNDAuMDcgMzc3LjAzNzUsMzkuMjg4OCBRMzc4LjMxODgsMzguNTA3NSAzODAuMTkzOCwzOC41MDc1IFEzODEuMDg0NCwzOC41MDc1IDM4MS43NTYzLDM4LjY5NSBRMzgyLjQyODEsMzguODY2OSAzODMuMTE1NiwzOS4yMTA2IEwzODIuMzAzMSw0MS4yMjYzIFEzODEuNjc4MSw0MC45MTM4IDM4MS4xMzEzLDQwLjc4ODggUTM4MC42LDQwLjY2MzggMzgwLjExNTYsNDAuNjYzOCBRMzc4Ljk0MzgsNDAuNjYzOCAzNzguMjQwNiw0MS4xOTUgUTM3Ny41Mzc1LDQxLjcyNjMgMzc3LjI0MDYsNDIuNjc5NCBRMzc2Ljk0MzgsNDMuNjMyNSAzNzYuOTQzOCw0NC44OTgxIFEzNzYuOTQzOCw0Ni45MTM4IDM3Ny42NjI1LDQ3Ljg4MjUgUTM3OC4zODEzLDQ4LjgzNTYgMzc5Ljk3NSw0OC44MzU2IFEzODAuNTY4OCw0OC44MzU2IDM4MS4xOTM4LDQ4LjY3OTQgUTM4MS44MTg4LDQ4LjUyMzEgMzgyLjY0NjksNDguMTQ4MSBMMzgyLjY0NjksNTAuMzY2OSBRMzgxLjkxMjUsNTAuNjc5NCAzODEuMTE1Niw1MC44MzU2IFEzODAuMzM0NCw1MC45OTE5IDM3OS41Njg4LDUwLjk5MTkgWiAnIGZpbGw9JyMwMDAwMDAnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc1OScgeD0nMzk5LjknIHk9JzQ5LjUwMic+TGlzdE5vZGU8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB4MT0nMzQwJyB4Mj0nNDg3JyB5MT0nNjAuMDcnIHkyPSc2MC4wNycvPjxlbGxpcHNlIGN4PSczNTAnIGN5PSc5OC4xNzE5JyBmaWxsPSdub25lJyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEyMycgeD0nMzU5JyB5PScxMDIuMTAzOSc+bU5leHQ6IExpc3ROb2RlKjs8L3RleHQ+PGVsbGlwc2UgY3g9JzM1MCcgY3k9JzExNy4yMzk4JyBmaWxsPSdub25lJyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzgwJyB4PSczNTknIHk9JzEyMS4xNzE4Jz5tVmFsdWU6IGludDs8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMzQwJyB4Mj0nMzkyLjUnIHkxPSc3Ny42MDQnIHkyPSc3Ny42MDQnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc0MicgeD0nMzkyLjUnIHk9JzgyLjUzNTknPnB1YmxpYzwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSc0MzQuNScgeDI9JzQ4NycgeTE9Jzc3LjYwNCcgeTI9Jzc3LjYwNCcvPjwvZz48ZyBpZD0nZWxlbV9HTU43Jz48cGF0aCBkPSdNMjQ2LjUsMjExLjM0IEwyNDYuNSwyMzkuMDQ2IEEwLDAgMCAwIDAgMjQ2LjUsMjM5LjA0NiBMNTgwLjUsMjM5LjA0NiBBMCwwIDAgMCAwIDU4MC41LDIzOS4wNDYgTDU4MC41LDIyMS4zNCBMNTcwLjUsMjExLjM0IEw0MTcuNSwyMTEuMzQgTDQxMy41LDEyOS40MSBMNDA5LjUsMjExLjM0IEwyNDYuNSwyMTEuMzQgQTAsMCAwIDAgMCAyNDYuNSwyMTEuMzQgJyBmaWxsPScjRkVGRkREJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsnLz48cGF0aCBkPSdNNTcwLjUsMjExLjM0IEw1NzAuNSwyMjEuMzQgTDU4MC41LDIyMS4zNCBMNTcwLjUsMjExLjM0ICcgZmlsbD0nI0ZFRkZERCcgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTMnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMzEzJyB4PScyNTIuNScgeT0nMjMwLjIzNyc+RGF0ZW50eXAgZGVyIEtub3RlbndlcnRlIGthbm4gYXVjaCBnZW5lcmlzY2ggc2VpbjwvdGV4dD48L2c+PGcgaWQ9J2xpbmtfTGlzdE5vZGVfTGlzdE5vZGUnPjxwYXRoIGNvZGVMaW5lPScxNycgZD0nTTQ4OC40OCw1OS43IEM1MDguMTQsNjAuODMgNTIzLDY3LjE1IDUyMyw3OC42NyBDNTIzLDkwLjIgNTA4LjE0LDk2LjUyIDQ4OC40OCw5Ny42NSAnIGZpbGw9J25vbmUnIGlkPSdMaXN0Tm9kZS1MaXN0Tm9kZScgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHBvbHlnb24gZmlsbD0nIzAwMDAwMCcgcG9pbnRzPSc1MjguMjg2OSw4NC4wMTQ4LDUzMC43MDIsNzQuODE1OSw1MjQuODMzOCw3NS4xNTMyLDUyOC4yODY5LDg0LjAxNDgnIHN0eWxlPSdzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzEzJyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzI3JyB4PSc1NDInIHk9Jzg0LjA2Nyc+bmV4dDwvdGV4dD48L2c+PGcgaWQ9J2xpbmtfTGlzdF9MaXN0Tm9kZSc+PHBhdGggY29kZUxpbmU9JzE4JyBkPSdNMzE5LjIyLDc4LjY3IEMzMjUuNzYsNzguNjcgMzMyLjMsNzguNjcgMzM4Ljg0LDc4LjY3ICcgZmlsbD0nbm9uZScgaWQ9J0xpc3QtYmFja3RvLUxpc3ROb2RlJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cG9seWdvbiBmaWxsPScjMTgxODE4JyBwb2ludHM9JzMwNi40Miw3OC42NywzMTIuNDIsODIuNjcsMzE4LjQyLDc4LjY3LDMxMi40Miw3NC42NywzMDYuNDIsNzguNjcnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjwvZz48L2c+PC9zdmc+" alt="Diagram" width="587" height="246">
+</div>
+<div class="title">Bild 2. Das Klassendiagramm der verketteten Liste für <code>int</code>-Werte</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rohe_zeiger"><a class="anchor" href="#_rohe_zeiger"></a><a class="link" href="#_rohe_zeiger">3. Rohe Zeiger</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Obwohl die Datenstruktur <em>verkettete Liste</em> in vielen Lehrmaterialien mit <em>rohen</em> Zeigern realisiert wird, wird dies
+als nicht mehr zeitgemäß betrachtet. Die unterschiedlichen Qualitäten der Zeiger (gemeinsame (SP) oder
+unikate Eigentümerschaft (UP) oder bloße Benutzung (RP)) werden dabei nicht berücksichtigt.
+Die folgende Realisierung mit <strong>rohen</strong> Zeigern dient
+nur zur Demonstration und enthält zudem eklatante <strong>Fehler</strong>!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Das obige <a href="#umlclass">Klassendiagramm</a> wird direkt in <code>C++</code>-Code umgesetzt. Lediglich der Datumstyp wird von
+<code>int</code> auf <code>Point</code> geändert:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 1. Zeilen aus der Datei <a href="../src/ppc08/pointlist00.h" target="newwindows"><code>pointlist00.h</code></a> [Snippet: PointListNode] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointListNode</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">explicit</span><span class="tok-w"> </span><span class="tok-n">PointListNode</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">);</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">mNext</span><span class="tok-p">{</span><span class="tok-k">nullptr</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">6</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Initialisierung über den allegmeinen Konstruktor; der <code>Point</code>-Wert eines Listenknotens kann nachträglich nicht mehr modifiziert werden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Der <em>rohe</em> Zeiger (<strong>RP</strong>) auf den nächsten Listenknoten.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Schnittstelle der Klasse <a href="../src/ppc08/pointlist00.h">PointList</a> umfasst zunächst nur die
+Operationen zum <em>Anfügen</em> <code>+=</code> (die Operation <code>append()</code> im obigen <a href="#umlclass">Klassendiagramm</a>)
+und zur Bestimmung der <em>Knotenanzahl</em> <code>size()</code>:</p>
+</div>
+<div id="pointlist" class="listingblock">
+<div class="title">Quelltext 2. Zeilen aus der Datei <a href="../src/ppc08/pointlist00.h" target="newwindows"><code>pointlist00.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">5</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">mHead</span><span class="tok-p">{</span><span class="tok-k">nullptr</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">7</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Achtung</strong>: diese Realisierung ist in <strong>mehrfacher</strong> Hinsicht <strong>falsch</strong> (s.a. <em>rule-of-three</em>)!</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Anfügeoperation: fügt einen Listenknoten mit dem Wert <code>point</code> und Typ <code>Point</code> an das Ende der Liste an.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Bestimmen der Knotenanzahl</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Der Initialzustand wir durch diesen <em>in-class-initializer</em> hergestellt &#8594; kein spezieller Konstruktor erfoderlich.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Elementfunktion zum Anfügen an das Ende der Liste:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 3. Zeilen aus der Datei <a href="../src/ppc08/pointlist00.cc" target="newwindows"><code>pointlist00.cc</code></a> [Snippet: add] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-p">{</span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-n">PointListNode</span><span class="tok-p">(</span><span class="tok-n">point</span><span class="tok-p">)};</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 4</span><span class="tok-w">        </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-p">{</span><span class="tok-n">mHead</span><span class="tok-p">};</span>
+<span class="linenos"> 5</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-p">);</span>
+<span class="linenos"> 6</span><span class="tok-w">        </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 7</span><span class="tok-w">            </span><span class="tok-n">n</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">        </span><span class="tok-p">}</span>
+<span class="linenos"> 9</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">10</span><span class="tok-w">        </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b>
+<span class="linenos">12</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">mHead</span><span class="tok-p">);</span>
+<span class="linenos">13</span><span class="tok-w">        </span><span class="tok-n">mHead</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-p">;</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Erzeugen eines neuen Listenknotens mit dem Wert <code>point</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Allgemeiner Fall: nicht-leere Liste</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Bestimmen des <em>letzten</em> Knotens in der Liste</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Zusicherung: <code>n</code> hat <em>keinen</em> Nachfolgeknoten</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Einfügen des neuen Knotens ans Ende</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Spezialfall: leere Liste</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Elementfunktion zur Bestimmung der Elementanzahl:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 4. Zeilen aus der Datei <a href="../src/ppc08/pointlist00.cc" target="newwindows"><code>pointlist00.cc</code></a> [Snippet: size] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">PointList::size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">size</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-p">{</span><span class="tok-n">mHead</span><span class="tok-p">};</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">node</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">5</span><span class="tok-w">        </span><span class="tok-n">size</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="linenos">6</span><span class="tok-w">        </span><span class="tok-n">node</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">;</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">8</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">size</span><span class="tok-p">;</span>
+<span class="linenos">9</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wir definieren selbstverständlich Testfälle:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 5. Zeilen aus der Datei <a href="../src/ppc08/pointlist00.cc" target="newwindows"><code>pointlist00.cc</code></a> [Snippet: tests] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">SIMPLETEST</span><span class="tok-p">(</span><span class="tok-s">&quot;PointList ctor1&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl</span><span class="tok-p">;</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">pl</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">true</span><span class="tok-p">;</span>
+<span class="linenos"> 5</span><span class="tok-p">};</span>
+<span class="linenos"> 6</span><span class="tok-n">SIMPLETEST</span><span class="tok-p">(</span><span class="tok-s">&quot;PointList insert1&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">pl</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">pl</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">true</span><span class="tok-p">;</span>
+<span class="linenos">13</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ein Testprogramm</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 6. Zeilen aus der Datei <a href="../src/ppc08/ppc0800.cc" target="newwindows"><code>ppc0800.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;pointlist00.h&quot;</span>
+<span class="linenos">3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Anzahl: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">pl</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">8</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>liefert folgende Ausgabe:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 1. Ausgabe des Programms: <code>ppc0800</code></div>
+<div class="content">
+<pre class="nowrap">Test(Point ctor1,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,184) ok (1/0)
+Test(Point ctor2,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,193) ok (2/0)
+Test(Point ctor3,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,202) ok (3/0)
+Test(Point setX,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,211) ok (4/0)
+Test(Point setY,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,221) ok (5/0)
+Test(Point move,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,231) ok (6/0)
+Test(Point color,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,241) ok (7/0)
+Test(Point color2,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,252) ok (8/0)
+Test(Point toSVG,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,263) ok (9/0)
+Test(Point toSVG2,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,269) ok (10/0)
+Test(Point distance,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,276) ok (11/0)
+Test(Point &lt;&lt;,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,286) ok (12/0)
+Test(Point op-,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,298) ok (13/0)
+Test(Point op==,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,308) ok (14/0)
+Test(Point op== 2,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,317) ok (15/0)
+Test(Point ctor4,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,327) ok (16/0)
+Test(Point ctor5,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,335) ok (17/0)
+Test(Point area,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,343) ok (18/0)
+Test(Point cctor,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,352) ok (19/0)
+Test(Point assignment,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,366) ok (20/0)
+Test(Point assignment2,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,381) ok (21/0)
+Test(DG std-ctor,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,451) ok (22/0)
+Test(DG ctor1,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,457) ok (23/0)
+Test(DG attr1,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,464) ok (24/0)
+Test(DG op+=1,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,473) ok (25/0)
+Test(DG op+=2,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/point70.cc,485) ok (26/0)
+Test(PointList ctor1,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/pointlist00.cc,27) ok (27/0)
+Test(PointList insert1,/home/lmeier/Lehre/osscourse-git/pcpp/src/ppc08/pointlist00.cc,33) ok (28/0)
+Anzahl: 2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Testfälle sind erfolgreich.
+Trotzdem ist die <strong>Realisierung</strong> der Klasse <code>PointList</code> <strong>falsch</strong>: die Speicheranalyse deckt den Fehler auf:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 2. Speicheranalyse des Programms: <code>ppc0800</code></div>
+<div class="content">
+<pre class="nowrap">==36107== Memcheck, a memory error detector
+==36107== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==36107== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==36107== Command: ./ppc0800
+==36107== 
+==36107== 
+==36107== HEAP SUMMARY:
+==36107==     in use at exit: 256 bytes in 4 blocks
+==36107==   total heap usage: 17 allocs, 13 frees, 79,085 bytes allocated
+==36107== 
+==36107== LEAK SUMMARY:
+==36107==    definitely lost: 128 bytes in 2 blocks
+==36107==    indirectly lost: 128 bytes in 2 blocks
+==36107==      possibly lost: 0 bytes in 0 blocks
+==36107==    still reachable: 0 bytes in 0 blocks
+==36107==         suppressed: 0 bytes in 0 blocks
+==36107== Rerun with --leak-check=full to see details of leaked memory
+==36107== 
+==36107== For lists of detected and suppressed errors, rerun with: -s
+==36107== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rule_of_three"><a class="anchor" href="#_rule_of_three"></a><a class="link" href="#_rule_of_three">3.1. Rule of Three</a></h3>
+<div id="r3" class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Die Regel: <strong><em>rule-of-three</em></strong></div>
+<div class="paragraph">
+<p>Die Regel
+<a href="http://en.cppreference.com/w/cpp/language/rule_of_three">rule-of-three</a>
+(später dann erweitert zur Regel <a href="#r5"><em>rule-of-five</em></a>) sagt folgendes:</p>
+</div>
+<div class="paragraph">
+<p><span class="icon red"><i class="fa fa-warning"></i></span>
+<strong>Muss eine der Elementfunktionen <em>Destruktor</em>, <em>Kopierkonstruktor</em> oder <em>Kopierzuweisungsoperator</em>
+überschrieben oder verboten werden, so trifft dies fast mit Sicherheit auch auf die beiden anderen Elementfunktionen zu</strong>
+<span class="icon red"><i class="fa fa-warning"></i></span></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Dies ist fast mit Sicherheit immer dann der Fall, wenn die Klasse <em>rohe Zeiger</em> enthält!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In der <a href="#pointlist">obigen Realisierung</a> der Klasse <code>PointList</code> ist eine <em>roher</em> Zeiger enthalten, aber die Klasse
+überschreibt keine der drei Elementfuktionen aus der <a href="#r3">rule-of-three</a>. <strong>Dies ist ein Fehler!</strong></p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">Die <strong>Fehler</strong> in der Klasse <code>PointList</code></div>
+<div class="paragraph">
+<p>Folgende grundlegende Fehler sind in der Klasse <code>PointList</code> enthalten:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Missachtung der Regel <a href="#r3">rule-of-three</a> (bzw. <a href="#r5">rule-of-five</a>): die Klasse enthält einen <em>rohen</em> Zeiger (RP),
+aber es ist keine der drei speziellen Elementfunktionen überschrieben.</p>
+</li>
+<li>
+<p>Die Hüllklasse <code>PointList</code> hat die <strong>alleinige Eigentümerschaft</strong> über die Listenknoten vom Typ <code>PointListNode</code>: dies
+wird durch den Code (<em>roher</em> Zeiger sowohl in <code>PointList</code> wie auch in <code>PointListNode</code>) <strong>nicht</strong> zum Ausdruck gebracht.</p>
+</li>
+<li>
+<p>Damit ist unklar, durch welches (Verwaltungs-) Objekt die Listenknoten (assoziierte Objekte im Freispeicher) gelöscht
+werden.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Korrekturmaßnahmen</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#r3">rule-of-three</a>: Überschreiben des <em>Destruktors</em> &#8594; korrektes (tiefes) Löschen der Listenknoten</p>
+</li>
+<li>
+<p>Verbieten des <em>Kopierkonstruktors</em> &#8594; nicht-kopierbarer Datentyp: tiefes Kopieren muss nicht betrachtet werden</p>
+</li>
+<li>
+<p>Verbieten des <em>Kopierzuweisungsoperators</em>. &#8594; nicht-kopierbarer Datentyp: tiefes Kopierzuweisen
+muss nicht betrachtet werden</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nun mit den Korrekturmaßnahmen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 7. Zeilen aus der Datei <a href="../src/ppc08/pointlist10.h" target="newwindows"><code>pointlist10.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">default</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">delete</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">rhs</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">delete</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-o">~</span><span class="tok-n">PointList</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">7</span><span class="tok-c1">// ...</span>
+<span class="linenos">8</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Der synthetisierte Standardkonstruktor ist ausreichend. Wegen des deklarierten Kopierkonstruktors muss er allerdings wieder <em>eingeschaltet</em> werden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Ein <em>flaches</em> Kopieren ist <strong>falsch</strong>: aus Aufwandsgründen deswegen hier <em>verboten</em>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Ein <em>flaches</em> Kopierzuweisen ist <strong>falsch</strong>: deswegen hier <em>verbieten</em>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><em>Tiefes Löschen</em> ist erforderlich.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 8. Zeilen aus der Datei <a href="../src/ppc08/pointlist10.cc" target="newwindows"><code>pointlist10.cc</code></a> [Snippet: dtor] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">PointList</span><span class="tok-o">::~</span><span class="tok-n">PointList</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-p">{</span><span class="tok-n">mHead</span><span class="tok-p">};</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">node</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-w">        </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">next</span><span class="tok-p">{</span><span class="tok-n">node</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">};</span>
+<span class="linenos">5</span><span class="tok-w">        </span><span class="tok-k">delete</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">6</span><span class="tok-w">        </span><span class="tok-n">node</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">next</span><span class="tok-p">;</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">8</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Traversieren der Knoten</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Löschen jedes Knotens</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 3. Speicheranalyse des Programms: <code>ppc0810</code></div>
+<div class="content">
+<pre class="nowrap">==36143== Memcheck, a memory error detector
+==36143== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==36143== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==36143== Command: ./ppc0810
+==36143== 
+==36143== 
+==36143== HEAP SUMMARY:
+==36143==     in use at exit: 0 bytes in 0 blocks
+==36143==   total heap usage: 14 allocs, 14 frees, 78,870 bytes allocated
+==36143== 
+==36143== All heap blocks were freed -- no leaks are possible
+==36143== 
+==36143== For lists of detected and suppressed errors, rerun with: -s
+==36143== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_intelligente_zeiger"><a class="anchor" href="#_intelligente_zeiger"></a><a class="link" href="#_intelligente_zeiger">4. Intelligente Zeiger</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die obigen Probleme lassen sich direkt vermeiden, wenn <em>intelligente Zeiger</em> eingesetzt werden, um die
+Eigentümerschaft zum Ausdruck zu bringen.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Eigentümerschaft über die Listenknoten</div>
+<span class="icon red"><i class="fa fa-warning"></i></span> Alle Listenknoten sind <strong>alleiniges</strong> Eigentum des Hüll-Objektes!<span class="icon red"><i class="fa fa-warning"></i></span>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Aus diesem Grund werden die <em>rohen</em> Zeiger in der Klasse <code>PointList</code> und in der Klasse <code>PointListNode</code> durch
+<a href="http://en.cppreference.com/w/cpp/memory/unique_ptr">std::unique_ptr</a> (unikate Eigentümerschaft, <strong>UP</strong>) ersetzt.</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 9. Zeilen aus der Datei <a href="../src/ppc08/pointlist01.h" target="newwindows"><code>pointlist01.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">);</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">mHead</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">7</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Der erste und auch alle weiteren Listenknoten sind <em>alleiniges Eigentum</em> eines Objektes des Typs <code>PointList</code>.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 10. Zeilen aus der Datei <a href="../src/ppc08/pointlist01.h" target="newwindows"><code>pointlist01.h</code></a> [Snippet: PointListNode] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointListNode</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">PointListNode</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">);</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">mNext</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">6</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Die Existenz des zweiten und der weiteren Listenknoten ist an den ersten Knoten gebunden.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Iteration über die Listenknoten</div>
+Eine <em>Iteration</em> über die Listenknoten ist eine Operation, die <em>unabhängig</em> von der Eigentümerschaft durchgeführt
+wird: die Listenknoten werden durchlaufen, die Eigentümerschaft bleibt an das Hüll-Objekt gebunben.
+Dies ist eine <em>Benutzungsrelation</em> ohne eine Änderung der Eigentümerschaft.
+Daher muss ein <em>roher Zeiger</em> (<strong>RP</strong>) als <em>Knoteniterator</em> eingesetzt werden.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 11. Zeilen aus der Datei <a href="../src/ppc08/pointlist01.cc" target="newwindows"><code>pointlist01.cc</code></a> [Snippet: size] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">PointList::size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">size</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-p">{</span><span class="tok-n">mHead</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">()};</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">5</span><span class="tok-w">        </span><span class="tok-n">size</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="linenos">6</span><span class="tok-w">        </span><span class="tok-n">n</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">8</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">size</span><span class="tok-p">;</span>
+<span class="linenos">9</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Hier ist <code>n</code> ein <em>roher</em> Zeiger zur Iteration (Iterator) <em>ohne</em> Eigentümerschaft.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Der <strong>UP</strong> behält die Eigentümerschaft!</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Beim Einfügen eines <em>neuen</em> Knotens in die Liste, stellt sich die Frage der <em>Eigentümerschaft</em>. Der <strong>UP</strong> in der lokalen
+Variable <code>node</code> (<a href="../src/ppc08/pointlist01.cc">pointlist01.cc</a>) <em>muss</em> die Eigentümerschaft an den
+vorangehenden Konten <em>abgeben</em>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 12. Zeilen aus der Datei <a href="../src/ppc08/pointlist01.cc" target="newwindows"><code>pointlist01.cc</code></a> [Snippet: add] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-k">auto</span><span class="tok-w"> </span><span class="tok-n">node</span><span class="tok-p">{</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">point</span><span class="tok-p">)};</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-w">        </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-p">{</span><span class="tok-n">mHead</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">()};</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 5</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-p">);</span>
+<span class="linenos"> 6</span><span class="tok-w">        </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 7</span><span class="tok-w">            </span><span class="tok-n">n</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">();</span>
+<span class="linenos"> 8</span><span class="tok-w">        </span><span class="tok-p">}</span>
+<span class="linenos"> 9</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">10</span><span class="tok-w">        </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">node</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">12</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">mHead</span><span class="tok-p">);</span>
+<span class="linenos">13</span><span class="tok-w">        </span><span class="tok-n">mHead</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">node</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">node</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="7"></i><b>(7)</b>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+<span class="linenos">17</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Ein neuer Knoten wird erzeugt und die lokale Zeigervariable <code>node</code> ist zunächst <em>alleiniger</em> Eigentümer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>n</code> ist ein <em>roher</em> Zeiger zur Iteration <em>ohne</em> Eigentümerschaft.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>n</code> ist damit ein Zeiger auf den letzten Knoten.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Die unikate Eigentümerschaft von <code>node</code> kann man nur <strong>verschieben</strong>! <code>node</code> ist anschließend leer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Spezialfall: leere Liste</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Die unikate Eigentümerschaft von <code>node</code> kann man nur nach <code>mHead</code> <strong>verschieben</strong>. Damit hat das Hüllobjekt die (unikate) Eigentümerschaft übernommen. <code>node</code> ist anschließend leer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><code>node</code> <em>muss</em> die Eigentümerschaft abgegeben haben.</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4wLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSLzIwMDEvUFItU1ZHLTIwMDEwNzE5L0RURC9zdmcxMC5kdGQiPgo8c3ZnIHdpZHRoPSI1NWNtIiBoZWlnaHQ9IjE2Y20iIHZpZXdCb3g9IjE5IDkgMTA4NSAzMTUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogIDxnPgogICAgPHBvbHlnb24gc3R5bGU9ImZpbGw6ICNmZmZmZmYiIHBvaW50cz0iMzgwLDEwIDQ5OS44LDEwIDUxMS44LDIyIDUxMS44LDYwIDM4MCw2MCAiLz4KICAgIDxwb2x5Z29uIHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNmZjAwMDAiIHBvaW50cz0iMzgwLDEwIDQ5OS44LDEwIDUxMS44LDIyIDUxMS44LDYwIDM4MCw2MCAiLz4KICAgIDxwb2x5bGluZSBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMTsgc3Ryb2tlOiAjZmYwMDAwIiBwb2ludHM9IjQ5OS44LDEwIDQ5OS44LDIyIDUxMS44LDIyICIvPgogICAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogI2ZmMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6aXRhbGljO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMzg3IiB5PSIzNC45Ij4KICAgICAgPHRzcGFuIHg9IjM4NyIgeT0iMzQuOSI+dW5pa2F0ZTwvdHNwYW4+CiAgICAgIDx0c3BhbiB4PSIzODciIHk9IjUwLjkiPkVpZ2VudMO8bWVyc2NoYWZ0PC90c3Bhbj4KICAgIDwvdGV4dD4KICA8L2c+CiAgPGc+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogI2Q4ZTVlNSIgeD0iNDQ2IiB5PSI4MCIgd2lkdGg9IjMwMi42IiBoZWlnaHQ9IjI4Ii8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDAwMDAwIiB4PSI0NDYiIHk9IjgwIiB3aWR0aD0iMzAyLjYiIGhlaWdodD0iMjgiLz4KICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTYiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOm1pZGRsZTtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0OjcwMCIgeD0iNTk3LjMiIHk9Ijk5Ij4mbHQ7Jmd0OyA6UG9pbnRMaXN0Tm9kZTwvdGV4dD4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZDhlNWU1IiB4PSI0NDYiIHk9IjEwOCIgd2lkdGg9IjMwMi42IiBoZWlnaHQ9IjM2Ii8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDAwMDAwIiB4PSI0NDYiIHk9IjEwOCIgd2lkdGg9IjMwMi42IiBoZWlnaHQ9IjM2Ii8+CiAgICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5Om1vbm9zcGFjZTtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjQ0OSIgeT0iMTIyIj4rbU5leHQ6IHN0ZDo6dW5pcXVlX3B0ciZsdDtQb2ludExpc3ROb2RlJmd0OzwvdGV4dD4KICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6bW9ub3NwYWNlO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iNDQ5IiB5PSIxMzgiPittVmFsdWU6IGNvbnN0IFBvaW50PC90ZXh0PgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNkOGU1ZTUiIHg9IjQ0NiIgeT0iMTQ0IiB3aWR0aD0iMzAyLjYiIGhlaWdodD0iOCIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgeD0iNDQ2IiB5PSIxNDQiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSI4Ii8+CiAgPC9nPgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNjOWY5YzkiIHg9IjIwIiB5PSIxMSIgd2lkdGg9IjMwMi42IiBoZWlnaHQ9IjI4Ii8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDAwMDAwIiB4PSIyMCIgeT0iMTEiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSIyOCIvPgogICAgPHRleHQgZm9udC1zaXplPSIxNiIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7dGV4dC1hbmNob3I6bWlkZGxlO2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6NzAwIiB4PSIxNzEuMyIgeT0iMzAiPmxpc3Q6IFBvaW50TGlzdDwvdGV4dD4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjYzlmOWM5IiB4PSIyMCIgeT0iMzkiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSIyMCIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgeD0iMjAiIHk9IjM5IiB3aWR0aD0iMzAyLjYiIGhlaWdodD0iMjAiLz4KICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6bW9ub3NwYWNlO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMjMiIHk9IjUzIj4rbUhlYWQ6IHN0ZDo6dW5pcXVlX3B0ciZsdDtQb2ludExpc3ROb2RlJmd0OzwvdGV4dD4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjYzlmOWM5IiB4PSIyMCIgeT0iNTkiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSI4Ii8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDAwMDAwIiB4PSIyMCIgeT0iNTkiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSI4Ii8+CiAgPC9nPgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNkOGU1ZTUiIHg9IjgwMCIgeT0iODAiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSIyOCIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgeD0iODAwIiB5PSI4MCIgd2lkdGg9IjMwMi42IiBoZWlnaHQ9IjI4Ii8+CiAgICA8dGV4dCBmb250LXNpemU9IjE2IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjptaWRkbGU7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDo3MDAiIHg9Ijk1MS4zIiB5PSI5OSI+Jmx0OyZndDsgOlBvaW50TGlzdE5vZGU8L3RleHQ+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogI2Q4ZTVlNSIgeD0iODAwIiB5PSIxMDgiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSIzNiIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgeD0iODAwIiB5PSIxMDgiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSIzNiIvPgogICAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTptb25vc3BhY2U7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSI4MDMiIHk9IjEyMiI+K21OZXh0OiBzdGQ6OnVuaXF1ZV9wdHImbHQ7UG9pbnRMaXN0Tm9kZSZndDs8L3RleHQ+CiAgICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5Om1vbm9zcGFjZTtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjgwMyIgeT0iMTM4Ij4rbVZhbHVlOiBjb25zdCBQb2ludDwvdGV4dD4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZDhlNWU1IiB4PSI4MDAiIHk9IjE0NCIgd2lkdGg9IjMwMi42IiBoZWlnaHQ9IjgiLz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMDAwMDAiIHg9IjgwMCIgeT0iMTQ0IiB3aWR0aD0iMzAyLjYiIGhlaWdodD0iOCIvPgogIDwvZz4KICA8Zz4KICAgIDxwYXRoIHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNmZjAwMDAiIGQ9Ik0gMzIyLjYgNDkgQyAzODAsNTEgMzg2LDgwIDQzNi4yNjQsODAiLz4KICAgIDxwb2x5Z29uIHN0eWxlPSJmaWxsOiAjZmYwMDAwIiBwb2ludHM9IjQ0My43NjQsODAgNDMzLjc2NCw4NSA0MzYuMjY0LDgwIDQzMy43NjQsNzUgIi8+CiAgICA8cG9seWdvbiBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmYwMDAwIiBwb2ludHM9IjQ0My43NjQsODAgNDMzLjc2NCw4NSA0MzYuMjY0LDgwIDQzMy43NjQsNzUgIi8+CiAgPC9nPgogIDxnPgogICAgPHBhdGggc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmMDAwMCIgZD0iTSA3NDguNiAxMTggQyA3ODYsMTIwIDc2MCw4MCA3OTAuMjY0LDgwIi8+CiAgICA8cG9seWdvbiBzdHlsZT0iZmlsbDogI2ZmMDAwMCIgcG9pbnRzPSI3OTcuNzY0LDgwIDc4Ny43NjQsODUgNzkwLjI2NCw4MCA3ODcuNzY0LDc1ICIvPgogICAgPHBvbHlnb24gc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmMDAwMCIgcG9pbnRzPSI3OTcuNzY0LDgwIDc4Ny43NjQsODUgNzkwLjI2NCw4MCA3ODcuNzY0LDc1ICIvPgogIDwvZz4KICA8Zz4KICAgIDxwb2x5Z29uIHN0eWxlPSJmaWxsOiAjZmZmZmZmIiBwb2ludHM9IjcyNiwxMCA4NDUuOCwxMCA4NTcuOCwyMiA4NTcuOCw2MCA3MjYsNjAgIi8+CiAgICA8cG9seWdvbiBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmYwMDAwIiBwb2ludHM9IjcyNiwxMCA4NDUuOCwxMCA4NTcuOCwyMiA4NTcuOCw2MCA3MjYsNjAgIi8+CiAgICA8cG9seWxpbmUgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDE7IHN0cm9rZTogI2ZmMDAwMCIgcG9pbnRzPSI4NDUuOCwxMCA4NDUuOCwyMiA4NTcuOCwyMiAiLz4KICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICNmZjAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOml0YWxpYztmb250LXdlaWdodDpub3JtYWwiIHg9IjczMyIgeT0iMzQuOSI+CiAgICAgIDx0c3BhbiB4PSI3MzMiIHk9IjM0LjkiPnVuaWthdGU8L3RzcGFuPgogICAgICA8dHNwYW4geD0iNzMzIiB5PSI1MC45Ij5FaWdlbnTDvG1lcnNjaGFmdDwvdHNwYW4+CiAgICA8L3RleHQ+CiAgPC9nPgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNkOGU1ZTUiIHg9IjgwMCIgeT0iMjIwIiB3aWR0aD0iMzAyLjYiIGhlaWdodD0iMjgiLz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMDAwMDAiIHg9IjgwMCIgeT0iMjIwIiB3aWR0aD0iMzAyLjYiIGhlaWdodD0iMjgiLz4KICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTYiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOm1pZGRsZTtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0OjcwMCIgeD0iOTUxLjMiIHk9IjIzOSI+Jmx0OyZndDsgOlBvaW50TGlzdE5vZGU8L3RleHQ+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogI2Q4ZTVlNSIgeD0iODAwIiB5PSIyNDgiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSIzNiIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgeD0iODAwIiB5PSIyNDgiIHdpZHRoPSIzMDIuNiIgaGVpZ2h0PSIzNiIvPgogICAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTptb25vc3BhY2U7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSI4MDMiIHk9IjI2MiI+K21OZXh0OiBzdGQ6OnVuaXF1ZV9wdHImbHQ7UG9pbnRMaXN0Tm9kZSZndDs8L3RleHQ+CiAgICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5Om1vbm9zcGFjZTtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjgwMyIgeT0iMjc4Ij4rbVZhbHVlOiBjb25zdCBQb2ludDwvdGV4dD4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZDhlNWU1IiB4PSI4MDAiIHk9IjI4NCIgd2lkdGg9IjMwMi42IiBoZWlnaHQ9IjgiLz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMDAwMDAiIHg9IjgwMCIgeT0iMjg0IiB3aWR0aD0iMzAyLjYiIGhlaWdodD0iOCIvPgogIDwvZz4KICA8Zz4KICAgIDxnPgogICAgICA8cmVjdCBzdHlsZT0iZmlsbDogI2ZmZmZmZiIgeD0iMjgwIiB5PSIyNjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIvPgogICAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmYwMDAwIiB4PSIyODAiIHk9IjI2MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIi8+CiAgICA8L2c+CiAgICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMGZmO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5Om1vbm9zcGFjZTtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjIzMSIgeT0iMjczIj4KICAgICAgPHRzcGFuIHg9IjIzMSIgeT0iMjczIj5hdXRvICAgbm9kZSAgID0gc3RkOjptYWtlX3VuaXF1ZSZsdDtQb2ludExpc3ROb2RlJmd0OygpOzwvdHNwYW4+CiAgICA8L3RleHQ+CiAgPC9nPgogIDxnPgogICAgPHBhdGggc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwZmYwMCIgZD0iTSAzODAgMjAwIEMgMzgwLDE4MCA0NDYsMTcyIDQ0NiwxNjEuNzM2Ii8+CiAgICA8cG9seWdvbiBzdHlsZT0iZmlsbDogIzAwZmYwMCIgcG9pbnRzPSI0NDYsMTU0LjIzNiA0NTEsMTY0LjIzNiA0NDYsMTYxLjczNiA0NDEsMTY0LjIzNiAiLz4KICAgIDxwb2x5Z29uIHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMGZmMDAiIHBvaW50cz0iNDQ2LDE1NC4yMzYgNDUxLDE2NC4yMzYgNDQ2LDE2MS43MzYgNDQxLDE2NC4yMzYgIi8+CiAgPC9nPgogIDxnPgogICAgPGc+CiAgICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZmZmZmZmIiB4PSIzNjAiIHk9IjIwMCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIi8+CiAgICAgIDxyZWN0IHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMGZmMDAiIHg9IjM2MCIgeT0iMjAwIiB3aWR0aD0iNDAiIGhlaWdodD0iMjAiLz4KICAgIDwvZz4KICAgIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwZmY7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6bW9ub3NwYWNlO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMjQ1IiB5PSIyMTQiPgogICAgICA8dHNwYW4geD0iMjQ1IiB5PSIyMTQiPlBvaW50TGlzdE5vZGUqICAgbiAgID0gbUhlYWQuZ2V0KCk7PC90c3Bhbj4KICAgIDwvdGV4dD4KICA8L2c+CiAgPGc+CiAgICA8cGF0aCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmYwMDAwIiBkPSJNIDMwMCAyNjAgQyAyOTgsMjQwIDc0MCwyMjAgNzkwLjI2NCwyMjAiLz4KICAgIDxwb2x5Z29uIHN0eWxlPSJmaWxsOiAjZmYwMDAwIiBwb2ludHM9Ijc5Ny43NjQsMjIwIDc4Ny43NjQsMjI1IDc5MC4yNjQsMjIwIDc4Ny43NjQsMjE1ICIvPgogICAgPHBvbHlnb24gc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmMDAwMCIgcG9pbnRzPSI3OTcuNzY0LDIyMCA3ODcuNzY0LDIyNSA3OTAuMjY0LDIyMCA3ODcuNzY0LDIxNSAiLz4KICA8L2c+CiAgPGc+CiAgICA8cGF0aCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlLWRhc2hhcnJheTogNDsgc3Ryb2tlOiAjZmZhNTAwIiBkPSJNIDMwMCAyODAgQyA0NDAsMzQwIDc0MCwzMjAgNzk3LjIyOCwxMjcuMzMzIi8+CiAgICA8cG9seWdvbiBzdHlsZT0iZmlsbDogI2ZmYTUwMCIgcG9pbnRzPSI3OTkuMzYzLDEyMC4xNDQgODAxLjMwOSwxMzEuMTUzIDc5Ny4yMjgsMTI3LjMzMyA3OTEuNzIzLDEyOC4zMDYgIi8+CiAgICA8cG9seWdvbiBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmZhNTAwIiBwb2ludHM9Ijc5OS4zNjMsMTIwLjE0NCA4MDEuMzA5LDEzMS4xNTMgNzk3LjIyOCwxMjcuMzMzIDc5MS43MjMsMTI4LjMwNiAiLz4KICA8L2c+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogI2ZmYTUwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iNTgwIiB5PSIzMjAiPgogICAgPHRzcGFuIHg9IjU4MCIgeT0iMzIwIj5WZXJzY2hpZWJlbiBkZXIgRWlnZW50w7xtZXJzY2hhZnQ8L3RzcGFuPgogIDwvdGV4dD4KPC9zdmc+Cg==" alt="singlelist1">
+</div>
+<div class="title">Bild 3. Die Operation zum Anhängen am Ende mit Übergang der Eigentümerschaft grafisch verdeutlicht</div>
+</div>
+<div class="paragraph">
+<p>Der <strong>UP</strong> in <a href="../src/ppc08/pointlist01.h">PointList</a> bringt die Eigentümerschaft <strong>klar</strong> zum Ausdruck und
+verhindert Fehler:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 13. Zeilen aus der Datei <a href="../src/ppc08/ppc0801.cc" target="newwindows"><code>ppc0801.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cassert&gt;</span>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;pointlist01.h&quot;</span>
+<span class="linenos"> 4</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl</span><span class="tok-p">;</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos"> 8</span><span class="tok-c1">//    PointList pl2 = pl; </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl3</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-c1">//    pl3 = pl; </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl2</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">pl2</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">pl</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">);</span>
+<span class="linenos">14</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Kopierkonstruktion ist mit dem <em>impliziten</em> Kopierkonstruktor nicht möglich, da <code>std::unique_ptr</code> nicht kopiert werden kann.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Kopierzuweisung ist mit dem <em>impliziten</em> Kopierzuweisungsoperator nicht möglich, da <code>std::unique_ptr</code> nicht kopierzugewiesen werden kann.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Eine <em>Verschiebungszuweisung</em> ist aber <em>möglich</em>!</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Ausgabe der Speicheranalyse zeigt, dass alles in Ordnung ist:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 4. Speicheranalyse des Programms: <code>ppc0801</code></div>
+<div class="content">
+<pre class="nowrap">==36188== Memcheck, a memory error detector
+==36188== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==36188== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==36188== Command: ./ppc0801
+==36188== 
+==36188== 
+==36188== HEAP SUMMARY:
+==36188==     in use at exit: 0 bytes in 0 blocks
+==36188==   total heap usage: 13 allocs, 13 frees, 74,774 bytes allocated
+==36188== 
+==36188== All heap blocks were freed -- no leaks are possible
+==36188== 
+==36188== For lists of detected and suppressed errors, rerun with: -s
+==36188== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Die Verwendung eines <strong>UP</strong> (<em>unique pointer</em>) in der Klasse <code>PointList</code> hat erfolgreich verhindert, dass <em>ohne</em>
+überschiebenen  Destruktor Fehler (Speicherleck) auftreten (Dies macht die <a href="#r3">rule-of-three</a> aber nicht obsolet).
+Trotzdem sollte man die <em>Intention</em> des Klassenauthors, ob ein Datentyp <em>kopierbar</em> ist, klar zum Ausdruck bringen,
+und die Elementfunktionen <em>Kopierkonstruktor</em> und <em>Kopierzuweisungsoperator</em> entweder <em>verbieten</em> oder korrekt
+überschreiben.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Diese Realisierung der verketteten Liste führt das Löschen der Listenknoten in <em>rekursiver</em> Art (rekursiver
+Aufruf des Desktuktors der Listenknoten) durch. Bei <em>langen</em> Listen kann diese zu einem <em>Stacküberlauf</em> führen.
+Aus diesem Grunde ist dieser Realisierung <em>nicht</em> praxistauglich!
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_erweiterung_der_schnittstelle"><a class="anchor" href="#_erweiterung_der_schnittstelle"></a><a class="link" href="#_erweiterung_der_schnittstelle">5. Erweiterung der Schnittstelle</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wir erweitern die Schnittstelle der Klasse <code>PointList</code> um einen Zugriff auf den ersten Listenknoten und <em>verbieten</em> explizit
+(<code>delete</code>-Deklaration) die sonst implizit generierten Elementfunktionen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 14. Zeilen aus der Datei <a href="../src/ppc08/pointlist02.h" target="newwindows"><code>pointlist02.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">default</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">delete</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">rhs</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">delete</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">);</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-nf">front</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">pop_front</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">10</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">mHead</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Das explizite Einschalten des synthetisierten Standard-Konstruktors ist notwendig wegen der Deklaration anderer Konstruktoren (Kopierkonstruktor)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Deklaration zum Verbot der Kopierkonstruktors</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Deklaration zum Verbot des Kopierzuweisungsoperators</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Zugriff auf die Daten des ersten Listenknoten. Annahme: Liste ist nicht leer!</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Entfernen des ersten Listenknoten. Annahme: Liste ist nicht leer!</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Elementfunktion des Operators <code>+=</code> wird refaktoriert, so dass die <em>Verschiebungszuweisung</em> von einem
+R-Wert (<a href="http://en.wikipedia.org/wiki/Value_%28computer_science%29">rvalue</a>) vorgenommen wird:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 15. Zeilen aus der Datei <a href="../src/ppc08/pointlist02.cc" target="newwindows"><code>pointlist02.cc</code></a> [Snippet: add] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-w">        </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-p">{</span><span class="tok-n">mHead</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">()};</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 4</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-p">);</span>
+<span class="linenos"> 5</span><span class="tok-w">        </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 6</span><span class="tok-w">            </span><span class="tok-n">n</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">();</span>
+<span class="linenos"> 7</span><span class="tok-w">        </span><span class="tok-p">}</span>
+<span class="linenos"> 8</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 9</span><span class="tok-w">        </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">point</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">11</span><span class="tok-w">        </span><span class="tok-n">mHead</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">point</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+<span class="linenos">14</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Allgemeiner Fall: nicht-leere Liste</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>RP</strong> zur Iteration</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Zusicherung: <code>n</code> ist der letzte Knoten</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Dies ist eine <strong>Verschiebungszuweisung</strong> (<code>std::make_unique&lt;T&gt;()</code> liefert einen sog. <em>R-Wert</em>).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Spezialfall: leere Liste</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Dies ist auch eine Verschienungszuweisung wie oben.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Beim Entfernen des ersten Listenknotens ist wieder ein Wechsel der Eigentümerschaft notwendig:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 16. Zeilen aus der Datei <a href="../src/ppc08/pointlist02.cc" target="newwindows"><code>pointlist02.cc</code></a> [Snippet: access] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-nf">PointList::front</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">);</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">mHead</span><span class="tok-o">-&gt;</span><span class="tok-n">mValue</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-p">}</span>
+<span class="linenos">5</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">PointList::pop_front</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">);</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-p">{</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">)};</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">8</span><span class="tok-w">    </span><span class="tok-n">mHead</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">9</span><span class="tok-p">}</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Ergebnis ist eine <code>const</code>-Referenz für das Datenobjekt</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Die Eigentümerschaft des ersten Listenknoten wird in die Variable <code>n</code> <strong>verschoben</strong>. Damit auch alle weiteren Listenknoten.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Die Eigentümerschaft des Nachfolgeknotens wird wieder nach <code>mHead</code> <strong>verschoben</strong>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Der <em>lokale</em> <strong>UP</strong> <code>n</code> wird zerstört und damit auch der nicht mehr benötigte, erste Listenknoten.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code_strukturierung"><a class="anchor" href="#_code_strukturierung"></a><a class="link" href="#_code_strukturierung">6. Code-Strukturierung</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Vorwärts-Deklaration</div>
+Die Klasse <code>PointListNode</code> ist eine <em>interne Hilfsklasse</em>. Einem Anwender der Klasse <code>PointList</code> sollte diese
+interne Hilfsklasse nicht bekannt sein. Daher wird die vollständige Deklaration von <code>PointListNode</code> in die
+Implementierungsdatei <a href="../src/ppc08/pointlist03.cc">pointlist03.cc</a> verschoben. Für die Deklaration
+des UP in <code>PointList</code> reicht eine sog. <em>Vorwärts-Deklaration</em> aus.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Um das Anfügen von Knoten am Ende der Liste und die Längenbestimmung zu vereinfachen, werden die
+zusätzlichen Datenelemente <code>mTail</code> und <code>mSize</code> eingeführt:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 17. Zeilen aus der Datei <a href="../src/ppc08/pointlist03.h" target="newwindows"><code>pointlist03.h</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#pragma once</span>
+<span class="linenos"> 2</span><span class="tok-cp">#if __has_include(&quot;../ppc.h&quot;)</span>
+<span class="linenos"> 3</span><span class="tok-cp">#</span><span class="tok-w"> </span><span class="tok-cp">include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;../ppc.h&quot;</span>
+<span class="linenos"> 4</span><span class="tok-cp">#endif</span>
+<span class="linenos"> 5</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;memory&gt;</span>
+<span class="linenos"> 6</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;point70.h&quot;</span>
+<span class="linenos"> 7</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointListNode</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 8</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 9</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-o">~</span><span class="tok-n">PointList</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">delete</span><span class="tok-p">;</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">rhs</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">delete</span><span class="tok-p">;</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">);</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-nf">front</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span>
+<span class="linenos">17</span><span class="tok-w">    </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">pop_front</span><span class="tok-p">();</span>
+<span class="linenos">18</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">19</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">mHead</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">20</span><span class="tok-w">    </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">mTail</span><span class="tok-p">{</span><span class="tok-k">nullptr</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">21</span><span class="tok-w">    </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">mSize</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">22</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Vorwärts-Deklaration der Klasse <code>PointListNode</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Nur notwendig wegen der Vorwärtsdeklaration von <code>PointListNode</code>, es erfolgt eine leere Implementierung</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Nur notwendig wegen der Vorwärtsdeklaration von <code>PointListNode</code> (wie oben)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Unikate Eigentümerschaft der Listenkonten</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Roher Zeiger als spezieller Iterator auf den letzten Knoten: keine Eigentümerschaft, nur Benutzung des Objektes</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Implementierung kann daraus verschiedene Vorteile ziehen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 18. Zeilen aus der Datei <a href="../src/ppc08/pointlist03.cc" target="newwindows"><code>pointlist03.cc</code></a> [Snippet: a] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">mTail</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 3</span><span class="tok-w">        </span><span class="tok-n">mTail</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">point</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 4</span><span class="tok-w">        </span><span class="tok-n">mTail</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">mTail</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 6</span><span class="tok-w">        </span><span class="tok-n">mHead</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-n">PointListNode</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">point</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 7</span><span class="tok-w">        </span><span class="tok-n">mTail</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">mHead</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">();</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">mSize</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-p">}</span>
+<span class="linenos">12</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-n">pop_front</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">);</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-n">mHead</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-n">mSize</span><span class="tok-w"> </span><span class="tok-o">-=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">mHead</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">17</span><span class="tok-w">        </span><span class="tok-n">mTail</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-k">nullptr</span><span class="tok-p">;</span>
+<span class="linenos">18</span><span class="tok-w">        </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">mSize</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">);</span>
+<span class="linenos">19</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">20</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Ein neuer Listenknoten wird erzeugt und die Eigentümerschaft direkt an den bisherigen letzten Listenknoten abgegeben</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Aktualisierung des speziellen Iterators (RP)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>wie oben</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>kürzere Notation: Verschieben des zweiten Kontens an den Anfang, der ursprüngliche Anfang wird dabei gelöscht.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Spezialfall: es entsteht eine leere Liste: <code>mTail</code> zeigt damit auf das <em>Nichts</em></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="concepts"><a class="anchor" href="#concepts"></a><a class="link" href="#concepts">7. Anforderungen an Datentypen</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In <code>C++</code> ist es möglich, <a href="http://en.cppreference.com/w/cpp/language/constraints">Concepts</a> an Datentypen direkt als
+Deklarationen&#8288;<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>  zu formulieren.</p>
+</div>
+<div class="paragraph">
+<p>In der späteren Implementierung dieser Anforderungen zeigt es sich, dass es <em>meistens</em>  günstig ist, die
+Operationen Vertauschen, Verschieben und Kopieren als eine <em>Hierarchie</em> aufzufassen:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="http://en.cppreference.com/w/cpp/concept/Swappable">Vertauschbarkeit</a></p>
+</li>
+<li>
+<p>Verschiebbarkeit mit</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><a href="http://en.cppreference.com/w/cpp/concept/MoveConstructible">Verschiebungskonstruktion</a> und <a href="http://en.cppreference.com/w/cpp/concept/MoveAssignable">Verschiebungszuweisung</a></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Kopierbarkeit mit</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><a href="http://en.cppreference.com/w/cpp/concept/CopyConstructible">Kopierkonstruierbarkeit</a> und <a href="http://en.cppreference.com/w/cpp/concept/CopyAssignable">Kopierzuweisbarkeit</a></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="swap"><a class="anchor" href="#swap"></a><a class="link" href="#swap">8. Vertauschen</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Die <a href="http://en.cppreference.com/w/cpp/concept/Swappable">Vertauschbarkeit</a> wird durch eine <em>freie Funktion</em>
+<code>void swap(T&amp; a, T&amp; b)</code> hergestellt. Üblicherweise wird dazu eine entsprechende Elementfunktion deklariert, die von
+der freien Funktion benutzt wird.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 19. Zeilen aus der Datei <a href="../src/ppc08/pointlist04.h" target="newwindows"><code>pointlist04.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-c1">// ...</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">5</span><span class="tok-c1">// ...</span>
+<span class="linenos">6</span><span class="tok-p">};</span>
+<span class="linenos">7</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">swap</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Vertauschungsoperation als Elementfunktion</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Vertauschungsoperation als freie Funktion</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Die <em>Elementfuntion</em> <code>void X::swap(X&amp;)</code> hat einen <em>schematisierten</em> Aufbau:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">X::swap</span><span class="tok-p">(</span><span class="tok-n">X</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="tok-w">	</span><span class="tok-k">using</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">swap</span><span class="tok-p">;</span>
+<span class="tok-w">	</span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">attribute1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">.</span><span class="tok-n">attribute1</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">attribute2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">.</span><span class="tok-n">attribute2</span><span class="tok-p">);</span>
+<span class="tok-w">	</span><span class="tok-p">...</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 20. Zeilen aus der Datei <a href="../src/ppc08/pointlist04.cc" target="newwindows"><code>pointlist04.cc</code></a> [Snippet: swap] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">PointList::swap</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-k">using</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">swap</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">mHead</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">.</span><span class="tok-n">mHead</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">mTail</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">.</span><span class="tok-n">mTail</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">mSize</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">.</span><span class="tok-n">mSize</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">6</span><span class="tok-p">}</span>
+<span class="linenos">7</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">swap</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">8</span><span class="tok-w">    </span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">b</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">9</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Sehr wichtig</strong>: damit kommen überladene freie Funktionen <code>swap()</code> für die Typen der Datenelemente <strong>und</strong> das Funktionstemplate <code>std::swap()</code> als mögliche Funktionen in Betracht</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Freie Funktion <code>swap()</code> für <code>std::unique_ptr&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Funktionstemplate <code>std::swap()</code> für Zeigertypen</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Funktionstemplate <code>std::swap()</code> für <code>size_t</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Die freie Funktion benutzt die Elementfunktion</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 21. Zeilen aus der Datei <a href="../src/ppc08/ppc0804.cc" target="newwindows"><code>ppc0804.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;pointlist04.h&quot;</span>
+<span class="linenos"> 3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl</span><span class="tok-p">;</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">{</span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">2.0</span><span class="tok-p">}}.</span><span class="tok-n">setColor</span><span class="tok-p">(</span><span class="tok-s">&quot;red&quot;</span><span class="tok-p">);</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">{</span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">3.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">4.0</span><span class="tok-p">}}.</span><span class="tok-n">setColor</span><span class="tok-p">(</span><span class="tok-s">&quot;cyan&quot;</span><span class="tok-p">);</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl2</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">pl</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">pl2</span><span class="tok-p">);</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;front: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">pl2</span><span class="tok-p">.</span><span class="tok-n">front</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">pl2</span><span class="tok-p">.</span><span class="tok-n">pop_front</span><span class="tok-p">();</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;front: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">pl2</span><span class="tok-p">.</span><span class="tok-n">front</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-n">pl2</span><span class="tok-p">.</span><span class="tok-n">pop_front</span><span class="tok-p">();</span>
+<span class="linenos">13</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wir erhalten:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 5. Ausgabe des Programms: <code>ppc0804</code></div>
+<div class="content">
+<pre class="nowrap">front: Point[65,1,2,red]
+front: Point[67,3,4,cyan]</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="move"><a class="anchor" href="#move"></a><a class="link" href="#move">9. Verschieben</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Verschieben des Zustands eines Objekts in ein anderes Objekt desselben Typs</div>
+<div class="paragraph">
+<p>Das Verschieben geschieht durch <em>Verschiebungszuweisung</em> oder <em>Verschiebungskonstruktion</em>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="tok-n">A</span><span class="tok-w"> </span><span class="tok-n">a1</span><span class="tok-p">;</span>
+<span class="tok-n">A</span><span class="tok-w"> </span><span class="tok-n">a2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">a1</span><span class="tok-p">);</span><span class="tok-w">  </span><span class="tok-c1">// Verschiebungskonstruktion</span>
+<span class="tok-n">A</span><span class="tok-w"> </span><span class="tok-n">a3</span><span class="tok-p">;</span>
+<span class="tok-n">a2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">a3</span><span class="tok-p">);</span><span class="tok-w"> </span><span class="tok-c1">// Verschiebungszuweisung</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="icon red"><i class="fa fa-warning"></i></span> Anschließend sind die Quellobjekte (<code>a1</code> bzw. <code>a3</code>) in einem <strong>beliebigen</strong>, aber validen Zustand! Es muss
+mindestens sichergestellt werden, dass der <em>Destruktor</em> des Quellobjektes aufgerufen kann.<span class="icon red"><i class="fa fa-warning"></i></span></p>
+</div>
+<div class="paragraph">
+<p>In der Praxis unter Anwendung des <em>empty-swap</em> bzw. <em>swap</em>-Idioms wird das Quellobjekt in den Zustand des
+Zielobjektes versetzt. Bei der Verschiebungskonstruktion ist das Quellobjekt dann typischerweise in einem
+<em>default</em>-Zustand, bei der Verschiebungszuweisung im Zustand des Zielobjektes vor der Zuweisung. Sollten dabei
+<em>Ressourcen</em> in das Quellobjekt verschoben werden, so werden diese dann durch den Destruktor des Quellobjektes dann
+zerstört.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Für die Verschiebungszuweisung oder Verschiebungskonstruktion gibt es in <code>C++</code> <em>kein</em> neues Operatorsymbol: es
+bleibt bei <code>=</code>. Allerdings muss durch <code>std::move(source)</code> deutlich gemacht werden, dass der Zustand des <code>source</code>-
+Objektes <em>entnommen</em> (also verschoben) werden soll.</p>
+</div>
+<div class="paragraph">
+<p>In der Klassenschnittstelle werden die zwei neuen Operationen durch eine andere Signatur
+mit sog. <code>R-value reference</code>&#8288;s überladen.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 22. Zeilen aus der Datei <a href="../src/ppc08/pointlist05.h" target="newwindows"><code>pointlist05.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-c1">// ...</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-n">rhs</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">6</span><span class="tok-c1">// ...</span>
+<span class="linenos">7</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Besondere Signatur des <em>Verschiebungskonstruktors</em>: <code>&lt;type&gt;&amp;&amp;</code> ist eine sog. <em>rvalue</em>-Referenz</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Besondere Signatur des <em>Verschiebungszuweisungsoperators</em> (wie oben)</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">Schematisierte Realisierung der Verschiebungsoperationen</div>
+Mit Hilfe der Vertauschungsoperation <code>swap()</code> lassen sich die beiden Verschiebungsoperationen effektiv
+(und richtig) implementieren!
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 23. Zeilen aus der Datei <a href="../src/ppc08/pointlist05.cc" target="newwindows"><code>pointlist05.cc</code></a> [Snippet: moveable] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-k">operator</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-n">rhs</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">rhs</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+<span class="linenos">4</span><span class="tok-p">}</span>
+<span class="linenos">5</span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-n">PointList</span><span class="tok-p">(</span><span class="tok-n">PointList</span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">other</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">7</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Der Zustand von <code>rhs</code> wird zum eigenen Zustand (Verschieben), der eigene Zustand wird nach <code>rhs</code> verschoben. Entsprechend der Anforderung ist damit <code>rhs</code> nun wieder in einem validen (dem vorigen von <code>*this</code>) Zustand und damit auch zerstört werden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Die Datenelemente werden hier durch die <code>in-class</code>-Initialisierer in einen <em>leeren</em> Zustand versetzt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Der eigene, <em>leere</em> Zustand wird nach <code>other</code> verschoben. Auch dieser Zustand ist valide, und der <em>Destruktor</em> kann aufgerufen werden.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 24. Zeilen aus der Datei <a href="../src/ppc08/ppc0805.cc" target="newwindows"><code>ppc0805.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;pointlist05.h&quot;</span>
+<span class="linenos">3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl1</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">pl1</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">pl1</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">move</span><span class="tok-p">(</span><span class="tok-n">pl1</span><span class="tok-p">);</span>
+<span class="linenos">8</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title"><code>rvalue</code>-Referenzen und <code>std::move</code></div>
+<div class="paragraph">
+<p>Für die Verschiebungsoperationen fügt man <em>überladene</em> Varianten mit sog. <code>rvalue</code>-Referenzen in den
+Parameterlisten der Form <code>&lt;type&gt;&amp;&amp; name</code> der Klasse hinzu.</p>
+</div>
+<div class="paragraph">
+<p>Der Begriff <a href="http://en.wikipedia.org/wiki/Value_%28computer_science%29">rvalue</a> (R-Wert) bezeichnet ein <em>temporäres</em>, <em>anonymes</em>
+Objekt. Diese Objekte entstehen in einem Ausdruck, etwa in <code>pl1 = Point();` auf der rechten Seite des `=</code>-Operators.
+Dieses Objekt hat keinen Namen (anonym) und verschwindet automatisch am Ende der Anweisung (temporär). Da es <em>nach</em> der
+Anweisung für das Programm nicht mehr zugreifbar ist, kann es auch von der Anweisung in einem <em>beliebigen</em> validen
+Zustand hinterlassen werden. <strong>Von diesen Objekten kann man also gefahrlos die inneren Ressourcen verschieben</strong>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Das Funktionstemplate <code>std::move(&lt;src&gt;)</code> wandelt <strong>jedes</strong> benannte Objekt (Variable) in einen <em>R-Wert</em>. Achtung: damit
+hat das Quellobjekt <code>&lt;src&gt;</code> <em>nach</em> der Verschiebung einen beliebigen Zustand.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_rule_of_five"><a class="anchor" href="#_rule_of_five"></a><a class="link" href="#_rule_of_five">9.1. Rule of Five</a></h3>
+<div id="r5" class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Die Regel: <strong><em>rule-of-five</em></strong></div>
+<div class="paragraph">
+<p>Die Regel
+<a href="http://en.cppreference.com/w/cpp/language/rule_of_three">rule-of-five</a> sagt folgendes:</p>
+</div>
+<div class="paragraph">
+<p><span class="icon red"><i class="fa fa-warning"></i></span> <strong>Weil ein benutzerdefinierter <em>Destruktor</em>, <em>Kopierkonstruktor</em> oder  <em>Kopierzuweisungsoperator</em>
+die implizite Erzeugung des <em>Verschiebungskonstruktors</em> und des  <em>Verschiebungszuweisungsoperator</em>
+verhindern,  müssen alle fünf (inklusive der <a href="#r3">rule-of-three</a>) Elementfuktionen überschrieben werden,
+falls der  Datentyp zusätzlich verschiebbar sein soll.</strong> <span class="icon red"><i class="fa fa-warning"></i></span></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="copy"><a class="anchor" href="#copy"></a><a class="link" href="#copy">10. Kopieren</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Eine erste Version des
+<a href="ppcP0600.html#copyctor1">Kopierkonstruktors</a> und des
+<a href="ppcP0600.html#copyassign1">Kopierzuweisungsoperator</a> hatten wir schon behandelt. Zusammen mit der Vertauschbarkeit
+kann das allerdings einfacher (und sicherer) realisiert werden.</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 25. Zeilen aus der Datei <a href="../src/ppc08/pointlist06.h" target="newwindows"><code>pointlist06.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-c1">// ...</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">rhs</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">6</span><span class="tok-c1">// ...</span>
+<span class="linenos">7</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Deklaration des Kopierkonstruktors</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Deklaration des Kopierzuweisungsoperators</td>
+</tr>
+</table>
+</div>
+<div id="copyswap" class="listingblock">
+<div class="title">Quelltext 26. Zeilen aus der Datei <a href="../src/ppc08/pointlist06.cc" target="newwindows"><code>pointlist06.cc</code></a> [Snippet: copyable] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-n">PointList</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointListNode</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">other</span><span class="tok-p">.</span><span class="tok-n">mHead</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">n</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-w">        </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mValue</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 5</span><span class="tok-w">        </span><span class="tok-n">n</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">n</span><span class="tok-o">-&gt;</span><span class="tok-n">mNext</span><span class="tok-p">.</span><span class="tok-n">get</span><span class="tok-p">();</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos"> 7</span><span class="tok-p">}</span>
+<span class="linenos"> 8</span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">::</span><span class="tok-k">operator</span><span class="tok-o">=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">PointList</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">rhs</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-nf">copy</span><span class="tok-p">(</span><span class="tok-n">rhs</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">copy</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="7"></i><b>(7)</b>
+<span class="linenos">12</span><span class="tok-p">}</span><span class="tok-w"> </span><i class="conum" data-value="8"></i><b>(8)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Die Datenelemente werden durch <code>in-class</code>-Initialisierer als Zustand <em>leere</em> Liste initialisiert</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Ein <em>roher</em> Zeiger (RP) als Iterator</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Um Code-Duplizierung zu vermeiden, wird der <code>+=</code>-Operator eingesetzt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Die Realisierung des Kopierzuweisungsoperators nach dem <strong>copy-swap</strong>-Idiom</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Zuerst eine Kopier des <code>rhs</code>-Objektes anfertigen &#8594; Kopierkonstruktor</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Den aktuellen Zustand mit dem der Kopie des <code>rhs</code>-Objektes vertauschen</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Kettenzuweisungen ermöglichen</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Die lokale Variable <code>copy</code> wird zerstört &#8594; Destruktor</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">Copy-Swap-Idiom</div>
+Dieses Idiom erlaubt einen <em>schematisierten</em> Aufbau des <em>Kopierzuweisungsoperator</em>, der damit unter allen Aspekten
+(Speicherverwaltung, Ausnahmebehandlung) immer korrekt ist. Er wird zurückgeführt auf den <em>Kopierkonstruktor</em> und die
+<em>Vertauschungsoperation</em>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 27. Zeilen aus der Datei <a href="../src/ppc08/ppc0806.cc" target="newwindows"><code>ppc0806.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;pointlist06.h&quot;</span>
+<span class="linenos">3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl1</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">pl1</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">pl1</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">pl1</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">8</span><span class="tok-w">    </span><span class="tok-n">pl2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">pl1</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">9</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Kopierkonstruktion</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Kopierzuweisung</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. Das übersteigt allerdings die Möglichkeiten dieses Kurses
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.12<br>
+Last updated 2026-09-28 00:00:00 +0200
+</div>
+</div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a>.
+</body>
+</html>

@@ -1,0 +1,60 @@
+# $Id: Makefile 859 2015-01-20 12:05:40Z wimalopaan $
+#
+# ++C - C++ introduction
+# Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018 - 2022 Wilhelm Meier <wilhelm.meier@hs-kl.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+include ../nmake.include
+
+all: ppc0701.exe ppc0702.exe ppc0703.exe
+
+all: ppc0704.exe ppc0705.exe ppc0706.exe
+
+all: ppc0707.exe ppc0708.exe
+
+all: ppc0710.exe ppc0711.exe
+
+all: ppc0720.exe ppc0721.exe
+
+all: ppc0730.exe ppc0731.exe
+
+ppc0701.exe : ppc0701.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0702.exe : ppc0702.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0703.exe : ppc0703.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0704.exe : ppc0704.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0705.exe : ppc0705.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0706.exe : ppc0706.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0707.exe : ppc0707.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0708.exe : ppc0708.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0710.exe : ppc0710.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0711.exe : ppc0711.obj point60.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0720.exe : ppc0720.obj point61.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0721.exe : ppc0721.obj point61.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0730.exe : ppc0730.obj point61.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj
+
+ppc0731.exe : ppc0731.obj point61.obj svgfile.obj math.obj string.obj ../lib/simpletest.obj

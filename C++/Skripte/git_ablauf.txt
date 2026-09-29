@@ -1,0 +1,66 @@
+0 git pull
+
+1a To create and check out a new branch from the branch you do have checked out
+
+  git checkout -b new_branch
+
+( the newer, "experimental" command now available as of Git v2.23; `-c` stands for "'c'reate branch"
+  git switch -c new_branch)
+
+# To create a new branch from the branch you do have checked out:
+#   git branch new_branch
+
+# To create a new branch from a branch you do not have checked out
+#  git branch <new_branch> [from_branch]
+
+
+
+1b To create and check out a new branch from a branch you do not have checked out:
+   # classic
+  git checkout -b new_branch from_branch
+
+  # OR: new/experimental as of Git v2.23
+  git switch -c new_branch from_branch
+
+Note: without pushing, this branch is local, ie. your computer only, your git only 
+============= working in new branch
+
+? are any conflicts between new_branch and main  branch.
+  git pull
+  git status
+
+============= working in new branch
+ git merge master
+will update your current branch with the changes from your local master branch,
+the state of which will be that of when you last pulled while on that branch.
+
+So either a) rebase with master to pull in whatever has been added to master during
+the time I've been working on the test branch.
+
+  git pull -r upstream master
+
+Or b)
+  git merge origin master
+
+
+=========== When you're ready to merge back into main
+
+  git checkout main
+
+Note: if you have not been pushing before this checkout new_branch won't show up on the repository
+Note: however, your changed files and your commits (with all the message) will shop up ... in main!
+
+  git log ..new_branch # when you're curious
+  git merge new_branch
+   # If you're worried about breaking something on the merge,
+   # git merge --abort
+   # is there for you.
+  git push
+
+
+============= clean up
+After the merge of the pull request, you can delete it locally:
+
+      git branch -d new_branch
+
+eot

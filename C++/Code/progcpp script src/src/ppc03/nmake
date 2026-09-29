@@ -1,0 +1,36 @@
+# $Id: Makefile 859 2015-01-20 12:05:40Z wimalopaan $
+#
+# ++C - C++ introduction
+# Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018 - 2022 Wilhelm Meier <wilhelm.meier@hs-kl.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+include ../nmake.include
+
+all : ppc0301.exe ppc0302.exe ppc0303.exe ppc0305.exe ppc0310.exe ppc0311.exe ppc0320.exe
+
+ppc0301.exe : ppc0301.obj point20.obj math.obj ../lib/simpletest.obj
+
+ppc0302.exe : ppc0302.obj lifetime.obj math.obj ../lib/simpletest.obj
+
+ppc0303.exe : ppc0303.obj lifetime.obj lifetime2.obj math.obj ../lib/simpletest.obj
+
+ppc0305.exe : ppc0305.obj point20.obj svgfile.obj lifetime.obj math.obj ../lib/simpletest.obj
+
+ppc0310.exe : ppc0310.obj lifetime.obj
+
+ppc0311.exe : ppc0311.obj lifetime.obj
+
+ppc0320.exe : ppc0321.obj ppc0322.obj lifetime.obj

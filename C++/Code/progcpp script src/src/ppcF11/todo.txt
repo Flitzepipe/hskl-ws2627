@@ -1,0 +1,24 @@
+offen:
+* Bei templates die Definitionen von Deklarationen trennen
+* Serializer -> Iterator Schnittstelle, Inserter für Serializer
+* NamedType
+* XmlElement, XmlAttribute, XmlDocument
+** XmlSerializer hat XmlDocument, addiert XmlElemente
+** Xml: encoder / decoder (XmlDecument?)
+* std::exchange() für vector move
+
+erledigt:
+* Database: Meta-Funktion für Serializer
+* Serializer: NVI-Interface / template-method
+* Generell: uniform initialization syntax
+* std::optional überall
+* common.h aufräumen
+* Person: inline static
+* Propagate const Problem
+* HeapArray: Name -> FProg:Vector
+* HeapArray: ConstIterator / Iterator
+* HeapArray: Const-Iterator
+
+nicht sinnvoll:
+* Database: template-template-parameter für Container
+* op<<(): als fkt-template mit to_string (using std::to_string)
