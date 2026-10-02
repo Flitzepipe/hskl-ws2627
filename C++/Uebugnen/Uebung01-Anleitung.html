@@ -1,0 +1,1177 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProgC++ – Übung 01: G++ und einfache Entwicklungsumgebung</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef2f7;
+            color: #333;
+            line-height: 1.7;
+        }
+        .page {
+            max-width: 1060px;
+            margin: 40px auto;
+            padding: 40px 50px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+        .doc-header { text-align: center; border-bottom: 3px solid #1565c0; padding-bottom: 25px; margin-bottom: 30px; }
+        .doc-header h1 { color: #1565c0; font-size: 2.1em; margin-bottom: 10px; }
+        .doc-header .subtitle { color: #555; font-size: 1.15em; margin: 5px 0; }
+        .doc-header .meta { color: #999; font-size: 0.95em; font-style: italic; margin-top: 10px; }
+        .toc { background: #f0f4f8; border-radius: 12px; padding: 20px 25px; margin-bottom: 40px; }
+        .toc h2 { font-size: 1.1em; color: #333; margin-bottom: 10px; }
+        .toc ul { list-style: none; margin-left: 0; }
+        .toc li { margin: 6px 0; }
+        .toc a { color: #1565c0; text-decoration: none; font-weight: bold; }
+        .toc a:hover { text-decoration: underline; }
+        .section-badge {
+            display: inline-block; padding: 8px 16px; border-radius: 20px;
+            font-size: 0.9em; font-weight: bold; margin-bottom: 15px; color: white;
+        }
+        .sec-0 { background: #607d8b; }
+        .sec-a { background: #0078d4; }
+        .sec-b { background: #2e7d32; }
+        .sec-c { background: #e65100; }
+        .sec-d { background: #c62828; }
+        h2.section-title { color: #333; font-size: 1.7em; margin: 10px 0 20px 0; }
+        h2.section-title small { display: block; font-size: 0.55em; color: #777; font-weight: normal; }
+        .section { margin-bottom: 60px; }
+        .lead { margin-bottom: 25px; color: #444; }
+        .info-box { background: #e3f2fd; border-left: 4px solid #2196F3; padding: 15px 18px; border-radius: 8px; margin: 15px 0; }
+        .warn-box { background: #fff3e0; border-left: 4px solid #FF9800; padding: 15px 18px; border-radius: 8px; margin: 15px 0; }
+        .merke-box { background: #ede7f6; border-left: 4px solid #7e57c2; padding: 15px 18px; border-radius: 8px; margin: 15px 0; }
+        .step { display: flex; gap: 16px; margin-bottom: 30px; }
+        .step-num {
+            width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+            background: #1565c0; color: white; font-weight: bold; font-size: 1.05em;
+            display: flex; align-items: center; justify-content: center; margin-top: 3px;
+        }
+        .step-body { flex: 1; }
+        .step-body h3 { font-size: 1.12em; color: #222; margin-bottom: 8px; }
+        .step-body p { margin-bottom: 10px; }
+        .expected {
+            background: #e8f5e9; border-left: 4px solid #4CAF50;
+            padding: 12px 15px; border-radius: 8px; margin-top: 12px; font-size: 0.95em;
+        }
+        .expected strong { color: #2e7d32; }
+        code.inline {
+            background: #eceff1; padding: 2px 7px; border-radius: 4px;
+            font-family: Consolas, monospace; font-size: 0.92em; color: #0d47a1;
+        }
+        /* ---- 3-Spalten-Raster ---- */
+        .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 14px 0; align-items: stretch; }
+        @media (max-width: 950px) { .trio { grid-template-columns: 1fr; } }
+        .os-label { font-weight: bold; font-size: 0.88em; margin-bottom: 6px; padding-left: 2px; }
+        .os-win { color: #0078d4; }
+        .os-mac { color: #555; }
+        .os-lin { color: #dd4814; }
+        /* ---- Terminal-Optik (originalgetreu) ---- */
+        .terminal {
+            border-radius: 8px; overflow: hidden; margin: 0;
+            font-family: Consolas, Menlo, 'Courier New', monospace;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.16);
+            border: 1px solid rgba(0,0,0,0.15);
+        }
+        .term-title {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 10px; font-size: 0.74em; white-space: nowrap; overflow: hidden;
+        }
+        .term-title .tname { overflow: hidden; text-overflow: ellipsis; }
+        .term-title .tname.center { margin: 0 auto; }
+        .dots { display: flex; gap: 5px; flex-shrink: 0; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .dot.r { background: #ff5f56; } .dot.y { background: #ffbd2e; } .dot.g { background: #27c93f; }
+        .win-btns { margin-left: auto; flex-shrink: 0; letter-spacing: 2px; }
+        .term-body { padding: 10px 12px; font-size: 0.8em; line-height: 1.65; white-space: pre-wrap; overflow-wrap: break-word; overflow-x: auto; }
+        /* Windows: Eingabeaufforderung */
+        .t-cmd .term-title { background: #2d2d2d; color: #e6e6e6; }
+        .t-cmd .term-body { background: #0c0c0c; color: #cccccc; }
+        .t-cmd .pr { color: #ffffff; font-weight: bold; }
+        .t-cmd .err { color: #f87171; }
+        .t-cmd .cmd { color: #ffffff; font-weight: bold; }
+        /* macOS: Terminal.app */
+        .t-mac .term-title { background: #e9e9e9; color: #4a4a4a; border-bottom: 1px solid #d4d4d4; }
+        .t-mac .term-body { background: #ffffff; color: #1d1d1f; }
+        .t-mac .pr { color: #1d1d1f; font-weight: bold; }
+        .t-mac .err { color: #c62828; font-weight: bold; }
+        .t-mac .cmd { color: #1d1d1f; font-weight: bold; }
+        /* Ubuntu: GNOME Terminal */
+        .t-ub .term-title { background: #3b1830; color: #e6cfe3; }
+        .t-ub .term-body { background: #300a24; color: #f2f0f0; }
+        .t-ub .pr-u { color: #8ae234; font-weight: bold; }
+        .t-ub .pr-p { color: #729fcf; }
+        .t-ub .pr-s { color: #f2f0f0; font-weight: bold; }
+        .t-ub .err { color: #ef9a9a; font-weight: bold; }
+        .t-ub .cmd { color: #ffffff; font-weight: bold; }
+        /* Vollbreite Terminals (einspaltig) */
+        .terminal.wide { margin: 12px 0; }
+        .terminal.wide .term-body { font-size: 0.92em; padding: 14px 18px; }
+        /* ---- Code ---- */
+        .codebox {
+            background: #f5f7fa; border: 1px solid #dde3ea; border-radius: 10px; margin: 12px 0; padding: 16px 20px;
+            font-family: Consolas, monospace; font-size: 0.95em; color: #263238;
+            line-height: 1.8; overflow-x: auto;
+        }
+        .codebox .ln { color: #90a4ae; margin-right: 14px; user-select: none; }
+        /* ---- Installations-Spalten ---- */
+        .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 25px 0; align-items: start; }
+        @media (max-width: 900px) { .platform-grid { grid-template-columns: 1fr; } }
+        .platform-card { border: 2px solid; border-radius: 14px; padding: 18px; }
+        .pc-win { border-color: #0078d4; background: #f5fafe; }
+        .pc-mac { border-color: #616161; background: #fafafa; }
+        .pc-lin { border-color: #dd4814; background: #fffaf5; }
+        .platform-card h4 { font-size: 1.1em; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid #ddd; }
+        .platform-card ol, .platform-card ul { margin-left: 20px; }
+        .platform-card li { margin-bottom: 11px; font-size: 0.93em; }
+        .platform-card li code.inline { font-size: 0.86em; }
+        .platform-card .terminal { margin: 8px 0; }
+        .platform-card .term-body { font-size: 0.78em; }
+        /* ---- Troubleshooting ---- */
+        .ts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        @media (max-width: 800px) { .ts-grid { grid-template-columns: 1fr; } }
+        .ts-card { border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; background: #fff; }
+        .ts-problem {
+            background: #ffebee; padding: 10px 15px; color: #b71c1c;
+            font-family: Consolas, monospace; font-weight: bold; font-size: 0.88em;
+        }
+        .ts-solution { padding: 12px 15px; font-size: 0.93em; }
+        .ts-solution ul { margin-left: 18px; }
+        .ts-solution li { margin-bottom: 6px; }
+        /* ---- Tabellen ---- */
+        table { width: 100%; margin: 15px 0; border-collapse: collapse; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #1565c0; color: white; }
+        tr:nth-child(even) { background: #f5f7fa; }
+        td code.inline { font-size: 0.86em; }
+        .doc-footer { text-align: center; color: #999; font-size: 0.9em; margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; }
+        @media print {
+            body { background: #fff; }
+            .page { box-shadow: none; margin: 0; max-width: 100%; border-radius: 0; }
+            .trio, .platform-grid, .ts-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="doc-header">
+        <h1>🚀 ProgC++ – Übung 01: G++ und einfache Entwicklungsumgebung</h1>
+        <div class="subtitle">Nachdem Sie den g++-Compiler installiert haben: Terminal, erstes Programm &amp; erste Fehler</div>
+        <div class="subtitle">Vorlesung Programmieren in C++ · Medieninformatik</div>
+        <div class="meta">Prof. Adrian Müller · Hochschule Kaiserslautern · Wintersemester 2026/27</div>
+    </div>
+
+    <div class="toc">
+        <h2>📑 Inhalt</h2>
+        <ul>
+            <li><a href="#voraus">✅ Das bringen Sie mit – Compiler-Check</a></li>
+            <li><a href="#teil0">Teil 0 – Terminal-Grundlagen: öffnen &amp; navigieren</a></li>
+            <li><a href="#teilb">Teil a – Installation prüfen &amp; Problemlösungen</a></li>
+            <li><a href="#teilc">Teil b – Hello World: schreiben, übersetzen, starten</a></li>
+            <li><a href="#teild">Teil c – Einen Fehler absichtlich auslösen und beheben</a></li>
+            <li><a href="#checkliste">✅ Checkliste &amp; Spickzettel</a></li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <strong>📌 So arbeiten Sie mit dieser Anleitung:</strong>
+        Gehen Sie die Schritte der Reihe nach durch – <strong>nur in der Spalte Ihrer Plattform</strong>:
+        <strong class="os-win">🪟 Windows</strong> · <strong class="os-mac">🍎 macOS</strong> · <strong class="os-lin">🐧 Linux</strong>.
+        Prüfen Sie nach jedem Schritt das grüne Feld <strong>„So sieht Erfolg aus“</strong>.
+    </div>
+
+    <div class="info-box">
+        💡 <strong>Das Wichtigste vorab – Erfolg zeigt sich oft durch Stille:</strong>
+        Viele Befehle drucken bei Erfolg <strong>gar nichts</strong> – der Bildschirm bleibt einfach still, und der
+        Eingabeprompt erscheint wieder. Das ist <strong>normal und gut</strong>: Es bedeutet „Befehl ausgeführt, alles
+        geklappt“. Text erscheint nur in zwei Fällen: (1) Sie haben mit dem Befehl etwas abgefragt (z.&nbsp;B. den
+        Inhalt eines Ordners) – oder (2) es ist etwas schiefgegangen. Dann hilft der Problemlösungsteil weiter.
+    </div>
+
+            <!-- ================================================================ -->
+        <div class="section" id="voraus">
+            <span class="section-badge sec-b">Voraussetzung</span>
+            <h2 class="section-title">Das bringen Sie mit ✅
+                <small>Die g++-Installation war Inhalt des letzten Übungsblatts</small>
+            </h2>
+            <p class="lead">Nachdem Sie den g++-Compiler installiert haben (letztes Übungsblatt), starten wir
+                heute mit einem kurzen Check – und bauen darauf auf: Terminal-Grundlagen, Ihr erstes
+                C++-Programm und der erste Fehler.</p>
+            <div class="expected">✅ <strong>Compiler-Check – das sollte heute klappen:</strong>
+                <div class="trio">
+                    <div>
+                        <div class="os-label os-win">🪟 Windows</div>
+                        <div class="terminal t-cmd">
+                            <div class="term-title">
+                                <span class="tname">Eingabeaufforderung</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">g++ --version</span>
+        g++ (Rev3, Built by MSYS2 project) 14.2.0</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-mac">🍎 macOS</div>
+                        <div class="terminal t-mac">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                            </div>
+                            <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">g++ --version</span>
+        Apple clang version 15.0.0</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-lin">🐧 Linux</div>
+                        <div class="terminal t-ub">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@ubuntu: ~</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">g++ --version</span>
+        g++ (Ubuntu 13.2.0-23ubuntu1) 13.2.0</div>
+                        </div>
+                    </div>
+                </div>
+                Erscheint eine Versionsnummer, ist Ihr Compiler bereit für heute. 🎉
+            </div>
+            <div class="info-box">📌 <strong>Klappt der Check nicht?</strong> Die komplette Installationsanleitung
+                (Windows · macOS · Linux) finden Sie in der Anleitung zum letzten Übungsblatt – und der
+                Problemlösungsteil unten in dieser Anleitung hilft bei typischen Fehlern. Fragen Sie in der
+                Übung – dafür sind wir da.</div>
+        </div>
+<!-- ================================================================ -->
+    <div class="section" id="teil0">
+        <span class="section-badge sec-0">Teil 0</span>
+        <h2 class="section-title">Terminal-Grundlagen
+            <small>Das Fenster, in dem Sie tippen – öffnen und navigieren</small>
+        </h2>
+
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+                <h3>Das Terminal öffnen</h3>
+                <p>Das <strong>Terminal</strong> ist ein Fenster, in dem Sie Befehle eintippen statt mit der Maus zu klicken.
+                    Sie öffnen es je nach Plattform so:</p>
+                <div class="trio">
+                    <div>
+                        <div class="os-label os-win">🪟 Windows</div>
+                        <p style="font-size:0.93em">Windows-Taste drücken → <strong>cmd</strong> eintippen →
+                            „<strong>Eingabeaufforderung</strong>“ anklicken.</p>
+                    </div>
+                    <div>
+                        <div class="os-label os-mac">🍎 macOS</div>
+                        <p style="font-size:0.93em"><code class="inline">Cmd</code>+<code class="inline">Leertaste</code>
+                            drücken (Spotlight-Suche) → <strong>Terminal</strong> eintippen →
+                            <code class="inline">Enter</code>.</p>
+                    </div>
+                    <div>
+                        <div class="os-label os-lin">🐧 Linux (Ubuntu)</div>
+                        <p style="font-size:0.93em"><code class="inline">Strg</code>+<code class="inline">Alt</code>+<code class="inline">T</code>
+                            drücken – oder im Anwendungsmenü nach <strong>Terminal</strong> suchen.</p>
+                    </div>
+                </div>
+                <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Ein Fenster ist offen. Ganz links steht der
+                    <strong>Eingabeprompt</strong> – ein kleiner Text, der darauf wartet, dass Sie tippen. Ab jetzt gilt:
+                    <strong>Was in den Beispielen nach dem Prompt steht, tippen Sie ein</strong> (den Prompt selbst nicht).</div>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+                <h3>Wo bin ich gerade? – den aktuellen Ordner anzeigen</h3>
+                <p>Jedes Terminal „steht“ in einem Ordner – dem <strong>aktuellen Ordner</strong>. Alle Befehle, die Sie
+                    eingeben, wirken zuerst auf diesen Ordner. Mit einem Befehl können Sie nachfragen, wo das ist:</p>
+                <div class="trio">
+                    <div>
+                        <div class="os-label os-win">🪟 Windows</div>
+                        <div class="terminal t-cmd">
+                            <div class="term-title">
+                                <span class="tname">Eingabeaufforderung</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">cd</span>
+C:\Users\Anna</div>
+                        </div>
+                        <p style="font-size:0.85em">In Windows zeigt der Befehl <code class="inline">cd</code> <em>ohne</em> ZielORDNER einfach den aktuellen Ordner an.</p>
+                    </div>
+                    <div>
+                        <div class="os-label os-mac">🍎 macOS</div>
+                        <div class="terminal t-mac">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                            </div>
+                            <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">pwd</span>
+/Users/anna</div>
+                        </div>
+                        <p style="font-size:0.85em">Unter macOS und Linux heißt der Befehl <code class="inline">pwd</code> („print working directory“).</p>
+                    </div>
+                    <div>
+                        <div class="os-label os-lin">🐧 Linux</div>
+                        <div class="terminal t-ub">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@ubuntu: ~</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">pwd</span>
+/home/anna</div>
+                        </div>
+                        <p style="font-size:0.85em">Gleicher Befehl wie unter macOS: <code class="inline">pwd</code>.</p>
+                    </div>
+                </div>
+                <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Es erscheint der Pfad zu Ihrem
+                    <strong>persönlichen Hauptordner</strong> („Home-Verzeichnis“) – auf Windows
+                    <code class="inline">C:\Users\IhrName</code>, auf macOS <code class="inline">/Users/IhrName</code>,
+                    auf Linux <code class="inline">/home/IhrName</code>.</div>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+                <h3>Was liegt in diesem Ordner?</h3>
+                <div class="trio">
+                    <div>
+                        <div class="os-label os-win">🪟 Windows – <code class="inline">dir</code></div>
+                        <div class="terminal t-cmd">
+                            <div class="term-title">
+                                <span class="tname">Eingabeaufforderung</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">dir</span>
+ Verzeichnis von C:\Users\Anna
+
+14.10.2026  09:15    &lt;DIR&gt;          Desktop
+14.10.2026  09:15    &lt;DIR&gt;          Documents
+14.10.2026  09:15    &lt;DIR&gt;          Downloads</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-mac">🍎 macOS – <code class="inline">ls</code></div>
+                        <div class="terminal t-mac">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                            </div>
+                            <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">ls</span>
+Bilder    Downloads    Dokumente    Musik</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-lin">🐧 Linux – <code class="inline">ls</code></div>
+                        <div class="terminal t-ub">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@ubuntu: ~</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">ls</span>
+Bilder  Downloads  Dokumente  Musik</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Eine Liste von Ordnern und Dateien erscheint –
+                    bei Ihnen darf sie völlig anders aussehen oder fast leer sein.</div>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+                <h3>Einen Übungsordner anlegen</h3>
+                <p>Alle Programme dieser Vorlesung sollen an einem festen Ort liegen. Legen Sie deshalb jetzt einen Ordner
+                    namens <code class="inline">progcpp-ubungen</code> an. Der Befehl heißt auf allen drei Plattformen gleich:
+                    <code class="inline">mkdir</code> („make directory“).</p>
+                <div class="trio">
+                    <div>
+                        <div class="os-label os-win">🪟 Windows</div>
+                        <div class="terminal t-cmd">
+                            <div class="term-title">
+                                <span class="tname">Eingabeaufforderung</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">mkdir progcpp-ubungen</span>
+<span class="pr">C:\Users\Anna&gt;</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-mac">🍎 macOS</div>
+                        <div class="terminal t-mac">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                            </div>
+                            <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">mkdir progcpp-ubungen</span>
+<span class="pr">anna@MacBook-Pro ~ %</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-lin">🐧 Linux</div>
+                        <div class="terminal t-ub">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@ubuntu: ~</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">mkdir progcpp-ubungen</span>
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Der Prompt erscheint einfach wieder –
+                    <strong>ohne Meldung</strong>. Das ist hier genau richtig: Der Befehl hat funktioniert. 💡
+                    (Stille = Erfolg, siehe Kasten oben!)</div>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+                <h3>In den Übungsordner wechseln</h3>
+                <p>Mit <code class="inline">cd</code> („change directory“) + Ordnername wechseln Sie hinein – auch das
+                    funktioniert auf allen Plattformen gleich:</p>
+                <div class="trio">
+                    <div>
+                        <div class="os-label os-win">🪟 Windows</div>
+                        <div class="terminal t-cmd">
+                            <div class="term-title">
+                                <span class="tname">Eingabeaufforderung</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-mac">🍎 macOS</div>
+                        <div class="terminal t-mac">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                            </div>
+                            <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr">anna@MacBook-Pro progcpp-ubungen %</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="os-label os-lin">🐧 Linux</div>
+                        <div class="terminal t-ub">
+                            <div class="term-title">
+                                <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                <span class="tname center">anna@ubuntu: ~</span>
+                                <span class="win-btns">— □ ✕</span>
+                            </div>
+                            <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Der Prompt hat sich verändert – er zeigt jetzt
+                    <code class="inline">progcpp-ubungen</code> als aktuellen Ordner an. Damit haben Sie Ihr
+                    Arbeitsverzeichnis für die ganze Vorlesung eingerichtet. 🎉</div>
+            </div>
+        </div>
+
+        <div class="merke-box">🧠 <strong>Merke – die zwei Prompt-Arten:</strong> Wenn Sie später Befehle aus Anleitungen
+            abtippen, bedeutet das <strong>$</strong>- oder <strong>%</strong>-Zeichen (macOS/Linux) bzw. das
+            <strong>&gt;</strong> am Ende des Windows-Pfads: „Hier beginnt Ihre Eingabe“. Tippen Sie dieses Zeichen
+            <em>niemals mit ein</em> – es ist bereits da.</div>
+    </div>
+
+    <!-- ================================================================ -->
+        <div class="section" id="teilb">
+            <span class="section-badge sec-b">Teil a</span>
+            <h2 class="section-title">Installation prüfen &amp; Problemlösungen
+                <small>Läuft der Compiler? – und was tun, wenn nicht</small>
+            </h2>
+
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h3>Der große Test: <code class="inline">g++ --version</code></h3>
+                    <p>Tippen Sie den Versions-Check ein. Erscheint eine Versionsnummer, ist der Compiler installiert
+                        <strong>und</strong> das Terminal findet ihn – mehr brauchen Sie nicht.</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows</div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">g++ --version</span>
+g++ (Rev3, Built by MSYS2 project) 14.2.0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS</div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">g++ --version</span>
+Apple clang version 15.0.0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux</div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">g++ --version</span>
+g++ (Ubuntu 13.2.0-23ubuntu1) 13.2.0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Eine Zeile, die mit <code class="inline">g++</code>
+                        oder <code class="inline">Apple clang</code> beginnt und eine Versionsnummer enthält.
+                        Die genaue Nummer spielt keine Rolle – <strong>Hauptsache, es erscheint überhaupt Text</strong>.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h3>Woher kommt der Befehl?</h3>
+                    <p>Zur Vorbereitung auf die Problemlösung: Mit einem Befehl können Sie anzeigen lassen,
+                        <em>welche Datei</em> hinter dem Namen <code class="inline">g++</code> steckt.</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows – <code class="inline">where g++</code></div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">where g++</span>
+C:\mingw64\bin\g++.exe</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS – <code class="inline">which g++</code></div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">which g++</span>
+/usr/bin/g++</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux – <code class="inline">which g++</code></div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">which g++</span>
+/usr/bin/g++</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Eine Zeile mit einem Dateipfad.
+                        Erscheint stattdessen „Info: Could not find files“ (Windows) oder „not found“ (macOS/Linux),
+                        kennt Ihr System den Befehl noch nicht – dann hilft der Problemlösungsteil unten.</div>
+                </div>
+            </div>
+
+            <h3>🛠️ Problemlösungen: Wenn g++ nicht gefunden wird</h3>
+            <p>Der häufigste Fehler ist <code class="inline">g++: command not found</code> bzw.
+                <code class="inline">„g++“ wird nicht als Name eines Cmdlet-, Programms … erkannt</code>.
+                Arbeiten Sie die passenden Karten durch – fast immer löst die erste Karte das Problem:</p>
+
+            <div class="ts-grid">
+                <div class="ts-card">
+                    <div class="ts-problem">„g++“ wird nicht erkannt / command not found – direkt nach der Installation</div>
+                    <div class="ts-solution"><strong>Das Terminal neu öffnen – die häufigste Ursache!</strong>
+                        <ul>
+                            <li>Schließen Sie das Fenster <strong>komplett</strong> und öffnen Sie ein neues</li>
+                            <li>Grund: Das Terminal liest die Liste bekannter Programme nur <em>beim Öffnen</em> ein –
+                                ein frisch installiertes g++ ist im alten Fenster unsichtbar</li>
+                            <li>Danach erneut <code class="inline">g++ --version</code> testen</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ts-card">
+                    <div class="ts-problem">🪟 Windows: auch nach einem neuen Fenster bleibt „wird nicht erkannt“</div>
+                    <div class="ts-solution"><strong>Installation prüfen.</strong>
+                        <ul>
+                            <li>Lief die <code class="inline">winget</code>-Installation mit einer Fehlermeldung durch?
+                                Dann Befehl erneut eingeben und die Meldung lesen</li>
+                            <li>Manuelle Kontrolle: Existiert der Ordner <code class="inline">C:\mingw64\bin</code>
+                                mit einer <code class="inline">g++.exe</code>? Wenn ja, fehlt der Eintrag in den
+                                Umgebungsvariablen – wir helfen in der Übung</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ts-card">
+                    <div class="ts-problem">🍎 macOS: Der Installationsdialog erscheint nicht / bricht ab</div>
+                    <div class="ts-solution"><strong>Command Line Tools nachziehen.</strong>
+                        <ul>
+                            <li><code class="inline">xcode-select --install</code> einfach erneut ausführen –
+                                Dialoge brechen beim ersten Versuch gern mal ab</li>
+                            <li>Kommt „already installed“, war alles da: direkt <code class="inline">g++ --version</code> testen</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ts-card">
+                    <div class="ts-problem">🐧 Linux: „Unable to locate package“ / Paketfehler</div>
+                    <div class="ts-solution"><strong>Paketliste aktualisieren.</strong>
+                        <ul>
+                            <li>Zuerst <code class="inline">sudo apt update</code> ausführen, danach
+                                <code class="inline">sudo apt install build-essential gdb</code> erneut versuchen</li>
+                            <li>Nicht-Ubuntu-System: Distribution prüfen (Fedora → <code class="inline">dnf install gcc-c++</code>)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================ -->
+        <div class="section" id="teilc">
+            <span class="section-badge sec-c">Teil b</span>
+            <h2 class="section-title">Hello World 🌍
+                <small>Schreiben → Übersetzen → Starten → Prüfen</small>
+            </h2>
+            <p class="lead">Jetzt schreiben Sie Ihr erstes echtes C++-Programm. Das Ziel: Der Computer grüßt Sie zurück.</p>
+
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h3>In den Übungsordner wechseln</h3>
+                    <p>Das Terminal soll in Ihrem Übungsordner „stehen“ (falls es das nach Teil 0 nicht mehr tut):</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows</div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS</div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr">anna@MacBook-Pro progcpp-ubungen %</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux</div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Der Prompt zeigt den Übungsordner als
+                        aktuellen Ordner.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h3>Das Programm schreiben – im Texteditor</h3>
+                    <p>Programmcode schreiben Sie in einem <strong>Texteditor</strong> – das ist wie ein ganz einfaches
+                        Word ohne Fettdruck und ohne Farbe-Buttons, das nur reinen Text speichert.</p>
+                    <p class="plat-hint"><strong>🪟 Windows:</strong> Drücken Sie die Windows-Taste, tippen Sie
+                        <strong>Editor</strong> und öffnen Sie die App „Editor“ (englisch: „Notepad“).
+                        Wer mag, installiert später <strong>Notepad++</strong> – ein komfortablerer Editor, der
+                        C++-Code bunt einfärbt.</p>
+                    <p class="plat-hint"><strong>🍎 macOS:</strong> Öffnen Sie <strong>TextEdit</strong> aus dem
+                        Programmordner. <em>Wichtig:</em> Stellen Sie sofort im Menü <em>Format → „Mit reinem Text
+                        beginnen“</em> um – TextEdit kann sonst Formatierungen speichern, die den Compiler stören.</p>
+                    <p class="plat-hint"><strong>🐧 Linux:</strong> Öffnen Sie <strong>gedit</strong> („Texteditor“)
+                        aus dem Anwendungsmenü.</p>
+                    <p>Tippen Sie <strong>exakt</strong> diesen Code ab:</p>
+                    <div class="codebox"><span class="ln">1</span>#include &lt;iostream&gt;  // Bibliothek für Ein-/Ausgabe
+<span class="ln">2</span>
+<span class="ln">3</span>int main() {
+<span class="ln">4</span>    std::cout &lt;&lt; "Hello, World!" &lt;&lt; std::endl;
+<span class="ln">5</span>    return 0;  // Programm erfolgreich beendet
+<span class="ln">6</span>}</div>
+                    <div class="info-box">📖 <strong>Was passiert hier Zeile für Zeile?</strong>
+                        <ul style="margin-bottom:0">
+                            <li><code class="inline">#include &lt;iostream&gt;</code> – lädt die Bibliothek für Ein- und Ausgabe dazu</li>
+                            <li><code class="inline">int main() { ... }</code> – das ist die Stelle, an der jedes C++-Programm startet (der „Startpunkt“)</li>
+                            <li><code class="inline">std::cout &lt;&lt; ...</code> – bedeutet: „drucke das Folgende auf den Bildschirm“</li>
+                            <li><code class="inline">std::endl</code> – macht einen Zeilenumbruch danach</li>
+                            <li><code class="inline">return 0;</code> – meldet dem System: „Ich bin fehlerfrei fertig“ (0 = alles gut)</li>
+                        </ul>
+                    </div>
+                    <p><strong>Tipp: Abtippen statt Kopieren!</strong> So merken Sie sich die Schreibweise am ehesten.
+                        Achten Sie auf Groß-/Kleinschreibung und die Semikolons (<code class="inline">;</code>) am Zeilenende.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h3>Speichern als <code class="inline">hello.cpp</code> – und zwar im Übungsordner!</h3>
+                    <p class="plat-hint"><strong>🪟 Windows (Editor):</strong> Menü „Datei → Speichern unter“. Wechseln Sie
+                        links zu <em>Dokumente</em>? Nein – navigieren Sie zu <code class="inline">C:\Users\IhrName\progcpp-ubungen</code>.
+                        Wichtig: Bei „Dateityp“ wählen Sie <strong>„Alle Dateien (*.*)“</strong>, sonst hängt Windows
+                        heimlich ein <code class="inline">.txt</code> an und Ihre Datei heißt <code class="inline">hello.cpp.txt</code>.
+                        Dateiname: <code class="inline">hello.cpp</code> → Speichern.</p>
+                    <p class="plat-hint"><strong>🍎 macOS (TextEdit):</strong> <em>Ablage → Sichern</em>. Name:
+                        <code class="inline">hello.cpp</code>. Falls ein Dialog fragt, ob Sie wirklich die Endung
+                        „.cpp“ verwenden wollen → <strong>„.cpp verwenden“</strong> anklicken. Speicherort: Ihr Übungsordner
+                        (<code class="inline">/Users/IhrName/progcpp-ubungen</code>).</p>
+                    <p class="plat-hint"><strong>🐧 Linux (gedit):</strong> Speichern-Button → Ordner
+                        <code class="inline">progcpp-ubungen</code> in Ihrem persönlichen Ordner wählen → Dateiname
+                        <code class="inline">hello.cpp</code> → Speichern.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h3>Kontrolle im Terminal: Ist die Datei wirklich da?</h3>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows – <code class="inline">dir</code></div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">dir</span>
+ Verzeichnis von C:\Users\Anna\progcpp-ubungen
+
+14.10.2026  10:42               132 hello.cpp</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS – <code class="inline">ls</code></div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">ls</span>
+hello.cpp</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux – <code class="inline">ls</code></div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~/progcpp-ubungen</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">ls</span>
+hello.cpp</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> <code class="inline">hello.cpp</code>
+                        steht in der Liste. Sehen Sie statt dessen <code class="inline">hello.cpp.txt</code> oder gar
+                        nichts? Dann hat der Editor woanders oder unter falschem Namen gespeichert – öffnen Sie den
+                        Speichern-Dialog noch einmal (Schritt 3) und achten Sie auf Ordner und Dateityp.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h3>Übersetzen – aus dem Text wird ein Programm</h3>
+                    <p>Mit einem Befehl wandeln Sie den Quelltext in ein ausführbares Programm um. Achtung, ein kleiner
+                        plattformbedingter Unterschied im Ergebnisnamen: Windows macht <code class="inline">hello.exe</code>,
+                        macOS/Linux macht <code class="inline">hello</code>.</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows</div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">g++ -o hello.exe hello.cpp</span>
+<span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">dir</span>
+14.10.2026  10:42               132 hello.cpp
+14.10.2026  10:45            172.032 hello.exe</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS</div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">g++ -o hello hello.cpp</span>
+<span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">ls</span>
+hello    hello.cpp</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux</div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~/progcpp-ubungen</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">g++ -o hello hello.cpp</span>
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">ls</span>
+hello  hello.cpp</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Der Compiler druckt <strong>gar nichts</strong> –
+                        und genau das ist gut (Stille = Erfolg!). Mit <code class="inline">dir</code> bzw.
+                        <code class="inline">ls</code> sehen Sie die neu entstandene Datei: <code class="inline">hello.exe</code>
+                        (Windows) bzw. <code class="inline">hello</code> (macOS/Linux).</div>
+                    <div class="info-box">📖 <strong>Was bedeuten die drei Teile des Befehls?</strong>
+                        <code class="inline">g++</code> = „lieber Compiler, übersetze …“ ·
+                        <code class="inline">-o hello(.exe)</code> = „… und nenne das fertige Programm so“ ·
+                        <code class="inline">hello.cpp</code> = „… und benutze dabei diese Textdatei als Vorlage“.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">6</div>
+                <div class="step-body">
+                    <h3>Starten!</h3>
+                    <p>Auf Windows starten Sie das Programm, indem Sie den Namen eintippen. Auf macOS und Linux müssen
+                        ein Punkt und ein Schrägstrich davor – das bedeutet „such das Programm genau hier im aktuellen Ordner“:</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows</div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">hello.exe</span>
+Hello, World!</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS</div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">./hello</span>
+Hello, World!</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux</div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~/progcpp-ubungen</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">./hello</span>
+Hello, World!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Die Zeile <code class="inline">Hello, World!</code>
+                        erscheint – Ihr erstes C++-Programm läuft! 🎉 Das ist der Moment, in dem aus purem Text ein
+                        lebendiges Programm geworden ist.</div>
+                    <div class="info-box">📖 <strong>Warum <code class="inline">./</code> auf macOS/Linux?</strong> Diese
+                        Systeme suchen Programme nur in fest hinterlegten Systemordnern – nicht im Ordner, in dem Sie
+                        gerade stehen. <code class="inline">./</code> heißt wörtlich: „nimm die Datei aus genau diesem
+                        Ordner hier“. Vergisst man die zwei Zeichen, kommt „command not found“, obwohl die Datei
+                        existiert. (Windows ist hier einfacher: Es sucht automatisch im aktuellen Ordner mit.)</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">7</div>
+                <div class="step-body">
+                    <h3>Prüfen: Hat das Programm „alles gut“ gemeldet?</h3>
+                    <p>Ihr Programm endet mit <code class="inline">return 0;</code> – das ist eine Rückmeldung ans
+                        System: „Ich bin ohne Fehler durchgelaufen“. Diese Zahl können Sie sich anzeigen lassen –
+                        ein kleines Testwerkzeug, das wir öfter nutzen werden:</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows – <code class="inline">echo %errorlevel%</code></div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">hello.exe</span>
+Hello, World!
+<span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">echo %errorlevel%</span>
+0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS – <code class="inline">echo $?</code></div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">./hello</span>
+Hello, World!
+<span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">echo $?</span>
+0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux – <code class="inline">echo $?</code></div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~/progcpp-ubungen</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">./hello</span>
+Hello, World!
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">echo $?</span>
+0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Eine <code class="inline">0</code> –
+                        genau die Zahl aus <code class="inline">return 0;</code>. Damit ist der komplette Kreislauf
+                        gelaufen: <strong>schreiben → übersetzen → starten → prüfen</strong>. Diesen Kreislauf werden
+                        Sie in dieser Vorlesung hunderte Male drehen.</div>
+                </div>
+            </div>
+        </div>
+
+            <!-- ================================================================ -->
+        <div class="section" id="teild">
+            <span class="section-badge sec-d">Teil c</span>
+            <h2 class="section-title">Einen Fehler absichtlich auslösen 💥
+                <small>Fehlermeldungen lesen lernen – die wichtigste Fertigkeit des Semesters</small>
+            </h2>
+            <p class="lead">Früher oder später schreibt jeder fehlerhaften Code. Wer Fehlermeldungen lesen kann, ist in
+                Minuten fertig – wer davor zurückschreckt, in Stunden. Deshalb üben wir das Lesen jetzt ganz gezielt,
+                indem Sie selbst einen Fehler einbauen.</p>
+
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h3>Fehler einbauen: ein Semikolon löschen</h3>
+                    <p>Öffnen Sie <code class="inline">hello.cpp</code> im Editor und <strong>löschen Sie das Semikolon</strong>
+                        am Ende der <code class="inline">std::cout</code>-Zeile. Die Zeile sieht dann so aus:</p>
+                    <div class="codebox"><span class="ln">4</span>    std::cout &lt;&lt; "Hello, World!" &lt;&lt; std::endl   ▏← hier fehlt das Semikolon!</div>
+                    <p>Speichern Sie die Datei (im Editor!).</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h3>Neu übersetzen – und die Fehlermeldung betrachten</h3>
+                    <p>Führen Sie denselben Übersetzungsbefehl wie in Teil c aus. Diesmal wird der Compiler
+                        <strong>nicht</strong> still sein:</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows</div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">g++ -o hello.exe hello.cpp</span>
+<span class="err">hello.cpp: In function 'int main()':</span>
+<span class="err">hello.cpp:5:12: error: expected ';' before 'return'</span>
+    5 |     return 0;
+      |            ^
+      |            ;
+<span class="err">compilation terminated.</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS</div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">g++ -o hello hello.cpp</span>
+<span class="err">hello.cpp:5:12: error: expected ';' before 'return'</span>
+    5 |     return 0;
+      |            ^
+      |            ;
+<span class="err">1 error generated.</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux</div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~/progcpp-ubungen</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">g++ -o hello hello.cpp</span>
+<span class="err">hello.cpp:5:12: error: expected ';' before 'return'</span>
+    5 |     return 0;
+      |            ^
+      |            ;
+<span class="err">compilation terminated.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-box">📖 <strong>Die Fehlermeldung Stück für Stück entziffern</strong> (sie ist
+                        auf allen Plattformen fast gleich aufgebaut):
+                        <ul style="margin-bottom:0">
+                            <li><code class="inline">hello.cpp:5:12:</code> → <strong>in dieser Datei, Zeile 5, Spalte 12</strong> ist der Compiler gestolpert</li>
+                            <li><code class="inline">error: expected ';' before 'return'</code> → <strong>was fehlt:</strong> ein Semikolon, und zwar <em>vor</em> dem Wort <code class="inline">return</code></li>
+                            <li>darunter zeigt der Compiler die betroffene Zeile im Quelltext, markiert die Stelle mit <code class="inline">^</code> und schlägt sogar die Korrektur vor (das einsame <code class="inline">;</code>)</li>
+                        </ul>
+                        <p style="margin-top:8px">🤔 <strong>Kuriosität zum Nachdenken:</strong> Gelöscht haben Sie in
+                        <strong>Zeile 4</strong> – angemeckert wird <strong>Zeile 5</strong>! Der Compiler stolpert
+                        nämlich erst am <em>nächsten</em> Wort über die Lücke. Daraus folgt eine wichtige Regel:
+                        <strong>Ist die angemeckerte Zeile fehlerfrei, prüfen Sie die Zeile darüber!</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h3>Reparieren – und den Beweis antreten</h3>
+                    <p>Setzen Sie das Semikolon in der <code class="inline">std::cout</code>-Zeile wieder ein, speichern
+                        Sie im Editor – und drehen Sie den kompletten Kreislauf noch einmal:</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows</div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">g++ -o hello.exe hello.cpp</span>   (keine Ausgabe = gut!)
+<span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">hello.exe</span>
+Hello, World!
+<span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">echo %errorlevel%</span>
+0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS</div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">g++ -o hello hello.cpp</span>   (keine Ausgabe = gut!)
+<span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">./hello</span>
+Hello, World!
+<span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">echo $?</span>
+0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux</div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~/progcpp-ubungen</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">g++ -o hello hello.cpp</span>   (keine Ausgabe = gut!)
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">./hello</span>
+Hello, World!
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">echo $?</span>
+0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Übersetzen ohne Meldung, Start mit
+                        Ausgabe, Rückgabewert 0. Sie haben gerade einen Fehler gefunden, die Meldung gelesen, gedeutet
+                        und behoben – genau dieses Vorgehen werden Sie in dieser Vorlesung ständig brauchen.</div>
+                </div>
+            </div>
+
+            <div class="merke-box">🧠 <strong>Umgang mit Fehlermeldungen – die 4 goldenen Regeln:</strong>
+                <ol style="margin: 10px 0 0 0">
+                    <li><strong>Von oben nach unten lesen</strong> – die erste Zeile mit <code class="inline">error:</code> ist fast immer die Ursache, alles darunter oft nur Folgeprobleme.</li>
+                    <li><strong>Immer nur den ersten Fehler beheben, dann neu übersetzen</strong> – oft verschwinden mehrere Meldungen mit einem einzigen Fix (Kettenfehler!).</li>
+                    <li><strong>„Datei:Zeile:Spalte“ ernst nehmen</strong> – die Meldung sagt Ihnen genau, wo Sie suchen müssen. Und: Ist die gemeldete Zeile sauber, schauen Sie in die Zeile <em>davor</em>.</li>
+                    <li><strong>Ruhe bewahren</strong> – Fehler sind Alltag beim Programmieren, kein Versagen. Niemand schreibt fehlerfreien Code beim ersten Versuch – auch Ihre Dozenten nicht.</li>
+                </ol>
+            </div>
+
+            <div class="info-box">🎯 <strong>Zusatzaufgabe:</strong> Bauen Sie weitere Fehler ein – immer nur
+                <em>einen</em> auf einmal, beobachten, zurückbauen: (1) tippen Sie <code class="inline">cout</code>
+                statt <code class="inline">std::cout</code> – (2) löschen Sie die Anführungszeichen um
+                <code class="inline">Hello, World!</code> – (3) nennen Sie <code class="inline">main</code> in
+                <code class="inline">Main</code> um. Vergleichen Sie: Wie unterscheiden sich die Meldungen?</div>
+        </div>
+
+        <!-- ================================================================ -->
+        <div class="section" id="checkliste">
+            <span class="section-badge sec-0">✅</span>
+            <h2 class="section-title">Checkliste &amp; Spickzettel
+                <small>Wenn alle Kästchen Haken haben, sind Sie bereit für Übung 02</small>
+            </h2>
+
+            <h3>📋 Können Sie das schon?</h3>
+            <ul style="list-style:none; margin: 15px 0;">
+                <li>☐ Ich kann auf meiner Plattform das Terminal öffnen.</li>
+                <li>☐ Ich kann mir anzeigen lassen, wo ich bin (<code class="inline">cd</code> unter Windows, <code class="inline">pwd</code> unter macOS/Linux) und was im Ordner liegt (<code class="inline">dir</code> / <code class="inline">ls</code>).</li>
+                <li>☐ Ich habe einen Übungsordner angelegt und kann mit <code class="inline">cd</code> hineinwechseln.</li>
+                <li>☐ <code class="inline">g++ --version</code> zeigt eine Versionsnummer.</li>
+                <li>☐ Ich kann <code class="inline">hello.cpp</code> im Editor anlegen, im Übungsordner speichern und im Terminal wiederfinden.</li>
+                <li>☐ Ich kann übersetzen, starten und das Ergebnis prüfen – inklusive Rückgabewert (<code class="inline">echo %errorlevel%</code> / <code class="inline">echo $?</code>).</li>
+                <li>☐ Ich habe einen Fehler absichtlich ausgelöst, die Meldung gelesen und den Fehler behoben.</li>
+            </ul>
+
+            <h3>🗝️ Spickzettel: die Befehle im Überblick</h3>
+            <table>
+                <tr><th>Aufgabe</th><th>🪟 Windows (cmd)</th><th>🍎 macOS / 🐧 Linux</th></tr>
+                <tr><td>Wo bin ich?</td><td><code class="inline">cd</code></td><td><code class="inline">pwd</code></td></tr>
+                <tr><td>Was liegt hier?</td><td><code class="inline">dir</code></td><td><code class="inline">ls</code></td></tr>
+                <tr><td>Ordner anlegen</td><td colspan="2" style="text-align:center"><code class="inline">mkdir progcpp-ubungen</code></td></tr>
+                <tr><td>In Ordner wechseln</td><td colspan="2" style="text-align:center"><code class="inline">cd progcpp-ubungen</code></td></tr>
+                <tr><td>Eine Ebene zurück</td><td colspan="2" style="text-align:center"><code class="inline">cd ..</code></td></tr>
+                <tr><td>Home-Ordner (abgekürzt)</td><td><code class="inline">cd %USERPROFILE%</code></td><td><code class="inline">cd ~</code></td></tr>
+                <tr><td>Compilerversion testen</td><td colspan="2" style="text-align:center"><code class="inline">g++ --version</code></td></tr>
+                <tr><td>Wo steckt g++?</td><td><code class="inline">where g++</code></td><td><code class="inline">which g++</code></td></tr>
+                <tr><td>Übersetzen</td><td><code class="inline">g++ -o hello.exe hello.cpp</code></td><td><code class="inline">g++ -o hello hello.cpp</code></td></tr>
+                <tr><td>Starten</td><td><code class="inline">hello.exe</code></td><td><code class="inline">./hello</code></td></tr>
+                <tr><td>Rückgabewert anzeigen</td><td><code class="inline">echo %errorlevel%</code></td><td><code class="inline">echo $?</code></td></tr>
+            </table>
+
+        </div>
+
+        <div class="doc-footer">
+            ProgC++ · Übung 01 · Prof. Adrian Müller · Hochschule Kaiserslautern · Wintersemester 2026/27
+        </div>
+</div>
+</body>
+</html>
