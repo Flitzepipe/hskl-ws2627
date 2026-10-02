@@ -18,5 +18,5 @@
 - [Skript Software Engineering V2.0.pdf](/SE/Skript%20Software%20Engineering%20V2.0.pdf)
 
 #### Freitag 02.10.2026
-- [Übungs Skripte 01](C:\Users\rahen\Documents\Git_Repos\hskl-ws2627\C++\Uebugnen\Uebung01-Anleitung.html)
-- [Übungs Skripte 02](C:\Users\rahen\Documents\Git_Repos\hskl-ws2627\C++\Uebugnen\Uebung02-Anleitung.html)
+- [Übungs Skripte 01](/C++/Uebugnen/Uebung01-Anleitung.html)
+- [Übungs Skripte 02](/C++\Uebugnen/Uebung02-Anleitung.html)
