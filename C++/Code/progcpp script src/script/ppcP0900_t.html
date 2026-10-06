@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="description" content="Eine Einführung in C++">
+<meta name="keywords" content="Programmieren, Programming, C++">
+<meta name="author" content="Wilhelm Meier, Adrian MÜller">
+<meta name="copyright" content="Prof. Dr.-Ing. Wilhelm Meier">
+<title>pCpp - Programmierkonzepte mit C&#43;&#43; - LE 09 - [WS26/27]</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f8f8f8; }
+pre.pygments .tok-c { color: #3D7B7B; font-style: italic } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #666666 } /* Operator */
+pre.pygments .tok-ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #9C6500 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #E40000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { color: #008400 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #717171 } /* Generic.Output */
+pre.pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+pre.pygments .tok-m { color: #666666 } /* Literal.Number */
+pre.pygments .tok-s { color: #BA2121 } /* Literal.String */
+pre.pygments .tok-na { color: #687822 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #008000 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #880000 } /* Name.Constant */
+pre.pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #717171; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #0000FF } /* Name.Function */
+pre.pygments .tok-nl { color: #767600 } /* Name.Label */
+pre.pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #19177C } /* Name.Variable */
+pre.pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #A45A77 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+   jQuery('a[target^="newwindow"]').click(function(e) {
+       var width = 600;
+       var height = 400;
+       window.open(this.href, 'newwindow', 'width=' + width + ', height=' + height + ', top=50, left=500');
+       return false;
+   });
+});
+</script>
+<style>
+.listingblock a.view-result {
+  float: right;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-top: 0.15em;
+}
+</style>
+<script>
+function toggle_result_block(e) {
+  var resultNode = e.target.parentNode.parentNode.nextElementSibling;
+  resultNode.style.display = getComputedStyle(resultNode).display == 'none' ? '' : 'none';
+  return false;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  [].forEach.call(document.querySelectorAll('.result'), function(resultNode) {
+    resultNode.style.display = 'none';
+    var viewLink = document.createElement('a');
+    viewLink.className = 'view-result';
+    viewLink.appendChild(document.createTextNode('[ view result ]'));
+    resultNode.previousElementSibling.querySelector('.title').appendChild(viewLink);
+    viewLink.addEventListener('click', toggle_result_block);
+  });
+});
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>pCpp - Programmierkonzepte mit C&#43;&#43;</h1>
+<div class="details">
+<span id="author" class="author">Wilhelm Meier, Adrian MÜller</span><br>
+<span id="email" class="email"><a href="mailto:adrian.mueller@hs-kl.de">adrian.mueller@hs-kl.de</a></span><br>
+<span id="revnumber">version 1.12,</span>
+<span id="revdate">01.10.2026</span>
+<br><span id="revremark">WS26/27</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Inhalt</div>
+<ul class="sectlevel1">
+<li><a href="#part09">1. Lerneinheit 09 - Klassenhierarchien</a></li>
+<li><a href="#_abstraktion_der_klasse_point">2. Abstraktion der Klasse <code>Point</code></a></li>
+<li><a href="#_eine_schnittstellendeklaration_in_c">3. Eine Schnittstellendeklaration in <code>C++</code></a></li>
+<li><a href="#_vererbungsbeziehung">4. Vererbungsbeziehung</a></li>
+<li><a href="#_werte_kopieren_und_klassenhierarchien">5. Werte, Kopieren und Klassenhierarchien</a>
+<ul class="sectlevel2">
+<li><a href="#_statischer_und_dynamischer_typ">5.1. Statischer und dynamischer Typ</a></li>
+<li><a href="#slicing">5.2. Eingebettetes Basisklassenobjekt und das sog. <em>objectslicing</em></a></li>
+</ul>
+</li>
+<li><a href="#virtualdtor">6. Löschen von Freispeicherobjekten über Basisklassen-Zeigern</a></li>
+<li><a href="#ctordtorsequence">7. Konstruktions- und Destruktionsablauf</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lizenz</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" alt="Lizenz">
+</div>
+</div>
+<div class="paragraph">
+<p>Dieses Werk ist lizenziert unter einer <a href="http://creativecommons.org/licenses/by-nc-nd/4.0">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="part09"><a class="anchor" href="#part09"></a><a class="link" href="#part09">1. Lerneinheit 09 - Klassenhierarchien</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lernziele</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Was sind Basisklassen und abgeleitete Klassen?</p>
+</li>
+<li>
+<p>Was bedeutet Schnittstellenvererbung?</p>
+</li>
+<li>
+<p>Was sind virtuelle Elementfunktionen und was ist Laufzeitpolymorphie?</p>
+</li>
+<li>
+<p>Wie realisiert man eine Schnittstelle?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_abstraktion_der_klasse_point"><a class="anchor" href="#_abstraktion_der_klasse_point"></a><a class="link" href="#_abstraktion_der_klasse_point">2. Abstraktion der Klasse <code>Point</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In einem Grafikprogramm gibt es nicht nur Punkte zu zeichnen, sondern weitere Grafikobjekte wie eine Linie,
+ein Rechteck, eine Ellipse oder auch einen Kreis und ein Quadrat. Alle diese Objekte sollen durch die Klasse
+<code>SVGFile</code> korrekt in eine <code>SVG</code>-Datei eingefügt werden.</p>
+</div>
+<div class="paragraph">
+<p>Aus (jetziger) Sicht der Klasse <code>SVGFile</code> lassen sich die gemeinsamen Anforderungen an ein Grafikobjekt knapp
+zusammenfassen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Das Grafikobjekt muss eine Darstellung als <code>XML</code>-Element im <code>SVG</code>-Format liefern können.</p>
+</li>
+<li>
+<p>Das Grafikobjekt muss seine Ausdehnung in der <code>SVG</code>-Zeichenebene liefern können.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Beides sind <em>Verhaltensanforderungen</em> und damit Anforderungen an eine <em>gemeinsame</em> Schnittstelle. Dies
+wird in <code>C++</code> wie auch in <code>Java</code> durch das Schnittstellenkonzept ausgedrückt. Man kann sich auch sofort eine
+konkrete Klasse <code>Line</code> vorstellen, die ebenfalls diese Schnittstelle erfüllt.</p>
+</div>
+<div id="interface1" class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVMtQVNDSUknIHN0YW5kYWxvbmU9J25vJz8+PHN2ZyBjb250ZW50U3R5bGVUeXBlPSd0ZXh0L2NzcycgaGVpZ2h0PSc2NDdweCcgcHJlc2VydmVBc3BlY3RSYXRpbz0nbm9uZScgc3R5bGU9J3dpZHRoOjYyNHB4O2hlaWdodDo2NDdweDtiYWNrZ3JvdW5kOiNGRkZGRkY7JyB2ZXJzaW9uPScxLjEnIHZpZXdCb3g9JzAgMCA2MjQgNjQ3JyB3aWR0aD0nNjI0cHgnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHpvb21BbmRQYW49J21hZ25pZnknPjxkZWZzLz48Zz48ZyBpZD0nZWxlbV9TVkdTaGFwZSc+PHJlY3QgY29kZUxpbmU9JzEnIGZpbGw9JyNGMUYxRjEnIGhlaWdodD0nMTI5LjgwNTYnIGlkPSdTVkdTaGFwZScgcng9JzIuNScgcnk9JzIuNScgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB3aWR0aD0nMTkwJyB4PScyODYnIHk9JzY1LjQ0Jy8+PGVsbGlwc2UgY3g9JzM0NS43NScgY3k9JzgxLjQ0JyBmaWxsPScjQjRBN0U1JyByeD0nMTEnIHJ5PScxMScgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHBhdGggZD0nTTM0MS43ODEzLDg3Ljk0IEwzNDEuNzgxMyw4Ni4yMzY5IEwzNDQuMTQwNiw4NS45NzEyIEwzNDQuMTQwNiw3Ny43NjgxIEwzNDEuNzgxMyw3Ny41MDI1IEwzNDEuNzgxMyw3NS43OTk0IEwzNDguOTIxOSw3NS43OTk0IEwzNDguOTIxOSw3Ny41MDI1IEwzNDYuNSw3Ny43NjgxIEwzNDYuNSw4NS45NzEyIEwzNDguOTIxOSw4Ni4yMzY5IEwzNDguOTIxOSw4Ny45NCBMMzQxLjc4MTMsODcuOTQgWiAnIGZpbGw9JyMwMDAwMDAnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgZm9udC1zdHlsZT0naXRhbGljJyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzYyJyB4PSczNjYuMjUnIHk9Jzg2Ljg3Mic+U1ZHU2hhcGU8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB4MT0nMjg3JyB4Mj0nNDc1JyB5MT0nOTcuNDQnIHkyPSc5Ny40NCcvPjxlbGxpcHNlIGN4PScyOTcnIGN5PScxMzUuNTQxOScgZmlsbD0nIzg0QkU4NCcgcng9JzMnIHJ5PSczJyBzdHlsZT0nc3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxNjQnIHg9JzMwNicgeT0nMTM5LjQ3MzknPnN0ZDo6c3RyaW5nIHRvU1ZHKCkgY29uc3Q7PC90ZXh0PjxlbGxpcHNlIGN4PScyOTcnIGN5PScxNTQuNjA5OCcgZmlsbD0nIzg0QkU4NCcgcng9JzMnIHJ5PSczJyBzdHlsZT0nc3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxNDknIHg9JzMwNicgeT0nMTU4LjU0MTgnPkRSZWN0IHN2Z0FyZWEoKSBjb25zdDs8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMjg3JyB4Mj0nMzI4LjUnIHkxPScxMTQuOTc0JyB5Mj0nMTE0Ljk3NCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEwNScgeD0nMzI4LjUnIHk9JzExOS45MDU5Jz5wdWJsaWMgb2JzZXJ2ZXI8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nNDMzLjUnIHgyPSc0NzUnIHkxPScxMTQuOTc0JyB5Mj0nMTE0Ljk3NCcvPjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzI4NycgeDI9JzMzMScgeTE9JzE3Ni4xNzc3JyB5Mj0nMTc2LjE3NzcnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMDAnIHg9JzMzMScgeT0nMTgxLjEwOTcnPnB1YmxpYyBtdXRhdG9yPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzQzMScgeDI9JzQ3NScgeTE9JzE3Ni4xNzc3JyB5Mj0nMTc2LjE3NzcnLz48L2c+PGcgaWQ9J2VsZW1fUG9pbnQnPjxyZWN0IGNvZGVMaW5lPSc4JyBmaWxsPScjRjFGMUYxJyBoZWlnaHQ9JzMyNi45NTA4JyBpZD0nUG9pbnQnIHJ4PScyLjUnIHJ5PScyLjUnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41Oycgd2lkdGg9JzE1OScgeD0nMTg0LjUnIHk9JzMxMy42OCcvPjxlbGxpcHNlIGN4PScyNDIuNzUnIGN5PSczMjkuNjgnIGZpbGw9JyNBREQxQjInIHJ4PScxMScgcnk9JzExJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cGF0aCBkPSdNMjQyLjIxODgsMzM2LjYwMTkgUTI0MC40Njg4LDMzNi42MDE5IDIzOS4zMjgxLDMzNS44Njc1IFEyMzguMjAzMSwzMzUuMTE3NSAyMzcuNjQwNiwzMzMuNzczOCBRMjM3LjA5MzgsMzMyLjQxNDQgMjM3LjA5MzgsMzMwLjYxNzUgUTIzNy4wOTM4LDMyOC41ODYzIDIzNy43NSwzMjcuMTMzMSBRMjM4LjQwNjMsMzI1LjY4IDIzOS42ODc1LDMyNC44OTg4IFEyNDAuOTY4OCwzMjQuMTE3NSAyNDIuODQzOCwzMjQuMTE3NSBRMjQzLjczNDQsMzI0LjExNzUgMjQ0LjQwNjMsMzI0LjMwNSBRMjQ1LjA3ODEsMzI0LjQ3NjkgMjQ1Ljc2NTYsMzI0LjgyMDYgTDI0NC45NTMxLDMyNi44MzYzIFEyNDQuMzI4MSwzMjYuNTIzOCAyNDMuNzgxMywzMjYuMzk4OCBRMjQzLjI1LDMyNi4yNzM4IDI0Mi43NjU2LDMyNi4yNzM4IFEyNDEuNTkzOCwzMjYuMjczOCAyNDAuODkwNiwzMjYuODA1IFEyNDAuMTg3NSwzMjcuMzM2MyAyMzkuODkwNiwzMjguMjg5NCBRMjM5LjU5MzgsMzI5LjI0MjUgMjM5LjU5MzgsMzMwLjUwODEgUTIzOS41OTM4LDMzMi41MjM4IDI0MC4zMTI1LDMzMy40OTI1IFEyNDEuMDMxMywzMzQuNDQ1NiAyNDIuNjI1LDMzNC40NDU2IFEyNDMuMjE4OCwzMzQuNDQ1NiAyNDMuODQzOCwzMzQuMjg5NCBRMjQ0LjQ2ODgsMzM0LjEzMzEgMjQ1LjI5NjksMzMzLjc1ODEgTDI0NS4yOTY5LDMzNS45NzY5IFEyNDQuNTYyNSwzMzYuMjg5NCAyNDMuNzY1NiwzMzYuNDQ1NiBRMjQyLjk4NDQsMzM2LjYwMTkgMjQyLjIxODgsMzM2LjYwMTkgWiAnIGZpbGw9JyMwMDAwMDAnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSczNCcgeD0nMjYzLjI1JyB5PSczMzUuMTEyJz5Qb2ludDwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsnIHgxPScxODUuNScgeDI9JzM0Mi41JyB5MT0nMzQ1LjY4JyB5Mj0nMzQ1LjY4Jy8+PGVsbGlwc2UgY3g9JzE5NS41JyBjeT0nMzgzLjc4MTknIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTI4JyB4PScyMDQuNScgeT0nMzg3LjcxMzknPlBvaW50KFhDb29yLCBYQ29vcik8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMTg1LjUnIHgyPScyMDIuNScgeTE9JzM2My4yMTQnIHkyPSczNjMuMjE0Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTIzJyB4PScyMDIuNScgeT0nMzY4LjE0NTknPnB1YmxpYyBjb25zdHJ1Y3RvcjwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSczMjUuNScgeDI9JzM0Mi41JyB5MT0nMzYzLjIxNCcgeTI9JzM2My4yMTQnLz48ZWxsaXBzZSBjeD0nMTk1LjUnIGN5PSc0MjUuOTE3NycgZmlsbD0nIzg0QkU4NCcgcng9JzMnIHJ5PSczJyBzdHlsZT0nc3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMzMnIHg9JzIwNC41JyB5PSc0MjkuODQ5Nyc+ZG91YmxlIGdldFgoKSBjb25zdDs8L3RleHQ+PGVsbGlwc2UgY3g9JzE5NS41JyBjeT0nNDQ0Ljk4NTYnIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTMzJyB4PScyMDQuNScgeT0nNDQ4LjkxNzYnPmRvdWJsZSBnZXRZKCkgY29uc3Q7PC90ZXh0Pjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEyJyB4PScyMDQuNScgeT0nNDY3Ljk4NTUnPi4uLjwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScxODUuNScgeDI9JzIxMS41JyB5MT0nNDA1LjM0OTgnIHkyPSc0MDUuMzQ5OCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEwNScgeD0nMjExLjUnIHk9JzQxMC4yODE4Jz5wdWJsaWMgb2JzZXJ2ZXI8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMzE2LjUnIHgyPSczNDIuNScgeTE9JzQwNS4zNDk4JyB5Mj0nNDA1LjM0OTgnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMicgeD0nMTkwLjUnIHk9JzUxMC4xMjE0Jz4uLi48L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMTg1LjUnIHgyPScyMTAuNScgeTE9JzQ4NS42MjE1JyB5Mj0nNDg1LjYyMTUnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMDcnIHg9JzIxMC41JyB5PSc0OTAuNTUzNCc+cHVibGljIG11dGF0b3JzPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzMxNy41JyB4Mj0nMzQyLjUnIHkxPSc0ODUuNjIxNScgeTI9JzQ4NS42MjE1Jy8+PHJlY3QgZmlsbD0nbm9uZScgaGVpZ2h0PSc2JyBzdHlsZT0nc3Ryb2tlOiNDODI5MzA7c3Ryb2tlLXdpZHRoOjEuMDsnIHdpZHRoPSc2JyB4PScxOTIuNScgeT0nNTQ1LjMyNTInLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc3NicgeD0nMjA0LjUnIHk9JzU1Mi4yNTcyJz5kb3VibGUgbVg7PC90ZXh0PjxyZWN0IGZpbGw9J25vbmUnIGhlaWdodD0nNicgc3R5bGU9J3N0cm9rZTojQzgyOTMwO3N0cm9rZS13aWR0aDoxLjA7JyB3aWR0aD0nNicgeD0nMTkyLjUnIHk9JzU2NC4zOTMxJy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nNzYnIHg9JzIwNC41JyB5PSc1NzEuMzI1MSc+ZG91YmxlIG1ZOzwvdGV4dD48cmVjdCBmaWxsPSdub25lJyBoZWlnaHQ9JzYnIHN0eWxlPSdzdHJva2U6I0M4MjkzMDtzdHJva2Utd2lkdGg6MS4wOycgd2lkdGg9JzYnIHg9JzE5Mi41JyB5PSc1ODMuNDYxJy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTI1JyB4PScyMDQuNScgeT0nNTkwLjM5Myc+c3RkOjpzdHJpbmcgbUNvbG9yOzwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScxODUuNScgeDI9JzIyMy41JyB5MT0nNTI3Ljc1NzMnIHkyPSc1MjcuNzU3MycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzgxJyB4PScyMjMuNScgeT0nNTMyLjY4OTMnPnByaXZhdGUgZGF0YTwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSczMDQuNScgeDI9JzM0Mi41JyB5MT0nNTI3Ljc1NzMnIHkyPSc1MjcuNzU3MycvPjxyZWN0IGZpbGw9J25vbmUnIGhlaWdodD0nNicgc3R5bGU9J3N0cm9rZTojQzgyOTMwO3N0cm9rZS13aWR0aDoxLjA7JyB3aWR0aD0nNicgeD0nMTkyLjUnIHk9JzYyNS41OTY5Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTExJyB4PScyMDQuNScgeT0nNjMyLjUyODknPmludCBtU1ZHUmFkaXVzOzwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScxODUuNScgeDI9JzIwMy41JyB5MT0nNjA4LjAyOScgeTI9JzYwOC4wMjknLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMjEnIHg9JzIwMy41JyB5PSc2MTIuOTYwOSc+c3RhdGljIHByaXZhdGUgZGF0YTwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSczMjQuNScgeDI9JzM0Mi41JyB5MT0nNjA4LjAyOScgeTI9JzYwOC4wMjknLz48L2c+PGcgaWQ9J2VsZW1fTGluZSc+PHJlY3QgY29kZUxpbmU9JzI1JyBmaWxsPScjRjFGMUYxJyBoZWlnaHQ9JzIyNy42MTEzJyBpZD0nTGluZScgcng9JzIuNScgcnk9JzIuNScgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB3aWR0aD0nMjM4JyB4PSczNzknIHk9JzM2My4zNScvPjxlbGxpcHNlIGN4PSc0NzkuNzUnIGN5PSczNzkuMzUnIGZpbGw9JyNBREQxQjInIHJ4PScxMScgcnk9JzExJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cGF0aCBkPSdNNDc5LjIxODgsMzg2LjI3MTkgUTQ3Ny40Njg4LDM4Ni4yNzE5IDQ3Ni4zMjgxLDM4NS41Mzc1IFE0NzUuMjAzMSwzODQuNzg3NSA0NzQuNjQwNiwzODMuNDQzOCBRNDc0LjA5MzgsMzgyLjA4NDQgNDc0LjA5MzgsMzgwLjI4NzUgUTQ3NC4wOTM4LDM3OC4yNTYzIDQ3NC43NSwzNzYuODAzMSBRNDc1LjQwNjMsMzc1LjM1IDQ3Ni42ODc1LDM3NC41Njg4IFE0NzcuOTY4OCwzNzMuNzg3NSA0NzkuODQzOCwzNzMuNzg3NSBRNDgwLjczNDQsMzczLjc4NzUgNDgxLjQwNjMsMzczLjk3NSBRNDgyLjA3ODEsMzc0LjE0NjkgNDgyLjc2NTYsMzc0LjQ5MDYgTDQ4MS45NTMxLDM3Ni41MDYzIFE0ODEuMzI4MSwzNzYuMTkzOCA0ODAuNzgxMywzNzYuMDY4OCBRNDgwLjI1LDM3NS45NDM4IDQ3OS43NjU2LDM3NS45NDM4IFE0NzguNTkzOCwzNzUuOTQzOCA0NzcuODkwNiwzNzYuNDc1IFE0NzcuMTg3NSwzNzcuMDA2MyA0NzYuODkwNiwzNzcuOTU5NCBRNDc2LjU5MzgsMzc4LjkxMjUgNDc2LjU5MzgsMzgwLjE3ODEgUTQ3Ni41OTM4LDM4Mi4xOTM4IDQ3Ny4zMTI1LDM4My4xNjI1IFE0NzguMDMxMywzODQuMTE1NiA0NzkuNjI1LDM4NC4xMTU2IFE0ODAuMjE4OCwzODQuMTE1NiA0ODAuODQzOCwzODMuOTU5NCBRNDgxLjQ2ODgsMzgzLjgwMzEgNDgyLjI5NjksMzgzLjQyODEgTDQ4Mi4yOTY5LDM4NS42NDY5IFE0ODEuNTYyNSwzODUuOTU5NCA0ODAuNzY1NiwzODYuMTE1NiBRNDc5Ljk4NDQsMzg2LjI3MTkgNDc5LjIxODgsMzg2LjI3MTkgWiAnIGZpbGw9JyMwMDAwMDAnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScyOCcgeD0nNTAwLjI1JyB5PSczODQuNzgyJz5MaW5lPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OycgeDE9JzM4MCcgeDI9JzYxNicgeTE9JzM5NS4zNScgeTI9JzM5NS4zNScvPjxlbGxpcHNlIGN4PSczOTAnIGN5PSc0MzMuNDUxOScgZmlsbD0nIzg0QkU4NCcgcng9JzMnIHJ5PSczJyBzdHlsZT0nc3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScyMTInIHg9JzM5OScgeT0nNDM3LjM4MzknPkxpbmUoY29uc3QgUG9pbnQmYW1wOywgY29uc3QgUG9pbnQmYW1wOyk8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMzgwJyB4Mj0nNDM2LjUnIHkxPSc0MTIuODg0JyB5Mj0nNDEyLjg4NCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEyMycgeD0nNDM2LjUnIHk9JzQxNy44MTU5Jz5wdWJsaWMgY29uc3RydWN0b3I8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nNTU5LjUnIHgyPSc2MTYnIHkxPSc0MTIuODg0JyB5Mj0nNDEyLjg4NCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEyJyB4PSczODUnIHk9JzQ3OS41MTk3Jz4uLi48L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMzgwJyB4Mj0nNDQ1LjUnIHkxPSc0NTUuMDE5OCcgeTI9JzQ1NS4wMTk4Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTA1JyB4PSc0NDUuNScgeT0nNDU5Ljk1MTgnPnB1YmxpYyBvYnNlcnZlcjwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSc1NTAuNScgeDI9JzYxNicgeTE9JzQ1NS4wMTk4JyB5Mj0nNDU1LjAxOTgnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMicgeD0nMzg1JyB5PSc1MjEuNjU1NSc+Li4uPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzM4MCcgeDI9JzQ0NC41JyB5MT0nNDk3LjE1NTYnIHkyPSc0OTcuMTU1NicvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEwNycgeD0nNDQ0LjUnIHk9JzUwMi4wODc2Jz5wdWJsaWMgbXV0YXRvcnM8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nNTUxLjUnIHgyPSc2MTYnIHkxPSc0OTcuMTU1NicgeTI9JzQ5Ny4xNTU2Jy8+PHJlY3QgZmlsbD0nbm9uZScgaGVpZ2h0PSc2JyBzdHlsZT0nc3Ryb2tlOiNDODI5MzA7c3Ryb2tlLXdpZHRoOjEuMDsnIHdpZHRoPSc2JyB4PSczODcnIHk9JzU1Ni44NTk0Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nOTcnIHg9JzM5OScgeT0nNTYzLjc5MTQnPlBvaW50IG1Qb2ludDE7PC90ZXh0PjxyZWN0IGZpbGw9J25vbmUnIGhlaWdodD0nNicgc3R5bGU9J3N0cm9rZTojQzgyOTMwO3N0cm9rZS13aWR0aDoxLjA7JyB3aWR0aD0nNicgeD0nMzg3JyB5PSc1NzUuOTI3MycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9Jzk3JyB4PSczOTknIHk9JzU4Mi44NTkzJz5Qb2ludCBtUG9pbnQyOzwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSczODAnIHgyPSc0NTcuNScgeTE9JzUzOS4yOTE1JyB5Mj0nNTM5LjI5MTUnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc4MScgeD0nNDU3LjUnIHk9JzU0NC4yMjM0Jz5wcml2YXRlIGRhdGE8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nNTM4LjUnIHgyPSc2MTYnIHkxPSc1MzkuMjkxNScgeTI9JzUzOS4yOTE1Jy8+PC9nPjxnIGlkPSdlbGVtX1NWR0ZpbGUnPjxyZWN0IGNvZGVMaW5lPSc0MCcgZmlsbD0nI0YxRjFGMScgaGVpZ2h0PScyNDYuNjc5MicgaWQ9J1NWR0ZpbGUnIHJ4PScyLjUnIHJ5PScyLjUnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41Oycgd2lkdGg9JzI0NCcgeD0nNycgeT0nNycvPjxlbGxpcHNlIGN4PScxMDAuMjUnIGN5PScyMycgZmlsbD0nI0FERDFCMicgcng9JzExJyByeT0nMTEnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjxwYXRoIGQ9J005OS43MTg4LDI5LjkyMTkgUTk3Ljk2ODgsMjkuOTIxOSA5Ni44MjgxLDI5LjE4NzUgUTk1LjcwMzEsMjguNDM3NSA5NS4xNDA2LDI3LjA5MzggUTk0LjU5MzgsMjUuNzM0NCA5NC41OTM4LDIzLjkzNzUgUTk0LjU5MzgsMjEuOTA2MyA5NS4yNSwyMC40NTMxIFE5NS45MDYzLDE5IDk3LjE4NzUsMTguMjE4OCBROTguNDY4OCwxNy40Mzc1IDEwMC4zNDM4LDE3LjQzNzUgUTEwMS4yMzQ0LDE3LjQzNzUgMTAxLjkwNjMsMTcuNjI1IFExMDIuNTc4MSwxNy43OTY5IDEwMy4yNjU2LDE4LjE0MDYgTDEwMi40NTMxLDIwLjE1NjMgUTEwMS44MjgxLDE5Ljg0MzggMTAxLjI4MTMsMTkuNzE4OCBRMTAwLjc1LDE5LjU5MzggMTAwLjI2NTYsMTkuNTkzOCBROTkuMDkzOCwxOS41OTM4IDk4LjM5MDYsMjAuMTI1IFE5Ny42ODc1LDIwLjY1NjMgOTcuMzkwNiwyMS42MDk0IFE5Ny4wOTM4LDIyLjU2MjUgOTcuMDkzOCwyMy44MjgxIFE5Ny4wOTM4LDI1Ljg0MzggOTcuODEyNSwyNi44MTI1IFE5OC41MzEzLDI3Ljc2NTYgMTAwLjEyNSwyNy43NjU2IFExMDAuNzE4OCwyNy43NjU2IDEwMS4zNDM4LDI3LjYwOTQgUTEwMS45Njg4LDI3LjQ1MzEgMTAyLjc5NjksMjcuMDc4MSBMMTAyLjc5NjksMjkuMjk2OSBRMTAyLjA2MjUsMjkuNjA5NCAxMDEuMjY1NiwyOS43NjU2IFExMDAuNDg0NCwyOS45MjE5IDk5LjcxODgsMjkuOTIxOSBaICcgZmlsbD0nIzAwMDAwMCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzQ5JyB4PScxMjAuNzUnIHk9JzI4LjQzMic+U1ZHRmlsZTwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsnIHgxPSc4JyB4Mj0nMjUwJyB5MT0nMzknIHkyPSczOScvPjxlbGxpcHNlIGN4PScxOCcgY3k9Jzc3LjEwMTknIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMjE4JyB4PScyNycgeT0nODEuMDMzOSc+U1ZHRmlsZShjb25zdCBzdGQ6OnN0cmluZyZhbXA7IG5hbWUpPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzgnIHgyPSc2Ny41JyB5MT0nNTYuNTM0JyB5Mj0nNTYuNTM0Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTIzJyB4PSc2Ny41JyB5PSc2MS40NjU5Jz5wdWJsaWMgY29uc3RydWN0b3I8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMTkwLjUnIHgyPScyNTAnIHkxPSc1Ni41MzQnIHkyPSc1Ni41MzQnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMicgeD0nMTMnIHk9JzEyMy4xNjk3Jz4uLi48L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nOCcgeDI9Jzc2LjUnIHkxPSc5OC42Njk4JyB5Mj0nOTguNjY5OCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEwNScgeD0nNzYuNScgeT0nMTAzLjYwMTgnPnB1YmxpYyBvYnNlcnZlcjwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScxODEuNScgeDI9JzI1MCcgeTE9Jzk4LjY2OTgnIHkyPSc5OC42Njk4Jy8+PGVsbGlwc2UgY3g9JzE4JyBjeT0nMTYxLjM3MzUnIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMjE1JyB4PScyNycgeT0nMTY1LjMwNTUnPlNWR0ZpbGUmYW1wOyBhZGQoY29uc3QgU1ZHU2hhcGUmYW1wOyk8L3RleHQ+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTInIHg9JzI3JyB5PScxODQuMzczNCc+Li4uPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzgnIHgyPSc3NS41JyB5MT0nMTQwLjgwNTYnIHkyPScxNDAuODA1NicvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEwNycgeD0nNzUuNScgeT0nMTQ1LjczNzYnPnB1YmxpYyBtdXRhdG9yczwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScxODIuNScgeDI9JzI1MCcgeTE9JzE0MC44MDU2JyB5Mj0nMTQwLjgwNTYnLz48cmVjdCBmaWxsPSdub25lJyBoZWlnaHQ9JzYnIHN0eWxlPSdzdHJva2U6I0M4MjkzMDtzdHJva2Utd2lkdGg6MS4wOycgd2lkdGg9JzYnIHg9JzE1JyB5PScyMTkuNTc3MycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzE0NycgeD0nMjcnIHk9JzIyNi41MDkzJz5zdGQ6OnN0cmluZyBtU1ZHRGF0ZTs8L3RleHQ+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTInIHg9JzI3JyB5PScyNDUuNTc3Mic+Li4uPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzgnIHgyPSc4OC41JyB5MT0nMjAyLjAwOTQnIHkyPScyMDIuMDA5NCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzgxJyB4PSc4OC41JyB5PScyMDYuOTQxNCc+cHJpdmF0ZSBkYXRhPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzE2OS41JyB4Mj0nMjUwJyB5MT0nMjAyLjAwOTQnIHkyPScyMDIuMDA5NCcvPjwvZz48ZyBpZD0nbGlua19TVkdTaGFwZV9Qb2ludCc+PHBhdGggY29kZUxpbmU9JzM3JyBkPSdNMzUyLjQyLDIxNS41NiBDMzQyLjM3LDI0NS4yIDMzMC43LDI3OS41OSAzMTkuMiwzMTMuNDcgJyBmaWxsPSdub25lJyBpZD0nU1ZHU2hhcGUtYmFja3RvLVBvaW50JyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cG9seWdvbiBmaWxsPSdub25lJyBwb2ludHM9JzM0NS43MywyMTMuNTEsMzU4Ljc4LDE5Ni44MiwzNTguOTgsMjE4LjAxLDM0NS43MywyMTMuNTEnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjwvZz48ZyBpZD0nbGlua19TVkdTaGFwZV9MaW5lJz48cGF0aCBjb2RlTGluZT0nMzgnIGQ9J000MDkuNTgsMjE1LjU4IEM0MjQuNjMsMjU5LjkxIDQ0My4yOCwzMTQuODkgNDU5LjU3LDM2Mi45ICcgZmlsbD0nbm9uZScgaWQ9J1NWR1NoYXBlLWJhY2t0by1MaW5lJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cG9seWdvbiBmaWxsPSdub25lJyBwb2ludHM9JzQwMy4wMiwyMTguMDEsNDAzLjIyLDE5Ni44Miw0MTYuMjcsMjEzLjUxLDQwMy4wMiwyMTguMDEnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjwvZz48ZyBpZD0nbGlua19TVkdGaWxlX1NWR1NoYXBlJz48cGF0aCBjb2RlTGluZT0nNTMnIGQ9J00yNTEuMDYsMTMwLjM0IEMyNjIuNTcsMTMwLjM0IDI3NC4wNywxMzAuMzQgMjg1LjU4LDEzMC4zNCAnIGZpbGw9J25vbmUnIGlkPSdTVkdGaWxlLVNWR1NoYXBlJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48L2c+PC9nPjwvc3ZnPg==" alt="Diagram" width="624" height="647">
+</div>
+<div class="title">Bild 1. Erweitertes Klassendiagramm: Die konkrete Klasse <code>Point</code> und <code>Line</code> sowie die Schnittstelle <code>SVGShape</code>  und die Klasse <code>SVGFile</code></div>
+</div>
+<div class="paragraph">
+<p>In dem <a href="#interface1">obigen</a> <a href="http://de.wikipedia.org/wiki/Unified_Modeling_Language">UML</a> <a href="http://de.wikipedia.org/wiki/Klassendiagramm">Klassendiagramm</a> haben wir die <em>Schnittstelle</em> <code>SVGShape</code>, die von den
+konkreten Klasse <code>Point</code> und <code>Line</code> realisiert werden. Damit die die Klasse <code>SVGFile</code> in der Lage,
+statt den konkreten Klassen nur noch die Schnittstelle <code>SVGShape</code> zu verwenden.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_eine_schnittstellendeklaration_in_c"><a class="anchor" href="#_eine_schnittstellendeklaration_in_c"></a><a class="link" href="#_eine_schnittstellendeklaration_in_c">3. Eine Schnittstellendeklaration in <code>C++</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In <code>Java</code> existiert hierfür das
+Schlüsselwort <code>interface</code>. In <code>C++</code> wird dies durch eine Klasse mit <em>rein-virtuellen</em> Elementfunktionen
+realisiert (s.a. <a href="http://en.cppreference.com/w/cpp/language/abstract_class">abstrakte Klasse</a> und <a href="http://en.cppreference.com/w/cpp/language/virtual">virtuelle Elementfunktion</a>) .</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 1. Zeilen aus der Datei <a href="../src/ppc09/svgshape.h" target="newwindows"><code>svgshape.h</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#pragma once</span>
+<span class="linenos"> 2</span><span class="tok-cp">#if __has_include(&quot;../ppc.h&quot;)</span>
+<span class="linenos"> 3</span><span class="tok-cp">#</span><span class="tok-w"> </span><span class="tok-cp">include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;../ppc.h&quot;</span>
+<span class="linenos"> 4</span><span class="tok-cp">#endif</span>
+<span class="linenos"> 5</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;string&gt;</span>
+<span class="linenos"> 6</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;dgeometry.h&quot;</span>
+<span class="linenos"> 7</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">SVGShape</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 8</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">toSVG</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-w"> </span><span class="tok-nf">svgArea</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-o">~</span><span class="tok-n">SVGShape</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">12</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Diese Klasse enthält nur <strong>rein-virtuelle</strong> Elementfunktionen und stellt damit eine <strong>Schnittstelle</strong> dar.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Die Qualifizierungen <code>virtual</code> und <code>= 0</code> deklarieren diese Elementfunktion als <strong>rein-virtuell</strong>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Diese Elementfunktion ist ebenfalls <strong>rein-virtuell</strong>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Der Destruktor <strong>muss</strong> hier <strong>virtuell</strong> deklariert werden.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Datei <a href="../src/ppc09/svgshape.cc">svgshape.cc</a> enthält nur die Definition des <em>virtuellen</em>
+Destruktors (s.a. <a href="#virtualdtor">Notwendigkeit des virtuellen Destruktors</a>):</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 2. Zeilen aus der Datei <a href="../src/ppc09/svgshape.cc" target="newwindows"><code>svgshape.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;svgshape.h&quot;</span>
+<span class="linenos">2</span><span class="tok-n">SVGShape</span><span class="tok-o">::~</span><span class="tok-n">SVGShape</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">3</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Das Schlüsselwort <code>virtual</code> darf nur in der <em>Deklaration</em> angegeben werden. Es gehört nicht zur Signatur.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Klasse <code>SVGFile</code> wird entsprechend umgestellt: in der Parameterliste der Elementfunktion
+<code>SVGFile add(const SVGShape&amp;)</code> wird nun die <em>Interface</em>-Klasse <code>SVGShape</code> verwendet. Da es ein
+benutzerdefinierter Datentyp (UDT) ist, erfolgt die Übergabe <em>per-reference</em>: in diesem Fall ist dies auf jeden
+Fall zwingend (s.a. <a href="#slicing">Abschnitt 5.2</a>).</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 3. Zeilen aus der Datei <a href="../src/ppc09/svgfile.h" target="newwindows"><code>svgfile.h</code></a> [Snippet: SVGFile] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">SVGFile</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">SVGFile</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">filename</span><span class="tok-p">);</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-o">~</span><span class="tok-n">SVGFile</span><span class="tok-p">();</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">SVGFile</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-nf">add</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">SVGShape</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">shape</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">6</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">7</span><span class="tok-c1">// ...</span>
+<span class="linenos">8</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Statt des konkreten Typs <code>Point</code> wird in der Parameterliste nun ein Typ erwartet, der die Schnittstelle <code>SVGShape</code> erfüllt.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Realisierung der Elementfunktion <code>add()</code> bleibt bis auf die Parameterliste gleich:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 4. Zeilen aus der Datei <a href="../src/ppc09/svgfile.cc" target="newwindows"><code>svgfile.cc</code></a> [Snippet: add] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">SVGFile</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-nf">SVGFile::add</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">SVGShape</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">shape</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">mFile</span><span class="tok-p">.</span><span class="tok-n">is_open</span><span class="tok-p">());</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">mSVGData</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">shape</span><span class="tok-p">.</span><span class="tok-n">toSVG</span><span class="tok-p">();</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-n">mSVGData</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-sc">&#39;\n&#39;</span><span class="tok-p">;</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">mArea</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 6</span><span class="tok-w">        </span><span class="tok-n">mArea</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">shape</span><span class="tok-p">.</span><span class="tok-n">svgArea</span><span class="tok-p">();</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-k">else</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 8</span><span class="tok-w">        </span><span class="tok-n">mArea</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">shape</span><span class="tok-p">.</span><span class="tok-n">svgArea</span><span class="tok-p">();</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nun leiten wir die Klasse <code>Point</code> von der Schnittstelle <code>SVGShape</code> ab:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 5. Zeilen aus der Datei <a href="../src/ppc09/point80.h" target="newwindows"><code>point80.h</code></a> [Snippet: Point] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Point</span><span class="tok-w"> </span><span class="tok-k">final</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w">  </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-k">public</span><span class="tok-w"> </span><span class="tok-n">SVGShape</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">3</span><span class="tok-c1">// ...</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-o">~</span><span class="tok-n">Point</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">5</span><span class="tok-c1">// ...</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-nf">toSVG</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-w"> </span><span class="tok-nf">svgArea</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">8</span><span class="tok-c1">// ...</span>
+<span class="linenos">9</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Das Schlüsselwort <code>final</code> verhindert eine <em>weitere</em> Ableitung von der Klasse <code>Point</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Das Schlüsselwort <code>public</code> deklariert eine <strong>Schnittstellenvererbung</strong> der Klasse <code>SVGShape</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Da der Destruktor in der Schnittstelle <code>SVGShape</code> schon <code>virtual</code> deklariert wurde, ist es hier redundant.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Die <code>override</code>-Qualifizierung bestimmt ein <em>explizites</em> <strong>Überschreiben</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>s.o.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Schnittstellen in <code>C++</code></div>
+<div class="paragraph">
+<p>In <code>Java</code> gibt es das <code>interface</code>-Konstrukt. In <code>C++</code> müssen die folgenden Punkte beachtet werden:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Schnittstellen werden in <code>C++</code> durch <em>abstrakte</em> Klassen (s.a. <a href="http://en.cppreference.com/w/cpp/language/abstract_class">abstrakte Klasse</a>) dargestellt,
+die ggf. ausschließlich statische Datenelemente enthalten.</p>
+</li>
+<li>
+<p>Eine Klasse ist dann <em>abstrakt</em>, wenn sie nicht <em>instanziierbar</em> ist.</p>
+</li>
+<li>
+<p>Ein Klasse ist dann <em>nicht</em> instanziierbar, wenn sie unvollständig ist. Dies erreicht man mit <em>rein-virtuellen</em>
+Elementfunktionen.</p>
+</li>
+<li>
+<p>Eine <em>rein-virtuelle</em> Elementfunktion wird als <code>virtual</code> deklariert und mit <code>= 0</code> qualifiziert.</p>
+</li>
+<li>
+<p>Das Schlüsselwort <code>virtual</code> kennzeichnet ein Elementfunktion als <em>dynamisch gebunden</em>, d.h. für die
+Laufzeitpolymorphie (s.a. <a href="http://en.cppreference.com/w/cpp/language/virtual">virtuelle Elementfunktion</a>).</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vererbungsbeziehung"><a class="anchor" href="#_vererbungsbeziehung"></a><a class="link" href="#_vererbungsbeziehung">4. Vererbungsbeziehung</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Deklaration einer Vererbungsbeziehung</div>
+<div class="paragraph">
+<p>Die Schlüsselwörter <code>public</code> und <code>private</code> (auch <code>protected</code>) (s.a. <a href="http://en.cppreference.com/w/cpp/language/access">Zugriffspezifizierer</a>) können zur Deklaration einer
+Vererbungsbeziehung (s.a. <a href="http://en.cppreference.com/w/cpp/language/derived_class">abgeleitete Klasse</a>) verwendet werden:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code>public</code>
+</td>
+<td class="hdlist2">
+<p>Ergibt eine Schnittstellenvererbung und es gilt das
+<a href="http://de.wikipedia.org/wiki/Liskovsches_Substitutionsprinzip">Liskov&#8217;sche Substitutionsprinzip</a>: der abgeleitete Typ
+kann immer an die Stelle des Basistyps treten.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>private</code>
+</td>
+<td class="hdlist2">
+<p>Ergibt eine Implementierungsvererbung <strong>ohne</strong> Substitutionsprinzip: der abgeleitete Typ erbt <strong>nicht</strong>  die
+öffentliche Schnittstelle des Basistyps. Er kann aber die (mindestens) <code>protected</code> Elementfunktionen
+(Implementierung) des Basistyps verwenden.</p>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Als weiteres geometrisches Element definieren wir die <strong>Linie</strong>, die durch zwei Endpunkte bestimmt wird.
+Die Linie wird daher als Klasse <code>Line</code>  modelliert, die ebenfalls die Schnittstelle <code>SVGShape</code> realisiert.
+Zur Darstellung der Linie durch ihre Endpunkte wird die Klasse <code>Point</code> als Datenelement benutzt.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4wLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSLzIwMDEvUFItU1ZHLTIwMDEwNzE5L0RURC9zdmcxMC5kdGQiPgo8c3ZnIHdpZHRoPSIyNmNtIiBoZWlnaHQ9IjEwY20iIHZpZXdCb3g9IjQwIDQ2IDUyMCAxODciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNkOGU1ZTUiIHg9IjE2OCIgeT0iNjkiIHdpZHRoPSIyNjQiIGhlaWdodD0iMTYzIi8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmZmZmZmIiB4PSIxNjgiIHk9IjY5IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjE2MyIvPgogIDwvZz4KICA8Zz4KICAgIDxlbGxpcHNlIHN0eWxlPSJmaWxsOiAjZmZhNTAwIiBjeD0iMzk4IiBjeT0iMTAxIiByeD0iMzAiIHJ5PSIzMCIvPgogICAgPGVsbGlwc2Ugc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmYTUwMCIgY3g9IjM5OCIgY3k9IjEwMSIgcng9IjMwIiByeT0iMzAiLz4KICA8L2c+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMjcwIiB5PSIxMzkiPgogICAgPHRzcGFuIHg9IjI3MCIgeT0iMTM5Ij5MaW5pZTwvdHNwYW4+CiAgPC90ZXh0PgogIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICNmZjAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjQwIiB5PSIyMDMiPgogICAgPHRzcGFuIHg9IjQwIiB5PSIyMDMiPlNWRyBGbMOkY2hlIFB1bmt0IDE8L3RzcGFuPgogIDwvdGV4dD4KICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjZmYwMDAwO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSI0MzUiIHk9IjEwNyI+CiAgICA8dHNwYW4geD0iNDM1IiB5PSIxMDciPlNWRyBGbMOkY2hlIFB1bmt0IDI8L3RzcGFuPgogIDwvdGV4dD4KICA8Zz4KICAgIDxlbGxpcHNlIHN0eWxlPSJmaWxsOiAjZmZhNTAwIiBjeD0iMjAwIiBjeT0iMjAwIiByeD0iMzAiIHJ5PSIzMCIvPgogICAgPGVsbGlwc2Ugc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmYTUwMCIgY3g9IjIwMCIgY3k9IjIwMCIgcng9IjMwIiByeT0iMzAiLz4KICA8L2c+CiAgPGxpbmUgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDY7IHN0cm9rZTogIzAwMDAwMCIgeDE9IjIwMCIgeTE9IjIwMCIgeDI9IjQwMCIgeTI9IjEwMCIvPgogIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwOTk7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDo3MDAiIHg9IjE3MiIgeT0iNTgiPgogICAgPHRzcGFuIHg9IjE3MiIgeT0iNTgiPlNWRyBGbMOkY2hlIExpbmllPC90c3Bhbj4KICA8L3RleHQ+CiAgPGc+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmYwMDAwIiB4PSIxNzAuMTQ1IiB5PSIxNjguNDczIiB3aWR0aD0iNjAuMjE5NiIgaGVpZ2h0PSI2Mi4yMjY5Ii8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZmYwMDAwIiB4PSIxNzAuMTQ1IiB5PSIxNjguNDczIiB3aWR0aD0iNjAuMjE5NiIgaGVpZ2h0PSI2Mi4yMjY5Ii8+CiAgPC9nPgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmMDAwMCIgeD0iMzY4LjIzOCIgeT0iNzAuNCIgd2lkdGg9IjYwLjIxOTYiIGhlaWdodD0iNjIuMjI2OSIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2ZmMDAwMCIgeD0iMzY4LjIzOCIgeT0iNzAuNCIgd2lkdGg9IjYwLjIxOTYiIGhlaWdodD0iNjIuMjI2OSIvPgogIDwvZz4KPC9zdmc+Cg==" alt="line01">
+</div>
+<div class="title">Bild 2. Das umschreibende Rechteck einer Linie in der <code>SVG</code>-Zeichenfläche kann durch die Vereinigung der Endpunktflächen bestimmt werden</div>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 6. Zeilen aus der Datei <a href="../src/ppc09/line00.h" target="newwindows"><code>line00.h</code></a> [Snippet: Line] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Line</span><span class="tok-w"> </span><span class="tok-k">final</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-k">public</span><span class="tok-w"> </span><span class="tok-n">SVGShape</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">Line</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point2</span><span class="tok-p">);</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-nf">toSVG</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-w"> </span><span class="tok-nf">svgArea</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-n">Line</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-nf">setColor</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">color</span><span class="tok-p">);</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-nf">getColor</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">mPoint1</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">mPoint2</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">mColor</span><span class="tok-p">{</span><span class="tok-s">&quot;black&quot;</span><span class="tok-p">};</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-kr">inline</span><span class="tok-w"> </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mSVGWidth</span><span class="tok-p">{</span><span class="tok-mi">5</span><span class="tok-p">};</span>
+<span class="linenos">13</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Schnittstellenvererbung mit Substitutionsprinzip, aber die Klasse <code>Line</code> ist <strong>nicht</strong> weiter ableitbar (<code>final</code>).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Explizites Überschreiben der Elementfunktion</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Soll eine (weitere) Ableitung von eine Klasse verhindert werden, so kann sie als <code>final</code> deklariert werden.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 7. Zeilen aus der Datei <a href="../src/ppc09/line00.cc" target="newwindows"><code>line00.cc</code></a> [Snippet: Line] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">Line</span><span class="tok-o">::</span><span class="tok-n">Line</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">:</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">mPoint1</span><span class="tok-p">{</span><span class="tok-n">point1</span><span class="tok-p">},</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">mPoint2</span><span class="tok-p">{</span><span class="tok-n">point2</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">4</span><span class="tok-p">}</span>
+<span class="linenos">5</span><span class="tok-n">DRect</span><span class="tok-w"> </span><span class="tok-n">Line</span><span class="tok-o">::</span><span class="tok-n">svgArea</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">mPoint1</span><span class="tok-p">.</span><span class="tok-n">svgArea</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-n">mPoint2</span><span class="tok-p">.</span><span class="tok-n">svgArea</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">7</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Initialisierung der Endpunkte der Linie</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Die umschreibende Rechteck der Linie kann durch die Vereinigung der Endpunktflächen erreicht werden.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Für den Typ <code>DRect</code> macht es neben dem <code>=` Operator auch Sinn, den _binären_  Operator `</code> zu realisieren.
+Dies erfolgt gemäß den <a href="ppcP0500.html#recommendedops">empfohlenen Varianten</a> als <em>freie Funktion</em>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 8. Zeilen aus der Datei <a href="../src/ppc09/dgeometry.h" target="newwindows"><code>dgeometry.h</code></a> [Snippet: plus] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">DRect</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Bildet das <strong>gesamte umschreibende</strong> Rechteck als Ergebnis</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 9. Zeilen aus der Datei <a href="../src/ppc09/dgeometry.cc" target="newwindows"><code>dgeometry.cc</code></a> [Snippet: plus] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">DRect</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">DRect</span><span class="tok-p">(</span><span class="tok-n">a</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">3</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Dies ist sog. kanonische Implementierung des Operators <code>` durch den Operator `=</code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So können wir schon Linien zeichnen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 10. Zeilen aus der Datei <a href="../src/ppc09/ppc0900.cc" target="newwindows"><code>ppc0900.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#if __has_include(&quot;../ppc.h&quot;)</span>
+<span class="linenos"> 2</span><span class="tok-cp">#</span><span class="tok-w"> </span><span class="tok-cp">include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;../ppc.h&quot;</span>
+<span class="linenos"> 3</span><span class="tok-cp">#endif</span>
+<span class="linenos"> 4</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;svgfile.h&quot;</span>
+<span class="linenos"> 5</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;point80.h&quot;</span>
+<span class="linenos"> 6</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;line00.h&quot;</span>
+<span class="linenos"> 7</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">SVGFile</span><span class="tok-w"> </span><span class="tok-n">svgFile</span><span class="tok-p">(</span><span class="tok-s">&quot;test.svg&quot;</span><span class="tok-p">);</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">svgFile</span><span class="tok-p">.</span><span class="tok-n">add</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-n">Line</span><span class="tok-w"> </span><span class="tok-n">line1</span><span class="tok-p">{</span><span class="tok-n">Point</span><span class="tok-p">{</span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">}},</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">{</span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">100.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">100.0</span><span class="tok-p">}}};</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-n">line1</span><span class="tok-p">.</span><span class="tok-n">setColor</span><span class="tok-p">(</span><span class="tok-s">&quot;red&quot;</span><span class="tok-p">);</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-n">Line</span><span class="tok-w"> </span><span class="tok-n">line2</span><span class="tok-p">{{</span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">}},</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">100.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">-100.0</span><span class="tok-p">}}};</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-n">line2</span><span class="tok-p">.</span><span class="tok-n">setColor</span><span class="tok-p">(</span><span class="tok-s">&quot;blue&quot;</span><span class="tok-p">);</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-n">svgFile</span><span class="tok-p">.</span><span class="tok-n">add</span><span class="tok-p">(</span><span class="tok-n">line1</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-n">svgFile</span><span class="tok-p">.</span><span class="tok-n">add</span><span class="tok-p">(</span><span class="tok-n">line2</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">17</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Das <code>p1</code>-Objekt wird <strong>per-reference</strong> von <code>SVGFile::add(const SVGShape&amp; shape)</code> entgegen genommen</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Das <code>line1</code>-Objekt wird <strong>per-reference</strong> von <code>SVGFile::add(const SVGShape&amp; shape)</code> entgegen genommen</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>wie oben</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Beachten Sie die Signatur der Funktion <code>SVGFile::add(const SVGShape&amp; shape)</code>: hier ist der Parameter <code>shape</code> eine
+<em>Referenz</em> (zusätzlicher Name) für das Objekt der aufrufenden Funktion. Damit wird <a href="#slicing">Objektslicing</a>
+vermieden und für die <em>virtuellen</em> Elementfunktionen kommt Laufzeitpolymorphie zur Anwendung.
+</td>
+</tr>
+</table>
+</div>
+<div id="linesvg" class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgIHdpZHRoPSIxMjAiIGhlaWdodD0iMjIwIiB2aWV3Qm94PSItMTAgLTExMCAxMjAgMjIwIj4KPGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjEwIiBzdHJva2U9ImJsYWNrIiBmaWxsPSJibGFjayIgLz4KPGxpbmUgeDE9IjEiIHkxPSIxIiB4Mj0iMTAwIiB5Mj0iMTAwIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZT0icmVkIiAvPgo8bGluZSB4MT0iMSIgeTE9IjEiIHgyPSIxMDAiIHkyPSItMTAwIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZT0iYmx1ZSIgLz4KPC9zdmc+Cg==" alt="test">
+</div>
+<div class="title">Bild 3. Ein Bild mit Linien generiert durch das Programm <a href="../src/ppc09/ppc0900.cc">ppc0900.cc</a></div>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 11. Die zugehörige <code>XML</code>-Datei zu dem obigen <a href="#linesvg">Bild</a></div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="xml"><span></span><span class="tok-cp">&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot;?&gt;</span>
+<span class="tok-cp">&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot; &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;</span>
+<span class="tok-nt">&lt;svg</span><span class="tok-w"> </span><span class="tok-na">xmlns=</span><span class="tok-s">&quot;http://www.w3.org/2000/svg&quot;</span><span class="tok-w">  </span><span class="tok-na">width=</span><span class="tok-s">&quot;120&quot;</span><span class="tok-w"> </span><span class="tok-na">height=</span><span class="tok-s">&quot;220&quot;</span><span class="tok-w"> </span><span class="tok-na">viewBox=</span><span class="tok-s">&quot;-10 -110 120 220&quot;</span><span class="tok-nt">&gt;</span>
+<span class="tok-nt">&lt;circle</span><span class="tok-w"> </span><span class="tok-na">cx=</span><span class="tok-s">&quot;0&quot;</span><span class="tok-w"> </span><span class="tok-na">cy=</span><span class="tok-s">&quot;0&quot;</span><span class="tok-w"> </span><span class="tok-na">r=</span><span class="tok-s">&quot;10&quot;</span><span class="tok-w"> </span><span class="tok-na">stroke=</span><span class="tok-s">&quot;black&quot;</span><span class="tok-w"> </span><span class="tok-na">fill=</span><span class="tok-s">&quot;black&quot;</span><span class="tok-w"> </span><span class="tok-nt">/&gt;</span>
+<span class="tok-nt">&lt;line</span><span class="tok-w"> </span><span class="tok-na">x1=</span><span class="tok-s">&quot;1&quot;</span><span class="tok-w"> </span><span class="tok-na">y1=</span><span class="tok-s">&quot;1&quot;</span><span class="tok-w"> </span><span class="tok-na">x2=</span><span class="tok-s">&quot;100&quot;</span><span class="tok-w"> </span><span class="tok-na">y2=</span><span class="tok-s">&quot;100&quot;</span><span class="tok-w"> </span><span class="tok-na">stroke-width=</span><span class="tok-s">&quot;5&quot;</span><span class="tok-w"> </span><span class="tok-na">stroke=</span><span class="tok-s">&quot;red&quot;</span><span class="tok-w"> </span><span class="tok-nt">/&gt;</span>
+<span class="tok-nt">&lt;line</span><span class="tok-w"> </span><span class="tok-na">x1=</span><span class="tok-s">&quot;1&quot;</span><span class="tok-w"> </span><span class="tok-na">y1=</span><span class="tok-s">&quot;1&quot;</span><span class="tok-w"> </span><span class="tok-na">x2=</span><span class="tok-s">&quot;100&quot;</span><span class="tok-w"> </span><span class="tok-na">y2=</span><span class="tok-s">&quot;-100&quot;</span><span class="tok-w"> </span><span class="tok-na">stroke-width=</span><span class="tok-s">&quot;5&quot;</span><span class="tok-w"> </span><span class="tok-na">stroke=</span><span class="tok-s">&quot;blue&quot;</span><span class="tok-w"> </span><span class="tok-nt">/&gt;</span>
+<span class="tok-nt">&lt;/svg&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_werte_kopieren_und_klassenhierarchien"><a class="anchor" href="#_werte_kopieren_und_klassenhierarchien"></a><a class="link" href="#_werte_kopieren_und_klassenhierarchien">5. Werte, Kopieren und Klassenhierarchien</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Betrachten wir die folgende Klassenhierarchie bestehend aus den beiden Klasse <code>Base</code> und <code>Derived</code>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVMtQVNDSUknIHN0YW5kYWxvbmU9J25vJz8+PHN2ZyBjb250ZW50U3R5bGVUeXBlPSd0ZXh0L2NzcycgaGVpZ2h0PScxNTdweCcgcHJlc2VydmVBc3BlY3RSYXRpbz0nbm9uZScgc3R5bGU9J3dpZHRoOjU4NnB4O2hlaWdodDoxNTdweDtiYWNrZ3JvdW5kOiNGRkZGRkY7JyB2ZXJzaW9uPScxLjEnIHZpZXdCb3g9JzAgMCA1ODYgMTU3JyB3aWR0aD0nNTg2cHgnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHpvb21BbmRQYW49J21hZ25pZnknPjxkZWZzLz48Zz48ZyBpZD0nZWxlbV9CYXNlJz48cmVjdCBjb2RlTGluZT0nMycgZmlsbD0nI0YxRjFGMScgaGVpZ2h0PScxNDMuMzM5NicgaWQ9J0Jhc2UnIHJ4PScyLjUnIHJ5PScyLjUnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41Oycgd2lkdGg9JzI1NicgeD0nNycgeT0nNycvPjxlbGxpcHNlIGN4PScxMTQuNzUnIGN5PScyMycgZmlsbD0nI0FERDFCMicgcng9JzExJyByeT0nMTEnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjxwYXRoIGQ9J00xMTQuMjE4OCwyOS45MjE5IFExMTIuNDY4OCwyOS45MjE5IDExMS4zMjgxLDI5LjE4NzUgUTExMC4yMDMxLDI4LjQzNzUgMTA5LjY0MDYsMjcuMDkzOCBRMTA5LjA5MzgsMjUuNzM0NCAxMDkuMDkzOCwyMy45Mzc1IFExMDkuMDkzOCwyMS45MDYzIDEwOS43NSwyMC40NTMxIFExMTAuNDA2MywxOSAxMTEuNjg3NSwxOC4yMTg4IFExMTIuOTY4OCwxNy40Mzc1IDExNC44NDM4LDE3LjQzNzUgUTExNS43MzQ0LDE3LjQzNzUgMTE2LjQwNjMsMTcuNjI1IFExMTcuMDc4MSwxNy43OTY5IDExNy43NjU2LDE4LjE0MDYgTDExNi45NTMxLDIwLjE1NjMgUTExNi4zMjgxLDE5Ljg0MzggMTE1Ljc4MTMsMTkuNzE4OCBRMTE1LjI1LDE5LjU5MzggMTE0Ljc2NTYsMTkuNTkzOCBRMTEzLjU5MzgsMTkuNTkzOCAxMTIuODkwNiwyMC4xMjUgUTExMi4xODc1LDIwLjY1NjMgMTExLjg5MDYsMjEuNjA5NCBRMTExLjU5MzgsMjIuNTYyNSAxMTEuNTkzOCwyMy44MjgxIFExMTEuNTkzOCwyNS44NDM4IDExMi4zMTI1LDI2LjgxMjUgUTExMy4wMzEzLDI3Ljc2NTYgMTE0LjYyNSwyNy43NjU2IFExMTUuMjE4OCwyNy43NjU2IDExNS44NDM4LDI3LjYwOTQgUTExNi40Njg4LDI3LjQ1MzEgMTE3LjI5NjksMjcuMDc4MSBMMTE3LjI5NjksMjkuMjk2OSBRMTE2LjU2MjUsMjkuNjA5NCAxMTUuNzY1NiwyOS43NjU2IFExMTQuOTg0NCwyOS45MjE5IDExNC4yMTg4LDI5LjkyMTkgWiAnIGZpbGw9JyMwMDAwMDAnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSczMicgeD0nMTM1LjI1JyB5PScyOC40MzInPkJhc2U8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB4MT0nOCcgeDI9JzI2MicgeTE9JzM5JyB5Mj0nMzknLz48ZWxsaXBzZSBjeD0nMTgnIGN5PSc3Ny4xMDE5JyBmaWxsPScjODRCRTg0JyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzIwOScgeD0nMjcnIHk9JzgxLjAzMzknPnZvaWQgbm9udmlydHVhbGZ1bmN0aW9uKCkgY29uc3Q7PC90ZXh0PjxlbGxpcHNlIGN4PScxOCcgY3k9Jzk2LjE2OTgnIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMjMwJyB4PScyNycgeT0nMTAwLjEwMTgnPnZpcnR1YWwgdm9pZCB2aXJ0dWFsZnVuY3Rpb24oKSBjb25zdDs8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nOCcgeDI9JzExNCcgeTE9JzU2LjUzNCcgeTI9JzU2LjUzNCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzQyJyB4PScxMTQnIHk9JzYxLjQ2NTknPnB1YmxpYzwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScxNTYnIHgyPScyNjInIHkxPSc1Ni41MzQnIHkyPSc1Ni41MzQnLz48ZWxsaXBzZSBjeD0nMTgnIGN5PScxMzguMzA1NicgZmlsbD0nbm9uZScgcng9JzMnIHJ5PSczJyBzdHlsZT0nc3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc3MScgeD0nMjcnIHk9JzE0Mi4yMzc2Jz5pbnQgbUJhc2U7PC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzgnIHgyPScxMjAnIHkxPScxMTcuNzM3NycgeTI9JzExNy43Mzc3Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMzAnIHg9JzEyMCcgeT0nMTIyLjY2OTcnPmRhdGE8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMTUwJyB4Mj0nMjYyJyB5MT0nMTE3LjczNzcnIHkyPScxMTcuNzM3NycvPjwvZz48ZyBpZD0nZWxlbV9EZXJpdmVkJz48cmVjdCBjb2RlTGluZT0nMTAnIGZpbGw9JyNGMUYxRjEnIGhlaWdodD0nMTQzLjMzOTYnIGlkPSdEZXJpdmVkJyByeD0nMi41JyByeT0nMi41JyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsnIHdpZHRoPScyNTYnIHg9JzMyMycgeT0nNycvPjxlbGxpcHNlIGN4PSc0MjAuNzUnIGN5PScyMycgZmlsbD0nI0FERDFCMicgcng9JzExJyByeT0nMTEnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjxwYXRoIGQ9J000MjAuMjE4OCwyOS45MjE5IFE0MTguNDY4OCwyOS45MjE5IDQxNy4zMjgxLDI5LjE4NzUgUTQxNi4yMDMxLDI4LjQzNzUgNDE1LjY0MDYsMjcuMDkzOCBRNDE1LjA5MzgsMjUuNzM0NCA0MTUuMDkzOCwyMy45Mzc1IFE0MTUuMDkzOCwyMS45MDYzIDQxNS43NSwyMC40NTMxIFE0MTYuNDA2MywxOSA0MTcuNjg3NSwxOC4yMTg4IFE0MTguOTY4OCwxNy40Mzc1IDQyMC44NDM4LDE3LjQzNzUgUTQyMS43MzQ0LDE3LjQzNzUgNDIyLjQwNjMsMTcuNjI1IFE0MjMuMDc4MSwxNy43OTY5IDQyMy43NjU2LDE4LjE0MDYgTDQyMi45NTMxLDIwLjE1NjMgUTQyMi4zMjgxLDE5Ljg0MzggNDIxLjc4MTMsMTkuNzE4OCBRNDIxLjI1LDE5LjU5MzggNDIwLjc2NTYsMTkuNTkzOCBRNDE5LjU5MzgsMTkuNTkzOCA0MTguODkwNiwyMC4xMjUgUTQxOC4xODc1LDIwLjY1NjMgNDE3Ljg5MDYsMjEuNjA5NCBRNDE3LjU5MzgsMjIuNTYyNSA0MTcuNTkzOCwyMy44MjgxIFE0MTcuNTkzOCwyNS44NDM4IDQxOC4zMTI1LDI2LjgxMjUgUTQxOS4wMzEzLDI3Ljc2NTYgNDIwLjYyNSwyNy43NjU2IFE0MjEuMjE4OCwyNy43NjU2IDQyMS44NDM4LDI3LjYwOTQgUTQyMi40Njg4LDI3LjQ1MzEgNDIzLjI5NjksMjcuMDc4MSBMNDIzLjI5NjksMjkuMjk2OSBRNDIyLjU2MjUsMjkuNjA5NCA0MjEuNzY1NiwyOS43NjU2IFE0MjAuOTg0NCwyOS45MjE5IDQyMC4yMTg4LDI5LjkyMTkgWiAnIGZpbGw9JyMwMDAwMDAnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc1MicgeD0nNDQxLjI1JyB5PScyOC40MzInPkRlcml2ZWQ8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB4MT0nMzI0JyB4Mj0nNTc4JyB5MT0nMzknIHkyPSczOScvPjxlbGxpcHNlIGN4PSczMzQnIGN5PSc3Ny4xMDE5JyBmaWxsPScjODRCRTg0JyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzIwOScgeD0nMzQzJyB5PSc4MS4wMzM5Jz52b2lkIG5vbnZpcnR1YWxmdW5jdGlvbigpIGNvbnN0OzwvdGV4dD48ZWxsaXBzZSBjeD0nMzM0JyBjeT0nOTYuMTY5OCcgZmlsbD0nIzg0QkU4NCcgcng9JzMnIHJ5PSczJyBzdHlsZT0nc3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScyMzAnIHg9JzM0MycgeT0nMTAwLjEwMTgnPnZpcnR1YWwgdm9pZCB2aXJ0dWFsZnVuY3Rpb24oKSBjb25zdDs8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMzI0JyB4Mj0nNDMwJyB5MT0nNTYuNTM0JyB5Mj0nNTYuNTM0Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nNDInIHg9JzQzMCcgeT0nNjEuNDY1OSc+cHVibGljPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzQ3MicgeDI9JzU3OCcgeTE9JzU2LjUzNCcgeTI9JzU2LjUzNCcvPjxlbGxpcHNlIGN4PSczMzQnIGN5PScxMzguMzA1NicgZmlsbD0nbm9uZScgcng9JzMnIHJ5PSczJyBzdHlsZT0nc3Ryb2tlOiMwMzgwNDg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc5MScgeD0nMzQzJyB5PScxNDIuMjM3Nic+aW50IG1EZXJpdmVkOzwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSczMjQnIHgyPSc0MzYnIHkxPScxMTcuNzM3NycgeTI9JzExNy43Mzc3Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMzAnIHg9JzQzNicgeT0nMTIyLjY2OTcnPmRhdGE8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nNDY2JyB4Mj0nNTc4JyB5MT0nMTE3LjczNzcnIHkyPScxMTcuNzM3NycvPjwvZz48ZyBpZD0nbGlua19CYXNlX0Rlcml2ZWQnPjxwYXRoIGNvZGVMaW5lPScxOCcgZD0nTTI4NC41Myw3OC42NyBDMjk3LjI0LDc4LjY3IDMxMC4wMyw3OC42NyAzMjIuNTYsNzguNjcgJyBmaWxsPSdub25lJyBpZD0nQmFzZS1iYWNrdG8tRGVyaXZlZCcgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHBvbHlnb24gZmlsbD0nbm9uZScgcG9pbnRzPScyODQuNzgsODUuNjcsMjY0Ljc4LDc4LjY3LDI4NC43OCw3MS42NywyODQuNzgsODUuNjcnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjwvZz48L2c+PC9zdmc+" alt="Diagram" width="586" height="157">
+</div>
+<div class="title">Bild 4. Einfache Klassenhierarchie mit den Klassen <code>Base</code> und <code>Derived</code></div>
+</div>
+<div class="paragraph">
+<p>Dies setzen wir direkt in <code>C++</code>-Code um:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 12. Zeilen aus der Datei <a href="../src/ppc09/ppc0920.cc" target="newwindows"><code>ppc0920.cc</code></a> [Snippet: classes] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Base</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mBase</span><span class="tok-p">;</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">nonvirtualfunction</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">virtualfunction</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span>
+<span class="linenos"> 6</span><span class="tok-p">};</span>
+<span class="linenos"> 7</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Derived</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-k">public</span><span class="tok-w"> </span><span class="tok-n">Base</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 8</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mDerived</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">nonvirtualfunction</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">virtualfunction</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Die <code>override</code>-Qualifizierung ist bei <em>nicht-virtuellen</em> Funktionen nicht zulässig.</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_statischer_und_dynamischer_typ"><a class="anchor" href="#_statischer_und_dynamischer_typ"></a><a class="link" href="#_statischer_und_dynamischer_typ">5.1. Statischer und dynamischer Typ</a></h3>
+<div class="paragraph">
+<p>Betrachten wir zunächst den folgenden Codeabschnitt:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 13. Zeilen aus der Datei <a href="../src/ppc09/ppc0920.cc" target="newwindows"><code>ppc0920.cc</code></a> [Snippet: mainref] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">Derived</span><span class="tok-w"> </span><span class="tok-n">derived</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">Base</span><span class="tok-w"> </span><span class="tok-n">base</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">Base</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">base2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">derived</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">base2</span><span class="tok-p">.</span><span class="tok-n">nonvirtualfunction</span><span class="tok-p">();</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">base2</span><span class="tok-p">.</span><span class="tok-n">virtualfunction</span><span class="tok-p">();</span>
+<span class="linenos">7</span><span class="tok-c1">// ...</span>
+<span class="linenos">8</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Ein <code>Derived</code>-Objekt wird in der Variable <code>derived</code> instanziiert.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Eine Variable des Typs <code>Base</code> wird definiert, damit wird ein Objekt dieses Typs erzeugt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Hier wird <code>base2</code> als ein weiterer <strong>Name</strong> für das Objekt der Variable <code>derived</code> deklariert.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Situation im Speicher verdeutlicht auch das folgende Bild:</p>
+</div>
+<div id="objectrefs" class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4wLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSLzIwMDEvUFItU1ZHLTIwMDEwNzE5L0RURC9zdmcxMC5kdGQiPgo8c3ZnIHdpZHRoPSIxNWNtIiBoZWlnaHQ9IjljbSIgdmlld0JveD0iMTY2IDE4MSAyODggMTc3IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICA8Zz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZDhlNWU1IiB4PSIyODQuNSIgeT0iMTg1IiB3aWR0aD0iODAiIGhlaWdodD0iMTcxLjI1Ii8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjZDhlNWU1IiB4PSIyODQuNSIgeT0iMTg1IiB3aWR0aD0iODAiIGhlaWdodD0iMTcxLjI1Ii8+CiAgPC9nPgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNmZmE1MDAiIHg9IjI4NC41IiB5PSIyMDAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMDAiLz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMDAwMDAiIHg9IjI4NC41IiB5PSIyMDAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMDAiLz4KICA8L2c+CiAgPGc+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogI2ZmN2QwMCIgeD0iMjg0LjUiIHk9IjI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIi8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlLWRhc2hhcnJheTogNDsgc3Ryb2tlOiAjMDAwMDAwIiB4PSIyODQuNSIgeT0iMjQwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiLz4KICA8L2c+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMjk3LjUiIHk9IjIyMCI+CiAgICA8dHNwYW4geD0iMjk3LjUiIHk9IjIyMCI+OkRlcml2ZWQ8L3RzcGFuPgogIDwvdGV4dD4KICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjNGQ0ZDRkO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSIzMDQuNSIgeT0iMjYwIj4KICAgIDx0c3BhbiB4PSIzMDQuNSIgeT0iMjYwIj46QmFzZTwvdHNwYW4+CiAgPC90ZXh0PgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNjOWY5YzkiIHg9IjI4NC41IiB5PSIzMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogIzAwMDAwMCIgeD0iMjg0LjUiIHk9IjMxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIi8+CiAgPC9nPgogIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjMwNC41IiB5PSIzMzAiPgogICAgPHRzcGFuIHg9IjMwNC41IiB5PSIzMzAiPjpCYXNlPC90c3Bhbj4KICA8L3RleHQ+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTptb25vc3BhY2U7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSIxNjYiIHk9IjIyMCI+CiAgICA8dHNwYW4geD0iMTY2IiB5PSIyMjAiPmRlcml2ZWQsIGJhc2UyPC90c3Bhbj4KICA8L3RleHQ+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTptb25vc3BhY2U7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSIyMTIiIHk9IjMzMCI+CiAgICA8dHNwYW4geD0iMjEyIiB5PSIzMzAiPmJhc2U8L3RzcGFuPgogIDwvdGV4dD4KICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMGZmO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6NzAwIiB4PSIzOTAuNSIgeT0iMTkzIj4KICAgIDx0c3BhbiB4PSIzOTAuNSIgeT0iMTkzIj5PYmpla3RlPC90c3Bhbj4KICAgIDx0c3BhbiB4PSIzOTAuNSIgeT0iMjA5Ij5pbTwvdHNwYW4+CiAgICA8dHNwYW4geD0iMzkwLjUiIHk9IjIyNSI+U3BlaWNoZXI8L3RzcGFuPgogIDwvdGV4dD4KICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6NzAwIiB4PSIyMDQuNSIgeT0iMTkzLjUiPgogICAgPHRzcGFuIHg9IjIwNC41IiB5PSIxOTMuNSI+TmFtZTwvdHNwYW4+CiAgPC90ZXh0Pgo8L3N2Zz4K" alt="base01">
+</div>
+<div class="title">Bild 5. Die zwei Objekte des Typs <code>Derived</code> bzw. <code>Base</code> im Speicher und ihre Namen (Referenzen)</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Der Name <code>base</code> (statischer Typ: <code>Base</code>) bezeichnet ein Objekt des Typs <code>Base</code>.</p>
+</li>
+<li>
+<p>Der Name <code>derived</code> (statischer Typ: <code>Derived</code>) bezeichnet ein Objekt des Typs <code>Derived</code>. Das beinhaltet ein
+anonymes Basisklassenobjekt vom Typ <code>Base</code>.</p>
+</li>
+<li>
+<p>Der Name <code>base2</code> (statischer Typ: <code>Base</code>) bezeichnet dasselbe Objekt wie der Name <code>derived</code>;
+das ist vom dynamischen Typ <code>Derived</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Statischer Typ
+</td>
+<td class="hdlist2">
+<p>ist der Typ der Referenz,  und bestimmt die verwendbare Schnittstelle.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Dynamischer Typ
+</td>
+<td class="hdlist2">
+<p>ist der Typ des Objektes, das mit der Referenz bezeichnet wird. Bei <em>virtuellen</em> Elementfunktionen bestimmt der
+dynamische Typ die Auswahl der Elementfunktion.</p>
+</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Damit sind über die Referenz <code>base2</code> nur die Elemente der öffentlichen Schnittstelle  <code>Base</code> erreichbar, das
+Datenelement <code>mDerived</code> kann also mit <code>base2</code> nicht angesprochen werden.</p>
+</div>
+<div class="paragraph">
+<p>Bei überschriebenen <strong>virtuellen</strong> Elementfunktionen wird dann allerdings die Realisierung gemäß dem <strong>dynamischen</strong>
+Typ gewählt. Dies ist das <code>Java</code>-Verhalten.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Bei überschriebenen  <strong>nicht</strong>-virtuellen Elementfunktionen bestimmt der <strong>statische</strong> Typ der Referenz die
+Funktionsauswahl. Daher sollte man nicht-virtuelle Elementfunktionen <strong>nicht</strong> überschreiben
+(das Schlüsselwort <code>override</code> ist auch nicht anwendbar)!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 1. Beginn der Ausgabe des Programms: <code>ppc0920</code> (Zeile 1 und 2)</div>
+<div class="content">
+<pre class="nowrap">void Base::nonvirtualfunction() const
+virtual void Derived::virtualfunction() const</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Eine analoge Situation erhalten wir mit Zeigern:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 14. Zeilen aus der Datei <a href="../src/ppc09/ppc0920.cc" target="newwindows"><code>ppc0920.cc</code></a> [Snippet: mainptr2] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-c1">// ...</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">Base</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">bPtr</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-o">&amp;</span><span class="tok-n">derived</span><span class="tok-p">;</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">bPtr</span><span class="tok-o">-&gt;</span><span class="tok-n">nonvirtualfunction</span><span class="tok-p">();</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">bPtr</span><span class="tok-o">-&gt;</span><span class="tok-n">virtualfunction</span><span class="tok-p">();</span>
+<span class="linenos">6</span><span class="tok-c1">// ...</span>
+<span class="linenos">7</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div id="objectpointer" class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4wLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL1RSLzIwMDEvUFItU1ZHLTIwMDEwNzE5L0RURC9zdmcxMC5kdGQiPgo8c3ZnIHdpZHRoPSIxNWNtIiBoZWlnaHQ9IjEwY20iIHZpZXdCb3g9IjE2NiAxODEgMjg4IDE5NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgPGc+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogI2Q4ZTVlNSIgeD0iMjg0LjUiIHk9IjE4NSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjE4OC43NSIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZTogI2Q4ZTVlNSIgeD0iMjg0LjUiIHk9IjE4NSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjE4OC43NSIvPgogIDwvZz4KICA8Zz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjZmZhNTAwIiB4PSIyODQuNSIgeT0iMjAwIiB3aWR0aD0iODAiIGhlaWdodD0iMTAwIi8+CiAgICA8cmVjdCBzdHlsZT0iZmlsbDogbm9uZTsgZmlsbC1vcGFjaXR5OjA7IHN0cm9rZS13aWR0aDogMjsgc3Ryb2tlOiAjMDAwMDAwIiB4PSIyODQuNSIgeT0iMjAwIiB3aWR0aD0iODAiIGhlaWdodD0iMTAwIi8+CiAgPC9nPgogIDxnPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6ICNmZjdkMDAiIHg9IjI4NC41IiB5PSIyNDAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIvPgogICAgPHJlY3Qgc3R5bGU9ImZpbGw6IG5vbmU7IGZpbGwtb3BhY2l0eTowOyBzdHJva2Utd2lkdGg6IDI7IHN0cm9rZS1kYXNoYXJyYXk6IDQ7IHN0cm9rZTogIzAwMDAwMCIgeD0iMjg0LjUiIHk9IjI0MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIi8+CiAgPC9nPgogIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6c2Fucy1zZXJpZjtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjI5Ny41IiB5PSIyMjAiPgogICAgPHRzcGFuIHg9IjI5Ny41IiB5PSIyMjAiPjpEZXJpdmVkPC90c3Bhbj4KICA8L3RleHQ+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzRkNGQ0ZDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMzA0LjUiIHk9IjI2MCI+CiAgICA8dHNwYW4geD0iMzA0LjUiIHk9IjI2MCI+OkJhc2U8L3RzcGFuPgogIDwvdGV4dD4KICA8Zz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjYzlmOWM5IiB4PSIyODQuNSIgeT0iMzEwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiLz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMDAwMDAiIHg9IjI4NC41IiB5PSIzMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIvPgogIDwvZz4KICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5OnNhbnMtc2VyaWY7Zm9udC1zdHlsZTpub3JtYWw7Zm9udC13ZWlnaHQ6bm9ybWFsIiB4PSIzMDQuNSIgeT0iMzMwIj4KICAgIDx0c3BhbiB4PSIzMDQuNSIgeT0iMzMwIj46QmFzZTwvdHNwYW4+CiAgPC90ZXh0PgogIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6bW9ub3NwYWNlO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMTY2IiB5PSIyMjAiPgogICAgPHRzcGFuIHg9IjE2NiIgeT0iMjIwIj5kZXJpdmVkLCBiYXNlMjwvdHNwYW4+CiAgPC90ZXh0PgogIDx0ZXh0IGZvbnQtc2l6ZT0iMTIuOCIgc3R5bGU9ImZpbGw6ICMwMDAwMDA7dGV4dC1hbmNob3I6c3RhcnQ7Zm9udC1mYW1pbHk6bW9ub3NwYWNlO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMjEyIiB5PSIzMzAiPgogICAgPHRzcGFuIHg9IjIxMiIgeT0iMzMwIj5iYXNlPC90c3Bhbj4KICA8L3RleHQ+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDBmZjt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0OjcwMCIgeD0iMzkwLjUiIHk9IjE5MyI+CiAgICA8dHNwYW4geD0iMzkwLjUiIHk9IjE5MyI+T2JqZWt0ZTwvdHNwYW4+CiAgICA8dHNwYW4geD0iMzkwLjUiIHk9IjIwOSI+aW08L3RzcGFuPgogICAgPHRzcGFuIHg9IjM5MC41IiB5PSIyMjUiPlNwZWljaGVyPC90c3Bhbj4KICA8L3RleHQ+CiAgPHRleHQgZm9udC1zaXplPSIxMi44IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0OjcwMCIgeD0iMjA0LjUiIHk9IjE5My41Ij4KICAgIDx0c3BhbiB4PSIyMDQuNSIgeT0iMTkzLjUiPk5hbWU8L3RzcGFuPgogIDwvdGV4dD4KICA8Zz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiAjYzlmOWM5IiB4PSIyODQuOTUiIHk9IjM1Ni45IiB3aWR0aD0iODAiIGhlaWdodD0iMTMuMzUiLz4KICAgIDxyZWN0IHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICMwMDAwMDAiIHg9IjI4NC45NSIgeT0iMzU2LjkiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxMy4zNSIvPgogIDwvZz4KICA8dGV4dCBmb250LXNpemU9IjEyLjgiIHN0eWxlPSJmaWxsOiAjMDAwMDAwO3RleHQtYW5jaG9yOnN0YXJ0O2ZvbnQtZmFtaWx5Om1vbm9zcGFjZTtmb250LXN0eWxlOm5vcm1hbDtmb250LXdlaWdodDpub3JtYWwiIHg9IjIxMi41IiB5PSIzNjcuNzUiPgogICAgPHRzcGFuIHg9IjIxMi41IiB5PSIzNjcuNzUiPmJQdHI8L3RzcGFuPgogIDwvdGV4dD4KICA8Zz4KICAgIDxwYXRoIHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNmZjAwMDAiIGQ9Ik0gMzY0Ljk1IDM2My41NzYgQyA0MDguNSwzNDguNSA0MTMsMjI0LjI1IDM3My4yMDgsMjA0LjM1NCIvPgogICAgPHBvbHlnb24gc3R5bGU9ImZpbGw6ICNmZjAwMDAiIHBvaW50cz0iMzY2LjUsMjAxIDM3Ny42OCwyMDEgMzczLjIwOCwyMDQuMzU0IDM3My4yMDgsMjA5Ljk0NCAiLz4KICAgIDxwb2x5Z29uIHN0eWxlPSJmaWxsOiBub25lOyBmaWxsLW9wYWNpdHk6MDsgc3Ryb2tlLXdpZHRoOiAyOyBzdHJva2U6ICNmZjAwMDAiIHBvaW50cz0iMzY2LjUsMjAxIDM3Ny42OCwyMDEgMzczLjIwOCwyMDQuMzU0IDM3My4yMDgsMjA5Ljk0NCAiLz4KICA8L2c+CiAgPHRleHQgZm9udC1zaXplPSI5LjI1Njg5IiBzdHlsZT0iZmlsbDogIzAwMDAwMDt0ZXh0LWFuY2hvcjpzdGFydDtmb250LWZhbWlseTpzYW5zLXNlcmlmO2ZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtd2VpZ2h0Om5vcm1hbCIgeD0iMzA5LjUiIHk9IjM2NS43NSI+CiAgICA8dHNwYW4geD0iMzA5LjUiIHk9IjM2NS43NSI+OkJhc2UqPC90c3Bhbj4KICA8L3RleHQ+Cjwvc3ZnPgo=" alt="base02">
+</div>
+<div class="title">Bild 6. Wie im Bild <a href="#objectrefs">oben</a> und zusätzlich Zugriff auf das Objekt der Variable <code>derived</code> (Typ <code>Derived</code>) über einen Basisklassen-Zeiger <code>bPtr</code> (Typ <code>Base*</code>).</div>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 2. Beginn der Ausgabe des Programms: <code>ppc0920</code> (Zeile 3 und 4)</div>
+<div class="content">
+<pre class="nowrap">void Base::nonvirtualfunction() const
+virtual void Derived::virtualfunction() const</pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Polymorphe Verwendung von Objekten</div>
+<div class="paragraph">
+<p>Die folgenden Regeln bestimmen die polymorphe Verwendung von Objekten:</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Eine <em>polymorphe</em> Elementfunktionsauswahl (Auswahl anhand des <em>Objekttyps</em>) kann nur bei einem Zugriff über eine
+Basisklassen-<em>Referenz</em> oder einen Basisklassen-<em>Zeiger</em> erfolgen.</p>
+</li>
+<li>
+<p>Nur <em>virtuelle</em> Elementfunktionen nehmen an der polymorphen Auswahl teil.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Um Probleme (s.a. <a href="#slicing">Slicing</a>) zu vermeiden, sollte man nach der Regel verfahren:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Wertsemantik (kopierbare Datentypen) und Klassenhierarchien passen nicht zusammen.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="slicing"><a class="anchor" href="#slicing"></a><a class="link" href="#slicing">5.2. Eingebettetes Basisklassenobjekt und das sog. <em>objectslicing</em></a></h3>
+<div class="paragraph">
+<p>Eine ganz andere Situation ergibt sich in dem folgenden Codabschnitt:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 15. Zeilen aus der Datei <a href="../src/ppc09/ppc0920.cc" target="newwindows"><code>ppc0920.cc</code></a> [Snippet: mainslice] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-c1">// ...</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">base</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">derived</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-c1">// ...</span>
+<span class="linenos">5</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Dem Objekt der Variablen <code>base</code> soll das Objekt der Variablen <code>derived</code> kopier-zugewiesen werden! <strong>Achtung</strong>: Hier passiert das sog. <em>slicing</em>: nur der <code>Base</code>-Anteil von <code>derived</code> wird zugewiesen!</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wie im obigen <a href="#objectrefs">Bild</a> bzw. in <a href="#objectnesting">Bild</a> schon angedeutet,
+verschachteln sich Objekte und (anonyme) eingebettete
+Basisklassen-Objekte wie <a href="http://de.wikipedia.org/wiki/Matrjoschka">Matrjoschkas</a> ineinander.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://upload.wikimedia.org/wikipedia/commons/5/58/Russian-Matroshka2.jpg" alt="Russian Matroshka2" width="300">
+</div>
+<div class="title">Bild 7. Die russische Schachtelpuppe Matrjoschka: Die äußere Puppe enthält eine kleinere, eingebettete Innenpuppe, die wiederum eine Innenpuppe enthält, u.s.w.</div>
+</div>
+<div id="objectnesting" class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,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" alt="Diagram" width="210" height="210">
+</div>
+<div class="title">Bild 8. Das eingebettete Basisklassenobjekt des Typs <code>Base</code> in einem Objekt des Typs <code>Derived</code></div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Bei einer <em>Kopierzuweisung</em> eines abgeleiteten Typs an ein Objekt des Basistyp oder auch bei
+einer <em>Kopierkonstruktion</em> eines Basistyps von einem abgeleiteten Typs aus, kann nur der Anteil des anonymen,
+eingebetteten Basisklassenobjekts in das Zielobjekt kopiert werden.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/png;base64,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" alt="Diagram" width="420" height="210">
+</div>
+<div class="title">Bild 9. Der Effekt des Objektslicing: nur der <code>Base</code>-Anteil (eingebettetes Basisklassenobjekt) wird kopierzugewiesen.</div>
+</div>
+<div class="paragraph">
+<p>Dies findet natürlich auch bei Funktionsaufrufen statt:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 16. Zeilen aus der Datei <a href="../src/ppc09/ppc0920.cc" target="newwindows"><code>ppc0920.cc</code></a> [Snippet: mainparam] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-c1">// ...</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">foo</span><span class="tok-p">(</span><span class="tok-n">derived</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">bar</span><span class="tok-p">(</span><span class="tok-n">derived</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">5</span><span class="tok-c1">// ...</span>
+<span class="linenos">6</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Bei Parameterübergabe <em>per-value</em> kommt es auch zu einem <strong>Slicing</strong>, denn hier findet eine <em>Kopierkonstruktion</em> in die Parametervalue statt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Die Parameterübergabe <em>per-reference</em> vermeidet das <em>Slicing</em>.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 17. Zeilen aus der Datei <a href="../src/ppc09/ppc0920.cc" target="newwindows"><code>ppc0920.cc</code></a> [Snippet: functions] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">foo</span><span class="tok-p">(</span><span class="tok-n">Base</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-n">x</span><span class="tok-p">.</span><span class="tok-n">mBase</span><span class="tok-p">;</span>
+<span class="linenos"> 3</span><span class="tok-c1">//    x.mDerived; </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-n">x</span><span class="tok-p">.</span><span class="tok-n">nonvirtualfunction</span><span class="tok-p">();</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-n">x</span><span class="tok-p">.</span><span class="tok-n">virtualfunction</span><span class="tok-p">();</span>
+<span class="linenos"> 6</span><span class="tok-p">}</span>
+<span class="linenos"> 7</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">bar</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Base</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">x</span><span class="tok-p">.</span><span class="tok-n">mBase</span><span class="tok-p">;</span>
+<span class="linenos"> 9</span><span class="tok-c1">//    x.mDerived; </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">x</span><span class="tok-p">.</span><span class="tok-n">nonvirtualfunction</span><span class="tok-p">();</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-n">x</span><span class="tok-p">.</span><span class="tok-n">virtualfunction</span><span class="tok-p">();</span>
+<span class="linenos">12</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Parameterübernahme <em>per-value</em> bewirkt <code>Objektsclicing</code>, weil eine <em>Kopierkonstruktion</em> stattfindet</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Wegen <code>Slicing</code> nicht vorhandenes Datenelement.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Parameterübernahme <em>per-reference</em>  vermeidet <code>Slicing</code>, denn <code>x</code> ist hier nur ein weiterer Name (statischer Typ: <code>Base</code>) für das Objekt des Aufrufers</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Über den <em>statischen</em> Type nicht erreichbares Datenelement</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 3. Der Rest  der Ausgabe des Programms: <code>ppc0920</code> (Zeile 5 bis 8)</div>
+<div class="content">
+<pre class="nowrap">void Base::nonvirtualfunction() const
+virtual void Base::virtualfunction() const
+void Base::nonvirtualfunction() const
+virtual void Derived::virtualfunction() const</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="virtualdtor"><a class="anchor" href="#virtualdtor"></a><a class="link" href="#virtualdtor">6. Löschen von Freispeicherobjekten über Basisklassen-Zeigern</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die folgende Regel ist zu beachten:</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+So wichtig für die Programmfunktion die korrekte polymorphe Auswahl von allgemeinen Elementfunktionen ist, so
+lebenswichtig ist die korrekte Auswahl des <em>Destruktors</em> des Objektes über einen Basisklassen-<em>Zeiger</em>.
+Aus diesem Grunde muss&#8288;<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> in einer Klassenhierarchie der Destruktor
+ebenfalls eine <em>virtuelle</em> Elementfunktion sein.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wir verdeutlichen das an dem Beispiel der Klasse <a href="../src/ppc09/pointlist20.h">PointList</a> aus der
+<a href="ppcP0800.html#part08">Lerneinheit 08</a>. Dazu schreiben wir eine Schnittstelle
+<a href="../src/ppc09/list00.h">List</a>, die dann von der Klasse
+<a href="../src/ppc09/pointlist20.h">PointList</a> zu realisieren ist.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVMtQVNDSUknIHN0YW5kYWxvbmU9J25vJz8+PHN2ZyBjb250ZW50U3R5bGVUeXBlPSd0ZXh0L2NzcycgaGVpZ2h0PScxNzZweCcgcHJlc2VydmVBc3BlY3RSYXRpbz0nbm9uZScgc3R5bGU9J3dpZHRoOjM3MnB4O2hlaWdodDoxNzZweDtiYWNrZ3JvdW5kOiNGRkZGRkY7JyB2ZXJzaW9uPScxLjEnIHZpZXdCb3g9JzAgMCAzNzIgMTc2JyB3aWR0aD0nMzcycHgnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHpvb21BbmRQYW49J21hZ25pZnknPjxkZWZzLz48Zz48ZyBpZD0nZWxlbV9MaXN0Jz48cmVjdCBjb2RlTGluZT0nMicgZmlsbD0nI0YxRjFGMScgaGVpZ2h0PScxMjAuMjcxNycgaWQ9J0xpc3QnIHJ4PScyLjUnIHJ5PScyLjUnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41Oycgd2lkdGg9JzE0OScgeD0nNycgeT0nMjguMDcnLz48ZWxsaXBzZSBjeD0nNjYuMjUnIGN5PSc0NC4wNycgZmlsbD0nI0I0QTdFNScgcng9JzExJyByeT0nMTEnIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycvPjxwYXRoIGQ9J002Mi4yODEzLDUwLjU3IEw2Mi4yODEzLDQ4Ljg2NjkgTDY0LjY0MDYsNDguNjAxMiBMNjQuNjQwNiw0MC4zOTgxIEw2Mi4yODEzLDQwLjEzMjUgTDYyLjI4MTMsMzguNDI5NCBMNjkuNDIxOSwzOC40Mjk0IEw2OS40MjE5LDQwLjEzMjUgTDY3LDQwLjM5ODEgTDY3LDQ4LjYwMTIgTDY5LjQyMTksNDguODY2OSBMNjkuNDIxOSw1MC41NyBMNjIuMjgxMyw1MC41NyBaICcgZmlsbD0nIzAwMDAwMCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBmb250LXN0eWxlPSdpdGFsaWMnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMjInIHg9Jzg2Ljc1JyB5PSc0OS41MDInPkxpc3Q8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB4MT0nOCcgeDI9JzE1NScgeTE9JzYwLjA3JyB5Mj0nNjAuMDcnLz48ZWxsaXBzZSBjeD0nMTgnIGN5PSc5OC4xNzE5JyBmaWxsPScjODRCRTg0JyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzExNScgeD0nMjcnIHk9JzEwMi4xMDM5Jz5zaXplX3Qgc2l6ZSgpIGNvbnN0PC90ZXh0PjxlbGxpcHNlIGN4PScxOCcgY3k9JzExNy4yMzk4JyBmaWxsPScjODRCRTg0JyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEyMycgeD0nMjcnIHk9JzEyMS4xNzE4Jz5ib29sIGVtcHR5KCkgY29uc3Q8L3RleHQ+PGVsbGlwc2UgY3g9JzE4JyBjeT0nMTM2LjMwNzcnIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nNzMnIHg9JzI3JyB5PScxNDAuMjM5Nyc+dm9pZCBjbGVhcigpPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzgnIHgyPScyOScgeTE9Jzc3LjYwNCcgeTI9Jzc3LjYwNCcvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEwNScgeD0nMjknIHk9JzgyLjUzNTknPnB1YmxpYyBvYnNlcnZlcjwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPScxMzQnIHgyPScxNTUnIHkxPSc3Ny42MDQnIHkyPSc3Ny42MDQnLz48L2c+PGcgaWQ9J2VsZW1fUG9pbnRMaXN0Jz48cmVjdCBjb2RlTGluZT0nOScgZmlsbD0nI0YxRjFGMScgaGVpZ2h0PScxNjIuNDA3NScgaWQ9J1BvaW50TGlzdCcgcng9JzIuNScgcnk9JzIuNScgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7JyB3aWR0aD0nMTQ5JyB4PScyMTYnIHk9JzcnLz48ZWxsaXBzZSBjeD0nMjU4JyBjeT0nMjMnIGZpbGw9JyNBREQxQjInIHJ4PScxMScgcnk9JzExJyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cGF0aCBkPSdNMjU3LjQ2ODgsMjkuOTIxOSBRMjU1LjcxODgsMjkuOTIxOSAyNTQuNTc4MSwyOS4xODc1IFEyNTMuNDUzMSwyOC40Mzc1IDI1Mi44OTA2LDI3LjA5MzggUTI1Mi4zNDM4LDI1LjczNDQgMjUyLjM0MzgsMjMuOTM3NSBRMjUyLjM0MzgsMjEuOTA2MyAyNTMsMjAuNDUzMSBRMjUzLjY1NjMsMTkgMjU0LjkzNzUsMTguMjE4OCBRMjU2LjIxODgsMTcuNDM3NSAyNTguMDkzOCwxNy40Mzc1IFEyNTguOTg0NCwxNy40Mzc1IDI1OS42NTYzLDE3LjYyNSBRMjYwLjMyODEsMTcuNzk2OSAyNjEuMDE1NiwxOC4xNDA2IEwyNjAuMjAzMSwyMC4xNTYzIFEyNTkuNTc4MSwxOS44NDM4IDI1OS4wMzEzLDE5LjcxODggUTI1OC41LDE5LjU5MzggMjU4LjAxNTYsMTkuNTkzOCBRMjU2Ljg0MzgsMTkuNTkzOCAyNTYuMTQwNiwyMC4xMjUgUTI1NS40Mzc1LDIwLjY1NjMgMjU1LjE0MDYsMjEuNjA5NCBRMjU0Ljg0MzgsMjIuNTYyNSAyNTQuODQzOCwyMy44MjgxIFEyNTQuODQzOCwyNS44NDM4IDI1NS41NjI1LDI2LjgxMjUgUTI1Ni4yODEzLDI3Ljc2NTYgMjU3Ljg3NSwyNy43NjU2IFEyNTguNDY4OCwyNy43NjU2IDI1OS4wOTM4LDI3LjYwOTQgUTI1OS43MTg4LDI3LjQ1MzEgMjYwLjU0NjksMjcuMDc4MSBMMjYwLjU0NjksMjkuMjk2OSBRMjU5LjgxMjUsMjkuNjA5NCAyNTkuMDE1NiwyOS43NjU2IFEyNTguMjM0NCwyOS45MjE5IDI1Ny40Njg4LDI5LjkyMTkgWiAnIGZpbGw9JyMwMDAwMDAnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPSc1NycgeD0nMjc4JyB5PScyOC40MzInPlBvaW50TGlzdDwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsnIHgxPScyMTcnIHgyPSczNjQnIHkxPSczOScgeTI9JzM5Jy8+PGVsbGlwc2UgY3g9JzIyNycgY3k9Jzc3LjEwMTknIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTE1JyB4PScyMzYnIHk9JzgxLjAzMzknPnNpemVfdCBzaXplKCkgY29uc3Q8L3RleHQ+PGVsbGlwc2UgY3g9JzIyNycgY3k9Jzk2LjE2OTgnIGZpbGw9JyM4NEJFODQnIHJ4PSczJyByeT0nMycgc3R5bGU9J3N0cm9rZTojMDM4MDQ4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTIzJyB4PScyMzYnIHk9JzEwMC4xMDE4Jz5ib29sIGVtcHR5KCkgY29uc3Q8L3RleHQ+PGVsbGlwc2UgY3g9JzIyNycgY3k9JzExNS4yMzc3JyBmaWxsPScjODRCRTg0JyByeD0nMycgcnk9JzMnIHN0eWxlPSdzdHJva2U6IzAzODA0ODtzdHJva2Utd2lkdGg6MS4wOycvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzczJyB4PScyMzYnIHk9JzExOS4xNjk3Jz52b2lkIGNsZWFyKCk8L3RleHQ+PGxpbmUgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7JyB4MT0nMjE3JyB4Mj0nMjM4JyB5MT0nNTYuNTM0JyB5Mj0nNTYuNTM0Jy8+PHRleHQgZmlsbD0nIzAwMDAwMCcgZm9udC1mYW1pbHk9J3NhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMTQnIGxlbmd0aEFkanVzdD0nc3BhY2luZycgdGV4dExlbmd0aD0nMTA1JyB4PScyMzgnIHk9JzYxLjQ2NTknPnB1YmxpYyBvYnNlcnZlcjwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSczNDMnIHgyPSczNjQnIHkxPSc1Ni41MzQnIHkyPSc1Ni41MzQnLz48dGV4dCBmaWxsPScjMDAwMDAwJyBmb250LWZhbWlseT0nc2Fucy1zZXJpZicgZm9udC1zaXplPScxNCcgbGVuZ3RoQWRqdXN0PSdzcGFjaW5nJyB0ZXh0TGVuZ3RoPScxMicgeD0nMjIyJyB5PScxNjEuMzA1NSc+Li4uPC90ZXh0PjxsaW5lIHN0eWxlPSdzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOycgeDE9JzIxNycgeDI9JzI0MC41JyB5MT0nMTM2LjgwNTYnIHkyPScxMzYuODA1NicvPjx0ZXh0IGZpbGw9JyMwMDAwMDAnIGZvbnQtZmFtaWx5PSdzYW5zLXNlcmlmJyBmb250LXNpemU9JzE0JyBsZW5ndGhBZGp1c3Q9J3NwYWNpbmcnIHRleHRMZW5ndGg9JzEwMCcgeD0nMjQwLjUnIHk9JzE0MS43Mzc2Jz5wdWJsaWMgbXV0YXRvcjwvdGV4dD48bGluZSBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnIHgxPSczNDAuNScgeDI9JzM2NCcgeTE9JzEzNi44MDU2JyB5Mj0nMTM2LjgwNTYnLz48L2c+PGcgaWQ9J2xpbmtfTGlzdF9Qb2ludExpc3QnPjxwYXRoIGNvZGVMaW5lPScxOCcgZD0nTTE3Ny41OCw4OC4yMSBDMTkwLjM3LDg4LjIxIDIwMy4zMyw4OC4yMSAyMTUuNjcsODguMjEgJyBmaWxsPSdub25lJyBpZD0nTGlzdC1iYWNrdG8tUG9pbnRMaXN0JyBzdHlsZT0nc3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsnLz48cG9seWdvbiBmaWxsPSdub25lJyBwb2ludHM9JzE3Ny44Nyw5NS4yMSwxNTcuODcsODguMjEsMTc3Ljg3LDgxLjIxLDE3Ny44Nyw5NS4yMScgc3R5bGU9J3N0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Jy8+PC9nPjwvZz48L3N2Zz4=" alt="Diagram" width="372" height="176">
+</div>
+<div class="title">Bild 10. Die bekannte Klasse <code>PointList</code> realisiert nun die Schnittstelle <code>List</code></div>
+</div>
+<div class="paragraph">
+<p>Damit ergibt sich die <em>Schnittstellen</em>-Klasse <code>List</code> folgendermaßen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 18. Zeilen aus der Datei <a href="../src/ppc09/list00.h" target="newwindows"><code>list00.h</code></a> [Snippet: List] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">List</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-c1">// ...</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-o">~</span><span class="tok-n">List</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">5</span><span class="tok-c1">// ...</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-nf">empty</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="linenos">8</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">clear</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="linenos">9</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Wichtig</strong>: als <em>Schnittstellenklasse</em> (Basistyp) muss <code>List</code> einen <strong>virtuellen</strong> Destruktor besitzen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Die Schnittstelle besitzt nur <em>rein-virtuelle</em> Elementfunktionen.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wir verändern die bisherige Klasse <code>PointList</code> so, dass sie nun die Schnittstelle <code>List</code> realisiert:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 19. Zeilen aus der Datei <a href="../src/ppc09/pointlist20.h" target="newwindows"><code>pointlist20.h</code></a> [Snippet: PointList] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">PointList</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-k">public</span><span class="tok-w"> </span><span class="tok-n">List</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 3</span><span class="tok-c1">// ...</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-o">~</span><span class="tok-n">PointList</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 5</span><span class="tok-c1">// ...</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-nf">size</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-nf">empty</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">clear</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-k">override</span><span class="tok-p">;</span>
+<span class="linenos"> 9</span><span class="tok-c1">// ...</span>
+<span class="linenos">10</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Der Destruktor erzeugt zu Demonstrationszwecken eine Ausgabe.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Hier werden die rein-virtuellen Elementfunktionen der Schnittstelle <code>List</code> realisiert.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Elementfunktion <code>clear()</code> ist <em>ungewöhlich</em> realisiert, vermeidet so aber <em>Code-Duplizierung</em>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 20. Zeilen aus der Datei <a href="../src/ppc09/pointlist20.cc" target="newwindows"><code>pointlist20.cc</code></a> [Snippet: clear] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">PointList::clear</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">emptyList</span><span class="tok-p">;</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">emptyList</span><span class="tok-p">);</span>
+<span class="linenos">4</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Das Testprogramm zu Demonstrationszwecken:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 21. Zeilen aus der Datei <a href="../src/ppc09/ppc0922.cc" target="newwindows"><code>ppc0922.cc</code></a> [Snippet: main] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">PointList</span><span class="tok-w"> </span><span class="tok-n">pl</span><span class="tok-p">;</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">pl</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-p">();</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-n">List</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">list</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-n">PointList</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">pl</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">5</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Der <strong>UP</strong> <code>list</code> löscht das Freispeicherobjekt am Ende des Scopes.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wir erhalten die folgende Ausgabe:</p>
+</div>
+<div id="ppc0922aout" class="literalblock output">
+<div class="title">Ausgabe 1. Ausgabe des Programms: <code>ppc0922</code></div>
+<div class="content">
+<pre class="nowrap">List::List()
+PointList::PointList()
+List::List()
+PointList::PointList(const PointList&amp;)
+virtual PointList::~PointList()
+virtual List::~List()
+virtual PointList::~PointList()
+virtual List::~List()</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Bei der obigen <a href="#ppc0922aout">Ausgabe</a> ist zu beachten, dass sowohl bei der <em>Konstruktion</em> eines <code>PointList</code>
+Objektes als auch bei der Desktruktion jeweils <em>zwei</em> Zeilen in der Ausgabe zu sehen sind
+(s.a. <a href="#ctordtorsequence">Abschnitt 7</a>)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Deklarieren wir dagegen den Desktruktor in der Schnittstellenklasse <code>List</code> nicht virtuell,</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 22. Zeilen aus der Datei <a href="../src/ppc09/list00.h" target="newwindows"><code>list00.h</code></a> [Snippet: ListError] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">List</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">List</span><span class="tok-p">();</span>
+<span class="linenos"> 4</span><span class="tok-cp">#ifdef WITH_ERROR</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-o">~</span><span class="tok-n">List</span><span class="tok-p">();</span>
+<span class="linenos"> 6</span><span class="tok-cp">#else</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-k">virtual</span><span class="tok-w"> </span><span class="tok-o">~</span><span class="tok-n">List</span><span class="tok-p">();</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 8</span><span class="tok-cp">#endif</span>
+<span class="linenos"> 9</span><span class="tok-c1">// ...</span>
+<span class="linenos">10</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Wichtig</strong>: als <em>Schnittstellenklasse</em> (Basistyp) muss <code>List</code> einen <strong>virtuellen</strong> Destruktor besitzen.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>so erhalten wir die Ausgabe:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 4. Ausgabe des Programms: <code>ppc0922e</code></div>
+<div class="content">
+<pre class="nowrap">List::List()
+PointList::PointList()
+List::List()
+PointList::PointList(const PointList&amp;)
+virtual List::~List()
+virtual PointList::~PointList()
+virtual List::~List()</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Und der Fehler tritt auch bei der Speicheranalyse zu Tage:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 5. Speicheranalyse des Programms: <code>ppc0922e</code></div>
+<div class="content">
+<pre class="nowrap">==36992== Memcheck, a memory error detector
+==36992== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==36992== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==36992== Command: ./ppc0922e
+==36992== 
+==36992== 
+==36992== HEAP SUMMARY:
+==36992==     in use at exit: 72 bytes in 1 blocks
+==36992==   total heap usage: 42 allocs, 41 frees, 80,878 bytes allocated
+==36992== 
+==36992== LEAK SUMMARY:
+==36992==    definitely lost: 72 bytes in 1 blocks
+==36992==    indirectly lost: 0 bytes in 0 blocks
+==36992==      possibly lost: 0 bytes in 0 blocks
+==36992==    still reachable: 0 bytes in 0 blocks
+==36992==         suppressed: 0 bytes in 0 blocks
+==36992== Rerun with --leak-check=full to see details of leaked memory
+==36992== 
+==36992== For lists of detected and suppressed errors, rerun with: -s
+==36992== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ctordtorsequence"><a class="anchor" href="#ctordtorsequence"></a><a class="link" href="#ctordtorsequence">7. Konstruktions- und Destruktionsablauf</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In der obigen <a href="#ppc0922aout">Ausgabe</a> war schon zu erkennen, dass die Konstruktion eines Objektes
+<em>von-oben-nach-unten</em> (<em>top-down</em>) in einer Klassenhierarchie abläuft. Die Destruktion läuft
+dageben <em>von-unten-nach-oben</em> (<em>bottom-up</em>) ab.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Konstruktion</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Konstruktion des eingebetteten Basisklassenobjekts</p>
+</li>
+<li>
+<p>Konstruktion der weiteren Datenelement in der Reihenfolge der Deklaration</p>
+</li>
+<li>
+<p>Konstruktorrumpf</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Destruktion</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Destruktorrumpf</p>
+</li>
+<li>
+<p>Destruktion der Datenelemente in der umgekehrten Reihenfolge der Deklaration</p>
+</li>
+<li>
+<p>Destruktion des eingebettete Basisklassenobjekts</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 23. Zeilen aus der Datei <a href="../src/ppc09/ppc0925.cc" target="newwindows"><code>ppc0925.cc</code></a> [Snippet: classes] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">A</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">A</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">mA1</span><span class="tok-p">(</span><span class="tok-s">&quot;A1&quot;</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-n">mA2</span><span class="tok-p">(</span><span class="tok-s">&quot;A2&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos"> 5</span><span class="tok-c1">// ...</span>
+<span class="linenos"> 6</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">LifeTime</span><span class="tok-w"> </span><span class="tok-n">mA1</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">LifeTime</span><span class="tok-w"> </span><span class="tok-n">mA2</span><span class="tok-p">;</span>
+<span class="linenos"> 9</span><span class="tok-p">};</span>
+<span class="linenos">10</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">B</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-k">public</span><span class="tok-w"> </span><span class="tok-n">A</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">11</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-n">B</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">mB</span><span class="tok-p">(</span><span class="tok-s">&quot;B&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">14</span><span class="tok-c1">// ...</span>
+<span class="linenos">15</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-n">LifeTime</span><span class="tok-w"> </span><span class="tok-n">mB</span><span class="tok-p">;</span>
+<span class="linenos">17</span><span class="tok-p">};</span>
+<span class="linenos">18</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">C</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-k">public</span><span class="tok-w"> </span><span class="tok-n">B</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">19</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">20</span><span class="tok-w">    </span><span class="tok-n">C</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">mC2</span><span class="tok-p">(</span><span class="tok-s">&quot;C2&quot;</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-n">mC1</span><span class="tok-p">(</span><span class="tok-s">&quot;C1&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">21</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">22</span><span class="tok-c1">// ...</span>
+<span class="linenos">23</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">24</span><span class="tok-w">    </span><span class="tok-n">LifeTime</span><span class="tok-w"> </span><span class="tok-n">mC1</span><span class="tok-p">;</span>
+<span class="linenos">25</span><span class="tok-w">    </span><span class="tok-n">LifeTime</span><span class="tok-w"> </span><span class="tok-n">mC2</span><span class="tok-p">;</span>
+<span class="linenos">26</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Achtung</strong>: Initialisierung erfolgt in der Reihenfolge der Definition der Datenelemente!</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Erzeugung eines <code>C</code>-Objektes wie im folgenden Listing</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 24. Zeilen aus der Datei <a href="../src/ppc09/ppc0925.cc" target="newwindows"><code>ppc0925.cc</code></a> [Snippet: main] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">C</span><span class="tok-w"> </span><span class="tok-n">c</span><span class="tok-p">;</span>
+<span class="linenos">3</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>liefert dann die Ausgabe:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 6. Ausgabe des Programms: <code>ppc0925</code></div>
+<div class="content">
+<pre class="nowrap">LifeTime::LifeTime(const std::string&amp;) : A1
+LifeTime::LifeTime(const std::string&amp;) : A2
+A::A()
+LifeTime::LifeTime(const std::string&amp;) : B
+B::B()
+LifeTime::LifeTime(const std::string&amp;) : C1
+LifeTime::LifeTime(const std::string&amp;) : C2
+C::C()
+virtual C::~C()
+LifeTime::~LifeTime() : C2
+LifeTime::~LifeTime() : C1
+virtual B::~B()
+LifeTime::~LifeTime() : B
+virtual A::~A()
+LifeTime::~LifeTime() : A2
+LifeTime::~LifeTime() : A1</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. Bis auf wenige Ausnahmen, die ein sehr tiefes Verständnis der Zusammenhänge erfordern!
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.12<br>
+Last updated 2026-09-28 00:00:00 +0200
+</div>
+</div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a>.
+</body>
+</html>

@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="description" content="Eine Einführung in C++">
+<meta name="keywords" content="Programmieren, Programming, C++">
+<meta name="author" content="Wilhelm Meier, Adrian MÜller">
+<meta name="copyright" content="Prof. Dr.-Ing. Wilhelm Meier">
+<title>pCpp - Programmierkonzepte mit C&#43;&#43; - LE 05 - [WS26/27]</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f8f8f8; }
+pre.pygments .tok-c { color: #3D7B7B; font-style: italic } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #666666 } /* Operator */
+pre.pygments .tok-ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #9C6500 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #E40000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { color: #008400 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #717171 } /* Generic.Output */
+pre.pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+pre.pygments .tok-m { color: #666666 } /* Literal.Number */
+pre.pygments .tok-s { color: #BA2121 } /* Literal.String */
+pre.pygments .tok-na { color: #687822 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #008000 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #880000 } /* Name.Constant */
+pre.pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #717171; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #0000FF } /* Name.Function */
+pre.pygments .tok-nl { color: #767600 } /* Name.Label */
+pre.pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #19177C } /* Name.Variable */
+pre.pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #A45A77 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+   jQuery('a[target^="newwindow"]').click(function(e) {
+       var width = 600;
+       var height = 400;
+       window.open(this.href, 'newwindow', 'width=' + width + ', height=' + height + ', top=50, left=500');
+       return false;
+   });
+});
+</script>
+<style>
+.listingblock a.view-result {
+  float: right;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-top: 0.15em;
+}
+</style>
+<script>
+function toggle_result_block(e) {
+  var resultNode = e.target.parentNode.parentNode.nextElementSibling;
+  resultNode.style.display = getComputedStyle(resultNode).display == 'none' ? '' : 'none';
+  return false;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  [].forEach.call(document.querySelectorAll('.result'), function(resultNode) {
+    resultNode.style.display = 'none';
+    var viewLink = document.createElement('a');
+    viewLink.className = 'view-result';
+    viewLink.appendChild(document.createTextNode('[ view result ]'));
+    resultNode.previousElementSibling.querySelector('.title').appendChild(viewLink);
+    viewLink.addEventListener('click', toggle_result_block);
+  });
+});
+</script>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>pCpp - Programmierkonzepte mit C&#43;&#43;</h1>
+<div class="details">
+<span id="author" class="author">Adrian Müller</span><br>
+<span id="email" class="email"><a href="mailto:adrian.mueller@hs-kl.de">adrian.mueller@hs-kl.de</a></span><br>
+<span id="revnumber">version 1.12,</span>
+<span id="revdate">01.10.2026</span>
+<br><span id="revremark">WS26/27</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Inhalt</div>
+<ul class="sectlevel1">
+<li><a href="#part05">1. Lerneinheit 05 - Freie Funktionen, der Ausgabeoperator und andere</a></li>
+<li><a href="#_freie_funktionen">2. Freie Funktionen</a>
+<ul class="sectlevel2">
+<li><a href="#_definition_eigener_freier_funktionen">2.1. Definition eigener <em>freier</em> Funktionen</a></li>
+<li><a href="#_module_und_codestrukturierung">2.2. Module und Codestrukturierung</a></li>
+<li><a href="#typeconv">2.3. Typumwandlungen</a></li>
+<li><a href="#_ausgabeoperator">2.4. Ausgabeoperator</a></li>
+</ul>
+</li>
+<li><a href="#_details">3. Details</a>
+<ul class="sectlevel2">
+<li><a href="#friend">3.1. Freie Funktionen als Bestandteil der öffentlichen Klassenschnittstelle</a></li>
+<li><a href="#_idiome">3.2. Idiome</a>
+<ul class="sectlevel3">
+<li><a href="#refinrefout">3.2.1. Reference-in / Reference-out</a></li>
+</ul>
+</li>
+<li><a href="#opoverload">3.3. Operatorüberladung</a>
+<ul class="sectlevel3">
+<li><a href="#_beispiele">3.3.1. Beispiele</a></li>
+<li><a href="#recommendedops">3.3.2. Empfohlene Varianten der Operatorüberladung</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_rückblick">4. Rückblick</a>
+<ul class="sectlevel2">
+<li><a href="#_domänenspezifische_datentypen">4.1. Domänenspezifische Datentypen</a>
+<ul class="sectlevel3">
+<li><a href="#viewbox">4.1.1. SVG-Datei mit <code>viewBox</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lizenz</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" alt="Lizenz">
+</div>
+</div>
+<div class="paragraph">
+<p>Dieses Werk ist lizenziert unter einer <a href="http://creativecommons.org/licenses/by-nc-nd/4.0">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="part05"><a class="anchor" href="#part05"></a><a class="link" href="#part05">1. Lerneinheit 05 - Freie Funktionen, der Ausgabeoperator und andere</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lernziele</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Was ist der Unterschied zwischen <em>freien</em> Funktionen und <em>Elementfunktionen</em>?</p>
+</li>
+<li>
+<p>Wie wird die Trennung von Deklaration und Definition einer (freien) Funktion durchgeführt?</p>
+</li>
+<li>
+<p>Was ist ein Typumwandlungskonstruktor?</p>
+</li>
+<li>
+<p>Was ist der Ausgabeoperator? Wie wird er realisiert?</p>
+</li>
+<li>
+<p>Wie realisiert man andere Operatoren für UDT?</p>
+</li>
+<li>
+<p>Was sind Namensräume?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_freie_funktionen"><a class="anchor" href="#_freie_funktionen"></a><a class="link" href="#_freie_funktionen">2. Freie Funktionen</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Freie</em> Funktionen werden <em>ohne</em> umgebende Klasse (deswegen: <em>frei</em>) deklariert - im Gegensatz dazu die <em>Element</em>-Funktionen.</p>
+</div>
+<div class="paragraph">
+<p>Die erste freie Funktion ist <code>main()</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 1. Zeilen aus der Datei <a href="../src/ppc05/ppc0501.cc" target="newwindows"><code>ppc0501.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">2</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>main()</code> ist auch eine <em>freie</em> Funktion!</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">Warum freie Funktionen?</div>
+<div class="paragraph">
+<p>Ein wichtiges Grundprinzip in der Sprache <code>C++</code> ist die Gleichbehandlung von primitiven und selbstdefinierten Datentypen (UDT).
+Objekte selbstdefinierter Typen werden auch als <em>first-class</em>-Objekte bezeichnet, d.h. sie enthalten nicht nur strukturierte Daten sondern auch Operationen (Elementfunktionen, Methoden).</p>
+</div>
+<div class="paragraph">
+<p>Die primitiven Datentypen in <code>C++</code> ergeben <em>keine</em> first-class-Objekte.
+Man kann daher keine Elementfunktionen für primitive DT aufrufen.</p>
+</div>
+<div class="paragraph">
+<p>Dies ist bei der <em>generischen</em> Programmierung (in <code>C++</code> <em>template</em>&#8288;s genannt) sehr wichtig, denn man möchte Code
+unabhängig vom Typ - insbesondere der Unterscheidung zwischen primitiven und nicht-primitiven Typen - schreiben. Das spiegelt
+sich auch in der Einführung der <em>Operator-Überladung</em> wieder.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_definition_eigener_freier_funktionen"><a class="anchor" href="#_definition_eigener_freier_funktionen"></a><a class="link" href="#_definition_eigener_freier_funktionen">2.1. Definition eigener <em>freier</em> Funktionen</a></h3>
+<div class="paragraph">
+<p>Wir definieren eine Funktion <code>double quadrat(double)</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 2. Zeilen aus der Datei <a href="../src/ppc05/ppc0502.cc" target="newwindows"><code>ppc0502.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-nf">quadrat</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">value</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">value</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">value</span><span class="tok-p">;</span>
+<span class="linenos"> 4</span><span class="tok-p">}</span>
+<span class="linenos"> 5</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-p">{</span><span class="tok-mf">42.42</span><span class="tok-p">};</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Quadrat von &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot; ist &quot;</span>
+<span class="linenos"> 8</span><span class="tok-w">              </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">quadrat</span><span class="tok-p">(</span><span class="tok-n">x</span><span class="tok-p">)</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 9</span><span class="tok-w">              </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>Definition</strong> der freien Funktion <code>quadrat()</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>Aufruf</strong> der freien Funktion <code>quadrat()</code></td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Um ein Symbol in <code>C++</code> verwenden zu können, muss es zuvor <em>deklariert</em> worden sein, denn der Compiler traversiert
+den Quelltext nur <strong>einmal</strong> von oben nach unten. Weil aber jede <em>Definition</em> zugleich auch eine <em>Deklaration</em> ist,
+kann <a href="../src/ppc05/ppc0502.cc">ppc0502.cc</a> kompiliert werden.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wir erhalten die Ausgabe:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 1. Ausgabe des Programms: <code>ppc0502</code></div>
+<div class="content">
+<pre class="nowrap">Quadrat von 42.42 ist 1799.46</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Bislang hatten wir solche Funktionen in der Klasse <a href="../src/ppc05/math.h">Math</a> als statische
+Elementfunktionen (Klassenmethoden) untergebracht.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Es kann vorkommen, dass zwei Funktionen sich <em>wechselseitig</em> aufrufen. Um das
+<a href="http://de.wikipedia.org/wiki/Henne-Ei-Problem">Henne-Ei</a>-Problem bei der Definition der
+beiden Funktionen zu lösen, kann man wie bei Elementfunktionen die <em>Deklaration</em> von der <em>Definition</em> trennen.</p>
+</div>
+<div class="paragraph">
+<p>Hier die getrennte Deklaration und abgesetzte Definition der Funktion
+<code>double distance(const Point&amp;, const Point&amp;)</code> zur Berechnung der Distanz zwischen den geometrischen Punkten:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 3. Zeilen aus der Datei <a href="../src/ppc05/ppc0503.cc" target="newwindows"><code>ppc0503.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;../ppc.h&quot;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;point40.h&quot;</span>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 4</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cmath&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 5</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-nf">distance</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 6</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">1.0</span><span class="tok-p">};</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">{</span><span class="tok-mf">2.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">2.0</span><span class="tok-p">};</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Distanz: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">10</span><span class="tok-p">}</span>
+<span class="linenos">11</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-nf">distance</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">dx</span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">getX</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">getX</span><span class="tok-p">()};</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">dy</span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">getY</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">getY</span><span class="tok-p">()};</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">hypot</span><span class="tok-p">(</span><span class="tok-n">dx</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">dy</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">15</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Notwendig für die Verwendung von mathematischen Funktionen wie <code>std::hypot()</code> oder <code>std::sqrt()</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><strong>Deklaration</strong> der Funktion <code>distance()</code>, wird auch <em>Prototyp</em> genannt</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Aufruf der Funktion <code>distance()</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>Definition</strong> der Funktion entsprechend obiger Deklaration</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Berechnung der Hypotenusen-Länge</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 2. Ausgabe des Programms: <code>ppc0503</code></div>
+<div class="content">
+<pre class="nowrap">Distanz: 1.41421</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">Mathematische Funktionen der <code>C++</code>-Standardbibliothek</div>
+Die <code>C++</code>-Standardbibliothek enthält eine Vielzahl <a href="http://en.cppreference.com/w/cpp/numeric/math">mathematische Funktionen</a>, darunter auch <a href="http://en.cppreference.com/w/cpp/numeric/math/sqrt">std::sqrt</a> oder <a href="http://en.cppreference.com/w/cpp/numeric/math/hypot">std::hypot</a>
+(s.a. <a href="http://de.wikipedia.org/wiki/Rechtwinkliges_Dreieck">Hypotenuse</a>).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_module_und_codestrukturierung"><a class="anchor" href="#_module_und_codestrukturierung"></a><a class="link" href="#_module_und_codestrukturierung">2.2. Module und Codestrukturierung</a></h3>
+<div class="paragraph">
+<p>Grundsätzlich können Deklarationen und Definition ohne Einschränkungen in Übersetzungseinheiten strukturiert
+werden, solange folgende Regeln eingehalten werden:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Jeder Bezeichner muss <strong>vor</strong> seiner Verwendung <em>deklariert</em> worden sein.</p>
+</li>
+<li>
+<p>Für jeden Bezeichner darf es nur <strong>eine</strong> Definition geben (<strong>One Definition Rule</strong>, <span class="red">ODR</span>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Darüberhinaus <em>empfiehlt</em> es sich selbstverständlich, Klassen und <em>dazugehörige</em> freie Funktionen zusammenzufassen.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Der Code in <code>main()</code> hat sich nicht geändert:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 4. Zeilen aus der Datei <a href="../src/ppc05/ppc0504.cc" target="newwindows"><code>ppc0504.cc</code></a> [Snippet: points] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">1.0</span><span class="tok-p">};</span>
+<span class="linenos">2</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">{</span><span class="tok-mf">2.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">2.0</span><span class="tok-p">};</span>
+<span class="linenos">3</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Distanz p1-p2: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span></code></pre>
+</div>
+</div>
+<div id="ffdistance" class="paragraph">
+<p>Allerdings gehört die <em>freie Funktion</em> <code>double distance(const Point&amp;, const Point&amp;)</code> zur Klasse <code>Point</code>.
+Denn Sie ist ausschließlich auf Parameter des Datentyps <code>Point</code> anwendbar. Sie sollte
+deswegen in der Headerdatei <a href="../src/ppc05/point41.h">point41.h</a> <em>deklariert</em> und in der
+Implementiersungsdatei <a href="../src/ppc05/point41.cc">point41.cc</a> <em>definiert</em> werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 5. Zeilen aus der Datei <a href="../src/ppc05/point41.h" target="newwindows"><code>point41.h</code></a> [Snippet: distance] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-nf">distance</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Deklaration einer freien Funktion der öffentlichen Schnittstelle der Klasse <code>Point</code></td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 6. Zeilen aus der Datei <a href="../src/ppc05/point41.cc" target="newwindows"><code>point41.cc</code></a> [Snippet: distance] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-nf">distance</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">dx</span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">getX</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">getX</span><span class="tok-p">()};</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">dy</span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">getY</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">getY</span><span class="tok-p">()};</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">hypot</span><span class="tok-p">(</span><span class="tok-n">dx</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">dy</span><span class="tok-p">);</span>
+<span class="linenos"> 5</span><span class="tok-p">}</span>
+<span class="linenos"> 6</span><span class="tok-n">SIMPLETEST</span><span class="tok-p">(</span><span class="tok-s">&quot;Point distance&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">0.0</span><span class="tok-p">};</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">1.0</span><span class="tok-p">};</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-mf">0.0</span><span class="tok-p">))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-n">p2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-mf">0.0</span><span class="tok-p">))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">sqrt</span><span class="tok-p">(</span><span class="tok-mf">2.0</span><span class="tok-p">)))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">true</span><span class="tok-p">;</span>
+<span class="linenos">13</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Defintion der freien Funktion</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Auch die freie Funktion muss getestet werden!</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Freie Funktionen, die in ihren Parameterlisten nur <em>einen</em> UDT verwenden, gehören zu der öffentlichen
+Schnittstelle dieses Typs. Daher werden sie sinnvollerweise und üblicherweise in der zugehörigen Headerdatei des
+Typs (Klasse) deklariert und in der Implementiersungsdatei definiert (s.a. <a href="#friend">Abschnitt 3.1</a>).
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="typeconv"><a class="anchor" href="#typeconv"></a><a class="link" href="#typeconv">2.3. Typumwandlungen</a></h3>
+<div class="paragraph">
+<p>Interessant ist, dass der folgende Code überhaupt funktioniert, den man ggf. schnell hingeschrieben hat:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 7. Zeilen aus der Datei <a href="../src/ppc05/ppc0504.cc" target="newwindows"><code>ppc0504.cc</code></a> [Snippet: other] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">d1</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">);</span>
+<span class="linenos">2</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Distanz d1: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">d1</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">3</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">d2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-n">p2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">1.0</span><span class="tok-p">);</span>
+<span class="linenos">4</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Distanz d2: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">d2</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">d3</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">distance</span><span class="tok-p">(</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">1.0</span><span class="tok-p">);</span>
+<span class="linenos">6</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Distanz d3: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">d3</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Was soll die <em>Bedeutung</em> von <code>distance(0.0, p1)</code> sein?</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 3. Ausgabe des Programms: <code>ppc0504</code></div>
+<div class="content">
+<pre class="nowrap">Distanz p1-p2: 1.41421
+Distanz d1: 1.41421
+Distanz d2: 2.23607
+Distanz d3: 1
+p3 = [3,0]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Aus der obigen Ausgabe kann man schließen, dass offensichlich hierbei eine <code>double</code> Zahl <em>z</em> in ein Objekt des
+Typs <code>Point</code> mit der x-Koordinate mit dem Wert <em>z</em> und der y-Koordinate mit dem Wert <em>0</em> umgewandelt wird.
+Das macht auch der folgende Ausschnitt deutlich:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 8. Zeilen aus der Datei <a href="../src/ppc05/ppc0504.cc" target="newwindows"><code>ppc0504.cc</code></a> [Snippet: conversion] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p3</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mf">3.0</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">2</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;p3 = [&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p3</span><span class="tok-p">.</span><span class="tok-n">getX</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;,&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p3</span><span class="tok-p">.</span><span class="tok-n">getY</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;]&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><em>implizite</em> Konvertierung <code>double</code> &#8594; <code>Point</code> wie oben</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Diese <em>implizite</em> Typumwandlung wird durch den sog. <strong>Typumwandlungskonstruktor</strong> ermöglicht.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Typumwandlungskonstruktor</div>
+<div class="paragraph">
+<p><em>Typumwandlungskonstruktoren</em> sind allgemeine Konstruktoren, die mit <em>einem</em> Parameter eines <em>anderen</em> Typs
+<em>aufgerufen</em> werden können. Bei Parameterlisten mit <code>Arität &gt; 1</code> müssen die weiteren Parameter <em>Vorgabewerte</em>
+besitzen.</p>
+</div>
+<div class="paragraph">
+<p>Die Rolle des Typumwandlungskonstruktors kann durch das Schlüsselwort <code>explicit</code> <strong>abgeschaltet</strong> werden.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Das folgende, einfachere Beispiel macht das nochmals deutlich:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 9. Die Klasse <code>A</code> mit <em>Typumwandlungskonstruktor</em></div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">A</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-n">A</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">v</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">{</span><span class="tok-n">v</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-p">{}</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">6</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Dies ist ein allg. Konstruktor in der <em>Rolle</em> eines <strong>Typumwandlungskonstruktors</strong></td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 10. Die Klasse <code>B</code> ohne <em>Typumwandlungskonstruktor</em></div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">B</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">explicit</span><span class="tok-w"> </span><span class="tok-n">B</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">v</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">{</span><span class="tok-n">v</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-p">{}</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">6</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><em>Implizite</em> Typumwandlung durch das Schlüsselwort <code>explicit</code> ausgeschlossen</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 11. Zeilen aus der Datei <a href="../src/ppc05/ppc0511.cc" target="newwindows"><code>ppc0511.cc</code></a> [Snippet: conversion] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">A</span><span class="tok-w"> </span><span class="tok-n">a1</span><span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">2</span><span class="tok-n">A</span><span class="tok-w"> </span><span class="tok-n">a2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">3</span><span class="tok-n">a1</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">3</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">4</span><span class="tok-n">a2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">4</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-n">B</span><span class="tok-w"> </span><span class="tok-n">b1</span><span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">6</span><span class="tok-c1">//    B b2 = 2; </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">7</span><span class="tok-c1">//    b1 = 3;</span>
+<span class="linenos">8</span><span class="tok-n">b1</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">B</span><span class="tok-p">(</span><span class="tok-mi">3</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Verwendung des allgemeinen Konstruktors</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Der <code>int</code>-Initialisierer <code>2</code> wird in ein temporäres, anonymes Objekt des Typs <code>A</code> konvertiert und damit wird <code>a2</code> <em>kopier-initialisiert</em></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Der <code>int</code>-Wert <code>3</code> wird in ein temporäres, anonymes Objekt des Typs <code>A</code> konvertiert und dieses wir dann an <code>a1</code> <em>kopier-zugewiesen</em></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Verwendung des allgemeinen Konstruktors</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Die Rolle des allgemeinen Konstruktors als <em>Typumwandlungskonstruktor</em> ist durch das Schlüsselwort <code>explicit</code> abgeschaltet worden</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Auf der rechten Seite wird ein temporäres, anonymes Objekt des Typs <code>B</code> <em>explizit</em> instanziiert, das dann an <code>b1</code> kopier-zugewiesen wird.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ausgabeoperator"><a class="anchor" href="#_ausgabeoperator"></a><a class="link" href="#_ausgabeoperator">2.4. Ausgabeoperator</a></h3>
+<div class="paragraph">
+<p>Versuchen wir mit Hilfe des sog. <em>Ausgabeoperators</em> <code>&lt;&lt;</code> ein Objekt des Typs <code>Point</code> auszugeben,</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 12. Zeilen aus der Datei <a href="../src/ppc05/ppc0506.cc" target="newwindows"><code>ppc0506.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;point41.h&quot;</span>
+<span class="linenos">3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">6</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>so schlägt die Kompilation mit vielen Fehlermeldungen fehl:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 4. Versuchte Ausgabe eines <code>Point</code>-Objektes produziert viele Fehler (nicht alle dargestellt)</div>
+<div class="content">
+<pre class="nowrap">ppc0506.cc: In function 'int main()':
+ppc0506.cc:25:15: error: no match for 'operator&lt;&lt;' (operand types are 'std::ostream' {aka 'std::basic_ostream&lt;char&gt;'} and 'const Point')
+   25 |     std::cout &lt;&lt; p1 &lt;&lt; std::endl;
+      |     ~~~~~~~~~ ^~ ~~
+      |          |       |
+      |          |       const Point
+      |          std::ostream {aka std::basic_ostream&lt;char&gt;}
+In file included from /usr/include/c++/13.2.1/iostream:41,
+                 from ppc0506.cc:19:
+/usr/include/c++/13.2.1/ostream:110:7: note: candidate: 'std::basic_ostream&lt;_CharT, _Traits&gt;::__ostream_type&amp; std::basic_ostream&lt;_CharT, _Traits&gt;::operator&lt;&lt;(__ostream_type&amp; (*)(__ostream_type&amp;)) [with _CharT = char; _Traits = std::char_traits&lt;char&gt;; __ostream_type = std::basic_ostream&lt;char&gt;]'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Allerdings sieht man in der Fehlerausgabe auch, dass es dabei wohl um eine <em>Funktion</em> <code>operator&lt;&lt;</code> geht.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Operatorüberladung</div>
+<div class="paragraph">
+<p>Fast alle Operatoren wie <code>`, `-` oder `&lt;&lt;` (ausgenommen `sizeof`, `.`, `?:`, `::`, `.*`) können in `C+</code>
+<em>überladen</em> werden.  Das haben wir schon für den Datentyp <a href="http://en.cppreference.com/w/cpp/string/basic_string">std::string</a> benutzt.</p>
+</div>
+<div class="paragraph">
+<p>Folgende Operator-Arten gibt es in <code>C++</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>unäre</em> Operatoren wie <code>-</code> in der Anweisung <code>int x = -3;</code> oder auch <code>sizeof(int)</code></p>
+</li>
+<li>
+<p><em>binäre</em> Operatoren wie <code>-</code> oder <code>+</code> in der Anweisung <code>a + b</code> oder auch <code>&lt;&lt;</code> in der Anweisung <code>std::cout &lt;&lt; x;</code></p>
+</li>
+<li>
+<p><em>ternäre</em> Operatoren wie in der Anweisung <code>int x = (a &lt; b ? a : b);</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Operatoren werden in <code>C++</code> als freie Funktionen oder als Elementfunktionen realisiert (<a href="#recommendedops">Abschnitt 3.3.2</a>).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Der <em>Shift</em>-Operator als Ausgabeoperator</div>
+<div class="paragraph">
+<p>Der sog. <em>Ausgabeoperator</em> <code>&lt;&lt;</code> ist ein <em>binärer</em> Operator bspw. mit der Signatur</p>
+</div>
+<div class="paragraph">
+<p><code>std::ostream&amp; operator&lt;&lt;(std::ostream&amp;, const Point&amp;)</code></p>
+</div>
+<div class="paragraph">
+<p>für den Typ <code>Point</code>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Damit kann der <em>Ausgabeoperator</em> deklariert werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 13. Zeilen aus der Datei <a href="../src/ppc05/point42.h" target="newwindows"><code>point42.h</code></a> [Snippet: output] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iosfwd&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">2</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">);</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Diese Include-Datei enthält die <em>Deklaration</em> von <code>std::ostream</code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Neben der Definition gehört natürlich auch wieder ein <em>Testfall</em> dazu:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 14. Zeilen aus der Datei <a href="../src/ppc05/point42.cc" target="newwindows"><code>point42.cc</code></a> [Snippet: output] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;sstream&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 2</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">outputStream</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Point[&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">getX</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;,&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">getY</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;,&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">getColor</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;]&quot;</span><span class="tok-p">;</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 5</span><span class="tok-p">}</span>
+<span class="linenos"> 6</span><span class="tok-n">SIMPLETEST</span><span class="tok-p">(</span><span class="tok-s">&quot;Point &lt;&lt;&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">stringstream</span><span class="tok-w"> </span><span class="tok-n">ss</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">ss</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">ss</span><span class="tok-p">.</span><span class="tok-n">str</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-s">&quot;Point[0,0,black]&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">true</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Diese Include-Datei ist für den Testfall notwendig</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Dieses <em>Durchreichen</em> von <code>outputStream</code> ist für die Verkettung wichtig (s.a. <a href="#refinrefout">reference-in reference-out</a>)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Die Klasse <code>std::stringstream</code> ist abgeleitet von <code>std::ostream</code></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Dann kann der Operator verwendet werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 15. Zeilen aus der Datei <a href="../src/ppc05/ppc0507.cc" target="newwindows"><code>ppc0507.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;point42.h&quot;</span>
+<span class="linenos"> 3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">2.0</span><span class="tok-p">};</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">p2</span><span class="tok-p">.</span><span class="tok-n">setColor</span><span class="tok-p">(</span><span class="tok-s">&quot;red&quot;</span><span class="tok-p">);</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-sc">&#39;\n&#39;</span><span class="tok-p">);</span>
+<span class="linenos">10</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Verkettung und links-assoziative Auswertung</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Da der Ausgabe-Operator als freie Funktion realisiert wurde, kann man ihn bzw. die Funktion auch so aufrufen (sehr ungebräuchlich!)</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Wir erhalten die Ausgabe:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 5. Ausgabe des Programms: <code>ppc0507</code></div>
+<div class="content">
+<pre class="nowrap">Point[0,0,black]
+Point[1,2,red]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_details"><a class="anchor" href="#_details"></a><a class="link" href="#_details">3. Details</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="friend"><a class="anchor" href="#friend"></a><a class="link" href="#friend">3.1. Freie Funktionen als Bestandteil der öffentlichen Klassenschnittstelle</a></h3>
+<div class="paragraph">
+<p>Die <em>öffentliche</em> Klassenschnittstelle bestimmt die Menge der <em>Operationen</em>, die mit diesem Datentyp möglich
+sind. Aus diesem Grunde fallen auch i.a. die freien Operatorfunktion darunter.</p>
+</div>
+<div class="paragraph">
+<p>Diese freien (Operator-) Funktionen sind also genauso <em>Bestandteil</em> der öffentlichen Schnittstelle des Datentyps
+wie die Elementfunktionen. Daher sollten sie auch genauso Zugriff auf die <em>privaten</em> Datenelemente der Klasse
+erhalten.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Das Thema <em>Kapselung</em> kann an dieser Stelle nicht ganz ausführlich betrachtet werden. Deswegen
+werden nur <em>Regeln</em> gegeben. Die Begründung für viele dieser Regeln findet sich
+<a href="ppcP2100.html#encapsulation">hier</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Dies kann in <code>C++</code> durch die <code>friend</code>-Deklaration erreicht werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 16. Zeilen aus der Datei <a href="../src/ppc05/point43.h" target="newwindows"><code>point43.h</code></a> [Snippet: friend] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Point</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">-</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">4</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">5</span><span class="tok-c1">// ...</span>
+<span class="linenos">6</span><span class="tok-p">};</span>
+<span class="linenos">7</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-nf">distance</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span>
+<span class="linenos">8</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">);</span>
+<span class="linenos">9</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">-</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Die <code>friend</code>-Deklaration kann an beliebiger Stelle <strong>in</strong> der Klasse vorgenommen werden</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Als Alternative zur Funktion <code>distance</code> wird der Operator <code>-</code> überladen</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Deklaration des Operators <code>-</code></td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 17. Zeilen aus der Datei <a href="../src/ppc05/point43.cc" target="newwindows"><code>point43.cc</code></a> [Snippet: friend] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-n">outputStream</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Point[&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">mX</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;,&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">mY</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;,&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">mColor</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;]&quot;</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">;</span>
+<span class="linenos"> 4</span><span class="tok-p">}</span>
+<span class="linenos"> 5</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">-</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">hypot</span><span class="tok-p">(</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">mX</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">mX</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">mY</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">mY</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 7</span><span class="tok-p">}</span>
+<span class="linenos"> 8</span><span class="tok-n">SIMPLETEST</span><span class="tok-p">(</span><span class="tok-s">&quot;Point op-&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">0.0</span><span class="tok-p">};</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">1.0</span><span class="tok-p">};</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">0.0</span><span class="tok-p">))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">p2</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">0.0</span><span class="tok-p">))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">sqrt</span><span class="tok-p">(</span><span class="tok-mf">2.0</span><span class="tok-p">)))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">true</span><span class="tok-p">;</span>
+<span class="linenos">15</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Wegen der <code>friend</code>-Eigenschaft kann nun auf die <em>privaten</em> Datenelemente zugegriffen werden!</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Auch hier ist der Zugriff auf die <em>privaten</em> Elemente möglich</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nun kann man <em>Differenzen</em> von Punkten als geometrische <em>Abstände</em> berechnen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 18. Zeilen aus der Datei <a href="../src/ppc05/ppc0508.cc" target="newwindows"><code>ppc0508.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;point43.h&quot;</span>
+<span class="linenos">3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">1.0</span><span class="tok-p">};</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">-1.0</span><span class="tok-p">};</span>
+<span class="linenos">6</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Der Abstand der Punkte &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot; und &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot; ist &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">-</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">7</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Anwendung des Ausgabe und <code>-</code>-Operators</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Die Ausgabe:</p>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 6. Ausgabe des Programms: <code>ppc0508</code></div>
+<div class="content">
+<pre class="nowrap">Der Abstand der Punkte Point[0,1,black] und Point[0,-1,black] ist 2</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_idiome"><a class="anchor" href="#_idiome"></a><a class="link" href="#_idiome">3.2. Idiome</a></h3>
+<div class="sect3">
+<h4 id="refinrefout"><a class="anchor" href="#refinrefout"></a><a class="link" href="#refinrefout">3.2.1. Reference-in / Reference-out</a></h4>
+<div class="paragraph">
+<p>In <a href="ppcP0400.html#results">Ergebnisrückgabe</a> hatten  wir Regeln festgelegt, wann eine Funktion ein
+Ergebnis als <em>Referenz</em>  zurückliefern darf. Diese Regel können wir am Beispiel des Ausgabeoperators
+erweitern.</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 19. Zeilen aus der Datei <a href="../src/ppc05/point44.cc" target="newwindows"><code>point44.cc</code></a> [Snippet: out] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">&lt;&lt;</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ostream</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-w">    </span><span class="tok-n">outputStream</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Point[&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">mX</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;,&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">mY</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;,&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">mColor</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;]&quot;</span><span class="tok-p">;</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">outputStream</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Nach der Regel <em>reference-in / reference-out</em> darf <code>outputStream</code> als Referenz zurückgegeben werden.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Regel <em>reference-in</em> / <em>reference-out</em></div>
+<div class="paragraph">
+<p>Ein Referenzparameter (zusätzlicher Name für ein Objekt, dass beim Aufrufer existiert) kann auch wieder als Referenz
+an den Aufrufer zurückgegeben werden.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Dadurch ist auch eine Verkettung des Operators möglich
+(s.a. <a href="ppcP0600.html#chaining">Verkettung von Mutatoren</a>).</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="opoverload"><a class="anchor" href="#opoverload"></a><a class="link" href="#opoverload">3.3. Operatorüberladung</a></h3>
+<div class="sect3">
+<h4 id="_beispiele"><a class="anchor" href="#_beispiele"></a><a class="link" href="#_beispiele">3.3.1. Beispiele</a></h4>
+<div class="paragraph">
+<p>Bei der Verwendung der Klasse <a href="http://en.cppreference.com/w/cpp/string/basic_string">std::string</a> haben wir schon <em>intuitiv</em> die Operatoren <code>==</code> und <code>!=</code> sowie
+die <em>Konkatenation</em> mit
+den Operatoren <code>+=</code> und <code>+</code> verwendet.</p>
+</div>
+<div class="paragraph">
+<p>Das können wir auch mit unserem Datentyp <code>Point</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 20. Zeilen aus der Datei <a href="../src/ppc05/point44.h" target="newwindows"><code>point44.h</code></a> [Snippet: opcomp] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">==</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span>
+<span class="linenos">2</span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">!=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span>
+<span class="linenos">3</span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">==</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span>
+<span class="linenos">4</span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">!=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-p">);</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 21. Zeilen aus der Datei <a href="../src/ppc05/point44.cc" target="newwindows"><code>point44.cc</code></a> [Snippet: opcomp] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">==</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-n">mX</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">.</span><span class="tok-n">mX</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">&amp;&amp;</span><span class="tok-w"> </span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">equal</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-p">.</span><span class="tok-n">mY</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">.</span><span class="tok-n">mY</span><span class="tok-p">));</span>
+<span class="linenos"> 3</span><span class="tok-p">}</span>
+<span class="linenos"> 4</span><span class="tok-kt">bool</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">!=</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-o">!</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">);</span>
+<span class="linenos"> 6</span><span class="tok-p">}</span>
+<span class="linenos"> 7</span><span class="tok-n">SIMPLETEST</span><span class="tok-p">(</span><span class="tok-s">&quot;Point op==&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">}};</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">true</span><span class="tok-p">;</span>
+<span class="linenos">13</span><span class="tok-p">};</span>
+<span class="linenos">14</span><span class="tok-n">SIMPLETEST</span><span class="tok-p">(</span><span class="tok-s">&quot;Point op== 2&quot;</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">p1</span><span class="tok-p">;</span>
+<span class="linenos">17</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">==</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">))</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">18</span><span class="tok-w">    </span><span class="tok-k">if</span><span class="tok-w"> </span><span class="tok-p">(</span><span class="tok-n">p1</span><span class="tok-w"> </span><span class="tok-o">!=</span><span class="tok-w"> </span><span class="tok-n">p2</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">false</span><span class="tok-p">;</span>
+<span class="linenos">19</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-nb">true</span><span class="tok-p">;</span>
+<span class="linenos">20</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recommendedops"><a class="anchor" href="#recommendedops"></a><a class="link" href="#recommendedops">3.3.2. Empfohlene Varianten der Operatorüberladung</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Tabelle 1. Empfohlene Arten der Operatorrealisierungen</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operator</th>
+<th class="tableblock halign-left valign-top">Realisierung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alle unären</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Elementfunktion</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>=</code> , <code>()</code>, <code>[]</code>, <code>&#8594;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Elementfunktion (obligatorisch)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zuweisungsoperatoren wie <code>+=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Elementfunktion</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">andere binäre</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">freie Funktion (friend)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rückblick"><a class="anchor" href="#_rückblick"></a><a class="link" href="#_rückblick">4. Rückblick</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_domänenspezifische_datentypen"><a class="anchor" href="#_domänenspezifische_datentypen"></a><a class="link" href="#_domänenspezifische_datentypen">4.1. Domänenspezifische Datentypen</a></h3>
+<div class="paragraph">
+<p>Die <em>primitiven</em> Datentypen wie etwa <code>double</code> tragen keine <em>Semantik</em>: den beiden <code>double</code>-Parameteren in dem
+Konstruktor <code>Point::Point(double, double)</code> ist nicht zu entnehmen, bei welchem es sich um die <em>x</em> oder <em>y</em>-Koordinate
+handelt. Das birgt Verwechselungsgefahr.</p>
+</div>
+<div class="paragraph">
+<p>Was bedeutet folgendes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">3.14</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Da in <code>C++</code> die UDT so wie primitive DT verwendet werden <em>können</em>, ist es möglich, sich geeignete Datentypen für die
+<a href="http://de.wikipedia.org/wiki/Problemdom%C3%A4ne">Anwendungsdomäne</a> zu schaffen.
+Diese besitzen dann eine für die Domäne spezifische <strong>Semantik</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">POD Datentypen</div>
+Als <a href="http://de.wikipedia.org/wiki/Plain_Old_Data_structure">POD</a> (plain old datatype) Datentypen werden allgemein Datentypen
+bezeichnet, die Daten zwar kapseln, aber <strong>keine</strong> interne <strong>Zustandslogik</strong> aufweisen. Dies stellt sich allgemein so dar, dass
+diese Typen keine Elementfunktionen (auch Konstruktoren) enthalten und die Datenelemente <code>public</code> sind.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Dies führt zu den beiden Klassen <code>XCoor</code> und <code>YCoor</code> für kartesische Koordinaten:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 22. Zeilen aus der Datei <a href="../src/ppc05/point44.h" target="newwindows"><code>point44.h</code></a> [Snippet: cartesian] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">XCoor</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">};</span>
+<span class="linenos">4</span><span class="tok-p">};</span>
+<span class="linenos">5</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">YCoor</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">6</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">};</span>
+<span class="linenos">8</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Diese Klasse ist ein <em>POD</em> (plain old datatype) zur typsicheren Verwendung von <code>double</code>-Werten als x-Koordinatenwerte</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Diese Klasse ist ein <em>POD</em> (plain old datatype) zur typsicheren Verwendung von <code>double</code>-Werten als y-Koordinatenwerte</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Der Konstruktor von <code>Point</code> ist nun natürlich darauf anzupassen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 23. Zeilen aus der Datei <a href="../src/ppc05/point44.cc" target="newwindows"><code>point44.cc</code></a> [Snippet: cartesian] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-n">Point</span><span class="tok-o">::</span><span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">XCoor</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-w"> </span><span class="tok-n">y</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">mX</span><span class="tok-p">{</span><span class="tok-n">x</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">mY</span><span class="tok-p">{</span><span class="tok-n">y</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Analog dazu erstellen wir die Klassen <code>Radius</code> und <code>Angle</code> für Polarkoordinaten. Hierbei ist zu beachten,
+dass <code>Radius</code> kein POD mehr sein kann, da <strong>valide Zustände</strong> nur nicht-negative Radiuswerte umfassen:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 24. Zeilen aus der Datei <a href="../src/ppc05/point44.h" target="newwindows"><code>point44.h</code></a> [Snippet: polar] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Radius</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Point</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">);</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">);</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos"> 7</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">explicit</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-p">(</span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">r</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos"> 9</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b>
+<span class="linenos">11</span><span class="tok-p">};</span>
+<span class="linenos">12</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Angle</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="7"></i><b>(7)</b>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-k">friend</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+</span><span class="tok-p">(</span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="8"></i><b>(8)</b>
+<span class="linenos">14</span><span class="tok-w">    </span><i class="conum" data-value="9"></i><b>(9)</b>
+<span class="linenos">15</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">mRadiant</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">};</span>
+<span class="linenos">17</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Diese Klasse ist <strong>kein</strong> <em>POD</em>, da es einen allgemeinen Konstruktor gibt, der einen validen Zustand sicherstellt</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Als Alternative zu einem <em>getter</em> für <code>mValue</code> erhält die <em>Klasse</em>  Zugriff auf die privaten Datenelemente.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Diese überladene Variante ermöglicht die Multiplikation mit einem Faktor</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Evtl. sind weitere Operatoren sinnvoll wie <code>+</code>, <code>-</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Dieser Konstruktor stellt einen validen Zustand sicher mit <code>r &gt;= 0.0</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Hier muss das Datenelement <em>privat</em> sein, um den Zustand sicherstellen zu können.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Diese Klasse ist ein <em>POD</em> (plain old datatype) zur typsicheren Verwendung von <code>double</code>-Werten als Winkel in <em>Radiant</em></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>es ist nur möglich, Winkel zu addieren</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Evtl. wäre der Operator <code>-</code> noch sinnvoll</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 25. Zeilen aus der Datei <a href="../src/ppc05/point44.cc" target="newwindows"><code>point44.cc</code></a> [Snippet: polar] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-n">Point</span><span class="tok-o">::</span><span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">r</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">phi</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">:</span>
+<span class="linenos"> 2</span><span class="tok-w">    </span><span class="tok-n">mX</span><span class="tok-p">{</span><span class="tok-n">r</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cos</span><span class="tok-p">(</span><span class="tok-n">phi</span><span class="tok-p">.</span><span class="tok-n">mRadiant</span><span class="tok-p">)},</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">mY</span><span class="tok-p">{</span><span class="tok-n">r</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">sin</span><span class="tok-p">(</span><span class="tok-n">phi</span><span class="tok-p">.</span><span class="tok-n">mRadiant</span><span class="tok-p">)}</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-p">}</span>
+<span class="linenos"> 5</span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-p">};</span>
+<span class="linenos"> 7</span><span class="tok-p">}</span>
+<span class="linenos"> 8</span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-p">};</span>
+<span class="linenos">10</span><span class="tok-p">}</span>
+<span class="linenos">11</span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">mValue</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">};</span>
+<span class="linenos">13</span><span class="tok-p">}</span>
+<span class="linenos">14</span><span class="tok-n">Radius</span><span class="tok-o">::</span><span class="tok-n">Radius</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">r</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">mValue</span><span class="tok-p">{</span><span class="tok-n">r</span><span class="tok-p">}</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">r</span><span class="tok-w"> </span><span class="tok-o">&gt;=</span><span class="tok-w"> </span><span class="tok-mf">0.0</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">16</span><span class="tok-p">}</span>
+<span class="linenos">17</span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-k">operator</span><span class="tok-o">+</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">a</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">18</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-n">a</span><span class="tok-p">.</span><span class="tok-n">mRadiant</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-n">b</span><span class="tok-p">.</span><span class="tok-n">mRadiant</span><span class="tok-p">};</span>
+<span class="linenos">19</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Berechnung der kartesichen Koordinaten aus den Polarkoordinaten</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Sicherstellen eines validen Zustands im Konstruktor</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>So können überladene Varianten für kartesische und Polarkoordinaten erstellt werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 26. Zeilen aus der Datei <a href="../src/ppc05/point44.h" target="newwindows"><code>point44.h</code></a> [Snippet: Point] (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">Point</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">2</span><span class="tok-c1">// ...</span>
+<span class="linenos">3</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-n">XCoor</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">XCoor</span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">},</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-w"> </span><span class="tok-n">y</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">YCoor</span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">});</span>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-n">Point</span><span class="tok-p">(</span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">r</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">phi</span><span class="tok-p">);</span>
+<span class="linenos">6</span><span class="tok-c1">// ...</span>
+<span class="linenos">7</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dies benutzen wir, um eine <em>Spirale</em> zu zeichnen.</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 27. Zeilen aus der Datei <a href="../src/ppc05/ppc0510.cc" target="newwindows"><code>ppc0510.cc</code></a>  </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cmath&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;random&gt;</span>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;point44.h&quot;</span>
+<span class="linenos"> 4</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;svgfile.h&quot;</span>
+<span class="linenos"> 5</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&quot;math.h&quot;</span>
+<span class="linenos"> 6</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 7</span><span class="tok-cp">#ifdef _MSC_VER</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">linear_congruential_engine</span><span class="tok-o">&lt;</span><span class="tok-kt">unsigned</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">63</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">255</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">generator</span><span class="tok-p">;</span>
+<span class="linenos"> 9</span><span class="tok-cp">#else</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">linear_congruential_engine</span><span class="tok-o">&lt;</span><span class="tok-kt">unsigned</span><span class="tok-w"> </span><span class="tok-kt">char</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">63</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">255</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">generator</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-cp">#endif</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">numberOfPoints</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">10</span><span class="tok-p">;</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-n">SVGFile</span><span class="tok-w"> </span><span class="tok-n">file</span><span class="tok-p">(</span><span class="tok-s">&quot;line2.svg&quot;</span><span class="tok-p">);</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">deltaPhi</span><span class="tok-p">{</span><span class="tok-mf">2.0</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-n">Math</span><span class="tok-o">::</span><span class="tok-n">pi</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-o">/</span><span class="tok-w"> </span><span class="tok-n">numberOfPoints</span><span class="tok-p">};</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-n">numberOfPoints</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">16</span><span class="tok-w">        </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-n">Radius</span><span class="tok-w"> </span><span class="tok-n">radius</span><span class="tok-p">{</span><span class="tok-mf">20.0</span><span class="tok-p">};</span>
+<span class="linenos">17</span><span class="tok-w">        </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-n">Angle</span><span class="tok-w"> </span><span class="tok-n">phi</span><span class="tok-p">{</span><span class="tok-mf">0.0</span><span class="tok-p">};</span>
+<span class="linenos">18</span><span class="tok-w">        </span><span class="tok-n">Point</span><span class="tok-w"> </span><span class="tok-n">p</span><span class="tok-p">{</span><span class="tok-n">radius</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">phi</span><span class="tok-p">};</span>
+<span class="linenos">19</span><span class="tok-w">        </span><span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">setColor</span><span class="tok-p">(</span><span class="tok-n">generator</span><span class="tok-p">(),</span><span class="tok-w"> </span><span class="tok-n">generator</span><span class="tok-p">(),</span><span class="tok-w"> </span><span class="tok-n">generator</span><span class="tok-p">());</span>
+<span class="linenos">20</span><span class="tok-w">        </span><span class="tok-n">file</span><span class="tok-p">.</span><span class="tok-n">add</span><span class="tok-p">(</span><span class="tok-n">p</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">21</span><span class="tok-w">        </span><span class="tok-n">radius</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">radius</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-mf">1.2</span><span class="tok-p">;</span>
+<span class="linenos">22</span><span class="tok-w">        </span><span class="tok-n">phi</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">phi</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-n">deltaPhi</span><span class="tok-p">;</span>
+<span class="linenos">23</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">24</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Verbesserung der Schnittstelle (s.a. <a href="#viewbox">Abschnitt 4.1.1</a>)</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgIHdpZHRoPSIxNTMiIGhlaWdodD0iMTM1IiB2aWV3Qm94PSItNjAgLTkyIDE1MyAxMzUiPgo8Y2lyY2xlIGN4PSIyMCIgY3k9IjAiIHI9IjEwIiBzdHJva2U9InJnYigxNDcsMTQ0LDYzKSIgZmlsbD0icmdiKDE0NywxNDQsNjMpIiAvPgo8Y2lyY2xlIGN4PSIxOSIgY3k9IjE0IiByPSIxMCIgc3Ryb2tlPSJyZ2IoMTg5LDMsODEpIiBmaWxsPSJyZ2IoMTg5LDMsODEpIiAvPgo8Y2lyY2xlIGN4PSI5IiBjeT0iMjciIHI9IjEwIiBzdHJva2U9InJnYigyNDMsMTg2LDE3NykiIGZpbGw9InJnYigyNDMsMTg2LDE3NykiIC8+CjxjaXJjbGUgY3g9Ii0xMSIgY3k9IjMzIiByPSIxMCIgc3Ryb2tlPSJyZ2IoMjEsNTcsOSkiIGZpbGw9InJnYigyMSw1Nyw5KSIgLz4KPGNpcmNsZSBjeD0iLTM0IiBjeT0iMjQiIHI9IjEwIiBzdHJva2U9InJnYigyNywyMTksNDgpIiBmaWxsPSJyZ2IoMjcsMjE5LDQ4KSIgLz4KPGNpcmNsZSBjeD0iLTUwIiBjeT0iMCIgcj0iMTAiIHN0cm9rZT0icmdiKDE0NCw2MywxNzEpIiBmaWxsPSJyZ2IoMTQ0LDYzLDE3MSkiIC8+CjxjaXJjbGUgY3g9Ii00OCIgY3k9Ii0zNSIgcj0iMTAiIHN0cm9rZT0icmdiKDMsODEsMTQ3KSIgZmlsbD0icmdiKDMsODEsMTQ3KSIgLz4KPGNpcmNsZSBjeD0iLTIyIiBjeT0iLTY4IiByPSIxMCIgc3Ryb2tlPSJyZ2IoMTg2LDE3NywxODkpIiBmaWxsPSJyZ2IoMTg2LDE3NywxODkpIiAvPgo8Y2lyY2xlIGN4PSIyNyIgY3k9Ii04MiIgcj0iMTAiIHN0cm9rZT0icmdiKDU3LDksMjQzKSIgZmlsbD0icmdiKDU3LDksMjQzKSIgLz4KPGNpcmNsZSBjeD0iODMiIGN5PSItNjEiIHI9IjEwIiBzdHJva2U9InJnYigyMTksNDgsMjEpIiBmaWxsPSJyZ2IoMjE5LDQ4LDIxKSIgLz4KPC9zdmc+Cg==" alt="line2">
+</div>
+<div class="title">Bild 1. Die Punktspirale des obigen Programms</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Ein ähnliches Problem mit dem Datentyp <code>std::string</code> hat die Funktion <code>void SVGFile::add(const std::string&amp;)</code>. Hier kann jede
+beliebige Zeichenkette übergeben werden, und damit ist die <em>Wohlgeformtheit</em> der SVG-datei gefährdet. Dies könnte man durch
+einen Datentyp <code>SVGElement</code> verbessern. Dies läuft auf eine <em>Klassenhierarchie</em> hinaus, was wir erst später kennenlernen.
+Zunächst ändern wir die Schnittstelle auf <code>void SVGFile::add(const Point&amp;)</code> ab.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="viewbox"><a class="anchor" href="#viewbox"></a><a class="link" href="#viewbox">4.1.1. SVG-Datei mit <code>viewBox</code></a></h4>
+<div class="paragraph">
+<p>Die bisherige Realisierung der Klasse <code>SVGFile</code> hatte eine parametrisierbare, aber feste Ausdehnung der Zeichenfläche.
+Diese musste bekannt sein.</p>
+</div>
+<div class="paragraph">
+<p>Besser ist es, die notwendige Größe der Zeichenfläche und deren Ursprung durch die enthaltenen Elemente bestimmen
+zu lassen, damit keine Anteile <em>abgeschnitten</em> werden. Dazu kann das
+<a href="http://www.w3.org/TR/SVG/coords.html#ViewBoxAttribute"><code>viewBox</code></a> SVG-Attribute verwendet werden.</p>
+</div>
+<div class="paragraph">
+<p>Wir refaktorieren die Funktion <code>void SVGFile::add(const std::string&amp;)</code> zu <code>void SVGFile::add(const Point&amp;)</code>.
+Statt des <em>unspezifischen</em> DT <code>std::string</code> verwenden wir den Typ <code>Point</code>, der sowohl die SVG-Darstellung als
+auch seine Ausdehnung liefern kann:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 28. Zeilen aus der Datei <a href="../src/ppc05/svgfile.h" target="newwindows"><code>svgfile.h</code></a> [Snippet: svgfile] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">SVGFile</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 2</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-n">SVGFile</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">filename</span><span class="tok-p">);</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-o">~</span><span class="tok-n">SVGFile</span><span class="tok-p">();</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-kt">void</span><span class="tok-w"> </span><span class="tok-nf">add</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">Point</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">point</span><span class="tok-p">);</span>
+<span class="linenos"> 6</span><span class="tok-k">private</span><span class="tok-o">:</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">ofstream</span><span class="tok-w"> </span><span class="tok-n">mFile</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mXMin</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mXMax</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mYMin</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">mYMax</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">mSVGData</span><span class="tok-p">;</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-kr">inline</span><span class="tok-w"> </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">header1</span><span class="tok-p">{</span><span class="tok-sa">R</span><span class="tok-s">&quot;</span><span class="tok-dl">(</span><span class="tok-s">&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot;?&gt;</span><span class="tok-dl">)</span><span class="tok-s">&quot;</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-kr">inline</span><span class="tok-w"> </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">header2</span><span class="tok-p">{</span><span class="tok-sa">R</span><span class="tok-s">&quot;</span><span class="tok-dl">(</span><span class="tok-s">&lt;!DOCTYPE svg PUBLIC &quot;-//W3C//DTD SVG 1.1//EN&quot; &quot;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&quot;&gt;</span><span class="tok-dl">)</span><span class="tok-s">&quot;</span><span class="tok-p">};</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-kr">inline</span><span class="tok-w"> </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">header3</span><span class="tok-p">{</span><span class="tok-sa">R</span><span class="tok-s">&quot;</span><span class="tok-dl">(</span><span class="tok-s">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;  width=&quot;$w&quot; height=&quot;$h&quot; viewBox=&quot;$v&quot;&gt;</span><span class="tok-dl">)</span><span class="tok-s">&quot;</span><span class="tok-p">};</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-kr">inline</span><span class="tok-w"> </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">footer1</span><span class="tok-p">{</span><span class="tok-sa">R</span><span class="tok-s">&quot;</span><span class="tok-dl">(</span><span class="tok-s">&lt;/svg&gt;</span><span class="tok-dl">)</span><span class="tok-s">&quot;</span><span class="tok-p">};</span>
+<span class="linenos">17</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>statische Datenelemente (Klassenvariablen)</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 29. Zeilen aus der Datei <a href="../src/ppc05/svgfile.h" target="newwindows"><code>svgfile.h</code></a> [Snippet: viewbox] </div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-kr">inline</span><span class="tok-w"> </span><span class="tok-k">static</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">string</span><span class="tok-w"> </span><span class="tok-n">header3</span><span class="tok-p">{</span><span class="tok-sa">R</span><span class="tok-s">&quot;</span><span class="tok-dl">(</span><span class="tok-s">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;  width=&quot;$w&quot; height=&quot;$h&quot; viewBox=&quot;$v&quot;&gt;</span><span class="tok-dl">)</span><span class="tok-s">&quot;</span><span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Die Ausdehnung eines Punktes in der Zeichenebene wird hier explizit durch die Klasse <code>SVGFile</code> berechnet. Damit hat bzw.
+benötigt die Klasse <code>SVGFile</code> Wissen über den Aufbau eines DT <code>Point</code>. Dies kann duch eine Elementfunktion der Art
+<code>DRect Point::svgArea() const</code> erreicht werden. Hierbei abstrahiert die Klasse <code>DRect</code> ein Rechteck in der
+SVG-Zeichenfläche (diskretes Rechteck).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.12<br>
+Last updated 2026-09-28 00:00:00 +0200
+</div>
+</div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a>.
+</body>
+</html>

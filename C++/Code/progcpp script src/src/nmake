@@ -1,0 +1,31 @@
+# $Id: Makefile 859 2015-01-20 12:05:40Z wimalopaan $
+#
+# ++C - C++ introduction
+# Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018 - 2022 Wilhelm Meier <wilhelm.meier@hs-kl.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# make sub-makes silent
+!CMDSWITCHES +s
+
+SUBDIRS = lib ppc00 ppc01 ppc02 ppc03 ppc04 ppc05 ppc06 ppc07 ppc08 ppc09 ppc10 ppc20 ppc21 ppc22 ppcA00 ppcA01 ppcA02 ppcA03 ppcA04 ppcA05 ppcA06 ppcA07 ppcA08 ppcA09 ppcA10 ppcA11 ppcA12 ppcA13
+
+all clean::
+ @for %%i in ($(SUBDIRS)) do @( \
+	 echo Making $@ in %%i ... & \
+	 cd %%i && \
+	 $(MAKE) /f nmake /nologo /$(MAKEFLAGS) $@ & \
+	 cd .. \
+ )

@@ -1,0 +1,20 @@
+#include "complexnumber20.h"
+#include "../lib/simpletest.h"   //!!!!
+#include "math.h" 
+#include <cmath>
+
+SIMPLETEST("ctor1") {
+    const ComplexNumber cn;
+    if (!Math::equal(cn.real(), 0.0)) return false;
+    if (!Math::equal(cn.imag(), 0.0)) return false;
+    return true;
+};
+
+SIMPLETEST("add1") {
+    ComplexNumber cn1{1.0, 0.0};
+    const ComplexNumber cn2{0.0, 1.0};
+    cn1.add(cn2);
+    if (!Math::equal(cn1.real(), 1.0)) return false;
+    if (!Math::equal(cn1.imag(), 1.0)) return false;
+    return true;
+};

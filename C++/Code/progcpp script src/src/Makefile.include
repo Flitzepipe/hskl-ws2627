@@ -1,0 +1,283 @@
+# -*- mode: makefile-gmake; -*-
+# $Id: Makefile.include 1280 2019-07-22 07:44:49Z wimalopaan $
+#
+# ++C - C++ introduction
+# Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018 - 2022 Wilhelm Meier <wilhelm.meier@hs-kl.de>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+export LC_ALL=C
+
+# Plattform-Erkennung: Windows (MSYS2/MinGW) vs. Linux vs. macOS (Homebrew)
+ifeq ($(OS),Windows_NT)
+#CXX = clang++
+CXX = g++
+CC = gcc
+PLATFORM = windows
+else
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+ CXX = g++-13
+ CC = gcc-13
+ PLATFORM = macos
+else
+ CXX = /usr/bin/g++
+ CC = /usr/bin/gcc
+ PLATFORM = linux
+endif
+endif
+
+AXTRACTOR = $(HOME)/Projekte/github/extractor/extract/axtractor
+EXTRACTOR = $(HOME)/Projekte/github/extractor/extract/extractor
+EXTRACTDIR = .extractor
+EXTRACTDIRNC = .extractornc
+EXLN = -n
+
+SRCHI = source-highlight
+
+ifeq (${CXX}, clang++)
+ ifeq ($(OS),Windows_NT)
+	CXXFLAGS += -Wall -Wextra -Wconversion -fstrict-aliasing -Wstrict-aliasing=1 
+	CXXFLAGS += -fno-exceptions # corrects gxx_personality bug in clang
+ else
+    CXXFLAGS += -Wall -Wextra -Wconversion -fstrict-aliasing -Wstrict-aliasing=1
+#    CXXFLAGS +=  -Weverything -Wno-c++98-compat -Wno-global-constructors -std=c++1z
+ endif
+else
+ CXXFLAGS += -O3 -Wall -Wextra -Wconversion -fstrict-aliasing -Wstrict-aliasing=1 -fPIC 
+ CFLAGS += -O3 -Wall -Wextra -Wconversion -fstrict-aliasing -Wstrict-aliasing=1 -fPIC
+endif
+
+ASMFLAGS += -fverbose-asm -masm=intel
+ASMFLAGS +=  -Wa,-adhln
+
+ifdef NDEBUG
+ CPPFLAGS += -DNDEBUG
+endif
+
+DEBUGFLAGS = -g
+
+# C++-Programme mit dem C++-Treiber (CXX) linken, nicht mit dem C-Treiber (cc)
+LINK.o = $(CXX) $(LDFLAGS) $(TARGET_ARCH)
+
+# C++-Standard fuer alle Uebersetzungen (Concepts in LE 50/52 benoetigen C++20)
+STDFLAGS = -std=c++20
+EXTRAFLAGS =
+
+#LDLIBS += -lstdc++ -lboost_date_time -lboost_unit_test_framework
+ifeq ($(PLATFORM),macos)
+# macOS (Apple clang / Homebrew gcc): libstdc++ ist veraltet, libc++ ist Standard
+ LDLIBS += -lm
+else
+ LDLIBS += -lstdc++ -lm
+endif
+#LDFLAGS += -L/usr/local/lib64 -Wl,-rpath=/usr/local/lib64
+
+# Default-Ziel: immer 'all' bauen (nicht die zufaellig erste Regel des Kapitel-Makefiles)
+.DEFAULT_GOAL := all
+
+ifeq ($(PLATFORM),linux)
+# Linux (Dozenten-Umgebung): alle Ziele inkl. Doku-Generierung
+ all: $(targets) ${subdirs}
+else
+# Windows/macOS (Studenten-Umgebung): Doku-Ziele ueberspringen
+# - %.extract/%.extractnc/%.axtract benoetigen 'extractor'/'axtractor' (Dozenten-Tools)
+# - %.html/shtml/ahtml benoetigen 'source-highlight'
+# - %.S kollidiert auf case-insensitiven Dateisystemen mit %.s (gleiche Datei!)
+ all: $(filter-out %.extract %.extractnc %.html %.axtract %.S shtml ahtml %.aout %.class %.valgrind %.png, $(targets)) ${subdirs}
+endif
+
+# unechte Ziele (dann kein Dateikonflikt)
+.PHONY: all clean subclean subdirs ${subdirs}
+
+subdirs: ${subdirs}
+
+${subdirs}:
+	@if [ -d $@ ]; then ${MAKE} -C $@ all; fi
+
+# wirldcards werden direkt nur als Vorbedingungen ausgewertet, daher hier explizit Funktionsaufruf
+ccsources = $(wildcard *.cc)
+headers   = $(wildcard *.h)
+jsources   = $(wildcard *.java)
+# patsubst: pattern-substitution, % ist bel. string
+ccdeps    = $(patsubst %.cc, %.d, $(ccsources))
+objects   = $(patsubst %.cc, %.o, $(ccsources))
+asm = $(patsubst %.cc, %.s, $(ccsources)) $(patsubst %.cc, %.S, $(ccsources))
+
+jhtml = $(patsubst %.java, %.java.html, $(jsources))
+cchtml = $(patsubst %.cc, %.cc.html, $(ccsources))
+hhtml = $(patsubst %.h, %.h.html, $(headers))
+ahtml = $(patsubst %.s, %.s.html, $(patsubst %S, %S.html, $(asm)))
+
+ahtml: $(ahtml)
+
+shtml: $(jhtml) $(cchtml) $(hhtml) # $(ahtml)
+
+objects   += ../lib/simpletest.o ../lib/tracer.o ../lib/util.o ../lib/optional.o
+
+# Erzeugt die dependency-includes (sed-Kommando um die %.d-Datei ebenfalls als Ziel hinzuzufuegen)
+# z.B.: hello.o hello.d: hello.cc hello.h
+%.d: %.cc
+	$(CXX) -MM -MG $(CXXFLAGS) $(STDFLAGS) $< | sed 's/$*\.o/& $@ $<.extract/g' > $@
+
+%.o: %.cc
+	 $(COMPILE.cc) $(STDFLAGS) $(DEBUGFLAGS) $(EXTRAFLAGS) $(OUTPUT_OPTION) $<
+
+%.s: %.cc
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(STDFLAGS) $(ASMFLAGS) -S -o $@ $<
+
+%.s: %.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(ASMFLAGS) -S -o $@ $<
+
+%.S: %.s
+	cat $< | c++filt | grep -v "^#" | grep -v "^[ \t]*$$" | grep -v "[ \t]*\.cfi_" | grep -v "^\.L[A-Z][A-Z]" > $@
+#	cat $< | grep -v "^#" | grep -v "^[ \t]*$$" | grep -v "[ \t]*\.[a-z]" | grep -v "^\.L[A-Z][A-Z]" > $@
+
+%.o: %.c
+	 $(COMPILE.c) $(STDFLAGS) $(DEBUGFLAGS) $(EXTRAFLAGS) $(OUTPUT_OPTION) $<
+
+%.memcheck: %
+	valgrind --tool=memcheck --num-callers=20 --leak-check=yes --leak-resolution=high ./$< > $@ 2>&1
+
+%.s.axtract: %.s
+	$(AXTRACTOR) $(EXLN) -o $@ $<
+
+%.S.axtract: %.S
+	$(AXTRACTOR) $(EXLN) -o $@ $<
+
+%.cc.extract: %.cc
+	$(EXTRACTOR) $(EXLN) -l cpp -a A2 -a N -o $@ -d $(EXTRACTDIR) $<
+
+%.c.extract: %.c
+	$(EXTRACTOR) $(EXLN) -l c -a A2 -o $@ -d $(EXTRACTDIR) $<
+
+%.h.extract: %.h
+	$(EXTRACTOR) $(EXLN) -l cpp -a A2 -a N -o $@ -d $(EXTRACTDIR) $<
+
+%.extract: %
+	$(EXTRACTOR) $(EXLN) -l cpp -a A2 -a N -o $@ -d $(EXTRACTDIR) $<
+
+%.java.extract: %.java
+	$(EXTRACTOR) $(EXLN) -l java -a A2 -o $@ -d $(EXTRACTDIR) $<
+
+%.cc.extractnc: %.cc
+	$(EXTRACTOR) $(EXLN) -l cpp -a A2 -a N --skip-callouts -d $(EXTRACTDIRNC) -o $@ $<
+
+%.h.extractnc: %.h
+	$(EXTRACTOR) $(EXLN) -l cpp -a A2 -a N --skip-callouts -d $(EXTRACTDIRNC) -o $@ $<
+
+%.java.extractnc: %.java
+	$(EXTRACTOR) $(EXLN) -l java -a A2 --skip-callouts -d $(EXTRACTDIRNC) -o $@ $<
+
+%.cc.html: %.cc
+	$(EXTRACTOR) -x --enable-block-comments --include-omitted $< | $(SRCHI) -scpp > $@
+
+%.h.html: %.h
+	$(EXTRACTOR) -x --enable-block-comments --include-omitted $< | $(SRCHI) -scpp > $@
+
+%.java.html: %.java
+	$(EXTRACTOR) -x --enable-block-comments --include-omitted  $< | $(SRCHI) -sjava > $@
+
+%.s.html: %.s
+		$(SRCHI) -sasm -i $< -o $@
+
+%.S.html: %.S
+		$(SRCHI) -sasm -i $< -o $@
+
+%.out: %.class
+	java $* $(PARGS) > $@
+
+%.out: %
+	./$< $(PARGS) > $@
+
+%.aout: %
+	echo -n ".{output-caption} {counter:output}. Ausgabe des Programms: \`" > $@
+	echo -n $< >> $@
+	echo "\`" >> $@
+	echo "[role=\"output\"]" >> $@
+	echo "...." >> $@
+	-SIMPLETEST=${SIMPLETEST} ./$< $(PARGS) >> $@ 2>&1
+	echo "...." >> $@
+
+%.aout2: %
+	echo -n ".{output-caption} {counter:output}. Ausgabe des Programms: \`" > $@
+	echo -n $< >> $@
+	echo "\`" >> $@
+	echo "[role=\"output\"]" >> $@
+	echo "...." >> $@
+	-SIMPLETEST=${SIMPLETEST} ./$< $(PARGS) >> $@ 2>/dev/null
+	echo "...." >> $@
+
+%.valgrind: %
+	echo -n ".{output-caption} {counter:output}. Speicheranalyse des Programms: \`" > $@
+	echo -n $< >> $@
+	echo "\`" >> $@
+	echo "[role=\"output\"]" >> $@
+	echo "...." >> $@
+	-SIMPLETEST=${SIMPLETEST} valgrind ./$< $(PARGS) 2>> $@ 1>/dev/null
+	echo "...." >> $@
+
+%.aout: %.class
+	echo -n ".{output-caption} {counter:output}. Ausgabe des Programms: \`" > $@
+	echo -n $< >> $@
+	echo "\`" >> $@
+	echo "[role=\"output\"]" >> $@
+	echo "...." >> $@
+	java $* $(PARGS) >> $@ 2>&1
+	echo "...." >> $@
+
+%.class: %.java
+	 javac $<
+
+%.png: %.svg
+	rsvg-convert $< > $@
+
+subclean:
+	@for d in ${subdirs}; do \
+		if [ -d $$d ]; then \
+			${MAKE} -C $$d clean; \
+		fi \
+	done
+
+clean: subclean
+	$(RM) $(filter-out %.svg %.png %.html,$(targets)) $(targetsmemcheck)
+	$(RM) *~
+	$(RM) a.out
+	$(RM) a.exe
+	$(RM) *.exe
+	$(RM) *.obj
+	$(RM) $(ccdeps)
+	$(RM) $(objects)
+	$(RM) *.class
+	$(RM) *.out
+	$(RM) *.memcheck
+	$(RM) *.stackdump
+	$(RM) *.extract
+	$(RM) *.gcno
+	$(RM) *.gcda
+	$(RM) *.gcov
+	$(RM) *.s
+	$(RM) *.S
+	-$(RM) -rf $(EXTRACTDIR)
+	-$(RM) -rf $(EXTRACTDIRNC)
+ifeq ($(PLATFORM),linux)
+# Linux (Dozenten-Umgebung): generierte Dateien loeschen
+	$(RM) *.html
+	$(RM) *.svg
+else
+# Windows/macOS: dokumentierte *.html und *.svg nicht loeschen (script/ verlinkt darauf)
+endif
+
+-include $(ccdeps)

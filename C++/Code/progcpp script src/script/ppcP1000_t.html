@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="description" content="Eine Einführung in C++">
+<meta name="keywords" content="Programmieren, Programming, C++">
+<meta name="author" content="Wilhelm Meier, Adrian MÜller">
+<meta name="copyright" content="Prof. Dr.-Ing. Wilhelm Meier">
+<title>pCpp - Programmierkonzepte mit C&#43;&#43; - LE 10 - [WS26/27]</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.pygments .hll { background-color: #ffffcc }
+pre.pygments { background: #f8f8f8; }
+pre.pygments .tok-c { color: #3D7B7B; font-style: italic } /* Comment */
+pre.pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+pre.pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+pre.pygments .tok-o { color: #666666 } /* Operator */
+pre.pygments .tok-ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+pre.pygments .tok-cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+pre.pygments .tok-cp { color: #9C6500 } /* Comment.Preproc */
+pre.pygments .tok-cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+pre.pygments .tok-c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+pre.pygments .tok-cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+pre.pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+pre.pygments .tok-ge { font-style: italic } /* Generic.Emph */
+pre.pygments .tok-gr { color: #E40000 } /* Generic.Error */
+pre.pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.pygments .tok-gi { color: #008400 } /* Generic.Inserted */
+pre.pygments .tok-go { color: #717171 } /* Generic.Output */
+pre.pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+pre.pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+pre.pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+pre.pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+pre.pygments .tok-m { color: #666666 } /* Literal.Number */
+pre.pygments .tok-s { color: #BA2121 } /* Literal.String */
+pre.pygments .tok-na { color: #687822 } /* Name.Attribute */
+pre.pygments .tok-nb { color: #008000 } /* Name.Builtin */
+pre.pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.pygments .tok-no { color: #880000 } /* Name.Constant */
+pre.pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+pre.pygments .tok-ni { color: #717171; font-weight: bold } /* Name.Entity */
+pre.pygments .tok-ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+pre.pygments .tok-nf { color: #0000FF } /* Name.Function */
+pre.pygments .tok-nl { color: #767600 } /* Name.Label */
+pre.pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.pygments .tok-nv { color: #19177C } /* Name.Variable */
+pre.pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+pre.pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+pre.pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+pre.pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+pre.pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+pre.pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+pre.pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+pre.pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+pre.pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+pre.pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+pre.pygments .tok-se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+pre.pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.pygments .tok-si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+pre.pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+pre.pygments .tok-sr { color: #A45A77 } /* Literal.String.Regex */
+pre.pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+pre.pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+pre.pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+pre.pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+pre.pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+pre.pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+   jQuery('a[target^="newwindow"]').click(function(e) {
+       var width = 600;
+       var height = 400;
+       window.open(this.href, 'newwindow', 'width=' + width + ', height=' + height + ', top=50, left=500');
+       return false;
+   });
+});
+</script>
+<style>
+.listingblock a.view-result {
+  float: right;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-top: 0.15em;
+}
+</style>
+<script>
+function toggle_result_block(e) {
+  var resultNode = e.target.parentNode.parentNode.nextElementSibling;
+  resultNode.style.display = getComputedStyle(resultNode).display == 'none' ? '' : 'none';
+  return false;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  [].forEach.call(document.querySelectorAll('.result'), function(resultNode) {
+    resultNode.style.display = 'none';
+    var viewLink = document.createElement('a');
+    viewLink.className = 'view-result';
+    viewLink.appendChild(document.createTextNode('[ view result ]'));
+    resultNode.previousElementSibling.querySelector('.title').appendChild(viewLink);
+    viewLink.addEventListener('click', toggle_result_block);
+  });
+});
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>pCpp - Programmierkonzepte mit C&#43;&#43;</h1>
+<div class="details">
+<span id="author" class="author">Wilhelm Meier, Adrian MÜller</span><br>
+<span id="email" class="email"><a href="mailto:adrian.mueller@hs-kl.de">adrian.mueller@hs-kl.de</a></span><br>
+<span id="revnumber">version 1.12,</span>
+<span id="revdate">01.10.2026</span>
+<br><span id="revremark">WS26/27</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Inhalt</div>
+<ul class="sectlevel1">
+<li><a href="#part10">1. Lerneinheit 10 - Zeiger und Zeigerarithmetik, rohe Arrays und Container</a></li>
+<li><a href="#rawarrays">2. Zeiger und statische, rohe Arrays</a></li>
+<li><a href="#pointertoarray">3. Zeigerarithmetik</a></li>
+<li><a href="#_rohe_arrays_als_funktionsparameter">4. Rohe Arrays als Funktionsparameter</a>
+<ul class="sectlevel2">
+<li><a href="#_längeninformation_als_weiterer_funktionsparameter">4.1. Längeninformation als weiterer Funktionsparameter</a></li>
+<li><a href="#arraypod">4.2. Kapselung in einem POD</a></li>
+<li><a href="#_generische_lösung">4.3. Generische Lösung</a></li>
+</ul>
+</li>
+<li><a href="#_die_signatur_int_mainconst_int_const_char_const">5. Die Signatur <code>int main(const int, const char* const*)</code></a></li>
+<li><a href="#_dynamische_rohe_arrays_im_freispeicher">6. Dynamische rohe Arrays im Freispeicher</a></li>
+<li><a href="#_alternativen_für_rohe_arrays_der_empfohlene_weg">7. Alternativen für <em>rohe</em> Arrays: der empfohlene Weg</a>
+<ul class="sectlevel2">
+<li><a href="#stdarray">7.1. Generische Alternative für statische Arrays: <code>std::array&lt;T, size&gt;</code></a></li>
+<li><a href="#stdvector">7.2. Generische Alternative für dynamische Arrays <code>std::vector&lt;T&gt;</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lizenz</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" alt="Lizenz">
+</div>
+</div>
+<div class="paragraph">
+<p>Dieses Werk ist lizenziert unter einer <a href="http://creativecommons.org/licenses/by-nc-nd/4.0">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="part10"><a class="anchor" href="#part10"></a><a class="link" href="#part10">1. Lerneinheit 10 - Zeiger und Zeigerarithmetik, rohe Arrays und Container</a></h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Lernziele</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Zusammenhang zwischen Zeigern (Zeigervariablen) und Array-Bezeichnern</p>
+</li>
+<li>
+<p>Verständnis über die fehlende Längeninformation eines <em>rohen</em> Arrays</p>
+</li>
+<li>
+<p>Die Signatur von <code>int main(const int, const char* const*)</code> vestehen.</p>
+</li>
+<li>
+<p>Alternativen für <em>rohe</em> Arrays</p>
+</li>
+<li>
+<p>Erstellen von <em>rohen</em> Arrays im Freispeicher</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rawarrays"><a class="anchor" href="#rawarrays"></a><a class="link" href="#rawarrays">2. Zeiger und statische, rohe Arrays</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Statische</em> Arrays (C-Arrays) können als lokale oder globale Variable definiert werden.
+Der <code>C++</code>-Standard erlaubt nur eine zur <em>Compile</em>-Zeit bekannte, konstante
+Dimensionierung: <code>&lt;type&gt; &lt;name&gt;[&lt;size&gt;]</code>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 1. Definition eines Arrays (Feld) bestehend aus 100 Elementen des Typs <code>float</code></div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="tok-kt">float</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-mi">100</span><span class="tok-p">];</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Einzelne Array-Elemente können mit Hilfe des <em>Subscript</em>-Operators <code>&lt;name&gt;[&lt;index&gt;]</code> (<a href="http://en.cppreference.com/w/cpp/language/operator_member_access">Elementzugriffsoperatoren</a>)
+bezeichnet werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 2. Zeilen aus der Datei <a href="../src/ppc10/ppc1001.cc" target="newwindows"><code>ppc1001.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cstdlib&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">array1</span><span class="tok-p">[</span><span class="tok-mi">5</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">2.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">3.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">4.0</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mf">5.0</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">array2</span><span class="tok-p">[</span><span class="tok-mi">5</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mf">1.0</span><span class="tok-p">};</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">array3</span><span class="tok-p">[</span><span class="tok-mi">5</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{};</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-kt">double</span><span class="tok-w"> </span><span class="tok-n">array4</span><span class="tok-p">[</span><span class="tok-mi">5</span><span class="tok-p">];</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b>
+<span class="linenos"> 9</span><span class="tok-w">        </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;i: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;</span><span class="tok-se">\t</span><span class="tok-s">array1: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">array1</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;</span><span class="tok-se">\t</span><span class="tok-s">array2: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">array2</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;</span><span class="tok-se">\t</span><span class="tok-s">array3: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">array3</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;</span><span class="tok-se">\t</span><span class="tok-s">array4: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">array4</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">11</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Notwendig für den Datentyp (Typalias) <code>size_t</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Vollständige Initialisierung eines <em>statischen</em> rohen Arrays.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Partielle Initialisierung, die restlichen Werte werden mit dem <em>numerischen Standardwert</em> <code>0.0</code> initialisiert</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Dies ist auch eine <em>partielle</em> Initialisierung &#8594; alle Array-Elemente werden mit <code>0.0</code> initialisiert.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><strong>Ohne Initialisierung</strong> ist eine <strong>Fehler</strong>. Dieser Fehler fällt allerdings auf, wenn das Array wie oben auch als <em>read-only</em> mit <code>const</code> qualifiziert wird.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><strong>Schlecht</strong>: Weil ein <em>rohes</em> Array kein <em>first-class-object</em> ist, gibt es keine direkte Möglichkeit, die Länge zu bestimmen.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 1: Man beachte die <em>zufälligen</em> Werte der Elemente des nicht initialisierten Arrays in der folgenden Ausgabe</div>
+<div class="content">
+<pre class="nowrap">i: 0	array1: 1	array2: 1	array3: 0	array4: 2.11653e+214
+i: 1	array1: 2	array2: 0	array3: 0	array4: 6.94432e-310
+i: 2	array1: 3	array2: 0	array3: 0	array4: 2.27616e-320
+i: 3	array1: 4	array2: 0	array3: 0	array4: -nan
+i: 4	array1: 5	array2: 0	array3: 0	array4: 2.11653e+214</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pointertoarray"><a class="anchor" href="#pointertoarray"></a><a class="link" href="#pointertoarray">3. Zeigerarithmetik</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Der Array-Bezeichner evaluiert zu der Adresse (Zeigerwert) des <em>ersten</em> Elementes des Arrays. Damit kann darauf
+auch die <em>Zeigerarithmetik</em> angewendet werden.</p>
+</div>
+<div class="paragraph">
+<p>Umgekehrt kann auch auf jede Zeigervariable der <em>Subscript</em>-Operator angewendet werden. Dies ist natürlich
+nur sinnvoll, wenn die Zeigervariable tatsächlich auf ein / das erste Array-Element zeigt und nicht nur auf ein
+<em>singuläres</em> Objekt.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 3. Zeilen aus der Datei <a href="../src/ppc10/ppc1002.cc" target="newwindows"><code>ppc1002.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 3</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">;</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-n">length</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{};</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">42</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">43</span><span class="tok-p">;</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;*array: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-n">array</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;*(array + 1): &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">ptr</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="5"></i><b>(5)</b>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;ptr[0]: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">ptr</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="6"></i><b>(6)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;ptr[1]: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">ptr</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Zur Dimensionierung sind zur Compilezeit konstante Ausdrücke zugelassen.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Elementzugriff über den <em>Subscript</em>-Operator.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Elementzugriff über den Zeiger auf das erste Element: der Bezeichners evaluiert zu der Adresse des ersten Elements.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Elementzugriff mit Hilfe von Zeigerarithmetik: es wird <em>nicht</em> ein Byte, sondern <code>sizeof(int)</code> Bytes addiert.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Für die Zielelemente ein <code>const</code> hinzugefügt.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Der <em>Subscript</em>-Operator kann bei jedem Zeiger angewendet werden!</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 2. Ausgabe des Programms: <code>ppc1002</code></div>
+<div class="content">
+<pre class="nowrap">*array: 42
+*(array + 1): 43
+ptr[0]: 42
+ptr[1]: 43</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rohe_arrays_als_funktionsparameter"><a class="anchor" href="#_rohe_arrays_als_funktionsparameter"></a><a class="link" href="#_rohe_arrays_als_funktionsparameter">4. Rohe Arrays als Funktionsparameter</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Bezeichner <em>roher</em> Arrays als Funktionsparameter ergeben immer <em>Zeigerwerte</em> (Adressen) für das <em>erste</em>
+Arrayelement. Diese Zeiger werden in der Parameterliste entsprechend angegeben: <code>void f(int* array)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Die Notation <code>void f(int array[])</code> ist zwar gleichbedeutend aber missveständlich!</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_längeninformation_als_weiterer_funktionsparameter"><a class="anchor" href="#_längeninformation_als_weiterer_funktionsparameter"></a><a class="link" href="#_längeninformation_als_weiterer_funktionsparameter">4.1. Längeninformation als weiterer Funktionsparameter</a></h3>
+<div class="paragraph">
+<p>Weil der Funktionsparameter nur ein Zeiger auf das erste Element des Arrays ist, ist <em>keine Längeninformation</em>
+verfügbar. Um die Länge an die Funktion übergeben zu können, kann ein weiterer Funktionsparameter verwendet
+werden:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 4. Zeilen aus der Datei <a href="../src/ppc10/ppc1003.cc" target="newwindows"><code>ppc1003.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cassert&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cstdlib&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 4</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">absoluteSum</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 8</span><span class="tok-w">        </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">abs</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]);</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-p">}</span>
+<span class="linenos">12</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">;</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-n">length</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-3</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-4</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">};</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">absoluteSum</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Notwendig für Zusicherungen mit Hilfe von <code>assert(&#8230;&#8203;)</code> (Präprozessormakro).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Notwendig für den Datentyp (Typalias) <code>size_t</code> und für die Funktion <code>int std::abs(int)</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Zusicherung für einen gültigen Zeigerwert != 0</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 3. Ausgabe des Programms: <code>ppc1003</code></div>
+<div class="content">
+<pre class="nowrap">15</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="arraypod"><a class="anchor" href="#arraypod"></a><a class="link" href="#arraypod">4.2. Kapselung in einem POD</a></h3>
+<div class="paragraph">
+<p>Weil der Zeiger auf das Array und die Längeninformation semantisch zusammen gehören, ist die Kapselung in
+einem Datentyp sinnvoll (die Standardbibliothek bietet hierfür auch eine generische Lösung als <a href="http://en.cppreference.com/w/cpp/container/array">std::array</a>,
+<a href="#stdarray">s.u.</a>):</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 5. Zeilen aus der Datei <a href="../src/ppc10/ppc1004.cc" target="newwindows"><code>ppc1004.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cassert&gt;</span>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cstdlib&gt;</span>
+<span class="linenos"> 4</span><span class="tok-k">class</span><span class="tok-w"> </span><span class="tok-nc">IntegerArray</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 5</span><span class="tok-k">public</span><span class="tok-o">:</span>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">items</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-k">nullptr</span><span class="tok-p">};</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">size</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span>
+<span class="linenos"> 8</span><span class="tok-p">};</span>
+<span class="linenos"> 9</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">absoluteSum</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">IntegerArray</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">.</span><span class="tok-n">items</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">13</span><span class="tok-w">        </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">abs</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">.</span><span class="tok-n">items</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]);</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-p">}</span>
+<span class="linenos">17</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">18</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">;</span>
+<span class="linenos">19</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-n">length</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-3</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-4</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">};</span>
+<span class="linenos">20</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">absoluteSum</span><span class="tok-p">({</span><span class="tok-n">array</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-p">})</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">21</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>POD-Typ um die Informationen <em>Anfangszeiger</em> und <em>Länge</em> zu kapseln</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Zusicherung für einen gültigen Anfangszeiger</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 4. Ausgabe des Programms: <code>ppc1004</code></div>
+<div class="content">
+<pre class="nowrap">15</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_generische_lösung"><a class="anchor" href="#_generische_lösung"></a><a class="link" href="#_generische_lösung">4.3. Generische Lösung</a></h3>
+<div class="paragraph">
+<p>Anstatt für jeden Array-Typ einen eigenen <em>POD</em> zu erstellen, bietet die Standardbibliothek mit der <em>generischen</em>
+Klasse (<em>template</em>) <a href="http://en.cppreference.com/w/cpp/utility/pair">std::pair</a> (Verallgemeinerung für <em>N</em> Elemente: <a href="http://en.cppreference.com/w/cpp/utility/tuple">std::tuple</a>) eine allgemeine Lösung, zwei semantisch
+zusammengehörige Elemente zu kapseln:</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 6. Zeilen aus der Datei <a href="../src/ppc10/ppc1005.cc" target="newwindows"><code>ppc1005.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cassert&gt;</span>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cstdlib&gt;</span>
+<span class="linenos"> 4</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;utility&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 5</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">absoluteSum</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">pair</span><span class="tok-o">&lt;</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-o">&gt;&amp;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-n">assert</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">.</span><span class="tok-n">first</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">.</span><span class="tok-n">second</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos"> 9</span><span class="tok-w">        </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">abs</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">.</span><span class="tok-n">first</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]);</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-p">}</span>
+<span class="linenos">13</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">;</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">[</span><span class="tok-n">length</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-3</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-4</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">};</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">absoluteSum</span><span class="tok-p">({</span><span class="tok-n">array</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-p">})</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">17</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Notwendig für den generischen Typ (template) <code>std::pair&lt;T,U&gt;</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Generalisierung des Ansatzes mit POD-Typ (s.o.)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Das Datenelement <code>first</code> hat hier den Typ <code>int*</code> und hat den Wert des Anfangszeigers.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Das Datenelement <code>second</code> ist hier vom Typ <code>size_t</code> und hat den Wert der Elementanzahl.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 5. Ausgabe des Programms: <code>ppc1005</code></div>
+<div class="content">
+<pre class="nowrap">15</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_die_signatur_int_mainconst_int_const_char_const"><a class="anchor" href="#_die_signatur_int_mainconst_int_const_char_const"></a><a class="link" href="#_die_signatur_int_mainconst_int_const_char_const">5. Die Signatur <code>int main(const int, const char* const*)</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Die <em>zweite</em> mögliche Signatur von <code>main()</code> ist <code>int main(const int argc, const char* const* argv)</code> (oder oft leider auch als
+<code>int main(int argc, char* argv[])</code> geschrieben. Damit ergibt sich:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Voraussetzung
+</td>
+<td class="hdlist2">
+<p><code>argv</code> ist ein Zeiger auf das <em>erste</em> Element eines Arrays der Länge <code>argc</code>. Zusätzlich hat
+dieses Array ein <em>Wächterelement</em> mit dem Wert <code>nullptr</code> als letztes Element.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>argv</code>
+</td>
+<td class="hdlist2">
+<p>hat den Typ <code>const char* const*</code> und ist damit ein Zeiger auf <em>Elemente</em> vom Typ <code>const char* const</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code>argv[i]</code>
+</td>
+<td class="hdlist2">
+<p>oder auch <code>*(argv + i)</code> hat den Typ <code>const char*</code>, die Werte werden als <em>C-Strings</em> interpretiert, also als
+Arrays des Elementtyps <code>const char</code> mit dem <em>Wächterelement</em> <code>\0</code>.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnIHN0YW5kYWxvbmU9J25vJz8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyBoZWlnaHQ9JzE5MHB0JyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBtZWV0JyB2aWV3Qm94PScwLjAwIDAuMDAgNDA0LjI1IDE5MC4wMCcgd2lkdGg9JzQwNHB0JyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KPGcgY2xhc3M9J2dyYXBoJyBpZD0nZ3JhcGgwJyB0cmFuc2Zvcm09J3NjYWxlKDEgMSkgcm90YXRlKDApIHRyYW5zbGF0ZSg0IDE4NiknPgo8dGl0bGU+RzwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J3doaXRlJyBwb2ludHM9Jy00LDQgLTQsLTE4NiA0MDAuMjUsLTE4NiA0MDAuMjUsNCAtNCw0JyBzdHJva2U9J25vbmUnLz4KCjxnIGNsYXNzPSdub2RlJyBpZD0nbm9kZTEnPgo8dGl0bGU+VjwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J25vbmUnIHBvaW50cz0nNzAuNSwtNzMuNSA3MC41LC0xMDkuNSAzMzguNSwtMTA5LjUgMzM4LjUsLTczLjUgNzAuNSwtNzMuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzEwNC4zOCcgeT0nLTg2LjgzJz5hcmd2WzBdPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScxMzguMjUsLTczLjUgMTM4LjI1LC0xMDkuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzE3Mi4xMicgeT0nLTg2LjgzJz5hcmd2WzFdPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScyMDYsLTczLjUgMjA2LC0xMDkuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzIzOS44OCcgeT0nLTg2LjgzJz5hcmd2WzJdPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScyNzMuNzUsLTczLjUgMjczLjc1LC0xMDkuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzMwNi4xMicgeT0nLTg2LjgzJz5udWxscHRyPC90ZXh0Pgo8L2c+Cgo8ZyBjbGFzcz0nbm9kZScgaWQ9J25vZGUyJz4KPHRpdGxlPk48L3RpdGxlPgo8cG9seWdvbiBmaWxsPSdub25lJyBwb2ludHM9JzAsLTAuNSAwLC0zNi41IDE0MywtMzYuNSAxNDMsLTAuNSAwLC0wLjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PScxNCcgeT0nLTEzLjgyJz5OPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScyOCwtMC41IDI4LC0zNi41JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nNDAuMTInIHk9Jy0xMy44Mic+YTwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nNTIuMjUsLTAuNSA1Mi4yNSwtMzYuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzY3JyB5PSctMTMuODInPm08L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzgxLjc1LC0wLjUgODEuNzUsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSc5My44OCcgeT0nLTEzLjgyJz5lPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScxMDYsLTAuNSAxMDYsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PScxMjQuNScgeT0nLTEzLjgyJz4mIzM5O1wwJiMzOTs8L3RleHQ+CjwvZz4KCjxnIGNsYXNzPSdlZGdlJyBpZD0nZWRnZTInPgo8dGl0bGU+VjphJiM0NTsmZ3Q7TjphPC90aXRsZT4KPHBhdGggZD0nTTEwNC41LC03M0MxMDQuNSwtMzQuMDkgMzEuNjgsLTcwLjc5IDE2LjMyLC00Ny44MycgZmlsbD0nbm9uZScgc3Ryb2tlPSdibGFjaycvPgo8cG9seWdvbiBmaWxsPSdibGFjaycgcG9pbnRzPScxOS43OSwtNDcuMjYgMTMuODgsLTM4LjQ2IDEzLjAyLC00OS4wMiAxOS43OSwtNDcuMjYnIHN0cm9rZT0nYmxhY2snLz4KPC9nPgoKPGcgY2xhc3M9J25vZGUnIGlkPSdub2RlMyc+Cjx0aXRsZT5BMDwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J25vbmUnIHBvaW50cz0nMTYwLjYyLC0wLjUgMTYwLjYyLC0zNi41IDI3MC4zOCwtMzYuNSAyNzAuMzgsLTAuNSAxNjAuNjIsLTAuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzE3Mi43NScgeT0nLTEzLjgyJz5hPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScxODQuODgsLTAuNSAxODQuODgsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PScxOTcuMzgnIHk9Jy0xMy44Mic+YjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nMjA5Ljg4LC0wLjUgMjA5Ljg4LC0zNi41JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nMjIxLjYyJyB5PSctMTMuODInPmM8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzIzMy4zOCwtMC41IDIzMy4zOCwtMzYuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzI1MS44OCcgeT0nLTEzLjgyJz4mIzM5O1wwJiMzOTs8L3RleHQ+CjwvZz4KCjxnIGNsYXNzPSdlZGdlJyBpZD0nZWRnZTMnPgo8dGl0bGU+VjpiJiM0NTsmZ3Q7QTA6YTwvdGl0bGU+CjxwYXRoIGQ9J00xNzIuNSwtNzNDMTcyLjUsLTYxLjYyIDE3Mi41LC01Ni4zMiAxNzIuNSwtNDguNDUnIGZpbGw9J25vbmUnIHN0cm9rZT0nYmxhY2snLz4KPHBvbHlnb24gZmlsbD0nYmxhY2snIHBvaW50cz0nMTc2LC00OC41MSAxNzIuNSwtMzguNTEgMTY5LC00OC41MSAxNzYsLTQ4LjUxJyBzdHJva2U9J2JsYWNrJy8+CjwvZz4KCjxnIGNsYXNzPSdub2RlJyBpZD0nbm9kZTQnPgo8dGl0bGU+QTE8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSdub25lJyBwb2ludHM9JzI4OC43NSwtMC41IDI4OC43NSwtMzYuNSAzOTYuMjUsLTM2LjUgMzk2LjI1LC0wLjUgMjg4Ljc1LC0wLjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSczMDEuMjUnIHk9Jy0xMy44Mic+ZDwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nMzEzLjc1LC0wLjUgMzEzLjc1LC0zNi41JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nMzI1Ljg4JyB5PSctMTMuODInPmU8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzMzOCwtMC41IDMzOCwtMzYuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzM0OC42MicgeT0nLTEzLjgyJz5mPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPSczNTkuMjUsLTAuNSAzNTkuMjUsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSczNzcuNzUnIHk9Jy0xMy44Mic+JiMzOTtcMCYjMzk7PC90ZXh0Pgo8L2c+Cgo8ZyBjbGFzcz0nZWRnZScgaWQ9J2VkZ2U0Jz4KPHRpdGxlPlY6YyYjNDU7Jmd0O0ExOmE8L3RpdGxlPgo8cGF0aCBkPSdNMjM5LjUsLTczQzIzOS41LC00NS44NyAyODQuNDYsLTYxLjk1IDI5Ny44MSwtNDcuNjQnIGZpbGw9J25vbmUnIHN0cm9rZT0nYmxhY2snLz4KPHBvbHlnb24gZmlsbD0nYmxhY2snIHBvaW50cz0nMzAxLjAzLC00OS4wMiAzMDEsLTM4LjQzIDI5NC40MiwtNDYuNzMgMzAxLjAzLC00OS4wMicgc3Ryb2tlPSdibGFjaycvPgo8L2c+Cgo8ZyBjbGFzcz0nbm9kZScgaWQ9J25vZGU1Jz4KPHRpdGxlPmFyZ3Y8L3RpdGxlPgo8ZWxsaXBzZSBjeD0nMTA0LjUnIGN5PSctMTY0JyBmaWxsPSdub25lJyByeD0nMzMuODUnIHJ5PScxOCcgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzEwNC41JyB5PSctMTU5LjMyJz5hcmd2PC90ZXh0Pgo8L2c+Cgo8ZyBjbGFzcz0nZWRnZScgaWQ9J2VkZ2UxJz4KPHRpdGxlPmFyZ3YmIzQ1OyZndDtWOmE8L3RpdGxlPgo8cGF0aCBkPSdNMTA0LjUsLTE0NS44MUMxMDQuNSwtMTM4LjYgMTA0LjUsLTEyOS44OSAxMDQuNSwtMTIxLjIzJyBmaWxsPSdub25lJyBzdHJva2U9J2JsYWNrJy8+Cjxwb2x5Z29uIGZpbGw9J2JsYWNrJyBwb2ludHM9JzEwOCwtMTIxLjUxIDEwNC41LC0xMTEuNTEgMTAxLC0xMjEuNTEgMTA4LC0xMjEuNTEnIHN0cm9rZT0nYmxhY2snLz4KPC9nPgo8L2c+Cjwvc3ZnPgo=" alt="Diagram" width="537" height="252">
+</div>
+<div class="title">Bild 1. Der Zusammenhang zwischen Zeigerarray <code>argv</code> und den C-Strings der Kommandozeilenparameter</div>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 7. Kommando1.</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="shell"><span></span>$<span class="tok-w"> </span>./ppc1010<span class="tok-w"> </span>abc<span class="tok-w"> </span>def</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 8. Zeilen aus der Datei <a href="../src/ppc10/ppc1010.cc" target="newwindows"><code>ppc1010.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">argc</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">char</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">argv</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-n">argc</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-mi">1</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">4</span><span class="tok-w">        </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Argument[&quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;]: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">5</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">6</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Der Datentyp von <code>argv[i]</code> ist <code>const char*</code>, also ein konstanter <em>C-String</em></td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 6. Ausgabe des Programms: <code>ppc1010</code></div>
+<div class="content">
+<pre class="nowrap">Argument[0]: ./ppc1010
+Argument[1]: abc
+Argument[2]: def</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Im Gegensatz zu <em>Java</em>  ist der <em>erste</em>  C-String (das Arrayelement mit dem Index <code>0</code>) der <em>Name</em>  der
+Programmdatei.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 9. Zeilen aus der Datei <a href="../src/ppc10/ppc1011.cc" target="newwindows"><code>ppc1011.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos">1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos">2</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">char</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-o">*</span><span class="tok-w"> </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">argv</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">3</span><span class="tok-w">    </span><span class="tok-k">auto</span><span class="tok-w"> </span><span class="tok-n">it</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">argv</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos">4</span><span class="tok-w">    </span><span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-n">it</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos">5</span><span class="tok-w">        </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-s">&quot;Argument: &quot;</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-o">*</span><span class="tok-n">it</span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">6</span><span class="tok-w">        </span><span class="tok-o">++</span><span class="tok-n">it</span><span class="tok-p">;</span>
+<span class="linenos">7</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">8</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>argv</code> zeugt auf das <em>erste</em> Element des C-Arrays</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Das letzte Element in diesem Feld von Zeigern ist immer der <code>nullptr</code> (Wächterelement)</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 7. Ausgabe des Programms: <code>ppc1011</code></div>
+<div class="content">
+<pre class="nowrap">Argument: ./ppc1011
+Argument: abc
+Argument: def</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In dem obigen Beispiel wird <code>argv</code> inkrementiert (<code>++argv</code>) und zeigt damit auf das <em>zweite Wort</em>  der Kommandozeile,
+in diesem Fall <code>abc</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnIHN0YW5kYWxvbmU9J25vJz8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyBoZWlnaHQ9JzE5MHB0JyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBtZWV0JyB2aWV3Qm94PScwLjAwIDAuMDAgNDA0LjI1IDE5MC4wMCcgd2lkdGg9JzQwNHB0JyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KPGcgY2xhc3M9J2dyYXBoJyBpZD0nZ3JhcGgwJyB0cmFuc2Zvcm09J3NjYWxlKDEgMSkgcm90YXRlKDApIHRyYW5zbGF0ZSg0IDE4NiknPgo8dGl0bGU+RzwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J3doaXRlJyBwb2ludHM9Jy00LDQgLTQsLTE4NiA0MDAuMjUsLTE4NiA0MDAuMjUsNCAtNCw0JyBzdHJva2U9J25vbmUnLz4KCjxnIGNsYXNzPSdub2RlJyBpZD0nbm9kZTEnPgo8dGl0bGU+VjwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J25vbmUnIHBvaW50cz0nNzAuNSwtNzMuNSA3MC41LC0xMDkuNSAzMzguNSwtMTA5LjUgMzM4LjUsLTczLjUgNzAuNSwtNzMuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzEwNC4zOCcgeT0nLTg2LjgzJz5hcmd2WzBdPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScxMzguMjUsLTczLjUgMTM4LjI1LC0xMDkuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzE3Mi4xMicgeT0nLTg2LjgzJz5hcmd2WzFdPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScyMDYsLTczLjUgMjA2LC0xMDkuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzIzOS44OCcgeT0nLTg2LjgzJz5hcmd2WzJdPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScyNzMuNzUsLTczLjUgMjczLjc1LC0xMDkuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzMwNi4xMicgeT0nLTg2LjgzJz5udWxscHRyPC90ZXh0Pgo8L2c+Cgo8ZyBjbGFzcz0nbm9kZScgaWQ9J25vZGUyJz4KPHRpdGxlPk48L3RpdGxlPgo8cG9seWdvbiBmaWxsPSdub25lJyBwb2ludHM9JzAsLTAuNSAwLC0zNi41IDE0MywtMzYuNSAxNDMsLTAuNSAwLC0wLjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PScxNCcgeT0nLTEzLjgyJz5OPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScyOCwtMC41IDI4LC0zNi41JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nNDAuMTInIHk9Jy0xMy44Mic+YTwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nNTIuMjUsLTAuNSA1Mi4yNSwtMzYuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzY3JyB5PSctMTMuODInPm08L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzgxLjc1LC0wLjUgODEuNzUsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSc5My44OCcgeT0nLTEzLjgyJz5lPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScxMDYsLTAuNSAxMDYsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PScxMjQuNScgeT0nLTEzLjgyJz4mIzM5O1wwJiMzOTs8L3RleHQ+CjwvZz4KCjxnIGNsYXNzPSdlZGdlJyBpZD0nZWRnZTInPgo8dGl0bGU+VjphJiM0NTsmZ3Q7TjphPC90aXRsZT4KPHBhdGggZD0nTTEwNC41LC03M0MxMDQuNSwtMzQuMDkgMzEuNjgsLTcwLjc5IDE2LjMyLC00Ny44MycgZmlsbD0nbm9uZScgc3Ryb2tlPSdibGFjaycvPgo8cG9seWdvbiBmaWxsPSdibGFjaycgcG9pbnRzPScxOS43OSwtNDcuMjYgMTMuODgsLTM4LjQ2IDEzLjAyLC00OS4wMiAxOS43OSwtNDcuMjYnIHN0cm9rZT0nYmxhY2snLz4KPC9nPgoKPGcgY2xhc3M9J25vZGUnIGlkPSdub2RlMyc+Cjx0aXRsZT5BMDwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9J25vbmUnIHBvaW50cz0nMTYwLjYyLC0wLjUgMTYwLjYyLC0zNi41IDI3MC4zOCwtMzYuNSAyNzAuMzgsLTAuNSAxNjAuNjIsLTAuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzE3Mi43NScgeT0nLTEzLjgyJz5hPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPScxODQuODgsLTAuNSAxODQuODgsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PScxOTcuMzgnIHk9Jy0xMy44Mic+YjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nMjA5Ljg4LC0wLjUgMjA5Ljg4LC0zNi41JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nMjIxLjYyJyB5PSctMTMuODInPmM8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzIzMy4zOCwtMC41IDIzMy4zOCwtMzYuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzI1MS44OCcgeT0nLTEzLjgyJz4mIzM5O1wwJiMzOTs8L3RleHQ+CjwvZz4KCjxnIGNsYXNzPSdlZGdlJyBpZD0nZWRnZTMnPgo8dGl0bGU+VjpiJiM0NTsmZ3Q7QTA6YTwvdGl0bGU+CjxwYXRoIGQ9J00xNzIuNSwtNzNDMTcyLjUsLTYxLjYyIDE3Mi41LC01Ni4zMiAxNzIuNSwtNDguNDUnIGZpbGw9J25vbmUnIHN0cm9rZT0nYmxhY2snLz4KPHBvbHlnb24gZmlsbD0nYmxhY2snIHBvaW50cz0nMTc2LC00OC41MSAxNzIuNSwtMzguNTEgMTY5LC00OC41MSAxNzYsLTQ4LjUxJyBzdHJva2U9J2JsYWNrJy8+CjwvZz4KCjxnIGNsYXNzPSdub2RlJyBpZD0nbm9kZTQnPgo8dGl0bGU+QTE8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSdub25lJyBwb2ludHM9JzI4OC43NSwtMC41IDI4OC43NSwtMzYuNSAzOTYuMjUsLTM2LjUgMzk2LjI1LC0wLjUgMjg4Ljc1LC0wLjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSczMDEuMjUnIHk9Jy0xMy44Mic+ZDwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9J25vbmUnIHBvaW50cz0nMzEzLjc1LC0wLjUgMzEzLjc1LC0zNi41JyBzdHJva2U9J2JsYWNrJy8+Cjx0ZXh0IGZvbnQtZmFtaWx5PSdUaW1lcyxzZXJpZicgZm9udC1zaXplPScxNC4wMCcgdGV4dC1hbmNob3I9J21pZGRsZScgeD0nMzI1Ljg4JyB5PSctMTMuODInPmU8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSdub25lJyBwb2ludHM9JzMzOCwtMC41IDMzOCwtMzYuNScgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzM0OC42MicgeT0nLTEzLjgyJz5mPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0nbm9uZScgcG9pbnRzPSczNTkuMjUsLTAuNSAzNTkuMjUsLTM2LjUnIHN0cm9rZT0nYmxhY2snLz4KPHRleHQgZm9udC1mYW1pbHk9J1RpbWVzLHNlcmlmJyBmb250LXNpemU9JzE0LjAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyB4PSczNzcuNzUnIHk9Jy0xMy44Mic+JiMzOTtcMCYjMzk7PC90ZXh0Pgo8L2c+Cgo8ZyBjbGFzcz0nZWRnZScgaWQ9J2VkZ2U0Jz4KPHRpdGxlPlY6YyYjNDU7Jmd0O0ExOmE8L3RpdGxlPgo8cGF0aCBkPSdNMjM5LjUsLTczQzIzOS41LC00NS44NyAyODQuNDYsLTYxLjk1IDI5Ny44MSwtNDcuNjQnIGZpbGw9J25vbmUnIHN0cm9rZT0nYmxhY2snLz4KPHBvbHlnb24gZmlsbD0nYmxhY2snIHBvaW50cz0nMzAxLjAzLC00OS4wMiAzMDEsLTM4LjQzIDI5NC40MiwtNDYuNzMgMzAxLjAzLC00OS4wMicgc3Ryb2tlPSdibGFjaycvPgo8L2c+Cgo8ZyBjbGFzcz0nbm9kZScgaWQ9J25vZGU1Jz4KPHRpdGxlPmFyZ3Y8L3RpdGxlPgo8ZWxsaXBzZSBjeD0nMTcyLjUnIGN5PSctMTY0JyBmaWxsPSdub25lJyByeD0nMzMuODUnIHJ5PScxOCcgc3Ryb2tlPSdibGFjaycvPgo8dGV4dCBmb250LWZhbWlseT0nVGltZXMsc2VyaWYnIGZvbnQtc2l6ZT0nMTQuMDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIHg9JzE3Mi41JyB5PSctMTU5LjMyJz5hcmd2PC90ZXh0Pgo8L2c+Cgo8ZyBjbGFzcz0nZWRnZScgaWQ9J2VkZ2UxJz4KPHRpdGxlPmFyZ3YmIzQ1OyZndDtWOmI8L3RpdGxlPgo8cGF0aCBkPSdNMTcyLjUsLTE0NS44MUMxNzIuNSwtMTM4LjYgMTcyLjUsLTEyOS44OSAxNzIuNSwtMTIxLjIzJyBmaWxsPSdub25lJyBzdHJva2U9J2JsYWNrJy8+Cjxwb2x5Z29uIGZpbGw9J2JsYWNrJyBwb2ludHM9JzE3NiwtMTIxLjUxIDE3Mi41LC0xMTEuNTEgMTY5LC0xMjEuNTEgMTc2LC0xMjEuNTEnIHN0cm9rZT0nYmxhY2snLz4KPC9nPgo8L2c+Cjwvc3ZnPgo=" alt="Diagram" width="537" height="252">
+</div>
+<div class="title">Bild 2. Nach der Anweisung <code>++argv</code> zeigt <code>argv</code> auf das <strong>zweite</strong> Wort der Komandozeile (das erste Wort ist der Name des Programms)</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dynamische_rohe_arrays_im_freispeicher"><a class="anchor" href="#_dynamische_rohe_arrays_im_freispeicher"></a><a class="link" href="#_dynamische_rohe_arrays_im_freispeicher">6. Dynamische rohe Arrays im Freispeicher</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Der Name <em>statisches</em> Array bezieht sich auf die <em>Dimensionierung</em>, die ein zur Compilezeit konstanter Ausdruck sein
+muss. <em>Dynamische</em> Arrays können zur <em>Laufzeit</em> variabel dimensioniert werden. Als Konsequenz daraus können sie nicht
+als lokale / globale Variable sondern nur im Freispeicher erzeugt werden. Sie müssen daher wieder explizit gelöscht werden.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Wie für singuläre Objekte im Freispeicher gibt es auch für Arrays im Freispeicher
+<a href="ppcP0700.html#smartpointer">Intelligente Zeiger</a>. Diese sollen zur Definition der <em>Eigentümerschaft</em>
+verwendet werden.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 10. Zeilen aus der Datei <a href="../src/ppc10/ppc1020.cc" target="newwindows"><code>ppc1020.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;memory&gt;</span>
+<span class="linenos"> 3</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 4</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">;</span>
+<span class="linenos"> 5</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-kt">double</span><span class="tok-p">[]</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">up1</span><span class="tok-p">{</span><span class="tok-k">new</span><span class="tok-w"> </span><span class="tok-kt">double</span><span class="tok-p">[</span><span class="tok-n">length</span><span class="tok-p">]};</span><span class="tok-w"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">unique_ptr</span><span class="tok-o">&lt;</span><span class="tok-kt">double</span><span class="tok-p">[]</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">up2</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-kt">double</span><span class="tok-p">[]</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">length</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-k">auto</span><span class="tok-w"> </span><span class="tok-n">up3</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">make_unique</span><span class="tok-o">&lt;</span><span class="tok-kt">double</span><span class="tok-p">[]</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">length</span><span class="tok-p">);</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-n">up3</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mf">42.0</span><span class="tok-p">;</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">size_t</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-p">{</span><span class="tok-mi">0</span><span class="tok-p">};</span><span class="tok-w"> </span><span class="tok-n">i</span><span class="tok-w"> </span><span class="tok-o">&lt;</span><span class="tok-w"> </span><span class="tok-n">length</span><span class="tok-p">;</span><span class="tok-w"> </span><span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">10</span><span class="tok-w">        </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">up3</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">12</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Wie schon bei singulären Objekten sollte auch bei rohen Arrays im Freispeicher diese explizite Erzeugung mit dem <code>new</code>-Operator nur in <strong>Ausnahmefällen</strong> verwendet werden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Dies ist die <em>präferierte</em> Variante gegenüber oben.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Die automatische <em>Typinferenz</em> spart die redundate Typangabe.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Der <strong>UP</strong> für Arrays besitzt auch einen <em>Subscript</em>-Operator.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 8. Ausgabe des Programms: <code>ppc1020</code></div>
+<div class="content">
+<pre class="nowrap">42
+0
+0
+0
+0</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_alternativen_für_rohe_arrays_der_empfohlene_weg"><a class="anchor" href="#_alternativen_für_rohe_arrays_der_empfohlene_weg"></a><a class="link" href="#_alternativen_für_rohe_arrays_der_empfohlene_weg">7. Alternativen für <em>rohe</em> Arrays: der empfohlene Weg</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Mit den <a href="http://en.cppreference.com/w/cpp/container">Container</a>n der <code>C++</code>-Standardbibliothek bieten sich genug effiziente und elegante Alternativen zu den
+<em>rohen</em> Arrays.</p>
+</div>
+<div class="paragraph">
+<p><strong class="red">Daher sind rohe Arrays grundsätzlich zugunsten von Containern zu vermeiden</strong></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="stdarray"><a class="anchor" href="#stdarray"></a><a class="link" href="#stdarray">7.1. Generische Alternative für statische Arrays: <code>std::array&lt;T, size&gt;</code></a></h3>
+<div class="paragraph">
+<p>Der Vorteil von <a href="http://en.cppreference.com/w/cpp/container/array">std::array</a> ist die Kompatibilität zur <em>ranged-based</em>-<code>for</code>-Schleife <a href="http://en.cppreference.com/w/cpp/language/range-for">range-for</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 11. Zeilen aus der Datei <a href="../src/ppc10/ppc1030.cc" target="newwindows"><code>ppc1030.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;array&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;utility&gt;</span>
+<span class="linenos"> 4</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cassert&gt;</span>
+<span class="linenos"> 5</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">absoluteSum</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">array</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-p">,</span><span class="tok-mi">5</span><span class="tok-o">&gt;&amp;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 6</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos"> 8</span><span class="tok-w">        </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">abs</span><span class="tok-p">(</span><span class="tok-n">x</span><span class="tok-p">);</span>
+<span class="linenos"> 9</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-p">;</span>
+<span class="linenos">11</span><span class="tok-p">}</span>
+<span class="linenos">12</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">13</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">array</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{{</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-3</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-4</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">}};</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">absoluteSum</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">15</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Notwendiges <code>include</code> für den Typ <code>std::array&lt;T, size&gt;</code> (s.u.)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Auch die Dimensionierung muss in die Parameterdeklaration übernommen werden!</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Vorteil gegenüber <em>rohen</em> Arrays: die Dimensionierungsinformation ist verfügbar, so dass diese Form der <code>for</code>-Schleife angewendet werden kann.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Definition eines statischen Arrays.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 9. Ausgabe des Programms: <code>ppc1030</code></div>
+<div class="content">
+<pre class="nowrap">15</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="stdvector"><a class="anchor" href="#stdvector"></a><a class="link" href="#stdvector">7.2. Generische Alternative für dynamische Arrays <code>std::vector&lt;T&gt;</code></a></h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Der <em>generische</em> Container <a href="http://en.cppreference.com/w/cpp/container/vector">std::vector</a> ist <em>der</em> Allzweck Container in der <code>C++</code>-Standardbibliothek. Die
+effiziente Implementierung (s.a. <a href="ppcP0800.html#move">Verschiebungsoperationen</a>)
+macht andere Array-Formen i.A. überflüssig.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Quelltext 12. Zeilen aus der Datei <a href="../src/ppc10/ppc1040.cc" target="newwindows"><code>ppc1040.cc</code></a>  (einige Zeilen nicht dargestellt)</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="linenos"> 1</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;iostream&gt;</span>
+<span class="linenos"> 2</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;vector&gt;</span><span class="tok-c1"> </span><i class="conum" data-value="1"></i><b>(1)</b>
+<span class="linenos"> 3</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;utility&gt;</span>
+<span class="linenos"> 4</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;cassert&gt;</span>
+<span class="linenos"> 5</span><span class="tok-cp">#include</span><span class="tok-w"> </span><span class="tok-cpf">&lt;numeric&gt;</span>
+<span class="linenos"> 6</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">absoluteSum</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;&amp;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos"> 7</span><span class="tok-w">    </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="linenos"> 8</span><span class="tok-w">    </span><span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-o">&amp;</span><span class="tok-w"> </span><span class="tok-n">x</span><span class="tok-o">:</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-w"> </span><i class="conum" data-value="2"></i><b>(2)</b>
+<span class="linenos"> 9</span><span class="tok-w">        </span><span class="tok-n">sum</span><span class="tok-w"> </span><span class="tok-o">+=</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">abs</span><span class="tok-p">(</span><span class="tok-n">x</span><span class="tok-p">);</span>
+<span class="linenos">10</span><span class="tok-w">    </span><span class="tok-p">}</span>
+<span class="linenos">11</span><span class="tok-w">    </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">sum</span><span class="tok-p">;</span>
+<span class="linenos">12</span><span class="tok-p">}</span>
+<span class="linenos">13</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-nf">main</span><span class="tok-p">()</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">14</span><span class="tok-w">    </span><span class="tok-k">const</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span><span class="tok-w"> </span><span class="tok-n">array</span><span class="tok-w"> </span><span class="tok-o">=</span><span class="tok-w"> </span><span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-3</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">-4</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-mi">5</span><span class="tok-p">};</span>
+<span class="linenos">15</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">absoluteSum</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">16</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span>
+<span class="linenos">17</span><span class="tok-w">              </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">accumulate</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">begin</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">end</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">)</span><span class="tok-w"> </span><i class="conum" data-value="3"></i><b>(3)</b>
+<span class="linenos">18</span><span class="tok-w">              </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">19</span><span class="tok-w">    </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">cout</span><span class="tok-w"> </span><span class="tok-o">&lt;&lt;</span>
+<span class="linenos">20</span><span class="tok-w">              </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">accumulate</span><span class="tok-p">(</span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">begin</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">end</span><span class="tok-p">(</span><span class="tok-n">array</span><span class="tok-p">),</span><span class="tok-w"> </span><span class="tok-mi">0</span><span class="tok-p">,</span>
+<span class="linenos">21</span><span class="tok-w">    </span><span class="tok-p">[](</span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">init</span><span class="tok-p">,</span><span class="tok-w"> </span><span class="tok-kt">int</span><span class="tok-w"> </span><span class="tok-n">element</span><span class="tok-p">)</span><span class="tok-w"> </span><span class="tok-p">{</span>
+<span class="linenos">22</span><span class="tok-w">        </span><span class="tok-k">return</span><span class="tok-w"> </span><span class="tok-n">init</span><span class="tok-w"> </span><span class="tok-o">+</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">abs</span><span class="tok-p">(</span><span class="tok-n">element</span><span class="tok-p">);</span>
+<span class="linenos">23</span><span class="tok-w">    </span><span class="tok-p">})</span><span class="tok-w"> </span><i class="conum" data-value="4"></i><b>(4)</b>
+<span class="linenos">24</span><span class="tok-w">            </span><span class="tok-o">&lt;&lt;</span><span class="tok-w"> </span><span class="tok-n">std</span><span class="tok-o">::</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+<span class="linenos">25</span><span class="tok-p">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Notwendiges <code>include</code> für den DT <code>std::vector&lt;T&gt;</code> (s.u.)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Diese sog. <code>range-based</code> <code>for</code>-Schleife kann auf den DT <code>std::vector&lt;T&gt;</code> angewendet werden.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Alternative Akkumulation durch Anwendung eines <em>Algorithmus</em> aus der Standardbibliothek. Achtung: dies ist <em>keine</em> Summation des Betrages der Elemente!</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Dieses <em>Funktionsobjekt</em> wird für jede Iteration aufgerufen und bewirkt die Betragsaddition.</td>
+</tr>
+</table>
+</div>
+<div class="literalblock output">
+<div class="title">Ausgabe 10. Ausgabe des Programms: <code>ppc1040</code></div>
+<div class="content">
+<pre class="nowrap">15
+1
+15</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.12<br>
+Last updated 2026-09-28 00:00:00 +0200
+</div>
+</div>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a><br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International Lizenz</a>.
+</body>
+</html>
