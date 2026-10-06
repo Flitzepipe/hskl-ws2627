@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProgC++ – Übung 03: Klassen und komplexe Zahlen</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Segoe UI", Calibri, sans-serif; font-size: 10pt;
+       color: #263238; line-height: 1.5; margin: 0;
+       background: #fff; }
+h1.doc-title { color: #1565c0; font-size: 19pt; text-align: center;
+               margin: 0 0 8px; border-bottom: 3px solid #1565c0;
+               padding-bottom: 8px; }
+h2 { color: #0d47a1; font-size: 13.5pt; margin: 20px 0 8px;
+     border-bottom: 1px solid #bbdefb; padding-bottom: 3px;
+     page-break-after: avoid; }
+h3 { color: #333; font-size: 11.5pt; margin: 14px 0 6px; }
+p { margin: 6px 0; }
+ul { margin: 6px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code { font-family: Consolas, "Courier New", monospace; background: #eceff1;
+       padding: 1px 4px; border-radius: 3px; font-size: 9pt; color: #0d47a1; }
+.box-info, .box-warn, .box-merke, .box-ok { padding: 8px 12px;
+     border-radius: 6px; margin: 8px 0; page-break-inside: avoid; }
+.box-info { background: #e3f2fd; border-left: 4px solid #1976d2; }
+.box-warn { background: #fff3e0; border-left: 4px solid #f57c00; }
+.box-merke { background: #ede7f6; border-left: 4px solid #7e57c2; }
+.box-ok { background: #e8f5e9; border-left: 4px solid #388e3c; }
+.codeblock { border: 1px solid #cfd8dc; border-radius: 6px;
+             margin: 8px 0 10px; page-break-inside: avoid; overflow: hidden; }
+.codehead { background: #263238; color: #fff; font-family: Consolas,
+            monospace; font-size: 8pt; padding: 3px 10px;
+            display: flex; justify-content: space-between; align-items: center; }
+.clang { letter-spacing: 0.5px; }
+.copybtn { appearance: none; background: transparent; color: #fff;
+           border: none; cursor: pointer; font-family: "Segoe UI", sans-serif;
+           font-size: 8pt; display: inline-flex; align-items: center;
+           gap: 5px; padding: 1px 0; }
+.copybtn:hover { color: #90caf9; }
+.copybtn.copied { color: #a5d6a7; }
+pre { margin: 0; padding: 8px 12px; background: #f7f9fb;
+      font-family: Consolas, "Courier New", monospace; font-size: 9pt;
+      line-height: 1.45; white-space: pre-wrap; }
+hr { border: none; border-top: 1px solid #cfd8dc; margin: 14px 0; }
+.foot { text-align: center; color: #78909c; font-size: 8.5pt; margin-top: 16px; }
+@media print { .copybtn { display: none; } }
+</style>
+</head>
+<body>
+<h1 class="doc-title">ProgC++ – Übung 03: Klassen und komplexe Zahlen</h1>
+<p><strong>Selbst definierte Datentypen: die Klasse <code>ComplexNumber</code> in drei Ausbaustufen</strong></p>
+<p>Vorlesung Programmieren in C++ · Medieninformatik · Prof. Adrian Müller · Hochschule Kaiserslautern · Wintersemester 2026/27</p>
+<hr>
+<h2>✅ Das bringen Sie mit (aus Übung 02)</h2>
+<p>In Übung 02 („Visual Studio Code") haben Sie Ihre Entwicklungsumgebung eingerichtet. Das setzen wir heute voraus:</p>
+<ul><li>VS Code ist installiert – <code>code --version</code> zeigt eine Versionsnummer.</li><li>Die Erweiterung <strong>„C/C++"</strong> (Microsoft, <code>ms-vscode.cpptools</code>) ist installiert.</li><li>Hello World läuft in VS Code: Übersetzen mit <code>Strg+Shift+B</code>, Starten im eingebauten Terminal.</li><li>Sie haben eine <code>.vscode/tasks.json</code> gesehen und verstanden (command, args, problemMatcher).</li><li><strong>Bonus aus Blatt 02</strong> (empfohlen, nicht Pflicht): Mehrdateien-Projekt <code>main.cc</code> + <code>utils.cc</code> + <code>utils.h</code> mit erweiterter tasks.json.</li></ul>
+<div class="box-info">📖 <strong>INFO:</strong> Fehlt etwas davon? Schlagen Sie in der Anleitung zu Übung 02 nach. Und: Fragen Sie in der Übung – dafür sind wir da.</div>
+<div class="box-info">📖 <strong>INFO:</strong> 🤖 <strong>Kurz notiert – Copilot:</strong> Falls VS Code noch nach einer Copilot-Anmeldung fragt: <strong>überspringen</strong> (nicht anmelden). Copilot ist ab Mitte des Semesters Thema (Stufe 3 der Vorlesung) – und gilt dann weiterhin: <em>Copilot-Vorschläge müssen Sie immer verstehen und erklären können.</em></div>
+<h2>🎯 Das lernen Sie heute</h2>
+<p>Heute schreiben wir unsere <strong>erste eigene Klasse</strong> – und bauen sie in drei Ausbaustufen bewusst weiter:</p>
+<ul><li><strong>Version 1:</strong> Klasse <code>ComplexNumber</code> mit <strong>öffentlichen</strong> Datenelementen – wir erleben, warum das problematisch ist.</li><li><strong>Version 2:</strong> <strong>Initialisierung</strong> der Datenelemente – in-class-Initialisierer (equal- und brace-Form), Konstruktor mit Initialisierungsliste.</li><li><strong>Version 3:</strong> <strong>Kapselung</strong>: Datenelemente werden <code>private</code>, Zugriff über <strong>Beobachter-Elementfunktionen</strong>.</li></ul>
+<div class="box-info">📖 <strong>INFO:</strong> Begleitthemen aus der Vorlesung: Elementfunktionen, Zugriffsspezifizierer (<code>public</code>/<code>private</code>), Objekte vs. Klassen, <code>const</code>-Qualifizierung von Beobachtern.</div>
+<h2>0️⃣ Vorbereitung: Übungsordner für Blatt 03</h2>
+<p>Wir arbeiten weiter in Ihrem Übungsordner <code>progcpp-ubungen</code> (aus Übung 01). Legen Sie dort einen Ordner für heute an und öffnen Sie ihn in VS Code.</p>
+<p><strong>Schritt 1 – In den Übungsordner wechseln</strong> (🪟 🍎 🐧 identisch):</p>
+<div class="codeblock"><div class="codehead"><span class="clang">bash</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>cd progcpp-ubungen</pre></div>
+<p><strong>Schritt 2 – Ordner für heute anlegen und VS Code öffnen</strong> (alles im Übungsordner; 🪟 🍎 🐧 identisch):</p>
+<div class="codeblock"><div class="codehead"><span class="clang">bash</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>mkdir uebung03
+cd uebung03
+code .</pre></div>
+<div class="box-ok">✅ <strong>So sieht Erfolg aus:</strong> VS Code öffnet mit dem (noch leeren) Ordner <code>uebung03</code> im Explorer links. „Do you trust the authors?" → <strong>Yes</strong>.</div>
+<div class="box-info">📖 <strong>INFO:</strong> Falls VS Code beim Öffnen fragt, ob es die C/C++-Konfiguration neu erkennen soll: <strong>nein</strong> – wir legen unsere Build-Konfiguration gleich selbst an.</div>
+<h2>1️⃣ Aufgabe 1: Eine Klasse für komplexe Zahlen (Version 1 – öffentlich)</h2>
+<p>Komplexe Zahlen bestehen aus <strong>Realteil</strong> und <strong>Imaginärteil</strong> (kartesische Form): z = a + b·i. Wir modellieren das als Klasse <code>ComplexNumber</code> mit zwei <code>double</code>-Datenelementen.</p>
+<p><strong>Schritt 1 – Klassendeklaration:</strong> Erzeugen Sie eine Datei <code>complexnumber01.h</code> mit folgendem Inhalt:</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#pragma once
+
+class ComplexNumber
+{
+public:
+    double mReal;
+    double mImag;
+};</pre></div>
+<p><strong>Schritt 2 – Hauptprogramm:</strong> Erzeugen Sie eine Datei <code>part01.cc</code> mit der <strong>freien Funktion <code>int main()</code></strong> – genau eine Datei pro Projekt darf sie enthalten:</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#include &lt;iostream&gt;
+#include "complexnumber01.h"
+
+int main()
+{
+    ComplexNumber cn1;
+    std::cout &lt;&lt; "cn1[" &lt;&lt; cn1.mReal &lt;&lt; "," &lt;&lt; cn1.mImag &lt;&lt; "]"
+              &lt;&lt; std::endl;
+
+    const ComplexNumber cn2{1.0, 2.0};
+    std::cout &lt;&lt; "cn2[" &lt;&lt; cn2.mReal &lt;&lt; "," &lt;&lt; cn2.mImag &lt;&lt; "]"
+              &lt;&lt; std::endl;
+}</pre></div>
+<p><strong>Schritt 3 – Übersetzen und starten:</strong> Nutzen Sie die Ein-Datei-Methode aus Blatt 02: <code>part01.cc</code> öffnen, dann <code>Strg+Shift+B</code>. Danach starten Sie im eingebauten Terminal.</p>
+<p>🪟 <strong>Windows:</strong></p>
+<div class="codeblock"><div class="codehead"><span class="clang">bat</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>part01</pre></div>
+<p>🍎 <strong>macOS / 🐧 Linux:</strong></p>
+<div class="codeblock"><div class="codehead"><span class="clang">bash</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>./part01</pre></div>
+<div class="box-warn">⚠️ <strong>ACHTUNG – die Compiler-Falle:</strong> Falls das Dropdown (oder der erste ▶-Klick) „C/C++: <strong>cl.exe</strong> build active file" anbietet: <strong>NICHT wählen</strong> – <code>cl.exe</code> ist der Microsoft-Compiler und funktioniert nur in speziellen VS-Terminals (Fehler: <code>'cl.exe' is not recognized</code>). Immer die <strong>g++</strong>-Variante wählen! Ab Aufgabe 2 pinnt Ihre eigene <code>tasks.json</code> den g++-Build fest.</div>
+<p><strong>Schritt 4 – Beobachten und notieren:</strong></p>
+<ul><li>Was gibt die Zeile mit <code>cn1</code> aus – und <strong>warum</strong>? (Stichwort: die Datenelemente wurden <strong>nicht initialisiert</strong>.)</li><li>Welchen <strong>Nachteil</strong> hat es, dass die Datenelemente öffentlich sind – und dass jeder sie von außen beliebig lesen und schreiben kann?</li></ul>
+<div class="box-info">📖 <strong>INFO:</strong> Der Compiler warnt Sie bereits: g++ meldet mit den Warn-Flags etwa <code>'cn1.ComplexNumber::mReal' is used uninitialized</code>. Genau für solche Meldungen lohnt sich der rote Wellenstrich und die Problems-Ansicht (<code>Strg+Shift+M</code>) aus Blatt 02.</div>
+<div class="box-ok">✅ <strong>So sieht Erfolg aus:</strong> Das Programm läuft, gibt für <code>cn2</code> korrekt <code>cn2[1,2]</code> aus – und für <code>cn1</code> z. B.:</div>
+<div class="codeblock"><div class="codehead"><span class="clang">text</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>cn1[3.31e-322, 6.95e-310]
+cn2[1,2]</pre></div>
+<h2>2️⃣ Aufgabe 2: Initialisierungen (Version 2 – mit Initialisierern)</h2>
+<p>Die erste Version ist <strong>fehlerhaft</strong> – die Objekte starten mit unbestimmten Werten. <strong>Diskutieren Sie mögliche Gründe!</strong> Dann beheben wir das.</p>
+<p><strong>Schritt 1 – Verständnisfragen</strong> (beantworten Sie schriftlich, als Kommentarblock in <code>part02.cc</code>):</p>
+<ul><li>Was versteht man unter <strong>Standard-Initialisierung</strong> für primitive Datentypen in C++?</li><li>Welche <strong>Arten der Initialisierung</strong> von Datenelementen einer Klasse existieren? (Tipp: <em>in-class</em>-Initialisierer in equal-Form <code>= 0.0</code> und in brace-Form <code>{0.0}</code>.)</li></ul>
+<p><strong>Schritt 2 – Header mit Initialisierern:</strong> Erzeugen Sie <code>complexnumber02.h</code> – die Klasse erhält jetzt <strong>in-class-Initialisierer</strong> und einen <strong>Konstruktor</strong>:</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#pragma once
+
+class ComplexNumber
+{
+public:
+    ComplexNumber() = default;
+    ComplexNumber(double real, double imag);
+
+    double mReal = 0.0;  // equal-Form
+    double mImag{0.0};   // brace-Form (besser!)
+};</pre></div>
+<p><strong>Schritt 3 – Konstruktor-Definition:</strong> Erzeugen Sie <code>complexnumber02.cc</code> – die Definition steht <strong>außerhalb</strong> der Klasse und nutzt die <strong>Initialisierungsliste</strong>:</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#include "complexnumber02.h"
+
+ComplexNumber::ComplexNumber(const double real, const double imag) :
+    mReal{real}, mImag{imag}
+{
+}</pre></div>
+<p><strong>Schritt 4 – Hauptprogramm:</strong> Erzeugen Sie <code>part02.cc</code> (Kopie Ihrer <code>main()</code> aus Aufgabe 1 – diesmal mit <code>#include "complexnumber02.h"</code>):</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#include &lt;iostream&gt;
+#include "complexnumber02.h"
+
+int main()
+{
+    const ComplexNumber cn1;
+    std::cout &lt;&lt; "cn1[" &lt;&lt; cn1.mReal &lt;&lt; "," &lt;&lt; cn1.mImag &lt;&lt; "]"
+              &lt;&lt; std::endl;
+
+    const ComplexNumber cn3{4.0, 5.0};
+    std::cout &lt;&lt; "cn3[" &lt;&lt; cn3.mReal &lt;&lt; "," &lt;&lt; cn3.mImag &lt;&lt; "]"
+              &lt;&lt; std::endl;
+}</pre></div>
+<p><strong>Schritt 5 – tasks.json für zwei Dateien:</strong> Ab jetzt besteht das Projekt aus <code>part02.cc</code> <strong>und</strong> <code>complexnumber02.cc</code> – der Ein-Datei-Task aus Blatt 02 reicht nicht mehr (sonst: Linker-Fehler <code>undefined reference to ...</code>). Erzeugen Sie den Ordner <code>.vscode</code> (mit führendem Punkt!) und darin die Datei <code>tasks.json</code> – voller Pfad: <code>progcpp-ubungen\uebung03\.vscode\tasks.json</code> (relativ zum geöffneten Ordner also <code>.vscode\tasks.json</code>):</p>
+<div class="codeblock"><div class="codehead"><span class="clang">json</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C++ build uebung03",
+            "command": "g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-Wall", "-Wextra", "-std=c++20",
+                "${workspaceFolder}/part02.cc",
+                "${workspaceFolder}/complexnumber02.cc",
+                "-o",
+                "${workspaceFolder}/part02"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": ["$gcc"],
+            "group": { "kind": "build", "isDefault": true }
+        }
+    ]
+}</pre></div>
+<p>Danach: <code>Strg+Shift+B</code> – VS Code nimmt den Default-Task mit beiden Dateien. Starten wie in Aufgabe 1.</p>
+<div class="box-merke">🧠 <strong>MERKE:</strong> Genau <strong>eine</strong> Datei darf <code>int main()</code> enthalten. Header (<code>.h</code>) kommen <strong>nicht</strong> in <code>args</code> (sie wirken über <code>#include</code>). Wildcards wie <code>${workspaceFolder}/*.cc</code> <strong>funktionieren</strong> mit dem MSYS2-g++ (getestet: g++ 15.2.0 expandiert sie) – aber Vorsicht in diesem Workspace: <code>part01.cc</code>, <code>part02.cc</code> und <code>part03.cc</code> enthalten <strong>je ein <code>main()</code></strong>. Ein Wildcard würde alle drei einsammeln und mit „multiple definition of <code>main</code>" abbrechen. Deshalb: Dateien pro Task <strong>explizit</strong> listen.</div>
+<p><strong>Schritt 6 – Beobachten:</strong> Jetzt ist auch <code>cn1</code> korrekt initialisiert – die Warnung von Aufgabe 1 ist verschwunden.</p>
+<div class="box-ok">✅ <strong>So sieht Erfolg aus:</strong> <code>part02</code> läuft und gibt <code>cn1[0,0]</code> und <code>cn3[4,5]</code> aus. Sie können die drei Initialisierungsarten benennen und erklären, warum <code>= default</code> zusammen mit den in-class-Initialisierern hier nötig ist.</div>
+<h2>3️⃣ Aufgabe 3: Kapselung (Version 3 – private + Beobachter)</h2>
+<p><strong>Schritt 1 – Header mit Kapselung:</strong> Erzeugen Sie <code>complexnumber03.h</code> – die Datenelemente werden jetzt <strong><code>private</code></strong>, der Lese-Zugriff erfolgt über <strong>Beobachter-Elementfunktionen</strong>:</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#pragma once
+
+class ComplexNumber
+{
+public:
+    ComplexNumber() = default;
+    ComplexNumber(double real, double imag);
+
+    double real() const;
+    double imag() const;
+
+private:
+    double mReal = 0.0;
+    double mImag{0.0};
+};</pre></div>
+<p><strong>Schritt 2 – Definitionen:</strong> Erzeugen Sie <code>complexnumber03.cc</code> – Konstruktoren <strong>und</strong> Beobachter-Definitionen (alle außerhalb der Klasse):</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#include "complexnumber03.h"
+
+ComplexNumber::ComplexNumber(const double real, const double imag) :
+    mReal{real}, mImag{imag}
+{
+}
+
+double ComplexNumber::real() const
+{
+    return mReal;
+}
+
+double ComplexNumber::imag() const
+{
+    return mImag;
+}</pre></div>
+<p><strong>Schritt 3 – Hauptprogramm:</strong> Erzeugen Sie <code>part03.cc</code> – Ihre <code>main()</code> nutzt jetzt die Beobachter statt der Datenelemente:</p>
+<div class="codeblock"><div class="codehead"><span class="clang">cpp</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>#include &lt;iostream&gt;
+#include "complexnumber03.h"
+
+int main()
+{
+    const ComplexNumber cn1;
+    std::cout &lt;&lt; "cn1[" &lt;&lt; cn1.real() &lt;&lt; "," &lt;&lt; cn1.imag() &lt;&lt; "]"
+              &lt;&lt; std::endl;
+
+    const ComplexNumber cn2{1.0, 2.0};
+    std::cout &lt;&lt; "cn2[" &lt;&lt; cn2.real() &lt;&lt; "," &lt;&lt; cn2.imag() &lt;&lt; "]"
+              &lt;&lt; std::endl;
+}</pre></div>
+<p><strong>Schritt 4 – tasks.json erweitern:</strong> Ergänzen Sie in <code>.vscode/tasks.json</code> einen <strong>zweiten Task</strong> mit eigenem <code>label</code> (z. B. <code>"C++ build part03"</code>) und den Dateien <code>part03.cc</code> + <code>complexnumber03.cc</code> – analog zu Aufgabe 2, Schritt 5. Umschalten über „Terminal → Run Build Task…" (<code>Strg+Shift+B</code>).</p>
+<p><strong>Schritt 5 – Fehler provozieren (wichtig!):</strong> Versuchen Sie in <code>part03.cc</code> einmal, direkt auf <code>cn2.mReal</code> zuzugreifen (alte Zeile aus Aufgabe 1). Übersetzen – g++ meldet exakt:</p>
+<div class="codeblock"><div class="codehead"><span class="clang">text</span><button class="copybtn" type="button" title="Block in die Zwischenablage kopieren"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="cstate">kopieren</span></button></div><pre>error: 'double ComplexNumber::mReal' is private within this context</pre></div>
+<p>Das ist der <strong>Beweis der Kapselung</strong> – genau so soll es sein. Zeile zurückbauen.</p>
+<p><strong>Schritt 6 – Verständnisfragen:</strong></p>
+<ul><li>Warum <strong>müssen</strong> <code>real()</code> und <code>imag()</code> mit <code>const</code> qualifiziert werden? (Tipp: <code>cn2</code> ist ein <code>const</code>-Objekt.)</li><li>Was gewinnen wir durch <code>private</code> – obwohl der Code jetzt länger ist?</li></ul>
+<div class="box-ok">✅ <strong>So sieht Erfolg aus:</strong> <code>part03</code> läuft (<code>cn1[0,0]</code>, <code>cn2[1,2]</code>), der private-Zugriff-Test liefert den erwarteten Compilerfehler, und Sie können <code>const</code>-Korrektheit bei Beobachtern erklären.</div>
+<h2>➕ Zusatzaufgabe (freiwillig)</h2>
+<p>Bauen Sie einen <strong>vierten Ausbauschritt</strong>: Ergänzen Sie der Klasse <code>ComplexNumber</code> eine Elementfunktion <code>double abs() const</code>, die den Betrag √(re² + im²) liefert (<code>#include &lt;cmath&gt;</code>). Testen Sie mit <code>ComplexNumber{3.0, 4.0}</code> – erwartete Ausgabe: <code>5</code>.</p>
+<div class="box-info">📖 <strong>INFO:</strong> Wer noch mehr üben möchte: Bringen Sie die drei <code>main()</code>s dazu, Zahlen formatiert auszugeben (<code>std::setw</code>, <code>#include &lt;iomanip&gt;</code>).</div>
+<h2>🧠 Checkliste für heute</h2>
+<ul><li>① Ordner <code>uebung03</code> in <code>progcpp-ubungen</code> angelegt und in VS Code geöffnet</li><li>② Version 1: Klasse mit öffentlichen Datenelementen – Warnung „uninitialized" verstanden</li><li>③ Version 2: in-class-Initialisierer + Konstruktor mit Initialisierungsliste – Warnung weg</li><li>④ tasks.json auf zwei <code>.cc</code>-Dateien erweitert – Linker versteht, was zu tun ist</li><li>⑤ Version 3: <code>private</code> + Beobachter mit <code>const</code> – Kapselung bewiesen (Fehler provoziert!)</li><li>⑥ Zusatzaufgabe <code>abs()</code> (freiwillig)</li></ul>
+<div class="box-info">📖 <strong>INFO:</strong> 💡 <strong>Ausblick:</strong> <strong>Debugger</strong> – also das schrittweise Durchsteppen Ihrer Programme mit Breakpoints – ist Thema der <strong>nächsten</strong> Übung. Halten Sie Ihr VS-Code-Setup bereit: Die Debug-Konfiguration (F5, gdb/LLDB) wird dann Bestandteil des Blatts.</div>
+<hr>
+<p class="foot"><em>ProgC++ · Prof. Adrian Müller · Hochschule Kaiserslautern · WS 2026/27 · Blatt 03 (adaptiert aus „Aufgaben Woche 2" des ++C-Curriculums von Wilhelm Meier)</em></p>
+<script>
+(function () {
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll(".copybtn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var block = btn.closest(".codeblock");
+      var pre = block ? block.querySelector("pre") : null;
+      if (!pre) { return; }
+      var text = pre.innerText;
+      var state = btn.querySelector(".cstate");
+      function done() {
+        btn.classList.add("copied");
+        if (state) { state.textContent = "kopiert!"; }
+        setTimeout(function () {
+          btn.classList.remove("copied");
+          if (state) { state.textContent = "kopieren"; }
+        }, 1500);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {
+          fallbackCopy(text); done();
+        });
+      } else {
+        fallbackCopy(text); done();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -18,9 +18,10 @@
 - [Skript Software Engineering V2.0.pdf](/SE/Skript%20Software%20Engineering%20V2.0.pdf)
 
 #### Freitag 02.10.2026
+- [Skripte C++ ](/C++/Code/progcpp%20script%20src/script/)
 - [Übungs Skripte 01](/C++/Uebugnen/Uebung01-Anleitung.html)
 - [Übungs Skripte 02](/C++\Uebugnen/Uebung02-Anleitung.html)
 
 ### Week_2:
 #### Dienstag 06.10.2026
-- []()
+- [Übung Skripte 03](/C++/Uebugnen/Uebung03-Anleitung.html)
