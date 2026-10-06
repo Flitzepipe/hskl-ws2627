@@ -11,7 +11,9 @@
 #### [Software Engineering/SE](/SE/)
 
 ### Emotional Support Cat's
-#### [Discord Channel](https://discord.com/channels/1417815689397534760/1427143986400989265) Only for those that have Access to the Server!
+#### [Discord Channel](https://discord.com/channels/1417815689397534760/1427143986400989265)
+##### Only for those that have Access to the Server!
+##### Otherwhise the link will lead to an Access Denied error!
 
 
 ## Chronologically new files:
