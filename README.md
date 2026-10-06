@@ -1,6 +1,10 @@
 # HSKL WS 26/27
 ## This Repository has the purpose to safe the Documents given by my Uni
 
+#### [Campusboard](https://campusboard.hs-kl.de/portal/)
+#### [E-Mails](https://mail.zdv.net/owa/#path=/mail)
+#### [OLAT](https://olat.vcrp.de/auth/MyCoursesSite/0/Courses/0/Bookmarks/0)
+
 
 ## Subjects that have files uploaded here:
 
