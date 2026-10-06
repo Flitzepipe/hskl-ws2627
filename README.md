@@ -34,3 +34,4 @@
 ### Week_2:
 #### Dienstag 06.10.2026
 - [Übung Skripte 03](/C++/Uebugnen/Uebung03-Anleitung.html)
+- [Notizen BwB](/BWB/Notizen.md)
