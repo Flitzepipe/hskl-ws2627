@@ -1,0 +1,466 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProgC++ – Übung 02: Visual Studio Code</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef2f7;
+            color: #333;
+            line-height: 1.7;
+        }
+        .page {
+            max-width: 1060px;
+            margin: 40px auto;
+            padding: 40px 50px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+        .doc-header { text-align: center; border-bottom: 3px solid #1565c0; padding-bottom: 25px; margin-bottom: 30px; }
+        .doc-header h1 { color: #1565c0; font-size: 2.1em; margin-bottom: 10px; }
+        .doc-header .subtitle { color: #555; font-size: 1.15em; margin: 5px 0; }
+        .doc-header .meta { color: #999; font-size: 0.95em; font-style: italic; margin-top: 10px; }
+        .toc { background: #f0f4f8; border-radius: 12px; padding: 20px 25px; margin-bottom: 40px; }
+        .toc h2 { font-size: 1.1em; color: #333; margin-bottom: 10px; }
+        .toc ul { list-style: none; margin-left: 0; }
+        .toc li { margin: 6px 0; }
+        .toc a { color: #1565c0; text-decoration: none; font-weight: bold; }
+        .toc a:hover { text-decoration: underline; }
+        .section-badge {
+            display: inline-block; padding: 8px 16px; border-radius: 20px;
+            font-size: 0.9em; font-weight: bold; margin-bottom: 15px; color: white;
+        }
+        .sec-0 { background: #607d8b; }
+        .sec-a { background: #0078d4; }
+        .sec-b { background: #2e7d32; }
+        .sec-c { background: #e65100; }
+        .sec-d { background: #c62828; }
+        h2.section-title { color: #333; font-size: 1.7em; margin: 10px 0 20px 0; }
+        h2.section-title small { display: block; font-size: 0.55em; color: #777; font-weight: normal; }
+        .section { margin-bottom: 60px; }
+        .lead { margin-bottom: 25px; color: #444; }
+        .info-box { background: #e3f2fd; border-left: 4px solid #2196F3; padding: 15px 18px; border-radius: 8px; margin: 15px 0; }
+        .warn-box { background: #fff3e0; border-left: 4px solid #FF9800; padding: 15px 18px; border-radius: 8px; margin: 15px 0; }
+        .merke-box { background: #ede7f6; border-left: 4px solid #7e57c2; padding: 15px 18px; border-radius: 8px; margin: 15px 0; }
+        .step { display: flex; gap: 16px; margin-bottom: 30px; }
+        .step-num {
+            width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+            background: #1565c0; color: white; font-weight: bold; font-size: 1.05em;
+            display: flex; align-items: center; justify-content: center; margin-top: 3px;
+        }
+        .step-body { flex: 1; }
+        .step-body h3 { font-size: 1.12em; color: #222; margin-bottom: 8px; }
+        .step-body p { margin-bottom: 10px; }
+        .expected {
+            background: #e8f5e9; border-left: 4px solid #4CAF50;
+            padding: 12px 15px; border-radius: 8px; margin-top: 12px; font-size: 0.95em;
+        }
+        .expected strong { color: #2e7d32; }
+        code.inline {
+            background: #eceff1; padding: 2px 7px; border-radius: 4px;
+            font-family: Consolas, monospace; font-size: 0.92em; color: #0d47a1;
+        }
+        /* ---- 3-Spalten-Raster ---- */
+        .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 14px 0; align-items: stretch; }
+        @media (max-width: 950px) { .trio { grid-template-columns: 1fr; } }
+        .os-label { font-weight: bold; font-size: 0.88em; margin-bottom: 6px; padding-left: 2px; }
+        .os-win { color: #0078d4; }
+        .os-mac { color: #555; }
+        .os-lin { color: #dd4814; }
+        /* ---- Terminal-Optik (originalgetreu) ---- */
+        .terminal {
+            border-radius: 8px; overflow: hidden; margin: 0;
+            font-family: Consolas, Menlo, 'Courier New', monospace;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.16);
+            border: 1px solid rgba(0,0,0,0.15);
+        }
+        .term-title {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 10px; font-size: 0.74em; white-space: nowrap; overflow: hidden;
+        }
+        .term-title .tname { overflow: hidden; text-overflow: ellipsis; }
+        .term-title .tname.center { margin: 0 auto; }
+        .dots { display: flex; gap: 5px; flex-shrink: 0; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .dot.r { background: #ff5f56; } .dot.y { background: #ffbd2e; } .dot.g { background: #27c93f; }
+        .win-btns { margin-left: auto; flex-shrink: 0; letter-spacing: 2px; }
+        .term-body { padding: 10px 12px; font-size: 0.8em; line-height: 1.65; white-space: pre-wrap; overflow-wrap: break-word; overflow-x: auto; }
+        /* Windows: Eingabeaufforderung */
+        .t-cmd .term-title { background: #2d2d2d; color: #e6e6e6; }
+        .t-cmd .term-body { background: #0c0c0c; color: #cccccc; }
+        .t-cmd .pr { color: #ffffff; font-weight: bold; }
+        .t-cmd .err { color: #f87171; }
+        .t-cmd .cmd { color: #ffffff; font-weight: bold; }
+        /* macOS: Terminal.app */
+        .t-mac .term-title { background: #e9e9e9; color: #4a4a4a; border-bottom: 1px solid #d4d4d4; }
+        .t-mac .term-body { background: #ffffff; color: #1d1d1f; }
+        .t-mac .pr { color: #1d1d1f; font-weight: bold; }
+        .t-mac .err { color: #c62828; font-weight: bold; }
+        .t-mac .cmd { color: #1d1d1f; font-weight: bold; }
+        /* Ubuntu: GNOME Terminal */
+        .t-ub .term-title { background: #3b1830; color: #e6cfe3; }
+        .t-ub .term-body { background: #300a24; color: #f2f0f0; }
+        .t-ub .pr-u { color: #8ae234; font-weight: bold; }
+        .t-ub .pr-p { color: #729fcf; }
+        .t-ub .pr-s { color: #f2f0f0; font-weight: bold; }
+        .t-ub .err { color: #ef9a9a; font-weight: bold; }
+        .t-ub .cmd { color: #ffffff; font-weight: bold; }
+        /* Vollbreite Terminals (einspaltig) */
+        .terminal.wide { margin: 12px 0; }
+        .terminal.wide .term-body { font-size: 0.92em; padding: 14px 18px; }
+        /* ---- Code ---- */
+        .codebox {
+            background: #f5f7fa; border: 1px solid #dde3ea; border-radius: 10px; margin: 12px 0; padding: 16px 20px;
+            font-family: Consolas, monospace; font-size: 0.95em; color: #263238;
+            line-height: 1.8; overflow-x: auto;
+        }
+        .codebox .ln { color: #90a4ae; margin-right: 14px; user-select: none; }
+        /* ---- Installations-Spalten ---- */
+        .platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 25px 0; align-items: start; }
+        @media (max-width: 900px) { .platform-grid { grid-template-columns: 1fr; } }
+        .platform-card { border: 2px solid; border-radius: 14px; padding: 18px; }
+        .pc-win { border-color: #0078d4; background: #f5fafe; }
+        .pc-mac { border-color: #616161; background: #fafafa; }
+        .pc-lin { border-color: #dd4814; background: #fffaf5; }
+        .platform-card h4 { font-size: 1.1em; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 2px solid #ddd; }
+        .platform-card ol, .platform-card ul { margin-left: 20px; }
+        .platform-card li { margin-bottom: 11px; font-size: 0.93em; }
+        .platform-card li code.inline { font-size: 0.86em; }
+        .platform-card .terminal { margin: 8px 0; }
+        .platform-card .term-body { font-size: 0.78em; }
+        /* ---- Troubleshooting ---- */
+        .ts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        @media (max-width: 800px) { .ts-grid { grid-template-columns: 1fr; } }
+        .ts-card { border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; background: #fff; }
+        .ts-problem {
+            background: #ffebee; padding: 10px 15px; color: #b71c1c;
+            font-family: Consolas, monospace; font-weight: bold; font-size: 0.88em;
+        }
+        .ts-solution { padding: 12px 15px; font-size: 0.93em; }
+        .ts-solution ul { margin-left: 18px; }
+        .ts-solution li { margin-bottom: 6px; }
+        /* ---- Tabellen ---- */
+        table { width: 100%; margin: 15px 0; border-collapse: collapse; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #1565c0; color: white; }
+        tr:nth-child(even) { background: #f5f7fa; }
+        td code.inline { font-size: 0.86em; }
+        .doc-footer { text-align: center; color: #999; font-size: 0.9em; margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee; }
+        @media print {
+            body { background: #fff; }
+            .page { box-shadow: none; margin: 0; max-width: 100%; border-radius: 0; }
+            .trio, .platform-grid, .ts-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="doc-header">
+        <h1>🧰 ProgC++ – Übung 02: Visual Studio Code</h1>
+        <div class="subtitle">Die Entwicklungsumgebung: installieren, einrichten, Hello World mit tasks.json</div>
+        <div class="subtitle">Vorlesung Programmieren in C++ · Medieninformatik</div>
+        <div class="meta">Prof. Adrian Müller · Hochschule Kaiserslautern · Wintersemester 2026/27</div>
+    </div>
+
+    <div class="toc">
+        <h2>📑 Inhalt</h2>
+        <ul>
+            <li><a href="#voraus">✅ Das bringen Sie mit (aus Übung 01)</a></li>
+            <li><a href="#vscode">1️⃣ Visual Studio Code installieren</a></li>
+            <li><a href="#basisset">2️⃣ Das C++-Basis-Set für VS Code</a></li>
+            <li><a href="#helloworld">3️⃣ Hello World in VS Code (mit tasks.json)</a></li>
+            <li><a href="#aufgabe02">📝 Übungsaufgabe #02: Das offizielle Tutorial</a></li>
+        </ul>
+    </div>
+
+        <!-- ================================================================ -->
+        <div class="section" id="voraus">
+            <span class="section-badge sec-b">Voraussetzung</span>
+            <h2 class="section-title">Das bringen Sie mit ✅
+                <small>Ergebnisse aus Übung 01 – Grundlage für heute</small>
+            </h2>
+            <p class="lead">In Übung 01 („G++ und einfache Entwicklungsumgebung“) haben Sie die Kommandozeile
+                kennengelernt und Ihr erstes Programm von Hand übersetzt. Das setzen wir heute voraus:</p>
+            <div class="expected">✅ <strong>Checkliste – das sollte erfüllt sein:</strong>
+                <ul style="margin:8px 0 0 18px">
+                    <li>Der C++-Compiler <code class="inline">g++</code> ist installiert und <code class="inline">g++ --version</code> zeigt eine Versionsnummer.</li>
+                    <li>Sie haben einen Übungsordner <code class="inline">progcpp-ubungen</code> in Ihrem Home-Verzeichnis.</li>
+                    <li>Darin liegt Ihr <code class="inline">hello.cpp</code> – übersetzt und gestartet über die Kommandozeile: <code class="inline">g++ -o hello(.exe) hello.cpp</code> → <code class="inline">./hello</code> bzw. <code class="inline">hello.exe</code>.</li>
+                    <li>Sie können ein Terminal öffnen, mit <code class="inline">cd</code>/<code class="inline">pwd</code> navigieren und mit <code class="inline">dir</code>/<code class="inline">ls</code> den Ordnerinhalt prüfen.</li>
+                </ul>
+            </div>
+            <div class="info-box">📌 <strong>Fehlt etwas davon?</strong> Schlagen Sie in der Anleitung zu Übung 01
+                nach – dort finden Sie Terminal-Grundlagen, Hello World per Kommandozeile und den Umgang mit
+                Fehlermeldungen Schritt für Schritt. Und: Fragen Sie in der Übung – dafür sind wir da.</div>
+            <p class="lead">Heute steigen wir vom einfachen Editor auf eine richtige <strong>Entwicklungsumgebung</strong>
+                um: <strong>Visual Studio Code</strong> (kurz: <strong>VS Code</strong>).</p>
+        </div>
+        <!-- ================================================================ -->
+        <div class="section" id="vscode">
+            <span class="section-badge sec-e">Übung 01</span>
+            <h2 class="section-title">Visual Studio Code einrichten 🧰
+                <small>Der nächste Schritt: vom einfachen Editor zur Entwicklungsumgebung</small>
+            </h2>
+            <p class="lead">Bisher haben Sie im einfachen Editor (Notepad &amp; Co.) geschrieben. Der nächste
+                Schritt: <strong>Visual Studio Code</strong> (kurz: <strong>VS Code</strong>). Er zeigt C++-Code
+                <em>bunt</em> an (Schlüsselwörter, Texte, Kommentare in verschiedenen Farben), markiert Fehler
+                bereits beim Tippen, rückt automatisch ein und kann Ihren Code per Tastendruck übersetzen.
+                Ab jetzt ist VS Code die Arbeitsumgebung dieser Vorlesung – und mit dem Basis-Set ist sie in
+                wenigen Minuten eingerichtet.</p>
+
+            <div class="info-box">🤖 <strong>Kurz notiert – Copilot:</strong> VS Code bietet beim ersten Start die
+                optionale Copilot-Anmeldung an. Für jetzt: einfach überspringen (nicht anmelden). Copilot ist als
+                <strong>Schritt 2</strong> Thema der Vorlesung.</div>
+
+            <h3 style="margin-top:30px">1️⃣ VS Code installieren</h3>
+            <div class="trio">
+                <div>
+                    <div class="os-label os-win">🪟 Windows</div>
+                    <div class="terminal t-cmd">
+                        <div class="term-title">
+                            <span class="tname">Eingabeaufforderung</span>
+                            <span class="win-btns">— □ ✕</span>
+                        </div>
+                        <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">winget install Microsoft.VisualStudioCode</span>
+<span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">code --version</span>
+1.95.3</div>
+                    </div>
+                    <p style="font-size:0.85em">oder: Grafisch von <code class="inline">code.visualstudio.com</code> → „Download for Windows“ → Installer durchklicken.</p>
+                </div>
+                <div>
+                    <div class="os-label os-mac">🍎 macOS</div>
+                    <div class="terminal t-mac">
+                        <div class="term-title">
+                            <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                            <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                        </div>
+                        <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">brew install --cask visual-studio-code</span>
+<span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">code --version</span>
+1.95.3</div>
+                    </div>
+                    <p style="font-size:0.85em">oder: Grafisch von <code class="inline">code.visualstudio.com</code> → dmg-Datei öffnen → VS Code in den Programmordner ziehen.</p>
+                </div>
+                <div>
+                    <div class="os-label os-lin">🐧 Linux (Ubuntu)</div>
+                    <div class="terminal t-ub">
+                        <div class="term-title">
+                            <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                            <span class="tname center">anna@ubuntu: ~</span>
+                            <span class="win-btns">— □ ✕</span>
+                        </div>
+                        <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">sudo snap install code --classic</span>
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">code --version</span>
+1.95.3</div>
+                    </div>
+                    <p style="font-size:0.85em">oder über <code class="inline">code.visualstudio.com</code> (deb-Paket).</p>
+                </div>
+            </div>
+            <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> <code class="inline">code --version</code> druckt eine Versionsnummer. (Funktioniert der Befehl <code class="inline">code</code> nicht, obwohl VS Code installiert ist: Windows/macOS einmal <em>abmelden und neu anmelden</em> bzw. VS Code einmal öffnen und mit <code class="inline">Strg+Shift+P</code> → „Shell Command: Install ‚code‘ command in PATH“ bestätigen.)</div>
+
+            <h3 id="basisset" style="margin-top:30px">2️⃣ Das C++-Basis-Set für VS Code – genau <em>eine</em> Erweiterung</h3>
+            <p>Für unser Hello-World-Setup brauchen Sie <strong>nur die eine offizielle Erweiterung</strong> – kein
+                „Extension Pack“, keine Themes:</p>
+            <div class="info-box">
+                <strong>Erweiterung: „C/C++“ (von Microsoft)</strong> – Marketplace-ID: <code class="inline">ms-vscode.cpptools</code><br>
+                📖 Was sie bringt: farbige Code-Darstellung (Syntax-Highlighting), automatische Vervollständigung
+                beim Tippen (IntelliSense), Markierung unbekannter Befehle, und die <code class="inline">tasks.json</code>-Logik,
+                mit der VS Code weiß, <em>wie</em> Ihr Code zu übersetzen ist.
+            </div>
+            <ol>
+                <li>VS Code starten</li>
+                <li>Links in der Seitenleiste auf das <strong>Erweiterungen-Symbol</strong> klicken (die vier
+                    Quadrate; Tastenkürzel <code class="inline">Strg+Shift+X</code>)</li>
+                <li>Im Suchfeld <strong>C/C++</strong> eintippen</li>
+                <li>Den Eintrag <strong>„C/C++“</strong> mit dem blauen Microsoft-Logo und „ms-vscode.cpptools“ wählen →
+                    <strong>Install</strong> klicken</li>
+                <li><em>Nicht</em> nötig fürs Erste: „C/C++ Extension Pack“, „C/C++ DevTools“ – alles Weitere
+                    kommt später in der Vorlesung</li>
+            </ol>
+            <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> In der Erweiterungs-Liste steht bei „C/C++“ nun ein
+                Zahnrad statt eines Install-Buttons. Mehr brauchen wir nicht – der Compiler selbst (g++) wurde
+                bereits in Teil a installiert, die Erweiterung ist nur der „Dolmetscher“ zwischen VS Code und g++.</div>
+
+            <h3 id="helloworld" style="margin-top:30px">3️⃣ Hello World in VS Code – mit der entscheidenden <code class="inline">tasks.json</code></h3>
+
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h3>Projektordner in VS Code öffnen</h3>
+                    <p>VS Code denkt in <strong>Ordnern</strong> („Workspaces“). Öffnen Sie Ihren Übungsordner:</p>
+                    <div class="trio">
+                        <div>
+                            <div class="os-label os-win">🪟 Windows</div>
+                            <div class="terminal t-cmd">
+                                <div class="term-title">
+                                    <span class="tname">Eingabeaufforderung</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr">C:\Users\Anna&gt;</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr">C:\Users\Anna\progcpp-ubungen&gt;</span> <span class="cmd">code .</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-mac">🍎 macOS</div>
+                            <div class="terminal t-mac">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@MacBook-Pro — -zsh — 80×24</span>
+                                </div>
+                                <div class="term-body"><span class="pr">anna@MacBook-Pro ~ %</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr">anna@MacBook-Pro progcpp-ubungen %</span> <span class="cmd">code .</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="os-label os-lin">🐧 Linux</div>
+                            <div class="terminal t-ub">
+                                <div class="term-title">
+                                    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+                                    <span class="tname center">anna@ubuntu: ~</span>
+                                    <span class="win-btns">— □ ✕</span>
+                                </div>
+                                <div class="term-body"><span class="pr-u">anna@ubuntu</span><span class="pr-p">:~</span><span class="pr-s">$</span> <span class="cmd">cd progcpp-ubungen</span>
+<span class="pr-u">anna@ubuntu</span><span class="pr-p">:~/progcpp-ubungen</span><span class="pr-s">$</span> <span class="cmd">code .</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>VS Code öffnet sich mit Ihrem Ordner. Falls ein Dialog fragt <em>„Do you trust the authors?“</em> →
+                        <strong>„Yes, I trust“</strong> (es ist Ihr eigener Ordner).</p>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Links sehen Sie die Dateien Ihres
+                        Übungsordners (z.&nbsp;B. <code class="inline">hello.cpp</code> von vorhin). Unten gibt es ein
+                        eingebautes Terminal – das ist Ihr bekanntes cmd/Terminal, nur hier einklappbar.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h3>Datei anlegen und Code schreiben</h3>
+                    <p>In der linken Seitenleiste (Explorer): Icon „Neue Datei“ → Name <code class="inline">hallo.cpp</code>
+                        (oder Sie öffnen Ihre bestehende <code class="inline">hello.cpp</code> per Klick). Tippen Sie:</p>
+                    <div class="codebox"><span class="ln">1</span>#include &lt;iostream&gt;
+<span class="ln">2</span>
+<span class="ln">3</span>int main() {
+<span class="ln">4</span>    std::cout &lt;&lt; "Hello, VS Code!" &lt;&lt; std::endl;
+<span class="ln">5</span>    return 0;
+<span class="ln">6</span>}</div>
+                    <p>Speichern: <code class="inline">Strg+S</code> (macOS: <code class="inline">Cmd+S</code>). <strong>Ab jetzt
+                        ist der Code bunt</strong> – violette Schlüsselwörter, blaue Texte, graue Kommentare: Das ist
+                        das Syntax-Highlighting der C/C++-Erweiterung.</p>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Beim Tippen von <code class="inline">std::</code>
+                        schlägt VS Code automatisch sinnvolle Ergänzungen vor (IntelliSense) – mit <code class="inline">Tab</code>
+                        übernehmen, mit <code class="inline">Esc</code> ignorieren.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h3>Erster Start über den ▶-Button – VS Code baut die <code class="inline">tasks.json</code> selbst</h3>
+                    <p>Öffnen Sie <code class="inline">hallo.cpp</code>, sodass es die aktive Datei ist, und klicken Sie
+                        oben rechts den <strong>▶-Pfeil</strong> (Play-Button). Im Dropdown wählen Sie:</p>
+                    <div class="info-box"><strong>„C/C++: g++ build and run active file“</strong> bzw. „C/C++: g++.exe build
+                        and run active file“ (Windows) – je nach System steht da <code class="inline">clang++</code>
+                        (macOS), das ist equally richtig.</div>
+                    <p>VS Code übersetzt Ihr Programm und startet es im eingebauten Terminal. <strong>Und:</strong> Beim
+                        ersten Mal hat VS Code still im Hintergrund die Datei <code class="inline">.vscode/tasks.json</code>
+                        angelegt – die „Rezept-Kartei“, wie Ihr Projekt zu übersetzen ist.</p>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Im Terminal unten erscheint
+                        <code class="inline">Hello, VS Code!</code>. Und im Explorer liegt jetzt der Ordner
+                        <code class="inline">.vscode</code> mit der Datei <code class="inline">tasks.json</code>.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h3>Die <code class="inline">tasks.json</code> verstehen – und anpassen</h3>
+                    <p>Öffnen Sie im Explorer den Ordner <code class="inline">.vscode</code> → Doppelklick auf
+                        <code class="inline">tasks.json</code>. Dort steht (je nach Plattform minimal anders) sinngemäß:</p>
+                    <div class="codebox" style="border-left: 4px solid #007acc;">{
+  <span style="color:#9cdcfe;">"version"</span>: <span style="color:#ce9178;">"2.0.0"</span>,
+  <span style="color:#9cdcfe;">"tasks"</span>: [
+    {
+      <span style="color:#9cdcfe;">"type"</span>: <span style="color:#ce9178;">"cppbuild"</span>,
+      <span style="color:#9cdcfe;">"label"</span>: <span style="color:#ce9178;">"C/C++: g++ build active file"</span>,
+      <span style="color:#9cdcfe;">"command"</span>: <span style="color:#ce9178;">"g++"</span>,
+      <span style="color:#9cdcfe;">"args"</span>: [
+        <span style="color:#ce9178;">"-fdiagnostics-color=always"</span>,
+        <span style="color:#ce9178;">"${file}"</span>,
+        <span style="color:#ce9178;">"-o"</span>,
+        <span style="color:#ce9178;">"${fileDirname}/${fileBasenameNoExtension}"</span>
+      ],
+      <span style="color:#9cdcfe;">"options"</span>: { <span style="color:#9cdcfe;">"cwd"</span>: <span style="color:#ce9178;">"${fileDirname}"</span> },
+      <span style="color:#9cdcfe;">"problemMatcher"</span>: [<span style="color:#ce9178;">"$gcc"</span>],
+      <span style="color:#9cdcfe;">"group"</span>: {
+        <span style="color:#9cdcfe;">"kind"</span>: <span style="color:#ce9178;">"build"</span>,
+        <span style="color:#9cdcfe;">"isDefault"</span>: <span style="color:#2e7d32;">true</span>
+      }
+    }
+  ]
+}</div>
+                    <div class="info-box">📖 <strong>Zeile für Zeile – was hier steht:</strong>
+                        <ul style="margin-bottom:0">
+                            <li><code class="inline">"command": "g++"</code> – <em>welches</em> Programm VS Code aufruft: Ihren Compiler g++ (macOS zeigt hier clang++)</li>
+                            <li><code class="inline">"args"</code> – <em>mit welchen Argumenten</em>: übersetze die aktive Datei (<code class="inline">${file}</code>) und nenne das Ergebnis wie die Datei ohne Endung (<code class="inline">-o ${fileDirname}/${fileBasenameNoExtension}</code>) → aus <code class="inline">hallo.cpp</code> wird <code class="inline">hallo</code> bzw. <code class="inline">hallo.exe</code></li>
+                            <li><code class="inline">"label"</code> – der Anzeigename des Rezepts, z.&nbsp;B. im Play-Button-Menü</li>
+                            <li><code class="inline">"problemMatcher": ["$gcc"]</code> – liest g++-Fehlermeldungen und markiert die Stellen <em>direkt im Editor rot</em> – Fehlerzeilen werden klickbar!</li>
+                            <li><code class="inline">"group": { "isDefault": true }</code> – macht dieses Rezept zum Standard: Ab jetzt genügt <code class="inline">Strg+Shift+B</code></li>
+                        </ul>
+                    </div>
+                    <p><strong>Praktischer Feinschliff (optional):</strong> Wer möchte, hängt in <code class="inline">args</code>
+                        noch <code class="inline">"-Wall"</code> und <code class="inline">"-std=c++17"</code> ein – dann warnt
+                        g++ gründlicher und nutzt den modernen Sprachstandard. Danach Datei speichern.</p>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Ab jetzt genügt <code class="inline">Strg+Shift+B</code>
+                        (= Übersetzen), dann im eingebauten Terminal <code class="inline">./hallo</code> bzw.
+                        <code class="inline">hallo.exe</code> tippen (= Starten). Der Play-Button macht beides in einem Rutsch.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h3>Fehler provozieren – der VS-Code-Vorteil</h3>
+                    <p>Wiederholen Sie Teil c aus Übung 01 (Semikolon löschen), aber diesmal in VS Code: Nach
+                        <code class="inline">Strg+Shift+B</code> erscheint die Fehlermeldung nicht nur im Terminal –
+                        die betroffene Zeile wird <strong>rot im Editor markiert</strong>, und in der Registerkarte
+                        „Problems“ (<code class="inline">Strg+Shift+M</code>) klicken Sie direkt zur Stelle. Genau
+                        dafür lohnt sich die <code class="inline">problemMatcher</code>-Zeile in der tasks.json.</p>
+                    <div class="expected">✅ <strong>So sieht Erfolg aus:</strong> Rote Wellenlinie unter dem Code, Eintrag in
+                        der Problems-Liste, Klick springt zur Stelle. Semikolon zurück → speichern → neu übersetzen →
+                        Fehler verschwunden.</div>
+                </div>
+            </div>
+
+            <h3 id="aufgabe02" style="margin-top:30px">📝 Übungsaufgabe #02: Das offizielle VS-Code-Tutorial</h3>
+            <p>Arbeiten Sie das offizielle Einsteiger-Tutorial von Microsoft durch – es ist die erste
+                Übungsaufgabe und die Grundlage für alle folgenden Sitzungen:</p>
+            <div class="info-box">
+                <strong>📖 Ihre Aufgabe:</strong>
+                <a href="https://code.visualstudio.com/docs/editing/getting-started/editor-tutorial">„Tutorial: Get started with Visual Studio Code“</a>
+                – Benutzeroberfläche, erste Schritte, Basis-Bearbeitung. Dauer ca. 30–45 Minuten.
+                <em>Hinweis: Die optionale Copilot-Anmeldung einfach überspringen – Copilot ist Thema von
+                Schritt 2 der Vorlesung.</em>
+            </div>
+            <p>Wer lieber ein Video schaut, kann dieselben Inhalte hier bekommen – das Tutorial oben ersetzt
+                das aber nicht, es ergänzt es:</p>
+            <div class="info-box">
+                <strong>🎬 Ergänzend:</strong> <a href="https://www.youtube.com/watch?v=f8_uF_IDV50">„Learn Visual Studio Code in 15 minutes“ (offizielles Microsoft-Video)</a>
+                – Rundflug über alle Grundfunktionen. Wer lieber liest: dieselben Inhalte stehen in der
+                <a href="https://code.visualstudio.com/docs/editing/getting-started/userinterface">User-Interface-Doku</a>.
+            </div>
+            <div class="info-box">💡 <strong>Ausblick:</strong> Debugger, CMake, Extension Packs und Copilot –
+                all das kommt Schritt für Schritt in den folgenden Übungen. Mit dem eingerichteten VS Code und dem
+                absolvierten Tutorial sind Sie optimal vorbereitet.</div>
+        </div>
+
+        <div class="doc-footer">
+            ProgC++ · Übung 02 · Prof. Adrian Müller · Hochschule Kaiserslautern · Wintersemester 2026/27
+        </div>
+</div>
+</body>
+</html>
