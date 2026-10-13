@@ -17,9 +17,9 @@
 
 ![Siehe Tabelle](/KW/Grafiken/KW_Usability_Tabelle.png "Usability Grafik")
 
-|                   | Usability                                                                         | User Experience                                           |
-| ----------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| Die Frage         | Erreiche ich mein Ziel?                                                           | Wie ist es, das zu tun?                                   |
-| Zeitraum          | während der Benutzung                                                             | davor, währendessen, danach                               |
-| Maßstab           | Effektivität, Effizenz, zifriedenheit                                             | Wahrnehmung und Reaktion, auch erwartete                  |
-| Fehlt sie, dann   | schreitert die Aufgabe                                                            | gelingt die Aufgabe - und dennoch kommt niemand wieder    |
+|                   | Usability                             | User Experience                                           |
+| ----------------- | --------------------------------------| --------------------------------------------------------- |
+| Die Frage         | Erreiche ich mein Ziel?               | Wie ist es, das zu tun?                                   |
+| Zeitraum          | während der Benutzung                 | davor, währendessen, danach                               |
+| Maßstab           | Effektivität, Effizenz, zifriedenheit | Wahrnehmung und Reaktion, auch erwartete                  |
+| Fehlt sie, dann   | schreitert die Aufgabe                | gelingt die Aufgabe - und dennoch kommt niemand wieder    |

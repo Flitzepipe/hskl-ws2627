@@ -38,3 +38,7 @@
 
 #### Mittwoch 07.10.2026
 - [Notizen_HCI](/HCI/Notizen_HCI.md)
+
+### Week_3:
+#### Dienstag 13.10.2026
+- [Notizen_KW](/KW/Notizen_KW.md)
