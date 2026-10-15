@@ -1,17 +1,59 @@
-|Element|Beschreibung|
+## Nr. 1a)
+### Akteure:
+ - User
+ - Guest User
+
+### Use-Cases:
+#### Anmelden:
+ - Login
+ - Registrieren
+
+#### Post Erstellen:
+ - Post erstellen
+ - Bild upload
+    - Alt Text
+ - Titel
+ - Beschreibung
+ - Hashtags
+ - Links
+ - Post Veröffentlichen
+ - Benachrichtigung senden
+
+#### Post Interaktion:
+ - Bookmark
+ - Kommentieren
+ - Bild Downloaden
+
+#### Profil einsehen:
+ - Profil einsehen
+ - Bookmarks einsehen
+ - Posthistorie einsehen
+ - Folgen
+ - Profil Einstellungen
+ - Profil Bearbeiten
+
+#### onstiges
+
+## Nr. 1 b)
+![Diagram Fotosoftware](Diagram_Fotosoftware.png)
+
+## Nr. 1 c)
+
+|||
 |-|-|
-|User|Ist ein angemeldeter User der Plattfomr|
-|Guest User|Ist ein Nicht registrierter User der Plattform|
-|||
-|Log in|Öffnet eine Maske für das eingeben von login daten, falls vorhanden|
-|Register|Falls Log in Fails, Öffnet maske mit Eingabe neuer Anmeldedaten (ein @, email und Passwort)|
-|||
-|Post Erstellen|Öffnet maske zum erstellen eines neuen Posts mit Buttons|
-|Bild upload|Verplifchtend, ein Bild dem Post hinzufügen|
-|Alt Text|Alternativ Text für Bilder hinzufügen|
-|Titel eintragen|Verpichtend, einen Titel hinzuzufügen|
-|BEschriebugn|Optional, eine Beschreibung seinem Post hinzufügen|
-|Hashtags|dem Post somit eine oder mehrere Kategorie/n geben|
-|Link|Verlinkung von verschiedenen dingen (Geolocation, webseite, etc.)|
-|Veröffentlichen|Published den Post und versieht ihn mit einem Wasserzeichen (dem @ des Users)|
-|||
+|Name||
+|Nachbed. im Erfolgsfall||
+|Nachbed. bei Fehlschlag||
+|Akteur/e||
+|Auslösendes Ereignis||
+|Beschreibung||
+|Erweiterungen/Alternativen||
+
+|-|-|
+|Name|Login|
+|Nachbed. im Erfolgsfall|User wird angemeldet|
+|Nachbed. bei Fehlschlag|Aufforderung zur neueingabe der Credentials|
+|Akteur/e|User|
+|Auslösendes Ereignis|User klickt Button|
+|Beschreibung||
+|Erweiterungen/Alternativen||
