@@ -35,3 +35,12 @@
 - Offenheit für Themen
 - Möglichkeit ernstere Themen zu behandeln
 - Message mitgeben ist möglich 
+
+
+### Umsetzung der Themenidee
+
+#### Autofahrt mit drei GoPros
+    - Jeder Redet über sein Leben (vor/während/nach dem Studium)
+    - Wechselnde KAmera Perspektiven immeer wenn jemand spricht, so locker auf einer Roadtrip mässigen idee.
+    - Lockere Atmosphäre
+    - Serielle aufnahme, alles auf der Autofahrt

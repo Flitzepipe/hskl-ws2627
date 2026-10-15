@@ -38,3 +38,16 @@
 
 #### Mittwoch 07.10.2026
 - [Notizen_HCI](/HCI/Notizen_HCI.md)
+
+### Week_3:
+#### Dienstag 13.10.2026
+- [Notizen_KW](/KW/Notizen_KW.md)
+
+#### Mittwoch 14.10.2026
+- [Übung_HCI_Notizen](/HCI/Übung_HCI_Notizen.md)
+- [AA_HCI_Abgabe_1](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1/)
+- [Bilder für HCI_Abgabe_1](/HCI/Bilder/)
+
+#### Donnerstag 15.10.2026
+- [Übung_1](/SE/Übungen_SE/Übung_1.md)
+- [Übungen SE Notizen](/SE/Übungen_SE/Übung_SE_Notizen.md)
