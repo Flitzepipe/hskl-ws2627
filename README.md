@@ -47,3 +47,7 @@
 - [Übung_HCI_Notizen](/HCI/Übung_HCI_Notizen.md)
 - [AA_HCI_Abgabe_1](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1/)
 - [Bilder für HCI_Abgabe_1](/HCI/Bilder/)
+
+#### Donnerstag 15.10.2026
+- [Übung_1](/SE/Übungen_SE/Übung_1.md)
+- [Übungen SE Notizen](/SE/Übungen_SE/Übung_SE_Notizen.md)
