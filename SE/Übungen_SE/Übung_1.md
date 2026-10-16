@@ -42,16 +42,6 @@
 
 |||
 |-|-|
-|Name||
-|Nachbed. im Erfolgsfall||
-|Nachbed. bei Fehlschlag||
-|Akteur/e||
-|Auslösendes Ereignis||
-|Beschreibung||
-|Erweiterungen/Alternativen||
-
-|||
-|-|-|
 |Name|Login|
 |Nachbed. im Erfolgsfall|User wird angemeldet|
 |Nachbed. bei Fehlschlag|Aufforderung zur neueingabe der Credentials|
@@ -88,7 +78,68 @@
 |Akteur/e|User|
 |Auslösendes Ereignis|Anwählen der Schalffläche "Bild hochladen" (Button, Drag and Drop Menu)|
 |Beschreibung|1a. Bild über Drag & drop Menu ziehen <br> 1b. Klicklen des "Datei auswählen" Buttons|
-|Erweiterungen/Alternativen|1. Weiteres Bild hochladen <br> 2. Alt Text hinzufügen  <br> "Content Warning" Hinzufügen (Bruled das Bild im Feed falls es NSFW ist)|
+|Erweiterungen/Alternativen|1. Weiteres Bild hochladen <br> 2. Alt Text hinzufügen  <br> "Content Warning" Hinzufügen (Blured das Bild im Feed falls es NSFW ist)|
+
+|||
+|-|-|
+|Name|Titel|
+|Nachbed. im Erfolgsfall|Post wurde ein erfolgreich ein Titel hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf die Textfeld "Titel hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Textfeld <br> 2. Titel einfügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Beschreibung|
+|Nachbed. im Erfolgsfall|Post wurde ein erfolgreich eine Beschreibung hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf das Textfeld "Beschreibung hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Textfeld <br> 2. Beschreibung einfügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Hashtags|
+|Nachbed. im Erfolgsfall|Post wurde erfolgreich ein/mehrere Hashtags hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf das Feld "Hashtag hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Feld <br> 2a. Hashtag auswählen und hinzufühen <br> 2b. Neuen Hashtag hinzufügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+
+|||
+|-|-|
+|Name|Links|
+|Nachbed. im Erfolgsfall|Post wurde erfolgreich ein/mehrere Links hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf das Textfeld "Links hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Textfeld <br> 2. Links mit Substitute einfügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Post veröfentlichen|
+|Nachbed. im Erfolgsfall|1. Post wird hochgeladen <br> 2. Benachrichtigugn an Follower des Users werden gesendet|
+|Nachbed. bei Fehlschlag|1. Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/ <br> 2. Aufblinken eines Verpflichtenden Feldes das leer ist <br> 3. Evtl. Meldung popt auf "Post wurde als Enwurf gespeichert"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klicken des Buttons "Post veröffentlichen"|
+|Beschreibung|User klickt Button|
+|Erweiterungen/Alternativen|1. User bricht Post ab und verwirfft änderungen <br> 2. User Speichert Post als Entwurf|
+
+|||
+|-|-|
+|Name||
+|Nachbed. im Erfolgsfall||
+|Nachbed. bei Fehlschlag||
+|Akteur/e||
+|Auslösendes Ereignis||
+|Beschreibung||
+|Erweiterungen/Alternativen||
 
 |||
 |-|-|
