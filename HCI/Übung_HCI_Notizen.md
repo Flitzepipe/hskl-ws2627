@@ -13,7 +13,8 @@ Con:
     Bestellanleitung Unklar
     Fehlleitenden Informationen
     Im Verhältnis Umständliches Bezahlen
-    Produkt Namen stellenweiße nicht Lesbar.
+    Produkt Namen stellenweiße nicht Lesbar
+    Becher ist zu voll
 Pro:
     Zufreidenstellende Getränkeauswahl+
     SChnell Fertig 
