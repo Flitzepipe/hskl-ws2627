@@ -142,7 +142,8 @@
 |Auslösendes Ereignis|Anklick des "Post veröffentlichen" Buttons|
 |Beschreibung|1. "Post veröffentlichen" wird geklickt <br> 2. Benachrichtigung mit Titel und Vorschaubild wird nach vorlage generiert <br> 3. Benachrichtigung wird an folgenden User gesendet|
 |Erweiterungen/Alternativen|-|
-<br> <br>
+
+<br>
 
 |||
 |-|-|
@@ -218,6 +219,26 @@
 
 |||
 |-|-|
+|Name|Folgen|
+|Nachbed. im Erfolgsfall|1. Das @ des Gefolgten wird der Folgeliste des Users hinzugefügt. <br> 2. Benachrichtigungen werden Raus gesendet wenn der Gefolgte einen Post Veröffentlicht. <br> 3. Benachrichtigung über einen neuen Follower wir dem Gefolgten gesendet|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf "Folgen" Button|
+|Beschreibung|1. User Klickt auf "Folgen" Button <br> 2. Das @ des Gefolgten wird der Folgeliste des Users hinzugefügt. <br> 3.Seite lädt neu mit einem Visuell veränderten "Folgen" Button für Visuelles Feedback <br> 4. Benachrichtigungen werden Raus gesendet wenn der Gefolgte einen Post Veröffentlicht. <br> 5. Benachrichtigung über einen neuen Follower wir dem Gefolgten gesendet|
+|Erweiterungen/Alternativen|Selbe Aktion folgt zum Entfolgen, Gefolgter wird aus Folgeliste entfernt|
+
+|||
+|-|-|
+|Name|Profil Einstellungen|
+|Nachbed. im Erfolgsfall|User landet in seinen Einstellungen|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User klickt "Einstellungen" Button (Zahnrad Icon)|
+|Beschreibung|1. User klickt "Einstellungen" Button <br> |
+|Erweiterungen/Alternativen||
+
+|||
+|-|-|
 |Name||
 |Nachbed. im Erfolgsfall||
 |Nachbed. bei Fehlschlag||
@@ -225,6 +246,8 @@
 |Auslösendes Ereignis||
 |Beschreibung||
 |Erweiterungen/Alternativen||
+
+<br>
 
 |||
 |-|-|
