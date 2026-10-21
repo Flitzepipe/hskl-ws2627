@@ -70,7 +70,7 @@
 |Akteur/e|User|
 |Auslösendes Ereignis|Klick auf den Button "Neuen Post erstellen"|
 |Beschreibung|Eine Maske für das erstellen eines neuen Posts mit den Unterkategorien Bild upload-Alt Text, Titel, Beschreibung, Hashtag, Links, Post Veröffentlichung|
-|Erweiterungen/Alternativen|Benachrichtigung Senden|
+|Erweiterungen/Alternativen|1. Benachrichtigung Senden <br> 2. Abbrechen|
 
 |||
 |-|-|
@@ -80,7 +80,7 @@
 |Akteur/e|User|
 |Auslösendes Ereignis|Anwählen der Schalffläche "Bild hochladen" (Button, Drag and Drop Menu)|
 |Beschreibung|1a. Bild über Drag & drop Menu ziehen <br> 1b. Klicklen des "Datei auswählen" Buttons|
-|Erweiterungen/Alternativen|1. Weiteres Bild hochladen <br> 2. Alt Text hinzufügen  <br> "Content Warning" Hinzufügen (Blured das Bild im Feed falls es NSFW ist)|
+|Erweiterungen/Alternativen|1. Weiteres Bild hochladen <br> 2. Alt Text hinzufügen  <br> 3. "Content Warning" Hinzufügen (Blured das Bild im Feed falls es NSFW ist) <br> 4. Abbrechen|
 
 |||
 |-|-|
@@ -131,7 +131,7 @@
 |Akteur/e|User|
 |Auslösendes Ereignis|Klicken des Buttons "Post veröffentlichen"|
 |Beschreibung|User klickt Button|
-|Erweiterungen/Alternativen|1. User bricht Post ab und verwirfft änderungen <br> 2. User Speichert Post als Entwurf|
+|Erweiterungen/Alternativen|1. User bricht Post ab und verwirfft änderungen <br> 2. User Speichert Post als Entwurf <br> 3. Abbrechen|
 
 |||
 |-|-|
@@ -172,49 +172,49 @@
 |Akteur/e|User|
 |Auslösendes Ereignis|1. Klick auf die Kommentar Zeile <br> 2. Klick auf den Antwort Button eines Kommentars|
 |Beschreibung|1a. Klick auf die Kommentar Zeile <br> 1b. Klick auf die Antowrt Button <br> 2. Originat Post- /Kommentarerverfasser (OP) wird automatisch verlinkt <br> 2b. Alternativ andere User (mit ihrem @) verlinken <br> 4. Speichern/Senden Drücken <br> 4b. Kommentrar als Entwurf Speichern. <br> 5. Post wird neu geladen|
-|Erweiterungen/Alternativen|-|
+|Erweiterungen/Alternativen|1. Kommentar als Entwurf Speicher <br> 2. Abbrechen|
 
 |||
 |-|-|
-|Name|BIld Download|
+|Name|Bild Download|
 |Nachbed. im Erfolgsfall|1. Pop-up Meldung mit "Bild erfolgreich heruntergeldaden" <br> 2. Bild landet im, vom System, voreingestellten Downloads folder|
 |Nachbed. bei Fehlschlag|Pop-up Meldung "Irgend etwas ist schief gelaufen "Absatz" Versuchen sie es später erneut"|
 |Akteur/e|User|
 |Auslösendes Ereignis|User Klickt auf "Bild Herunterladen" Button|
 |Beschreibung|1. User klickt auf "Bild herunterladen" Button <br> 2a. Pop-up Meldung mit "Bild erfolgreich heruntergeldaden" <br> 2b. Pop-up Meldung "Irgend etwas ist schief gelaufen "Absatz" Versuchen sie es später erneut" <br> 3a. Bild erfolgreich Heruntergeladen <br> 3b. Abbruch|
-|Erweiterungen/Alternativen|Evtl. Cool down für den Download des gleichen Bilds (verhindert doppelten download wenn User doppelt klickt)|
+|Erweiterungen/Alternativen|Evtl. Cool down für den Download des gleichen Bilds (verhindert doppelten download wenn User doppelt klickt) <br> 2. Abbrechen|
 
 <br>
 
 |||
 |-|-|
-|Name||
-|Nachbed. im Erfolgsfall||
-|Nachbed. bei Fehlschlag||
-|Akteur/e||
-|Auslösendes Ereignis||
-|Beschreibung||
-|Erweiterungen/Alternativen||
+|Name|Profl einsehen|
+|Nachbed. im Erfolgsfall|User-Profil Übersicht wird angezeigt|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf Profilbild oder auf User-@|
+|Beschreibung|1. User Klickt auf PB oder @ <br> 2a. Übersichtsseite des Profils wird gerendert <br> 2b. Pop-up Meldung "Da ist etwas schief gelaufen" <br> 3. Aktuelle Seite Lädt neu|
+|Erweiterungen/Alternativen|Zurück zum post (System "Zurück" funktion verwenden)|
 
 |||
 |-|-|
-|Name||
-|Nachbed. im Erfolgsfall||
-|Nachbed. bei Fehlschlag||
-|Akteur/e||
-|Auslösendes Ereignis||
-|Beschreibung||
-|Erweiterungen/Alternativen||
+|Name|Bookmarks einsehen|
+|Nachbed. im Erfolgsfall|List aller gespeicherten Bookmarks werden Geladen und gerendert|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf "Bookmark" Button|
+|Beschreibung|1. User Klickt auf "Bookmark" Button <br> 2a. Liste mit gespiecherten Posts wird geladen (Titel und ersten ca 150 Zeichen der Beschreibung werden Gerendert) 2b. Pop-up Meldung "hier ist etwas schief gelaufen" 3. Aktuelle seite wird neu Geladen|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
 
 |||
 |-|-|
-|Name||
-|Nachbed. im Erfolgsfall||
-|Nachbed. bei Fehlschlag||
-|Akteur/e||
-|Auslösendes Ereignis||
-|Beschreibung||
-|Erweiterungen/Alternativen||
+|Name|Posthistorie einsehen|
+|Nachbed. im Erfolgsfall|Liste aller, dem User zugewiesenen,  Posts wird geladen|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|Uesr|
+|Auslösendes Ereignis|1. User Klickt auf "Posthistorie" Button |
+|Beschreibung|1. User Klickt auf "Posthistorie" Button <br> 2a. Liste mit zugehörigen Posts wird geladen (Titel und ersten ca 150 Zeichen der Beschreibung werden Gerendert) 2b. Pop-up Meldung "hier ist etwas schief gelaufen" 3. Aktuelle seite wird neu Geladen|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
 
 |||
 |-|-|
