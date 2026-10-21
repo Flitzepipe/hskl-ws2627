@@ -42,3 +42,12 @@ Collaborative UX design verbindet Ansätze aus Design Thinking, Lean UX und agil
 
 ##### "Lieblings Zitat"
 "Jeder hat einen Plan. Bis er auf die Fresse bekommt" - Mike Tyson
+
+##### Ablauf zum lösen von Problemen
+ - nutzende
+ - Probleme
+ - Lösungsanzätze
+ - Metriken
+ - Stakeholder
+ - Randbedingungen
+ - Risiken
