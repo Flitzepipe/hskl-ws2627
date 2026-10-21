@@ -234,38 +234,27 @@
 |Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
 |Akteur/e|User|
 |Auslösendes Ereignis|User klickt "Einstellungen" Button (Zahnrad Icon)|
-|Beschreibung|1. User klickt "Einstellungen" Button <br> |
-|Erweiterungen/Alternativen||
+|Beschreibung|1. User klickt "Einstellungen" Button <br> 2. Seite mit Account Einstellung öffnet sich (Zugrff auf Passwort, Accountsicherheit, Sichtbarkeitseinstellungen etc.)|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
 
 |||
 |-|-|
-|Name||
-|Nachbed. im Erfolgsfall||
-|Nachbed. bei Fehlschlag||
-|Akteur/e||
-|Auslösendes Ereignis||
-|Beschreibung||
-|Erweiterungen/Alternativen||
+|Name|Profil Bearbeiten|
+|Nachbed. im Erfolgsfall|User landet auf der Bearbeitungsseite für sein Profil|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User klickt "Bearbeiten" Button beim eigenen Profil |
+|Beschreibung|1. User klickt "Bearbeiten" Button beim eigenen Profil <br> 2. Seite mit Profil Details öffnet sich (Zugrff auf @, Email-Adresse, Beschreibung etc.)|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
 
 <br>
 
 |||
 |-|-|
-|Name||
-|Nachbed. im Erfolgsfall||
-|Nachbed. bei Fehlschlag||
-|Akteur/e||
-|Auslösendes Ereignis||
-|Beschreibung||
-|Erweiterungen/Alternativen||
-
-#### Profil einsehen:
- - Profil einsehen
- - Bookmarks einsehen
- - Posthistorie einsehen
- - Folgen
- - Profil Einstellungen
- - Profil Bearbeiten
-
-#### Sonstiges:
- - Suche
+|Name|Suche|
+|Nachbed. im Erfolgsfall|Gefilterter Feed Wird gelanden|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User klickt auf den "Suchen" Button (Lupe Icon)|
+|Beschreibung|1. User Gibt Suchbegriffe und/oder Hashtags ein <br> 2. User klickt auf den "Suchen" Button <br> 3. Feed wir dGefiltert neu geladen|
+|Erweiterungen/Alternativen|-|
