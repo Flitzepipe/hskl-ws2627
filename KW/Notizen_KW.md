@@ -35,8 +35,10 @@ Vier Grundpfeiler tragen das Modell
 
 Collaborative UX design verbindet Ansätze aus Design Thinking, Lean UX und agiler Entwicklung zu einem kohärenten, menschzentrierten und praxisorientierten Vorgehen.
 
-##### Grundpfeielr
+##### Grundpfeieler
 |Menschzentriert|Kollaborativ|Hypothesenbassiert|Agil|
 |-|-|-|-|
 |Nutzende, Technik und Business in Balance| ein Interdisziplinäres Team gestaltet gemeinsam|annahmnen werden aufgedeckt und geprüft|in kleinem Inkrementen ausliefern, früh Feedback bekommen|
 
+##### "Lieblings Zitat"
+"Jeder hat einen Plan. Bis er auf die Fresse bekommt" - Mike Tyson

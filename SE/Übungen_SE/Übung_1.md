@@ -59,8 +59,8 @@
 |Auslösendes Ereignis|Guest User Klickt Button|
 |Beschreibung|1. Der Nutzer gibt einen @ seiner Wahl ein <br> 2. Nutzer gibt Email Adresse ein <br> 3. Nutzer gibt Passwort ein <br> 4. Nutzer klickt auf beenden|
 |Erweiterungen/Alternativen|1. Abbrechen|
-<br> <br>
 
+<br>
 |||
 |-|-|
 |Name|Post erstellen|
@@ -175,6 +175,18 @@
 
 |||
 |-|-|
+|Name|BIld Download|
+|Nachbed. im Erfolgsfall|1. Pop-up Meldung mit "Bild erfolgreich heruntergeldaden" <br> 2. Bild landet im, vom System, voreingestellten Downloads folder|
+|Nachbed. bei Fehlschlag|Pop-up Meldung "Irgend etwas ist schief gelaufen "Absatz" Versuchen sie es später erneut"|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf "Bild Herunterladen" Button|
+|Beschreibung|1. User klickt auf "Bild herunterladen" Button <br> 2a. Pop-up Meldung mit "Bild erfolgreich heruntergeldaden" <br> 2b. Pop-up Meldung "Irgend etwas ist schief gelaufen "Absatz" Versuchen sie es später erneut" <br> 3a. Bild erfolgreich Heruntergeladen <br> 3b. Abbruch|
+|Erweiterungen/Alternativen|Evtl. Cool down für den Download des gleichen Bilds (verhindert doppelten download wenn User doppelt klickt)|
+
+<br>
+
+|||
+|-|-|
 |Name||
 |Nachbed. im Erfolgsfall||
 |Nachbed. bei Fehlschlag||
@@ -183,14 +195,53 @@
 |Beschreibung||
 |Erweiterungen/Alternativen||
 
-#### Post Erstellen:
- - Post erstellen
- - Bild upload
-    - Alt Text
- - Titel
- - Beschreibung
- - Hashtags
- - Links
- - Post Veröffentlichen
- - Benachrichtigung senden
- 
+|||
+|-|-|
+|Name||
+|Nachbed. im Erfolgsfall||
+|Nachbed. bei Fehlschlag||
+|Akteur/e||
+|Auslösendes Ereignis||
+|Beschreibung||
+|Erweiterungen/Alternativen||
+
+|||
+|-|-|
+|Name||
+|Nachbed. im Erfolgsfall||
+|Nachbed. bei Fehlschlag||
+|Akteur/e||
+|Auslösendes Ereignis||
+|Beschreibung||
+|Erweiterungen/Alternativen||
+
+|||
+|-|-|
+|Name||
+|Nachbed. im Erfolgsfall||
+|Nachbed. bei Fehlschlag||
+|Akteur/e||
+|Auslösendes Ereignis||
+|Beschreibung||
+|Erweiterungen/Alternativen||
+
+|||
+|-|-|
+|Name||
+|Nachbed. im Erfolgsfall||
+|Nachbed. bei Fehlschlag||
+|Akteur/e||
+|Auslösendes Ereignis||
+|Beschreibung||
+|Erweiterungen/Alternativen||
+
+#### Profil einsehen:
+ - Profil einsehen
+ - Bookmarks einsehen
+ - Posthistorie einsehen
+ - Folgen
+ - Profil Einstellungen
+ - Profil Bearbeiten
+
+#### Sonstiges:
+ - Suche
