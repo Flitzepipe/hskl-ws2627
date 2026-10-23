@@ -53,5 +53,21 @@
 - [Übungen SE Notizen](/SE/Übungen_SE/Übung_SE_Notizen.md)
 
 ### Week_4
-#### Dienstag 20.10.2026
+
+#### Sonntag 18.10.2026
+- [HA_2_Codes](/DB/HA_SQL_Query_Code/HA_2_Codes.md)
+- [HA_3_Codes](/DB/HA_SQL_Query_Code/HA_3_Codes.md)
+
+#### Mittwoch 21.10.2026
+- [AA_HCI_Abgabe_1_Teil_2](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1_Teil_2.pdf)
+- [Pictures Added](/HCI/Bilder/Kaffemaschine/1_261021_123427.pdf)
+- [Pictures Added](/HCI/Bilder/Kartenautomaten/2_261021_124214.pdf)
+
+#### Donnerstag 22.10.2026
+- [SE_Übung_2_1](/SE/Übungen_SE/SE_Übung_2_1.bpmn)
+- [SE_Übung_2_2](/SE/Übungen_SE/SE_Übung_2_2.bpmn)
+- [SWE-Übung02-011](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Übung02-011.pdf)
+
+### Week_5
+#### Dienstag 27.10.2026
 - []()
