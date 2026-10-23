@@ -51,3 +51,7 @@
 #### Donnerstag 15.10.2026
 - [Übung_1](/SE/Übungen_SE/Übung_1.md)
 - [Übungen SE Notizen](/SE/Übungen_SE/Übung_SE_Notizen.md)
+
+### Week_4
+#### Dienstag 20.10.2026
+- []()

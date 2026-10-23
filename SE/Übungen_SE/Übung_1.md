@@ -32,7 +32,8 @@
  - Profil Einstellungen
  - Profil Bearbeiten
 
-#### onstiges
+#### Sonstiges:
+ - Suche
 
 ## Nr. 1 b)
 ![Diagram Fotosoftware](Diagram_Fotosoftware.png)
@@ -41,19 +42,219 @@
 
 |||
 |-|-|
-|Name||
-|Nachbed. im Erfolgsfall||
-|Nachbed. bei Fehlschlag||
-|Akteur/e||
-|Auslösendes Ereignis||
-|Beschreibung||
-|Erweiterungen/Alternativen||
-
-|-|-|
 |Name|Login|
 |Nachbed. im Erfolgsfall|User wird angemeldet|
 |Nachbed. bei Fehlschlag|Aufforderung zur neueingabe der Credentials|
 |Akteur/e|User|
 |Auslösendes Ereignis|User klickt Button|
-|Beschreibung||
-|Erweiterungen/Alternativen||
+|Beschreibung|1. Nutzer gibt Email und Passwort ein <br> 2. Nutzer Schickt Credentials ab <br> 3. Nutzer ist Angemeldet|
+|Erweiterungen/Alternativen|1. Schließen der Login Maske <br> 2. Weiterleitung zur Registirerung|
+
+|||
+|-|-|
+|Name|Registrieren|
+|Nachbed. im Erfolgsfall| 1. Anmeldeverfahren wird durchlaufen <br> 2. Userkonto wurde erstellt und User ist nun angemeldet|
+|Nachbed. bei Fehlschlag| Erromeldung mit Ereigniscode und Kurz-Beschreibung|
+|Akteur/e|Guest User|
+|Auslösendes Ereignis|Guest User Klickt Button|
+|Beschreibung|1. Der Nutzer gibt einen @ seiner Wahl ein <br> 2. Nutzer gibt Email Adresse ein <br> 3. Nutzer gibt Passwort ein <br> 4. Nutzer klickt auf beenden|
+|Erweiterungen/Alternativen|1. Abbrechen|
+
+<br>
+
+|||
+|-|-|
+|Name|Post erstellen|
+|Nachbed. im Erfolgsfall|Eine Maske für das erstellen eines neuen Posts öffnet|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf den Button "Neuen Post erstellen"|
+|Beschreibung|Eine Maske für das erstellen eines neuen Posts mit den Unterkategorien Bild upload-Alt Text, Titel, Beschreibung, Hashtag, Links, Post Veröffentlichung|
+|Erweiterungen/Alternativen|1. Benachrichtigung Senden <br> 2. Abbrechen|
+
+|||
+|-|-|
+|Name|Bild Upload|
+|Nachbed. im Erfolgsfall|Bild wurder erfolgreich hochgeladen|
+|Nachbed. bei Fehlschlag|Popup Fehlermeldung "Beim Hochladen des Bildes ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Anwählen der Schalffläche "Bild hochladen" (Button, Drag and Drop Menu)|
+|Beschreibung|1a. Bild über Drag & drop Menu ziehen <br> 1b. Klicklen des "Datei auswählen" Buttons|
+|Erweiterungen/Alternativen|1. Weiteres Bild hochladen <br> 2. Alt Text hinzufügen  <br> 3. "Content Warning" Hinzufügen (Blured das Bild im Feed falls es NSFW ist) <br> 4. Abbrechen|
+
+|||
+|-|-|
+|Name|Titel|
+|Nachbed. im Erfolgsfall|Post wurde ein erfolgreich ein Titel hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf die Textfeld "Titel hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Textfeld <br> 2. Titel einfügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Beschreibung|
+|Nachbed. im Erfolgsfall|Post wurde ein erfolgreich eine Beschreibung hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf das Textfeld "Beschreibung hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Textfeld <br> 2. Beschreibung einfügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Hashtags|
+|Nachbed. im Erfolgsfall|Post wurde erfolgreich ein/mehrere Hashtags hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf das Feld "Hashtag hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Feld <br> 2a. Hashtag auswählen und hinzufühen <br> 2b. Neuen Hashtag hinzufügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+
+|||
+|-|-|
+|Name|Links|
+|Nachbed. im Erfolgsfall|Post wurde erfolgreich ein/mehrere Links hinzugefügt|
+|Nachbed. bei Fehlschlag|Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf das Textfeld "Links hinzufügen"|
+|Beschreibung|1. Nutzer klickt auf Textfeld <br> 2. Links mit Substitute einfügen <br> 3. Speichern|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Post veröfentlichen|
+|Nachbed. im Erfolgsfall|1. Post wird hochgeladen <br> 2. Benachrichtigugn an Follower des Users werden gesendet|
+|Nachbed. bei Fehlschlag|1. Popup-Fehlermeldung mit "Da ist etwas schief gelaufen :/ <br> 2. Aufblinken eines Verpflichtenden Feldes das leer ist <br> 3. Evtl. Meldung popt auf "Post wurde als Enwurf gespeichert"|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klicken des Buttons "Post veröffentlichen"|
+|Beschreibung|User klickt Button|
+|Erweiterungen/Alternativen|1. User bricht Post ab und verwirfft änderungen <br> 2. User Speichert Post als Entwurf <br> 3. Abbrechen|
+
+|||
+|-|-|
+|Name|Benachrichtigung senden|
+|Nachbed. im Erfolgsfall|Eine Benachrichtigung wird an den Follower gesendet|
+|Nachbed. bei Fehlschlag|1. Wiederholtes versuchen <br> 2. Bei eerneutem Scheitern Abbruch|
+|Akteur/e|Atomatisiert|
+|Auslösendes Ereignis|Anklick des "Post veröffentlichen" Buttons|
+|Beschreibung|1. "Post veröffentlichen" wird geklickt <br> 2. Benachrichtigung mit Titel und Vorschaubild wird nach vorlage generiert <br> 3. Benachrichtigung wird an folgenden User gesendet|
+|Erweiterungen/Alternativen|-|
+
+<br>
+
+|||
+|-|-|
+|Name|Post Interaktionen|
+|Nachbed. im Erfolgsfall|1. User hat mit dem Post interagiert <br> 2. Statistik Werte des Post updaten sich (Bookmarks, Views, Kommentare)|
+|Nachbed. bei Fehlschlag|1. Server Error wird angezeigt "Post konnte nicht geladen werden" <br> 2. Objekte werden neu gerendert um werte zu updaten|
+|Akteur/e|User|
+|Auslösendes Ereignis|Interaktion mit einer der Schaltflächgen "Kommentar", "Bookmark", "Post einsehen"|
+|Beschreibung|1. User Klickt Post an (Post einsehen) <br> 2a. User klickt "Kommentar" an <br> 2b. User klickt "Bookmark" an <br> 3. Werte (Bookmark anzahl, Kommentar anzahl) werden lokal um eins erhöht und neu gerendert.|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Bookmark|
+|Nachbed. im Erfolgsfall|Postid/Link wird unter dem Profil des Users gespeichert.|
+|Nachbed. bei Fehlschlag|1. Aktion wird abgebrochen <br> 2. Post wird neu gerendert|
+|Akteur/e|User|
+|Auslösendes Ereignis|Klick auf den "Bookmark" Button|
+|Beschreibung|1. Klick auf den "Bookmark" Button <br> 2a. List auswählen <br> 2b. Neue Liste erstellen und bnnenen <br> 3. Gespeichert Popupmeldung (Natives Android/IOs oder Web Popup) <br> 4. Gerenderter Bookmark wert with lokal um eins erhöht (verhindert neu rendern des ganzen posts)|
+|Erweiterungen/Alternativen|-|
+
+|||
+|-|-|
+|Name|Kommentieren|
+|Nachbed. im Erfolgsfall|Neuer Kommentar wurde gespeichert|
+|Nachbed. bei Fehlschlag|1. Bisher geschrieber Kommentar wird als Entwurf <br> 2. Post wurd neu gerentdert.|
+|Akteur/e|User|
+|Auslösendes Ereignis|1. Klick auf die Kommentar Zeile <br> 2. Klick auf den Antwort Button eines Kommentars|
+|Beschreibung|1a. Klick auf die Kommentar Zeile <br> 1b. Klick auf die Antowrt Button <br> 2. Originat Post- /Kommentarerverfasser (OP) wird automatisch verlinkt <br> 2b. Alternativ andere User (mit ihrem @) verlinken <br> 4. Speichern/Senden Drücken <br> 4b. Kommentrar als Entwurf Speichern. <br> 5. Post wird neu geladen|
+|Erweiterungen/Alternativen|1. Kommentar als Entwurf Speicher <br> 2. Abbrechen|
+
+|||
+|-|-|
+|Name|Bild Download|
+|Nachbed. im Erfolgsfall|1. Pop-up Meldung mit "Bild erfolgreich heruntergeldaden" <br> 2. Bild landet im, vom System, voreingestellten Downloads folder|
+|Nachbed. bei Fehlschlag|Pop-up Meldung "Irgend etwas ist schief gelaufen "Absatz" Versuchen sie es später erneut"|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf "Bild Herunterladen" Button|
+|Beschreibung|1. User klickt auf "Bild herunterladen" Button <br> 2a. Pop-up Meldung mit "Bild erfolgreich heruntergeldaden" <br> 2b. Pop-up Meldung "Irgend etwas ist schief gelaufen "Absatz" Versuchen sie es später erneut" <br> 3a. Bild erfolgreich Heruntergeladen <br> 3b. Abbruch|
+|Erweiterungen/Alternativen|Evtl. Cool down für den Download des gleichen Bilds (verhindert doppelten download wenn User doppelt klickt) <br> 2. Abbrechen|
+
+<br>
+
+|||
+|-|-|
+|Name|Profl einsehen|
+|Nachbed. im Erfolgsfall|User-Profil Übersicht wird angezeigt|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf Profilbild oder auf User-@|
+|Beschreibung|1. User Klickt auf PB oder @ <br> 2a. Übersichtsseite des Profils wird gerendert <br> 2b. Pop-up Meldung "Da ist etwas schief gelaufen" <br> 3. Aktuelle Seite Lädt neu|
+|Erweiterungen/Alternativen|Zurück zum post (System "Zurück" funktion verwenden)|
+
+|||
+|-|-|
+|Name|Bookmarks einsehen|
+|Nachbed. im Erfolgsfall|List aller gespeicherten Bookmarks werden Geladen und gerendert|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf "Bookmark" Button|
+|Beschreibung|1. User Klickt auf "Bookmark" Button <br> 2a. Liste mit gespiecherten Posts wird geladen (Titel und ersten ca 150 Zeichen der Beschreibung werden Gerendert) 2b. Pop-up Meldung "hier ist etwas schief gelaufen" 3. Aktuelle seite wird neu Geladen|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
+
+|||
+|-|-|
+|Name|Posthistorie einsehen|
+|Nachbed. im Erfolgsfall|Liste aller, dem User zugewiesenen,  Posts wird geladen|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|Uesr|
+|Auslösendes Ereignis|1. User Klickt auf "Posthistorie" Button |
+|Beschreibung|1. User Klickt auf "Posthistorie" Button <br> 2a. Liste mit zugehörigen Posts wird geladen (Titel und ersten ca 150 Zeichen der Beschreibung werden Gerendert) 2b. Pop-up Meldung "hier ist etwas schief gelaufen" 3. Aktuelle seite wird neu Geladen|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
+
+|||
+|-|-|
+|Name|Folgen|
+|Nachbed. im Erfolgsfall|1. Das @ des Gefolgten wird der Folgeliste des Users hinzugefügt. <br> 2. Benachrichtigungen werden Raus gesendet wenn der Gefolgte einen Post Veröffentlicht. <br> 3. Benachrichtigung über einen neuen Follower wir dem Gefolgten gesendet|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User Klickt auf "Folgen" Button|
+|Beschreibung|1. User Klickt auf "Folgen" Button <br> 2. Das @ des Gefolgten wird der Folgeliste des Users hinzugefügt. <br> 3.Seite lädt neu mit einem Visuell veränderten "Folgen" Button für Visuelles Feedback <br> 4. Benachrichtigungen werden Raus gesendet wenn der Gefolgte einen Post Veröffentlicht. <br> 5. Benachrichtigung über einen neuen Follower wir dem Gefolgten gesendet|
+|Erweiterungen/Alternativen|Selbe Aktion folgt zum Entfolgen, Gefolgter wird aus Folgeliste entfernt|
+
+|||
+|-|-|
+|Name|Profil Einstellungen|
+|Nachbed. im Erfolgsfall|User landet in seinen Einstellungen|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User klickt "Einstellungen" Button (Zahnrad Icon)|
+|Beschreibung|1. User klickt "Einstellungen" Button <br> 2. Seite mit Account Einstellung öffnet sich (Zugrff auf Passwort, Accountsicherheit, Sichtbarkeitseinstellungen etc.)|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
+
+|||
+|-|-|
+|Name|Profil Bearbeiten|
+|Nachbed. im Erfolgsfall|User landet auf der Bearbeitungsseite für sein Profil|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User klickt "Bearbeiten" Button beim eigenen Profil |
+|Beschreibung|1. User klickt "Bearbeiten" Button beim eigenen Profil <br> 2. Seite mit Profil Details öffnet sich (Zugrff auf @, Email-Adresse, Beschreibung etc.)|
+|Erweiterungen/Alternativen|Zurück zum Profil (System "Zurück" funktion verwenden)|
+
+<br>
+
+|||
+|-|-|
+|Name|Suche|
+|Nachbed. im Erfolgsfall|Gefilterter Feed Wird gelanden|
+|Nachbed. bei Fehlschlag|1. Pop-up Meldung "hier ist etwas schief gelaufen" <br> 2. Aktuelle Seite Lädt neu|
+|Akteur/e|User|
+|Auslösendes Ereignis|User klickt auf den "Suchen" Button (Lupe Icon)|
+|Beschreibung|1. User Gibt Suchbegriffe und/oder Hashtags ein <br> 2. User klickt auf den "Suchen" Button <br> 3. Feed wir dGefiltert neu geladen|
+|Erweiterungen/Alternativen|-|

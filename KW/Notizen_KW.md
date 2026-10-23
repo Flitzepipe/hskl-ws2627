@@ -4,6 +4,7 @@
 #### Randnotizen: 
 - Das Wort "Benutzerfreundlich" = Durchfallen (eine "erfundenes" Konzeot des Marketing, hat in der Wissenschaft nichst verloren) 
 
+
 #### Deifnitionen:
 
 - Wir beantworten sie in vier Schritten: zwei Definitionen, die in eienr Norm stehen; eine Disziplin, sie aus mehreren Subdiziplinen besteht; eine Geschichte, in der sich die Antwort dreimal geändert hat; und ein Vorgehensmodel, mit dem ein Team sie für sein eigenes Produkt herausfindet.
@@ -24,3 +25,29 @@
 | Zeitraum          | während der Benutzung                 | davor, währendessen, danach                               |
 | Maßstab           | Effektivität, Effizenz, zifriedenheit | Wahrnehmung und Reaktion, auch erwartete                  |
 | Fehlt sie, dann   | schreitert die Aufgabe                | gelingt die Aufgabe - und dennoch kommt niemand wieder    |
+
+
+#### Collabortive UX Design:
+
+3 Spuren, jeweils Ablauf, kennen sollen
+
+Vier Grundpfeiler tragen das Modell
+
+Collaborative UX design verbindet Ansätze aus Design Thinking, Lean UX und agiler Entwicklung zu einem kohärenten, menschzentrierten und praxisorientierten Vorgehen.
+
+##### Grundpfeieler
+|Menschzentriert|Kollaborativ|Hypothesenbassiert|Agil|
+|-|-|-|-|
+|Nutzende, Technik und Business in Balance| ein Interdisziplinäres Team gestaltet gemeinsam|annahmnen werden aufgedeckt und geprüft|in kleinem Inkrementen ausliefern, früh Feedback bekommen|
+
+##### "Lieblings Zitat"
+"Jeder hat einen Plan. Bis er auf die Fresse bekommt" - Mike Tyson
+
+##### Ablauf zum lösen von Problemen
+ - nutzende
+ - Probleme
+ - Lösungsanzätze
+ - Metriken
+ - Stakeholder
+ - Randbedingungen
+ - Risiken
