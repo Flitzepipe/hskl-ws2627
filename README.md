@@ -77,3 +77,4 @@
 #### Donnerstag 29.10.2026
 - [SWE-Übung03-008](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Ubung03-008.pdf)
 - [SWE-07 Klassendiagramme Einfuhrung 005 ausgewahlte Losungen](/SE/Vorlesungsskripte_SE/SWE-07%20Klassendiagramme%20Einfuhrung%20005%20ausgewahlte%20Losungen.pdf)
+- [SE Java Code](/SE/SE_Java_Code/)
