@@ -19,6 +19,10 @@
 | Externe           | 1. Fehlende Informationen <br> 2. Keinen direkten Überblick über Angebote <br> 3. Fehlernder Mensa Tab                                                         | 1. Hinzufügen von Interessepunkten <br> 2. Kurzzusammenfasungen von Angeboten aus Startseite <br> 3. Mensaplan                                                             | 1. MArketing-Psycholgisch Interessen lenken 2. Direkte Menüpunkte für Studienangebote <br> 3. Mensplan                                                                                                                              |             |                               |
 | Verwaltende/Admin | 1. Unübersichtlichkeit <br> 2. Anmelden bzw. 2FA                                                                                                               | 1. berischtlichkeit verbessern <br> 2. 2FA Verbesserugnen <br> 3. Intergration mehrerer Funktionalitäten                                                                   | 1. Kein Bloated GUI <br> 2. Alternative 2FA Möglickieten/Anmeldungstoken der IP Speichern <br> 3. Integrieren der WEiterleitungegn in Seite                                                                                         |             |                               |
 
+Blitzgedanke Für Log in Problem und Zusatzfunktion der App.
+Auslesen des NFC tags des Studenten ausweises für das Anzeigen des Kontostandes und für das einloggen
+
+
 ### Proto Persona
 
 ## Aufgabe 2
