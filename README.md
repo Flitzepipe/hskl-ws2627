@@ -69,5 +69,9 @@
 - [SWE-Übung02-011](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Übung02-011.pdf)
 
 ### Week_5
-#### Dienstag 27.10.2026
+#### Mittwoch 28.10.2026
+- [AA_HCI_Abgabe_1_Teil3 (Markdown)](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1_Teil3.md)
+- [AA_HCI_Abgabe_1_Teil3 (PDF)](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1_Teil3.pdf)
+
+#### Donnerstag 29.10.2026
 - []()
