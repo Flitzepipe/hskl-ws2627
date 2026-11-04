@@ -25,4 +25,6 @@ Auslesen des NFC tags des Studenten ausweises für das Anzeigen des Kontostandes
 
 ### Proto Persona
 
+
+
 ## Aufgabe 2
