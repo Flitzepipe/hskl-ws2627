@@ -25,8 +25,8 @@ Auslesen des NFC tags des Studenten ausweises für das Anzeigen des Kontostandes
 
 ### Proto Persona
 
-![Proto-Persona Miro Board](/HCI/Übungen_PDFs/Mein%20erstes%20Board-1.png "Proto-Persona eines HiWi's")
+![Proto-Persona eines HiWi als Miro Board](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.png)
 
-[Proto-Persona als PDF](/HCI/Übungen_PDFs/Mein%20erstes%20Board.pdf)
+[Proto-Persona eines HiWi als Miro Board (pdf)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.pdf)
 
 ## Aufgabe 2

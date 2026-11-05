@@ -85,3 +85,8 @@
 #### Mittwoche 04.11.2026
 - [AA_HCI_Abgabe_1_Teil4 (PDF)](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1_Teil4.pdf)
 - [AA_HCI_Abgabe_1_Teil4 (Markdown)](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1_Teil4.md)
+
+#### Donnerstag 05.11.2026
+- [Proto_Persona_HiWi_Miro_Board (pdf)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.pdf)
+- [Proto_Persona_HiWi_Miro_Board (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.png)
+- [SWE-Uebung04-012](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Ubung04-012.pdf)
