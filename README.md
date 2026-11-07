@@ -98,6 +98,8 @@
 
 ##### Added:
 - [Campusboard_Verleihsystem_White_Mode_Startseite](/HCI/Bilder/Campusboard/Campusboard_Verleihsystem_White_Mode_Startseite.png)
-- [Campusboard_Verleihsystem_White_Mode](/HCI/Bilder/Campusboard/Campusboard_Verleihsystem_White_Mode.png)
+- [Campusboard_Verleihsystem_White_Mode_Detailseite](/HCI/Bilder/Campusboard/Campusboard_Verleihsystem_White_Mode_Detailseite.png)
+- [Campusboard_Verleihsystem_White_Mode_Bereich_waehlen](/HCI/Bilder/Campusboard/Campusboard_Verleihsystem_White_Mode_Bereich_waehlen.png)
+- [Campuboard_Verleihsyste_White_Mode_Eigene_Reservierugen.png](/HCI/Bilder/Campusboard/Campuboard_Verleihsyste_White_Mode_Eigene_Reservierugnen.png)
 - [Abgabe_1_Randy](/HCI/Übungen_PDFs/Abgabe_1/Aufgabe_1_Randy.md)
 - [Proto_Persona_Person (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_Person.png)
