@@ -79,3 +79,14 @@
 - [SWE-Übung03-008](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Ubung03-008.pdf)
 - [SWE-07 Klassendiagramme Einfuhrung 005 ausgewahlte Losungen](/SE/Vorlesungsskripte_SE/SWE-07%20Klassendiagramme%20Einfuhrung%20005%20ausgewahlte%20Losungen.pdf)
 - [SE Java Code](/SE/SE_Java_Code/)
+
+### Week_6
+
+#### Mittwoche 04.11.2026
+- [AA_HCI_Abgabe_1_Teil4 (PDF)](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1_Teil4.pdf)
+- [AA_HCI_Abgabe_1_Teil4 (Markdown)](/HCI/Übungen_PDFs/AA_HCI_Abgabe_1_Teil4.md)
+
+#### Donnerstag 05.11.2026
+- [Proto_Persona_HiWi_Miro_Board (pdf)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.pdf)
+- [Proto_Persona_HiWi_Miro_Board (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.png)
+- [SWE-Uebung04-012](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Ubung04-012.pdf)
