@@ -90,3 +90,14 @@
 - [Proto_Persona_HiWi_Miro_Board (pdf)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.pdf)
 - [Proto_Persona_HiWi_Miro_Board (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_HiWi_Miro_Board.png)
 - [SWE-Uebung04-012](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Ubung04-012.pdf)
+
+#### Samstag 07.11.2026
+##### Removed:
+- Campusboard_Verleihsystem_Darkmode_Startseite
+- Campusboard_Verleihsystem_Darkmode
+
+##### Added:
+- [Campusboard_Verleihsystem_White_Mode_Startseite](/HCI/Bilder/Campusboard/Campusboard_Verleihsystem_White_Mode_Startseite.png)
+- [Campusboard_Verleihsystem_White_Mode](/HCI/Bilder/Campusboard/Campusboard_Verleihsystem_White_Mode.png)
+- [Abgabe_1_Randy](/HCI/Übungen_PDFs/Abgabe_1/Aufgabe_1_Randy.md)
+- [Proto_Persona_Person (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_Person.png)
