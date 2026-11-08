@@ -103,3 +103,7 @@
 - [Campuboard_Verleihsyste_White_Mode_Eigene_Reservierugen.png](/HCI/Bilder/Campusboard/Campuboard_Verleihsyste_White_Mode_Eigene_Reservierugnen.png)
 - [Abgabe_1_Randy](/HCI/Übungen_PDFs/Abgabe_1/Aufgabe_1_Randy.md)
 - [Proto_Persona_Person (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_Person.png)
+
+### week_7
+#### Dienstag 10.11.2026
+-[]()
