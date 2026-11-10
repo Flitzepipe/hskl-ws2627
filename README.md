@@ -105,5 +105,13 @@
 - [Proto_Persona_Person (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_Person.png)
 
 ### week_7
+
+#### Montag 09.11.2026
+##### Removed:
+- Ehre Genommen
+
+##### Added:
+- None
+
 #### Dienstag 10.11.2026
 -[]()
