@@ -54,3 +54,9 @@ Collaborative UX design verbindet Ansätze aus Design Thinking, Lean UX und agil
  - Stakeholder
  - Randbedingungen
  - Risiken
+
+#### Vier relevanten Scoping phasen
+- Proto Problem Statement Map
+- 
+- 
+- 
