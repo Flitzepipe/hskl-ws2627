@@ -119,3 +119,11 @@
 #### Mittwoche 11.11.2026
 - [Abgabe_2_Teil_1 (Markdown)](/HCI/Übungen_PDFs/Abgabe_2/Teil_1/Abgabe_2_Teil_1.md)
 - [Abgabe_2_Teil_1 (PDF)](/HCI/Übungen_PDFs/Abgabe_2/Teil_1/Abgabe_2_Teil_1.pdf)
+
+#### Donnerstag 12.11.2026
+- None
+
+### week_8
+
+#### Mittwoch 18.11.2026
+- [Abgabe_2_Teil_2 (Markdown)](/HCI/Übungen_PDFs/Abgabe_2/Teil_2/Abgabe_2_Teil_2.md)
