@@ -103,3 +103,19 @@
 - [Campuboard_Verleihsyste_White_Mode_Eigene_Reservierugen.png](/HCI/Bilder/Campusboard/Campuboard_Verleihsyste_White_Mode_Eigene_Reservierugnen.png)
 - [Abgabe_1_Randy](/HCI/Übungen_PDFs/Abgabe_1/Aufgabe_1_Randy.md)
 - [Proto_Persona_Person (PNG)](/HCI/Übungen_PDFs/Abgabe_3/Proto_Persona_Person.png)
+
+### week_7
+
+#### Montag 09.11.2026
+##### Removed:
+- PALDS hat meine Ehre genommen
+
+##### Added:
+- None
+
+#### Dienstag 10.11.2026
+- None
+
+#### Mittwoche 11.11.2026
+- [Abgabe_2_Teil_1 (Markdown)](/HCI/Übungen_PDFs/Abgabe_2/Teil_1/Abgabe_2_Teil_1.md)
+- [Abgabe_2_Teil_1 (PDF)](/HCI/Übungen_PDFs/Abgabe_2/Teil_1/Abgabe_2_Teil_1.pdf)
