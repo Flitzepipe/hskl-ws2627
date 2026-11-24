@@ -119,3 +119,16 @@
 #### Mittwoche 11.11.2026
 - [Abgabe_2_Teil_1 (Markdown)](/HCI/Übungen_PDFs/Abgabe_2/Teil_1/Abgabe_2_Teil_1.md)
 - [Abgabe_2_Teil_1 (PDF)](/HCI/Übungen_PDFs/Abgabe_2/Teil_1/Abgabe_2_Teil_1.pdf)
+
+#### Donnerstag 12.11.2026
+- None
+
+### week_8
+
+#### Mittwoch 18.11.2026
+- [Abgabe_2_Teil_2 (Markdown)](/HCI/Übungen_PDFs/Abgabe_2/Teil_2/Abgabe_2_Teil_2.md)
+- [Abgabe_2_Teil_2 (PDF)](/HCI/Übungen_PDFs/Abgabe_2/Teil_2/Abgabe_2_Teil_2.pdf)
+
+#### Donnerstag 19.11.2026 (GTA VI Day or smth.)
+- [SWE-Uebung06-009.pdf](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Ubung06-009.pdf)
+- [SE_Übung_6_1.bpmn](/SE/Übungen_SE/SE_Aufgaben_Bearbeitet/Aufgabe_6/SE_Übung_6_1.bpmn)
