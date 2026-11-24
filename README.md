@@ -132,3 +132,8 @@
 #### Donnerstag 19.11.2026 (GTA VI Day or smth.)
 - [SWE-Uebung06-009.pdf](/SE/Übungen_SE/Übungen_SE_Aufgaben/SWE-Ubung06-009.pdf)
 - [SE_Übung_6_1.bpmn](/SE/Übungen_SE/SE_Aufgaben_Bearbeitet/Aufgabe_6/SE_Übung_6_1.bpmn)
+
+### week_9
+
+#### Dienstag 24.11.2026
+- [BWB Storyboard Scheiß](/BWB/Stroyboard_BWB_Teil_1_Randy.pdf) Eigentlich im Branch week_8 hochegeladen
