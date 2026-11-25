@@ -6,6 +6,8 @@
 
 - Webseite zum [Buch](https://www.collaborative-uxdesign.com)
 
+- Gerne genommene Klausur frage: Unterschied zwischen gestallt und Gestalltung (so ungefärt oder so)
+
 #### Deifnitionen:
 
 - Wir beantworten sie in vier Schritten: zwei Definitionen, die in eienr Norm stehen; eine Disziplin, sie aus mehreren Subdiziplinen besteht; eine Geschichte, in der sich die Antwort dreimal geändert hat; und ein Vorgehensmodel, mit dem ein Team sie für sein eigenes Produkt herausfindet.
